@@ -85,8 +85,8 @@ DROP TABLE IF EXISTS social_mtch;
 -- 물품찜
 DROP TABLE IF EXISTS item_like;
 
--- 채팅메시지
-DROP TABLE IF EXISTS cht_msg;
+-- 메시지
+DROP TABLE IF EXISTS msg;
 
 -- 소셜매치예약
 DROP TABLE IF EXISTS social_mtch_rsv;
@@ -99,6 +99,9 @@ DROP TABLE IF EXISTS club_post_comment;
 
 -- 소셜매치유형
 DROP TABLE IF EXISTS social_mtch_type;
+
+-- 새 테이블
+DROP TABLE IF EXISTS TABLE;
 
 -- 사용자
 CREATE TABLE user (
@@ -153,7 +156,7 @@ CREATE UNIQUE INDEX UIX_field
 	);
 
 ALTER TABLE field
-	MODIFY COLUMN field_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN field_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 클래스
 CREATE TABLE cls (
@@ -171,8 +174,8 @@ CREATE TABLE cls (
 	level VARCHAR(10) NOT NULL,
 	tchr_intr LONGTEXT NOT NULL,
 	dtl_intr LONGTEXT NOT NULL,
-	mdfy_date TIMESTAMP NOT NULL,
-	rgt_date TIMESTAMP NOT NULL
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NOT NULL
 );
 
 -- 클래스
@@ -183,7 +186,7 @@ ALTER TABLE cls
 	);
 
 ALTER TABLE cls
-	MODIFY COLUMN cls_no INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN cls_no INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 클럽
 CREATE TABLE club (
@@ -219,7 +222,7 @@ CREATE UNIQUE INDEX UIX_club2
 	);
 
 ALTER TABLE club
-	MODIFY COLUMN club_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN club_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 회원
 CREATE TABLE member (
@@ -234,7 +237,8 @@ CREATE TABLE member (
 	acnt_holder VARCHAR(50) NOT NULL,
 	evnt_yn BOOLEAN NOT NULL,
 	scope INTEGER NOT NULL,
-	preferred_time INTEGER NOT NULL,
+	preferred_weekdays TIME NOT NULL,
+	preferred_weekends TIME NOT NULL,
 	sigun_id INTEGER NOT NULL,
 	court_type_id INTEGER NOT NULL,
 	lefty_yn BOOLEAN NOT NULL,
@@ -252,7 +256,7 @@ ALTER TABLE member
 	);
 
 ALTER TABLE member
-	MODIFY COLUMN user_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN user_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 테니스숙련도
 CREATE TABLE lv (
@@ -274,7 +278,7 @@ CREATE UNIQUE INDEX UIX_lv
 	);
 
 ALTER TABLE lv
-	MODIFY COLUMN lv_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN lv_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 코트
 CREATE TABLE court (
@@ -301,7 +305,7 @@ CREATE UNIQUE INDEX UIX_court
 	);
 
 ALTER TABLE court
-	MODIFY COLUMN court_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN court_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 수강생
 CREATE TABLE stnt (
@@ -321,12 +325,6 @@ ALTER TABLE stnt
 	cls_id,  -- 클래스번호
 	user_id  -- 수강생번호
 	);
-
-ALTER TABLE stnt
-	MODIFY COLUMN cls_id INTEGER NOT NULL;
-
-ALTER TABLE stnt
-	MODIFY COLUMN user_id INTEGER NOT NULL;
 
 -- 코트타입
 CREATE TABLE court_type (
@@ -348,7 +346,7 @@ CREATE UNIQUE INDEX UIX_court_type
 	);
 
 ALTER TABLE court_type
-	MODIFY COLUMN court_type_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN court_type_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 코트사용예약
 CREATE TABLE court_rsv (
@@ -372,7 +370,7 @@ ALTER TABLE court_rsv
 	);
 
 ALTER TABLE court_rsv
-	MODIFY COLUMN rsv_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN rsv_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 구장운영시간
 CREATE TABLE field_opr_hrs (
@@ -390,7 +388,7 @@ ALTER TABLE field_opr_hrs
 	);
 
 ALTER TABLE field_opr_hrs
-	MODIFY COLUMN opr_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN opr_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 클럽회원
 CREATE TABLE club_mbr (
@@ -398,7 +396,7 @@ CREATE TABLE club_mbr (
 	user_id INTEGER NOT NULL,
 	state INTEGER NOT NULL,
 	rmk LONGTEXT NULL,
-	rgt_date TIMESTAMP,
+	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NOT NULL
 );
 
@@ -409,12 +407,6 @@ ALTER TABLE club_mbr
 	club_id, -- 클럽번호
 	user_id  -- 회원번호
 	);
-
-ALTER TABLE club_mbr
-	MODIFY COLUMN club_id INTEGER NOT NULL;
-
-ALTER TABLE club_mbr
-	MODIFY COLUMN user_id INTEGER NOT NULL;
 
 -- 라임캐시
 CREATE TABLE lime_cash (
@@ -433,7 +425,7 @@ ALTER TABLE lime_cash
 	);
 
 ALTER TABLE lime_cash
-	MODIFY COLUMN lime_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN lime_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 커뮤니티게시글
 CREATE TABLE cmnty_post (
@@ -442,7 +434,7 @@ CREATE TABLE cmnty_post (
 	category VARCHAR(10) NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	content LONGTEXT NOT NULL,
-	rgt_date TIMESTAMP,
+	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NULL,
 	view_count INTEGER NOT NULL
 );
@@ -455,7 +447,7 @@ ALTER TABLE cmnty_post
 	);
 
 ALTER TABLE cmnty_post
-	MODIFY COLUMN post_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN post_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 게시판이미지
 CREATE TABLE post_img (
@@ -472,7 +464,7 @@ ALTER TABLE post_img
 	);
 
 ALTER TABLE post_img
-	MODIFY COLUMN img_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN img_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 시군구
 CREATE TABLE sigun (
@@ -489,7 +481,7 @@ ALTER TABLE sigun
 	);
 
 ALTER TABLE sigun
-	MODIFY COLUMN sigun_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN sigun_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 댓글
 CREATE TABLE comment (
@@ -497,7 +489,7 @@ CREATE TABLE comment (
 	post_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
 	content LONGTEXT NOT NULL,
-	rgt_date TIMESTAMP,
+	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NULL
 );
 
@@ -509,13 +501,13 @@ ALTER TABLE comment
 	);
 
 ALTER TABLE comment
-	MODIFY COLUMN comment_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN comment_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 신고
 CREATE TABLE report (
 	report_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
-	rgt_date TIMESTAMP,
+	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NOT NULL,
 	post_type VARCHAR(10) NOT NULL,
 	post_id INTEGER NOT NULL,
@@ -530,7 +522,7 @@ ALTER TABLE report
 	);
 
 ALTER TABLE report
-	MODIFY COLUMN report_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN report_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 시도
 CREATE TABLE sido (
@@ -546,7 +538,7 @@ ALTER TABLE sido
 	);
 
 ALTER TABLE sido
-	MODIFY COLUMN sido_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN sido_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 은행타입
 CREATE TABLE bank_info (
@@ -568,7 +560,7 @@ CREATE UNIQUE INDEX UIX_bank_info
 	);
 
 ALTER TABLE bank_info
-	MODIFY COLUMN bank_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN bank_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 중고거래물품
 CREATE TABLE item (
@@ -578,7 +570,7 @@ CREATE TABLE item (
 	item_name VARCHAR(255) NOT NULL,
 	item_cost INTEGER NOT NULL,
 	content LONGTEXT NOT NULL,
-	rgt_date TIMESTAMP,
+	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NULL,
 	trans_state INTEGER NOT NULL,
 	view_cnt INTEGER DEFAULT '0'
@@ -592,7 +584,7 @@ ALTER TABLE item
 	);
 
 ALTER TABLE item
-	MODIFY COLUMN item_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN item_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 평가항목
 CREATE TABLE rating_list (
@@ -615,7 +607,7 @@ CREATE UNIQUE INDEX UIX_rating_list
 	);
 
 ALTER TABLE rating_list
-	MODIFY COLUMN rating_list_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN rating_list_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 클럽게시글
 CREATE TABLE club_post (
@@ -624,7 +616,7 @@ CREATE TABLE club_post (
 	user_id INTEGER NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	content LONGTEXT NOT NULL,
-	rgt_date TIMESTAMP,
+	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NOT NULL,
 	view_cnt INTEGER DEFAULT '0'
 );
@@ -637,7 +629,7 @@ ALTER TABLE club_post
 	);
 
 ALTER TABLE club_post
-	MODIFY COLUMN post_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN post_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 경기운영자
 CREATE TABLE mgr (
@@ -653,7 +645,7 @@ ALTER TABLE mgr
 	);
 
 ALTER TABLE mgr
-	MODIFY COLUMN user_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN user_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 물품사진
 CREATE TABLE item_img (
@@ -670,7 +662,7 @@ ALTER TABLE item_img
 	);
 
 ALTER TABLE item_img
-	MODIFY COLUMN item_img_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN item_img_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 중고거래댓글
 CREATE TABLE trans_rpy (
@@ -678,7 +670,7 @@ CREATE TABLE trans_rpy (
 	item_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
 	content LONGTEXT NOT NULL,
-	rgt_date TIMESTAMP,
+	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NULL
 );
 
@@ -690,7 +682,7 @@ ALTER TABLE trans_rpy
 	);
 
 ALTER TABLE trans_rpy
-	MODIFY COLUMN trans_rpy_no INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN trans_rpy_no INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 회원평가
 CREATE TABLE rating_mbr (
@@ -698,7 +690,7 @@ CREATE TABLE rating_mbr (
 	user_id INTEGER NOT NULL,
 	mtch_id INTEGER NOT NULL,
 	rating_list_id INTEGER NOT NULL,
-	rgt_date TIMESTAMP
+	rgt_date TIMESTAMP NOT NULL
 );
 
 -- 회원평가
@@ -709,7 +701,7 @@ ALTER TABLE rating_mbr
 	);
 
 ALTER TABLE rating_mbr
-	MODIFY COLUMN rating_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN rating_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 소셜매치
 CREATE TABLE social_mtch (
@@ -732,7 +724,7 @@ ALTER TABLE social_mtch
 	);
 
 ALTER TABLE social_mtch
-	MODIFY COLUMN mtch_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN mtch_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 물품찜
 CREATE TABLE item_like (
@@ -748,31 +740,25 @@ ALTER TABLE item_like
 	user_id  -- 회원번호
 	);
 
-ALTER TABLE item_like
-	MODIFY COLUMN item_id INTEGER NOT NULL;
-
-ALTER TABLE item_like
-	MODIFY COLUMN user_id INTEGER NOT NULL;
-
--- 채팅메시지
-CREATE TABLE cht_msg (
-	cht_msg_no INTEGER NOT NULL,
-	user_id INTEGER NOT NULL,
-	user_id2 INTEGER NOT NULL,
+-- 메시지
+CREATE TABLE msg (
+	msg_no INTEGER NOT NULL,
+	sender_no INTEGER NOT NULL,
+	receiver_no INTEGER NOT NULL,
 	content LONGTEXT NOT NULL,
 	read_yn BOOLEAN NOT NULL,
 	rgt_date TIMESTAMP NOT NULL
 );
 
--- 채팅메시지
-ALTER TABLE cht_msg
-	ADD CONSTRAINT PK_cht_msg -- 채팅메시지 기본키
+-- 메시지
+ALTER TABLE msg
+	ADD CONSTRAINT PK_msg -- 메시지 기본키
 	PRIMARY KEY (
-	cht_msg_no -- 채팅메시지번호
+	msg_no -- 메시지번호
 	);
 
-ALTER TABLE cht_msg
-	MODIFY COLUMN cht_msg_no INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE msg
+	MODIFY COLUMN msg_no INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 소셜매치예약
 CREATE TABLE social_mtch_rsv (
@@ -795,12 +781,6 @@ CREATE UNIQUE INDEX UIX_social_mtch_rsv
 				lime_id ASC -- 라임내역번호
 	);
 
-ALTER TABLE social_mtch_rsv
-	MODIFY COLUMN user_id INTEGER NOT NULL;
-
-ALTER TABLE social_mtch_rsv
-	MODIFY COLUMN mtch_id INTEGER NOT NULL;
-
 -- 좋아요
 CREATE TABLE likes (
 	likes_id INTEGER NOT NULL,
@@ -817,7 +797,7 @@ ALTER TABLE likes
 	);
 
 ALTER TABLE likes
-	MODIFY COLUMN likes_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN likes_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 클럽게시글댓글
 CREATE TABLE club_post_comment (
@@ -825,7 +805,7 @@ CREATE TABLE club_post_comment (
 	post_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
 	content LONGTEXT NOT NULL,
-	rgt_date TIMESTAMP,
+	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NOT NULL
 );
 
@@ -837,7 +817,7 @@ ALTER TABLE club_post_comment
 	);
 
 ALTER TABLE club_post_comment
-	MODIFY COLUMN club_comment_id INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN club_comment_id INTEGER NOT NULL AUTO_INCREMENT(1,1);
 
 -- 소셜매치유형
 CREATE TABLE social_mtch_type (
@@ -853,7 +833,11 @@ ALTER TABLE social_mtch_type
 	);
 
 ALTER TABLE social_mtch_type
-	MODIFY COLUMN COL INTEGER NOT NULL AUTO_INCREMENT;
+	MODIFY COLUMN COL INTEGER NOT NULL AUTO_INCREMENT(1,1);
+
+-- 새 테이블
+CREATE TABLE TABLE (
+);
 
 -- 클래스
 ALTER TABLE cls
@@ -1289,21 +1273,21 @@ ALTER TABLE item_like
 	user_id -- 회원번호
 	);
 
--- 채팅메시지
-ALTER TABLE cht_msg
-	ADD CONSTRAINT FK_member_TO_cht_msg -- 회원 -> 채팅메시지
+-- 메시지
+ALTER TABLE msg
+	ADD CONSTRAINT FK_member_TO_msg -- 회원 -> 메시지
 	FOREIGN KEY (
-	user_id -- 발신회원번호
+	sender_no -- 발신회원번호
 	)
 	REFERENCES member ( -- 회원
 	user_id -- 회원번호
 	);
 
--- 채팅메시지
-ALTER TABLE cht_msg
-	ADD CONSTRAINT FK_member_TO_cht_msg2 -- 회원 -> 채팅메시지2
+-- 메시지
+ALTER TABLE msg
+	ADD CONSTRAINT FK_member_TO_msg2 -- 회원 -> 메시지2
 	FOREIGN KEY (
-	user_id2 -- 수신회원번호
+	receiver_no -- 수신회원번호
 	)
 	REFERENCES member ( -- 회원
 	user_id -- 회원번호
