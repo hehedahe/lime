@@ -1,0 +1,1347 @@
+-- 사용자
+DROP TABLE IF EXISTS user;
+
+-- 구장
+DROP TABLE IF EXISTS field;
+
+-- 클래스
+DROP TABLE IF EXISTS cls;
+
+-- 클럽
+DROP TABLE IF EXISTS club;
+
+-- 회원
+DROP TABLE IF EXISTS member;
+
+-- 테니스숙련도
+DROP TABLE IF EXISTS lv;
+
+-- 코트
+DROP TABLE IF EXISTS court;
+
+-- 수강생
+DROP TABLE IF EXISTS stnt;
+
+-- 코트타입
+DROP TABLE IF EXISTS court_type;
+
+-- 코트사용예약
+DROP TABLE IF EXISTS court_rsv;
+
+-- 구장운영시간
+DROP TABLE IF EXISTS field_opr_hrs;
+
+-- 클럽회원
+DROP TABLE IF EXISTS club_mbr;
+
+-- 라임캐시
+DROP TABLE IF EXISTS lime_cash;
+
+-- 커뮤니티게시글
+DROP TABLE IF EXISTS cmnty_post;
+
+-- 게시판이미지
+DROP TABLE IF EXISTS post_img;
+
+-- 시군구
+DROP TABLE IF EXISTS city;
+
+-- 댓글
+DROP TABLE IF EXISTS comment;
+
+-- 신고
+DROP TABLE IF EXISTS report;
+
+-- 시도
+DROP TABLE IF EXISTS region;
+
+-- 은행타입
+DROP TABLE IF EXISTS bank_info;
+
+-- 중고거래물품
+DROP TABLE IF EXISTS item;
+
+-- 평가항목
+DROP TABLE IF EXISTS rating_list;
+
+-- 클럽게시글
+DROP TABLE IF EXISTS club_post;
+
+-- 경기운영자
+DROP TABLE IF EXISTS mgr;
+
+-- 물품사진
+DROP TABLE IF EXISTS item_img;
+
+-- 중고거래댓글
+DROP TABLE IF EXISTS trans_rpy;
+
+-- 회원평가
+DROP TABLE IF EXISTS rating_mbr;
+
+-- 소셜매치
+DROP TABLE IF EXISTS social_mtch;
+
+-- 물품찜
+DROP TABLE IF EXISTS item_like;
+
+-- 메시지
+DROP TABLE IF EXISTS msg;
+
+-- 소셜매치예약
+DROP TABLE IF EXISTS social_mtch_rsv;
+
+-- 좋아요
+DROP TABLE IF EXISTS likes;
+
+-- 클럽게시글댓글
+DROP TABLE IF EXISTS club_post_comment;
+
+-- 소셜매치유형
+DROP TABLE IF EXISTS social_mtch_type;
+
+-- 사용자
+CREATE TABLE user (
+	user_id INTEGER NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	phone_no INTEGER NULL,
+	rgt_date DATE NOT NULL,
+	unreg_date DATE NULL,
+	unreg_yn BOOLEAN NOT NULL,
+	pwd INTEGER NOT NULL,
+	user_img VARCHAR(255) NULL,
+	user_type VARCHAR(10) NOT NULL
+);
+
+-- 사용자
+ALTER TABLE user
+	ADD CONSTRAINT PK_user -- 사용자 기본키
+	PRIMARY KEY (
+	user_id -- 사용자번호
+	);
+
+-- 사용자 유니크 인덱스
+CREATE UNIQUE INDEX UIX_user
+	ON user ( -- 사용자
+				email ASC -- 이메일
+	);
+
+-- 구장
+CREATE TABLE field (
+	field_id INTEGER NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	addr VARCHAR(255) NOT NULL,
+	ind_yn BOOLEAN NOT NULL,
+	court_cnt INTEGER NOT NULL,
+	parking_area BOOLEAN NOT NULL,
+	light_yn BOOLEAN NOT NULL
+);
+
+-- 구장
+ALTER TABLE field
+	ADD CONSTRAINT PK_field -- 구장 기본키
+	PRIMARY KEY (
+	field_id -- 구장번호
+	);
+
+-- 구장 유니크 인덱스
+CREATE UNIQUE INDEX UIX_field
+	ON field ( -- 구장
+				name ASC, -- 이름
+				addr ASC  -- 주소
+	);
+
+ALTER TABLE field
+	MODIFY COLUMN field_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 클래스
+CREATE TABLE cls (
+	cls_no INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	city_id INTEGER NOT NULL,
+	title VARCHAR(255) NOT NULL,
+	intr VARCHAR(255) NOT NULL,
+	img VARCHAR(255) NOT NULL,
+	cost INTEGER NOT NULL,
+	st_date DATE NOT NULL,
+	end_date DATE NOT NULL,
+	per_week INTEGER NOT NULL,
+	max_ppl INTEGER NOT NULL,
+	level VARCHAR(10) NOT NULL,
+	tchr_intr LONGTEXT NOT NULL,
+	dtl_intr LONGTEXT NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NOT NULL
+);
+
+-- 클래스
+ALTER TABLE cls
+	ADD CONSTRAINT PK_cls -- 클래스 기본키
+	PRIMARY KEY (
+	cls_no -- 클래스번호
+	);
+
+ALTER TABLE cls
+	MODIFY COLUMN cls_no INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 클럽
+CREATE TABLE club (
+	club_id INTEGER NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	city_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	lv_id INTEGER NOT NULL,
+	club_img VARCHAR(255) NOT NULL,
+	activity_time VARCHAR(20) NOT NULL,
+	min_age INTEGER NOT NULL,
+	max_age INTEGER NOT NULL,
+	headcnt INTEGER NOT NULL
+);
+
+-- 클럽
+ALTER TABLE club
+	ADD CONSTRAINT PK_club -- 클럽 기본키
+	PRIMARY KEY (
+	club_id -- 클럽번호
+	);
+
+-- 클럽 유니크 인덱스
+CREATE UNIQUE INDEX UIX_club
+	ON club ( -- 클럽
+				user_id ASC -- 클럽만든이번호
+	);
+
+-- 클럽 유니크 인덱스2
+CREATE UNIQUE INDEX UIX_club2
+	ON club ( -- 클럽
+				name ASC -- 클럽명
+	);
+
+ALTER TABLE club
+	MODIFY COLUMN club_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 회원
+CREATE TABLE member (
+	user_id INTEGER NOT NULL,
+	club_id INTEGER NULL,
+	gender BOOLEAN NOT NULL,
+	brth_date DATE NOT NULL,
+	social_yn BOOLEAN NOT NULL,
+	socail_id INTEGER NULL,
+	bank_id INTEGER NOT NULL,
+	acnt_no INTEGER NOT NULL,
+	acnt_holder VARCHAR(50) NOT NULL,
+	evnt_yn BOOLEAN NOT NULL,
+	scope INTEGER NOT NULL,
+	preferred_weekdays TIME NOT NULL,
+	preferred_weekends TIME NOT NULL,
+	city_id INTEGER NOT NULL,
+	court_type_id INTEGER NOT NULL,
+	lefty_yn BOOLEAN NOT NULL,
+	lv_id INTEGER NOT NULL,
+	manner_score INTEGER DEFAULT '100',
+	block_date TIMESTAMP NULL,
+	block_yn BOOLEAN NOT NULL
+);
+
+-- 회원
+ALTER TABLE member
+	ADD CONSTRAINT PK_member -- 회원 기본키
+	PRIMARY KEY (
+	user_id -- 회원번호
+	);
+
+ALTER TABLE member
+	MODIFY COLUMN user_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 테니스숙련도
+CREATE TABLE lv (
+	lv_id INTEGER NOT NULL,
+	lv_name VARCHAR(10) NOT NULL
+);
+
+-- 테니스숙련도
+ALTER TABLE lv
+	ADD CONSTRAINT PK_lv -- 테니스숙련도 기본키
+	PRIMARY KEY (
+	lv_id -- 테니스숙련도번호
+	);
+
+-- 테니스숙련도 유니크 인덱스
+CREATE UNIQUE INDEX UIX_lv
+	ON lv ( -- 테니스숙련도
+				lv_name ASC -- 등급이름
+	);
+
+ALTER TABLE lv
+	MODIFY COLUMN lv_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 코트
+CREATE TABLE court (
+	court_id INTEGER NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	court_type_id INTEGER NOT NULL,
+	field_id INTEGER NOT NULL,
+	fee INTEGER NOT NULL,
+	mdfy_date TIMESTAMP NULL
+);
+
+-- 코트
+ALTER TABLE court
+	ADD CONSTRAINT PK_court -- 코트 기본키
+	PRIMARY KEY (
+	court_id -- 코트번호
+	);
+
+-- 코트 유니크 인덱스
+CREATE UNIQUE INDEX UIX_court
+	ON court ( -- 코트
+				field_id ASC, -- 구장번호
+				name ASC      -- 코트명
+	);
+
+ALTER TABLE court
+	MODIFY COLUMN court_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 수강생
+CREATE TABLE stnt (
+	cls_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	state VARCHAR(10) NOT NULL,
+	cls_rate INTEGER NOT NULL,
+	rev_content LONGTEXT NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NOT NULL
+);
+
+-- 수강생
+ALTER TABLE stnt
+	ADD CONSTRAINT PK_stnt -- 수강생 기본키
+	PRIMARY KEY (
+	cls_id,  -- 클래스번호
+	user_id  -- 수강생번호
+	);
+
+-- 코트타입
+CREATE TABLE court_type (
+	court_type_id INTEGER NOT NULL,
+	name VARCHAR(50) NOT NULL
+);
+
+-- 코트타입
+ALTER TABLE court_type
+	ADD CONSTRAINT PK_court_type -- 코트타입 기본키
+	PRIMARY KEY (
+	court_type_id -- 코트타입번호
+	);
+
+-- 코트타입 유니크 인덱스
+CREATE UNIQUE INDEX UIX_court_type
+	ON court_type ( -- 코트타입
+				name ASC -- 코트타입명
+	);
+
+ALTER TABLE court_type
+	MODIFY COLUMN court_type_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 코트사용예약
+CREATE TABLE court_rsv (
+	rsv_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	court_id INTEGER NOT NULL,
+	lime_id INTEGER NOT NULL,
+	rsv_date TIMESTAMP NOT NULL,
+	st_time TIMESTAMP NOT NULL,
+	end_time TIMESTAMP NOT NULL,
+	state BOOLEAN NOT NULL,
+	fee INTEGER NOT NULL,
+	pymnt_date TIMESTAMP NOT NULL
+);
+
+-- 코트사용예약
+ALTER TABLE court_rsv
+	ADD CONSTRAINT PK_court_rsv -- 코트사용예약 기본키
+	PRIMARY KEY (
+	rsv_id -- 코트사용예약번호
+	);
+
+ALTER TABLE court_rsv
+	MODIFY COLUMN rsv_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 구장운영시간
+CREATE TABLE field_opr_hrs (
+	opr_id INTEGER NOT NULL,
+	field_id INTEGER NOT NULL,
+	st_time TIME NOT NULL,
+	end_time TIME NOT NULL
+);
+
+-- 구장운영시간
+ALTER TABLE field_opr_hrs
+	ADD CONSTRAINT PK_field_opr_hrs -- 구장운영시간 기본키
+	PRIMARY KEY (
+	opr_id -- 구장운영시간번호
+	);
+
+ALTER TABLE field_opr_hrs
+	MODIFY COLUMN opr_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 클럽회원
+CREATE TABLE club_mbr (
+	club_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	state INTEGER NOT NULL,
+	rmk LONGTEXT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NOT NULL
+);
+
+-- 클럽회원
+ALTER TABLE club_mbr
+	ADD CONSTRAINT PK_club_mbr -- 클럽회원 기본키
+	PRIMARY KEY (
+	club_id, -- 클럽번호
+	user_id  -- 회원번호
+	);
+
+-- 라임캐시
+CREATE TABLE lime_cash (
+	lime_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	amt INTEGER NOT NULL,
+	date TIMESTAMP NOT NULL,
+	type_use VARCHAR(10) NOT NULL
+);
+
+-- 라임캐시
+ALTER TABLE lime_cash
+	ADD CONSTRAINT PK_lime_cash -- 라임캐시 기본키
+	PRIMARY KEY (
+	lime_id -- 라임내역번호
+	);
+
+ALTER TABLE lime_cash
+	MODIFY COLUMN lime_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 커뮤니티게시글
+CREATE TABLE cmnty_post (
+	post_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	category VARCHAR(10) NOT NULL,
+	title VARCHAR(255) NOT NULL,
+	content LONGTEXT NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NULL,
+	view_count INTEGER NOT NULL
+);
+
+-- 커뮤니티게시글
+ALTER TABLE cmnty_post
+	ADD CONSTRAINT PK_cmnty_post -- 커뮤니티게시글 기본키
+	PRIMARY KEY (
+	post_id -- 게시글번호
+	);
+
+ALTER TABLE cmnty_post
+	MODIFY COLUMN post_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 게시판이미지
+CREATE TABLE post_img (
+	img_id INTEGER NOT NULL,
+	post_id INTEGER NOT NULL,
+	file_path VARCHAR(255) NOT NULL
+);
+
+-- 게시판이미지
+ALTER TABLE post_img
+	ADD CONSTRAINT PK_post_img -- 게시판이미지 기본키
+	PRIMARY KEY (
+	img_id -- 이미지번호
+	);
+
+ALTER TABLE post_img
+	MODIFY COLUMN img_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 시군구
+CREATE TABLE city (
+	city_id INTEGER NOT NULL,
+	region_id INTEGER NOT NULL,
+	city_name VARCHAR(50) NOT NULL
+);
+
+-- 시군구
+ALTER TABLE city
+	ADD CONSTRAINT PK_city -- 시군구 기본키
+	PRIMARY KEY (
+	city_id -- 시군구번호
+	);
+
+ALTER TABLE city
+	MODIFY COLUMN city_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 댓글
+CREATE TABLE comment (
+	comment_id INTEGER NOT NULL,
+	post_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	content LONGTEXT NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NULL
+);
+
+-- 댓글
+ALTER TABLE comment
+	ADD CONSTRAINT PK_comment -- 댓글 기본키
+	PRIMARY KEY (
+	comment_id -- 댓글번호
+	);
+
+ALTER TABLE comment
+	MODIFY COLUMN comment_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 신고
+CREATE TABLE report (
+	report_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NOT NULL,
+	post_type VARCHAR(10) NOT NULL,
+	post_id INTEGER NOT NULL,
+	report_type VARCHAR(50) NOT NULL
+);
+
+-- 신고
+ALTER TABLE report
+	ADD CONSTRAINT PK_report -- 신고 기본키
+	PRIMARY KEY (
+	report_id -- 신고번호
+	);
+
+ALTER TABLE report
+	MODIFY COLUMN report_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 시도
+CREATE TABLE region (
+	region_id INTEGER NOT NULL,
+	region_name VARCHAR(50) NOT NULL
+);
+
+-- 시도
+ALTER TABLE region
+	ADD CONSTRAINT PK_region -- 시도 기본키
+	PRIMARY KEY (
+	region_id -- 지역번호
+	);
+
+ALTER TABLE region
+	MODIFY COLUMN region_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 은행타입
+CREATE TABLE bank_info (
+	bank_id INTEGER NOT NULL,
+	name VARCHAR(50) NOT NULL
+);
+
+-- 은행타입
+ALTER TABLE bank_info
+	ADD CONSTRAINT PK_bank_info -- 은행타입 기본키
+	PRIMARY KEY (
+	bank_id -- 은행타입번호
+	);
+
+-- 은행타입 유니크 인덱스
+CREATE UNIQUE INDEX UIX_bank_info
+	ON bank_info ( -- 은행타입
+				name ASC -- 은행명
+	);
+
+ALTER TABLE bank_info
+	MODIFY COLUMN bank_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 중고거래물품
+CREATE TABLE item (
+	item_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	city_id INTEGER NOT NULL,
+	item_name VARCHAR(255) NOT NULL,
+	item_cost INTEGER NOT NULL,
+	content LONGTEXT NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NULL,
+	trans_state INTEGER NOT NULL,
+	view_cnt INTEGER DEFAULT '0'
+);
+
+-- 중고거래물품
+ALTER TABLE item
+	ADD CONSTRAINT PK_item -- 중고거래물품 기본키
+	PRIMARY KEY (
+	item_id -- 중고거래물품번호
+	);
+
+ALTER TABLE item
+	MODIFY COLUMN item_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 평가항목
+CREATE TABLE rating_list (
+	rating_list_id INTEGER NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	score INTEGER NOT NULL
+);
+
+-- 평가항목
+ALTER TABLE rating_list
+	ADD CONSTRAINT PK_rating_list -- 평가항목 기본키
+	PRIMARY KEY (
+	rating_list_id -- 평가항목번호
+	);
+
+-- 평가항목 유니크 인덱스
+CREATE UNIQUE INDEX UIX_rating_list
+	ON rating_list ( -- 평가항목
+				name ASC -- 평가항목명
+	);
+
+ALTER TABLE rating_list
+	MODIFY COLUMN rating_list_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 클럽게시글
+CREATE TABLE club_post (
+	post_id INTEGER NOT NULL,
+	club_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	title VARCHAR(255) NOT NULL,
+	content LONGTEXT NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NOT NULL,
+	view_cnt INTEGER DEFAULT '0'
+);
+
+-- 클럽게시글
+ALTER TABLE club_post
+	ADD CONSTRAINT PK_club_post -- 클럽게시글 기본키
+	PRIMARY KEY (
+	post_id -- 게시글번호
+	);
+
+ALTER TABLE club_post
+	MODIFY COLUMN post_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 경기운영자
+CREATE TABLE mgr (
+	user_id INTEGER NOT NULL,
+	city_id INTEGER NOT NULL
+);
+
+-- 경기운영자
+ALTER TABLE mgr
+	ADD CONSTRAINT PK_mgr -- 경기운영자 기본키
+	PRIMARY KEY (
+	user_id -- 직원번호
+	);
+
+ALTER TABLE mgr
+	MODIFY COLUMN user_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 물품사진
+CREATE TABLE item_img (
+	item_img_id INTEGER NOT NULL,
+	item_id INTEGER NOT NULL,
+	file_path VARCHAR(255) NOT NULL
+);
+
+-- 물품사진
+ALTER TABLE item_img
+	ADD CONSTRAINT PK_item_img -- 물품사진 기본키
+	PRIMARY KEY (
+	item_img_id -- 물품사진번호
+	);
+
+ALTER TABLE item_img
+	MODIFY COLUMN item_img_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 중고거래댓글
+CREATE TABLE trans_rpy (
+	trans_rpy_no INTEGER NOT NULL,
+	item_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	content LONGTEXT NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NULL
+);
+
+-- 중고거래댓글
+ALTER TABLE trans_rpy
+	ADD CONSTRAINT PK_trans_rpy -- 중고거래댓글 기본키
+	PRIMARY KEY (
+	trans_rpy_no -- 중고거래댓글번호
+	);
+
+ALTER TABLE trans_rpy
+	MODIFY COLUMN trans_rpy_no INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 회원평가
+CREATE TABLE rating_mbr (
+	rating_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	mtch_id INTEGER NOT NULL,
+	rating_list_id INTEGER NOT NULL,
+	rgt_date TIMESTAMP NOT NULL
+);
+
+-- 회원평가
+ALTER TABLE rating_mbr
+	ADD CONSTRAINT PK_rating_mbr -- 회원평가 기본키
+	PRIMARY KEY (
+	rating_id -- 회원평가번호
+	);
+
+ALTER TABLE rating_mbr
+	MODIFY COLUMN rating_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 소셜매치
+CREATE TABLE social_mtch (
+	mtch_id INTEGER NOT NULL,
+	court_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	mtch_date TIMESTAMP NOT NULL,
+	st_time TIME NOT NULL,
+	end_time TIME NOT NULL,
+	state INTEGER NOT NULL,
+	fee INTEGER NOT NULL,
+	COL INTEGER NOT NULL
+);
+
+-- 소셜매치
+ALTER TABLE social_mtch
+	ADD CONSTRAINT PK_social_mtch -- 소셜매치 기본키
+	PRIMARY KEY (
+	mtch_id -- 매칭번호
+	);
+
+ALTER TABLE social_mtch
+	MODIFY COLUMN mtch_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 물품찜
+CREATE TABLE item_like (
+	item_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL
+);
+
+-- 물품찜
+ALTER TABLE item_like
+	ADD CONSTRAINT PK_item_like -- 물품찜 기본키
+	PRIMARY KEY (
+	item_id, -- 중고거래물품번호
+	user_id  -- 회원번호
+	);
+
+-- 메시지
+CREATE TABLE msg (
+	msg_no INTEGER NOT NULL,
+	sender_no INTEGER NOT NULL,
+	receiver_no INTEGER NOT NULL,
+	content LONGTEXT NOT NULL,
+	read_yn BOOLEAN NOT NULL,
+	rgt_date TIMESTAMP NOT NULL
+);
+
+-- 메시지
+ALTER TABLE msg
+	ADD CONSTRAINT PK_msg -- 메시지 기본키
+	PRIMARY KEY (
+	msg_no -- 메시지번호
+	);
+
+ALTER TABLE msg
+	MODIFY COLUMN msg_no INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 소셜매치예약
+CREATE TABLE social_mtch_rsv (
+	user_id INTEGER NOT NULL,
+	mtch_id INTEGER NOT NULL,
+	lime_id INTEGER NOT NULL
+);
+
+-- 소셜매치예약
+ALTER TABLE social_mtch_rsv
+	ADD CONSTRAINT PK_social_mtch_rsv -- 소셜매치예약 기본키
+	PRIMARY KEY (
+	user_id, -- 회원번호
+	mtch_id  -- 매칭번호
+	);
+
+-- 소셜매치예약 유니크 인덱스
+CREATE UNIQUE INDEX UIX_social_mtch_rsv
+	ON social_mtch_rsv ( -- 소셜매치예약
+				lime_id ASC -- 라임내역번호
+	);
+
+-- 좋아요
+CREATE TABLE likes (
+	likes_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	post_type VARCHAR(50) NOT NULL,
+	post_id INTEGER NOT NULL
+);
+
+-- 좋아요
+ALTER TABLE likes
+	ADD CONSTRAINT PK_likes -- 좋아요 기본키
+	PRIMARY KEY (
+	likes_id -- 좋아요번호
+	);
+
+ALTER TABLE likes
+	MODIFY COLUMN likes_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 클럽게시글댓글
+CREATE TABLE club_post_comment (
+	club_comment_id INTEGER NOT NULL,
+	post_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	content LONGTEXT NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NOT NULL
+);
+
+-- 클럽게시글댓글
+ALTER TABLE club_post_comment
+	ADD CONSTRAINT PK_club_post_comment -- 클럽게시글댓글 기본키
+	PRIMARY KEY (
+	club_comment_id -- 클럽댓글번호
+	);
+
+ALTER TABLE club_post_comment
+	MODIFY COLUMN club_comment_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 소셜매치유형
+CREATE TABLE social_mtch_type (
+	COL INTEGER NOT NULL,
+	COL2 VARCHAR(10) NOT NULL
+);
+
+-- 소셜매치유형
+ALTER TABLE social_mtch_type
+	ADD CONSTRAINT PK_social_mtch_type -- 소셜매치유형 기본키
+	PRIMARY KEY (
+	COL -- 소셜매치유형번호
+	);
+
+ALTER TABLE social_mtch_type
+	MODIFY COLUMN COL INTEGER NOT NULL AUTO_INCREMENT;
+
+-- 클래스
+ALTER TABLE cls
+	ADD CONSTRAINT FK_member_TO_cls -- 회원 -> 클래스
+	FOREIGN KEY (
+	user_id -- 강사번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 클래스
+ALTER TABLE cls
+	ADD CONSTRAINT FK_city_TO_cls -- 시군구 -> 클래스
+	FOREIGN KEY (
+	city_id -- 시군구번호
+	)
+	REFERENCES city ( -- 시군구
+	city_id -- 시군구번호
+	);
+
+-- 클럽
+ALTER TABLE club
+	ADD CONSTRAINT FK_member_TO_club -- 회원 -> 클럽
+	FOREIGN KEY (
+	user_id -- 클럽만든이번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 클럽
+ALTER TABLE club
+	ADD CONSTRAINT FK_city_TO_club -- 시군구 -> 클럽
+	FOREIGN KEY (
+	city_id -- 클럽활동지역번호
+	)
+	REFERENCES city ( -- 시군구
+	city_id -- 시군구번호
+	);
+
+-- 클럽
+ALTER TABLE club
+	ADD CONSTRAINT FK_lv_TO_club -- 테니스숙련도 -> 클럽
+	FOREIGN KEY (
+	lv_id -- 최소레벨번호
+	)
+	REFERENCES lv ( -- 테니스숙련도
+	lv_id -- 테니스숙련도번호
+	);
+
+-- 회원
+ALTER TABLE member
+	ADD CONSTRAINT FK_user_TO_member -- 사용자 -> 회원
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES user ( -- 사용자
+	user_id -- 사용자번호
+	);
+
+-- 회원
+ALTER TABLE member
+	ADD CONSTRAINT FK_club_TO_member -- 클럽 -> 회원
+	FOREIGN KEY (
+	club_id -- 소속클럽번호
+	)
+	REFERENCES club ( -- 클럽
+	club_id -- 클럽번호
+	);
+
+-- 회원
+ALTER TABLE member
+	ADD CONSTRAINT FK_lv_TO_member -- 테니스숙련도 -> 회원
+	FOREIGN KEY (
+	lv_id -- 테니스숙련도번호
+	)
+	REFERENCES lv ( -- 테니스숙련도
+	lv_id -- 테니스숙련도번호
+	);
+
+-- 회원
+ALTER TABLE member
+	ADD CONSTRAINT FK_city_TO_member -- 시군구 -> 회원
+	FOREIGN KEY (
+	city_id -- 선호지역번호
+	)
+	REFERENCES city ( -- 시군구
+	city_id -- 시군구번호
+	);
+
+-- 회원
+ALTER TABLE member
+	ADD CONSTRAINT FK_court_type_TO_member -- 코트타입 -> 회원
+	FOREIGN KEY (
+	court_type_id -- 선호코트타입번호
+	)
+	REFERENCES court_type ( -- 코트타입
+	court_type_id -- 코트타입번호
+	);
+
+-- 회원
+ALTER TABLE member
+	ADD CONSTRAINT FK_bank_info_TO_member -- 은행타입 -> 회원
+	FOREIGN KEY (
+	bank_id -- 은행타입번호
+	)
+	REFERENCES bank_info ( -- 은행타입
+	bank_id -- 은행타입번호
+	);
+
+-- 코트
+ALTER TABLE court
+	ADD CONSTRAINT FK_field_TO_court -- 구장 -> 코트
+	FOREIGN KEY (
+	field_id -- 구장번호
+	)
+	REFERENCES field ( -- 구장
+	field_id -- 구장번호
+	);
+
+-- 코트
+ALTER TABLE court
+	ADD CONSTRAINT FK_court_type_TO_court -- 코트타입 -> 코트
+	FOREIGN KEY (
+	court_type_id -- 코트타입번호
+	)
+	REFERENCES court_type ( -- 코트타입
+	court_type_id -- 코트타입번호
+	);
+
+-- 수강생
+ALTER TABLE stnt
+	ADD CONSTRAINT FK_cls_TO_stnt -- 클래스 -> 수강생
+	FOREIGN KEY (
+	cls_id -- 클래스번호
+	)
+	REFERENCES cls ( -- 클래스
+	cls_no -- 클래스번호
+	);
+
+-- 수강생
+ALTER TABLE stnt
+	ADD CONSTRAINT FK_member_TO_stnt -- 회원 -> 수강생
+	FOREIGN KEY (
+	user_id -- 수강생번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 코트사용예약
+ALTER TABLE court_rsv
+	ADD CONSTRAINT FK_court_TO_court_rsv -- 코트 -> 코트사용예약
+	FOREIGN KEY (
+	court_id -- 코트번호
+	)
+	REFERENCES court ( -- 코트
+	court_id -- 코트번호
+	);
+
+-- 코트사용예약
+ALTER TABLE court_rsv
+	ADD CONSTRAINT FK_member_TO_court_rsv -- 회원 -> 코트사용예약
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 코트사용예약
+ALTER TABLE court_rsv
+	ADD CONSTRAINT FK_lime_cash_TO_court_rsv -- 라임캐시 -> 코트사용예약
+	FOREIGN KEY (
+	lime_id -- 라임내역번호
+	)
+	REFERENCES lime_cash ( -- 라임캐시
+	lime_id -- 라임내역번호
+	);
+
+-- 구장운영시간
+ALTER TABLE field_opr_hrs
+	ADD CONSTRAINT FK_field_TO_field_opr_hrs -- 구장 -> 구장운영시간
+	FOREIGN KEY (
+	field_id -- 구장번호
+	)
+	REFERENCES field ( -- 구장
+	field_id -- 구장번호
+	);
+
+-- 클럽회원
+ALTER TABLE club_mbr
+	ADD CONSTRAINT FK_club_TO_club_mbr -- 클럽 -> 클럽회원
+	FOREIGN KEY (
+	club_id -- 클럽번호
+	)
+	REFERENCES club ( -- 클럽
+	club_id -- 클럽번호
+	);
+
+-- 클럽회원
+ALTER TABLE club_mbr
+	ADD CONSTRAINT FK_member_TO_club_mbr -- 회원 -> 클럽회원
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 라임캐시
+ALTER TABLE lime_cash
+	ADD CONSTRAINT FK_member_TO_lime_cash -- 회원 -> 라임캐시
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 커뮤니티게시글
+ALTER TABLE cmnty_post
+	ADD CONSTRAINT FK_member_TO_cmnty_post -- 회원 -> 커뮤니티게시글
+	FOREIGN KEY (
+	user_id -- 작성자번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 게시판이미지
+ALTER TABLE post_img
+	ADD CONSTRAINT FK_cmnty_post_TO_post_img -- 커뮤니티게시글 -> 게시판이미지
+	FOREIGN KEY (
+	post_id -- 게시글번호
+	)
+	REFERENCES cmnty_post ( -- 커뮤니티게시글
+	post_id -- 게시글번호
+	);
+
+-- 시군구
+ALTER TABLE city
+	ADD CONSTRAINT FK_region_TO_city -- 시도 -> 시군구
+	FOREIGN KEY (
+	region_id -- 시도번호
+	)
+	REFERENCES region ( -- 시도
+	region_id -- 지역번호
+	);
+
+-- 댓글
+ALTER TABLE comment
+	ADD CONSTRAINT FK_cmnty_post_TO_comment -- 커뮤니티게시글 -> 댓글
+	FOREIGN KEY (
+	post_id -- 게시글번호
+	)
+	REFERENCES cmnty_post ( -- 커뮤니티게시글
+	post_id -- 게시글번호
+	);
+
+-- 댓글
+ALTER TABLE comment
+	ADD CONSTRAINT FK_member_TO_comment -- 회원 -> 댓글
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 신고
+ALTER TABLE report
+	ADD CONSTRAINT FK_member_TO_report -- 회원 -> 신고
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 중고거래물품
+ALTER TABLE item
+	ADD CONSTRAINT FK_city_TO_item -- 시군구 -> 중고거래물품
+	FOREIGN KEY (
+	city_id -- 시군구번호
+	)
+	REFERENCES city ( -- 시군구
+	city_id -- 시군구번호
+	);
+
+-- 중고거래물품
+ALTER TABLE item
+	ADD CONSTRAINT FK_member_TO_item -- 회원 -> 중고거래물품
+	FOREIGN KEY (
+	user_id -- 판매회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 클럽게시글
+ALTER TABLE club_post
+	ADD CONSTRAINT FK_club_mbr_TO_club_post -- 클럽회원 -> 클럽게시글
+	FOREIGN KEY (
+	club_id, -- 클럽번호
+	user_id  -- 회원번호
+	)
+	REFERENCES club_mbr ( -- 클럽회원
+	club_id, -- 클럽번호
+	user_id  -- 회원번호
+	);
+
+-- 경기운영자
+ALTER TABLE mgr
+	ADD CONSTRAINT FK_user_TO_mgr -- 사용자 -> 경기운영자
+	FOREIGN KEY (
+	user_id -- 직원번호
+	)
+	REFERENCES user ( -- 사용자
+	user_id -- 사용자번호
+	);
+
+-- 경기운영자
+ALTER TABLE mgr
+	ADD CONSTRAINT FK_city_TO_mgr -- 시군구 -> 경기운영자
+	FOREIGN KEY (
+	city_id -- 선호지역번호
+	)
+	REFERENCES city ( -- 시군구
+	city_id -- 시군구번호
+	);
+
+-- 물품사진
+ALTER TABLE item_img
+	ADD CONSTRAINT FK_item_TO_item_img -- 중고거래물품 -> 물품사진
+	FOREIGN KEY (
+	item_id -- 중고거래물품번호
+	)
+	REFERENCES item ( -- 중고거래물품
+	item_id -- 중고거래물품번호
+	);
+
+-- 중고거래댓글
+ALTER TABLE trans_rpy
+	ADD CONSTRAINT FK_item_TO_trans_rpy -- 중고거래물품 -> 중고거래댓글
+	FOREIGN KEY (
+	item_id -- 중고거래물품번호
+	)
+	REFERENCES item ( -- 중고거래물품
+	item_id -- 중고거래물품번호
+	);
+
+-- 중고거래댓글
+ALTER TABLE trans_rpy
+	ADD CONSTRAINT FK_member_TO_trans_rpy -- 회원 -> 중고거래댓글
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 회원평가
+ALTER TABLE rating_mbr
+	ADD CONSTRAINT FK_rating_list_TO_rating_mbr -- 평가항목 -> 회원평가
+	FOREIGN KEY (
+	rating_list_id -- 평가항목번호
+	)
+	REFERENCES rating_list ( -- 평가항목
+	rating_list_id -- 평가항목번호
+	);
+
+-- 회원평가
+ALTER TABLE rating_mbr
+	ADD CONSTRAINT FK_social_mtch_rsv_TO_rating_mbr -- 소셜매치예약 -> 회원평가
+	FOREIGN KEY (
+	user_id, -- 회원번호
+	mtch_id  -- 매칭번호
+	)
+	REFERENCES social_mtch_rsv ( -- 소셜매치예약
+	user_id, -- 회원번호
+	mtch_id  -- 매칭번호
+	);
+
+-- 소셜매치
+ALTER TABLE social_mtch
+	ADD CONSTRAINT FK_mgr_TO_social_mtch -- 경기운영자 -> 소셜매치
+	FOREIGN KEY (
+	user_id -- 경기운영자번호
+	)
+	REFERENCES mgr ( -- 경기운영자
+	user_id -- 직원번호
+	);
+
+-- 소셜매치
+ALTER TABLE social_mtch
+	ADD CONSTRAINT FK_court_TO_social_mtch -- 코트 -> 소셜매치
+	FOREIGN KEY (
+	court_id -- 코트번호
+	)
+	REFERENCES court ( -- 코트
+	court_id -- 코트번호
+	);
+
+-- 소셜매치
+ALTER TABLE social_mtch
+	ADD CONSTRAINT FK_social_mtch_type_TO_social_mtch -- 소셜매치유형 -> 소셜매치
+	FOREIGN KEY (
+	COL -- 소셜매치유형번호
+	)
+	REFERENCES social_mtch_type ( -- 소셜매치유형
+	COL -- 소셜매치유형번호
+	);
+
+-- 물품찜
+ALTER TABLE item_like
+	ADD CONSTRAINT FK_item_TO_item_like -- 중고거래물품 -> 물품찜
+	FOREIGN KEY (
+	item_id -- 중고거래물품번호
+	)
+	REFERENCES item ( -- 중고거래물품
+	item_id -- 중고거래물품번호
+	);
+
+-- 물품찜
+ALTER TABLE item_like
+	ADD CONSTRAINT FK_member_TO_item_like -- 회원 -> 물품찜
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 메시지
+ALTER TABLE msg
+	ADD CONSTRAINT FK_member_TO_msg -- 회원 -> 메시지
+	FOREIGN KEY (
+	sender_no -- 발신회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 메시지
+ALTER TABLE msg
+	ADD CONSTRAINT FK_member_TO_msg2 -- 회원 -> 메시지2
+	FOREIGN KEY (
+	receiver_no -- 수신회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 소셜매치예약
+ALTER TABLE social_mtch_rsv
+	ADD CONSTRAINT FK_member_TO_social_mtch_rsv -- 회원 -> 소셜매치예약
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 소셜매치예약
+ALTER TABLE social_mtch_rsv
+	ADD CONSTRAINT FK_social_mtch_TO_social_mtch_rsv -- 소셜매치 -> 소셜매치예약
+	FOREIGN KEY (
+	mtch_id -- 매칭번호
+	)
+	REFERENCES social_mtch ( -- 소셜매치
+	mtch_id -- 매칭번호
+	);
+
+-- 소셜매치예약
+ALTER TABLE social_mtch_rsv
+	ADD CONSTRAINT FK_lime_cash_TO_social_mtch_rsv -- 라임캐시 -> 소셜매치예약
+	FOREIGN KEY (
+	lime_id -- 라임내역번호
+	)
+	REFERENCES lime_cash ( -- 라임캐시
+	lime_id -- 라임내역번호
+	);
+
+-- 좋아요
+ALTER TABLE likes
+	ADD CONSTRAINT FK_member_TO_likes -- 회원 -> 좋아요
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
+
+-- 클럽게시글댓글
+ALTER TABLE club_post_comment
+	ADD CONSTRAINT FK_club_post_TO_club_post_comment -- 클럽게시글 -> 클럽게시글댓글
+	FOREIGN KEY (
+	post_id -- 게시글번호
+	)
+	REFERENCES club_post ( -- 클럽게시글
+	post_id -- 게시글번호
+	);
+
+-- 클럽게시글댓글
+ALTER TABLE club_post_comment
+	ADD CONSTRAINT FK_member_TO_club_post_comment -- 회원 -> 클럽게시글댓글
+	FOREIGN KEY (
+	user_id -- 회원번호
+	)
+	REFERENCES member ( -- 회원
+	user_id -- 회원번호
+	);
