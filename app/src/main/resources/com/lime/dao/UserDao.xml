@@ -6,48 +6,40 @@
 <!-- 
   namespace => 인터페이스의 패키지 및 이름과 일치해야 한다.
  -->
-<mapper namespace="com.eomcs.mylist.dao.BoardDao">
+<mapper namespace="com.lime.dao.UserDao">
 
   <!-- 테이블의 컬럼과 객체 필드를 연결한다. -->
-  <resultMap type="board" id="boardMap">
+<!--   <resultMap type="user" id="userMap">
     <id column="board_no" property="no"/>
     <result column="title" property="title"/>
     <result column="content" property="content"/>
     <result column="created_date" property="createdDate"/>
     <result column="view_count" property="viewCount"/>
-  </resultMap>
+  </resultMap> -->
 
   <!-- 
     id => 인터페이스의 메서드 이름과 일치해야 한다.
    -->
-  <select id="findAll" resultMap="boardMap">
+<!--   <select id="findAll" resultMap="com.lime.domain.User">
     select 
-      board_no,
-      title,
-      created_date,
-      view_count
+      *
     from 
-      ml_board 
-    order by 
-      board_no desc
+       user 
   </select>
-  
+   -->
   <!-- 
     parameterType => 메서드의 파라미터 타입 및 개수와 일치해야 한다.
    -->
-  <select id="findByNo" resultMap="boardMap" parameterType="int">
+   <select id="findByNo" resultType="com.lime.domain.User" parameterType="int">
     select 
-      board_no,
-      title,
-      content,
-      created_date,
-      view_count
+      user_id as userId,
+      email as email
     from 
-      ml_board 
+     user 
     where 
-      board_no=#{no}
+      user_id=#{no}
   </select>
-
+<!-- 
   <insert id="insert" parameterType="Board">
     insert into ml_board(title,content) 
     values(#{title},#{content})
@@ -74,7 +66,7 @@
     update ml_board set 
       view_count=view_count + 1 
     where board_no=#{no}
-  </update>
+  </update> -->
 
 
 </mapper>
