@@ -1,0 +1,103 @@
+[33mcommit 441ea6b142829b27bb9ac9f29f6eaa47793578fc[m[33m ([m[1;36mHEAD -> [m[1;32mpooh[m[33m, [m[1;31morigin/pooh[m[33m)[m
+Author: poohbearr <syb369@naver.com>
+Date:   Wed Mar 16 17:32:55 2022 +0900
+
+     testtest
+
+[33mcommit 7cd0b55596fa92f216f6e7c5a8459af1327af6a4[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Wed Mar 16 16:53:28 2022 +0900
+
+    fix dbmodeling
+
+[33mcommit b68d0c78b6fef904014ef4bc83edcdc0f8e7ac4a[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Wed Mar 16 00:58:42 2022 +0900
+
+    fix db modeling
+
+[33mcommit 6a5dfaaf787fa0c456248547d2c6e302b5c84722[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Wed Mar 16 00:41:10 2022 +0900
+
+    fix db modeling
+
+[33mcommit 9e0dc5fcb80b3633264f25d8e898d307e5f12b61[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Tue Mar 15 22:42:55 2022 +0900
+
+    fix db modeling - club table
+
+[33mcommit 3fe4b613825341d598f4be487e186403acf95f0a[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Tue Mar 15 20:42:56 2022 +0900
+
+    fix db modelinf
+
+[33mcommit e1456727b461ebf89cec7b0c31fbe7613ef1572e[m
+Merge: 57d4841 07c2242
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Mon Mar 14 19:25:51 2022 +0900
+
+    resolved conflict
+
+[33mcommit 57d484149ed344b1f1f97d7beaa55531508b52ce[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Mon Mar 14 18:58:08 2022 +0900
+
+    updated db modeling
+
+[33mcommit 07c224291ca5fa527d85ffcdbbf42424253ea410[m
+Author: Phil <znzpzp13@naver.com>
+Date:   Mon Mar 14 18:44:27 2022 +0900
+
+    foward
+
+[33mcommit c76f3c6d3e3c4bda0f58a09650d2a98571ac8c45[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Mon Mar 14 18:06:50 2022 +0900
+
+    updated db modeling
+
+[33mcommit 6514a5edcbf74d5dd773dee5dec11cf4a4513d69[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Mon Mar 14 02:11:39 2022 +0900
+
+    updated db modeling 3.5.
+
+[33mcommit 21c466cbb60ce24bb7dda89f6471796d5cd5f243[m
+Merge: 513dd00 196e830
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Sun Mar 13 23:10:59 2022 +0900
+
+    Merge branch 'main' of https://github.com/hehedahe/lime
+
+[33mcommit 513dd00b6ea4b0f225dce7dbcb034cb3c26788ab[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Sun Mar 13 23:10:49 2022 +0900
+
+    db modeling 3.5
+
+[33mcommit 196e830f6164d4069242729778fa93684128e2b0[m
+Author: poohbearr <syb369@naver.com>
+Date:   Fri Mar 11 23:38:30 2022 +0900
+
+    previously version
+
+[33mcommit f5e2ee7f8943c080a6d1b116db1b82aa42fc2a67[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Fri Mar 11 23:05:53 2022 +0900
+
+    folder structure
+
+[33mcommit 41eeb168c0de00ad79cc06673c1afbb3ef7db1e6[m
+Author: hehedahe <smyekgo@gmail.com>
+Date:   Thu Mar 10 15:38:27 2022 +0900
+
+    created gradle and .gitignore
+
+[33mcommit 4d008a071fe659355b99e97de7aaec12e74c38ea[m
+Author: Dahae Chae <94945985+hehedahe@users.noreply.github.com>
+Date:   Thu Mar 10 15:34:31 2022 +0900
+
+    Initial commit
