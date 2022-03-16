@@ -5,6 +5,7 @@ package com.lime;
 
 public class LimeApplication {
     public String getGreeting() {
+      System.out.println("omh1004 test");
         return "Hello World!";
     }
 
