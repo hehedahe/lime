@@ -231,7 +231,7 @@ CREATE TABLE member (
 	gender VARCHAR(10) NOT NULL,
 	brth_date DATE NOT NULL,
 	social_yn BOOLEAN NOT NULL,
-	socail_id INTEGER NULL,
+	social_id INTEGER NULL,
 	bank_id INTEGER NOT NULL,
 	acnt_no INTEGER NOT NULL,
 	acnt_holder VARCHAR(50) NOT NULL,
