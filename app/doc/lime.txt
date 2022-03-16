@@ -98,17 +98,17 @@ DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS club_post_comment;
 
 -- 소셜매치유형
-DROP TABLE IF EXISTS social_mtch_type;
+DROP TABLE IF EXISTS mtch_type;
 
 -- 사용자
 CREATE TABLE user (
 	user_id INTEGER NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	name VARCHAR(50) NOT NULL,
-	phone_no INTEGER NULL,
-	rgt_date DATE NOT NULL,
-	unreg_date DATE NULL,
-	unreg_yn BOOLEAN NOT NULL,
+	phone_no INTEGER NOT NULL,
+	rgt_date TIMESTAMP NOT NULL,
+	unrgt_date TIMESTAMP NULL,
+	unrgt_yn BOOLEAN NOT NULL,
 	pwd INTEGER NOT NULL,
 	user_img VARCHAR(255) NULL,
 	user_type VARCHAR(10) NOT NULL
@@ -132,6 +132,7 @@ CREATE TABLE field (
 	field_id INTEGER NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	addr VARCHAR(255) NOT NULL,
+	number VARCHAR(30) NOT NULL,
 	ind_yn BOOLEAN NOT NULL,
 	court_cnt INTEGER NOT NULL,
 	parking_area BOOLEAN NOT NULL,
@@ -148,8 +149,9 @@ ALTER TABLE field
 -- 구장 유니크 인덱스
 CREATE UNIQUE INDEX UIX_field
 	ON field ( -- 구장
-				name ASC, -- 이름
-				addr ASC  -- 주소
+				name ASC,   -- 이름
+				addr ASC,   -- 주소
+				number ASC  -- 전화번호
 	);
 
 ALTER TABLE field
@@ -194,6 +196,7 @@ CREATE TABLE club (
 	lv_id INTEGER NOT NULL,
 	club_img VARCHAR(255) NOT NULL,
 	activity_time VARCHAR(20) NOT NULL,
+	activity_day VARCHAR(10) NOT NULL,
 	min_age INTEGER NOT NULL,
 	max_age INTEGER NOT NULL,
 	headcnt INTEGER NOT NULL
@@ -225,7 +228,7 @@ ALTER TABLE club
 CREATE TABLE member (
 	user_id INTEGER NOT NULL,
 	club_id INTEGER NULL,
-	gender BOOLEAN NOT NULL,
+	gender VARCHAR(10) NOT NULL,
 	brth_date DATE NOT NULL,
 	social_yn BOOLEAN NOT NULL,
 	socail_id INTEGER NULL,
@@ -238,7 +241,7 @@ CREATE TABLE member (
 	preferred_weekends TIME NOT NULL,
 	city_id INTEGER NOT NULL,
 	court_type_id INTEGER NOT NULL,
-	lefty_yn BOOLEAN NOT NULL,
+	lefty_yn VARCHAR(10) NOT NULL,
 	lv_id INTEGER NOT NULL,
 	manner_score INTEGER DEFAULT '100',
 	block_date TIMESTAMP NULL,
@@ -354,7 +357,7 @@ CREATE TABLE court_rsv (
 	rsv_date TIMESTAMP NOT NULL,
 	st_time TIMESTAMP NOT NULL,
 	end_time TIMESTAMP NOT NULL,
-	state BOOLEAN NOT NULL,
+	state VARCHAR(10) NOT NULL,
 	fee INTEGER NOT NULL,
 	pymnt_date TIMESTAMP NOT NULL
 );
@@ -710,7 +713,7 @@ CREATE TABLE social_mtch (
 	end_time TIME NOT NULL,
 	state INTEGER NOT NULL,
 	fee INTEGER NOT NULL,
-	COL INTEGER NOT NULL
+	mtch_type_id INTEGER NOT NULL
 );
 
 -- 소셜매치
@@ -817,20 +820,20 @@ ALTER TABLE club_post_comment
 	MODIFY COLUMN club_comment_id INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 소셜매치유형
-CREATE TABLE social_mtch_type (
-	COL INTEGER NOT NULL,
-	COL2 VARCHAR(10) NOT NULL
+CREATE TABLE mtch_type (
+	mtch_type_id INTEGER NOT NULL,
+	mtch_type VARCHAR(10) NOT NULL
 );
 
 -- 소셜매치유형
-ALTER TABLE social_mtch_type
-	ADD CONSTRAINT PK_social_mtch_type -- 소셜매치유형 기본키
+ALTER TABLE mtch_type
+	ADD CONSTRAINT PK_mtch_type -- 소셜매치유형 기본키
 	PRIMARY KEY (
-	COL -- 소셜매치유형번호
+	mtch_type_id -- 소셜매치유형번호
 	);
 
-ALTER TABLE social_mtch_type
-	MODIFY COLUMN COL INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE mtch_type
+	MODIFY COLUMN mtch_type_id INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 클래스
 ALTER TABLE cls
@@ -1158,7 +1161,7 @@ ALTER TABLE mgr
 ALTER TABLE mgr
 	ADD CONSTRAINT FK_city_TO_mgr -- 시군구 -> 경기운영자
 	FOREIGN KEY (
-	city_id -- 선호지역번호
+	city_id -- 활동지역번호
 	)
 	REFERENCES city ( -- 시군구
 	city_id -- 시군구번호
@@ -1238,12 +1241,12 @@ ALTER TABLE social_mtch
 
 -- 소셜매치
 ALTER TABLE social_mtch
-	ADD CONSTRAINT FK_social_mtch_type_TO_social_mtch -- 소셜매치유형 -> 소셜매치
+	ADD CONSTRAINT FK_mtch_type_TO_social_mtch -- 소셜매치유형 -> 소셜매치
 	FOREIGN KEY (
-	COL -- 소셜매치유형번호
+	mtch_type_id -- 소셜매치유형번호
 	)
-	REFERENCES social_mtch_type ( -- 소셜매치유형
-	COL -- 소셜매치유형번호
+	REFERENCES mtch_type ( -- 소셜매치유형
+	mtch_type_id -- 소셜매치유형번호
 	);
 
 -- 물품찜
