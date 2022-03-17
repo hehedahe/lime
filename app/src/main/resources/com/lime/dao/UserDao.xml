@@ -42,7 +42,7 @@
       user_id asc
   </select>
   
-  <select id="findByNo" resultMap="userMap" parameterType="int">
+    <select id="findByNo" resultMap="userMap" parameterType="int">
 	  select
 	    board_no,
 	    title,
