@@ -204,8 +204,8 @@ gradle-app.setting
 
 *.exe
 node_modules/
+package-lock.json
 temp/
 Debug/
 Release/
 html-exam/
-package-lock.json
