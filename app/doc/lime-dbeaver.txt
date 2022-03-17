@@ -107,7 +107,7 @@ CREATE TABLE `bank_info` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`bank_id`),
   UNIQUE KEY `UIX_bank_info` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.court_type definition
@@ -117,7 +117,7 @@ CREATE TABLE `court_type` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`court_type_id`),
   UNIQUE KEY `UIX_court_type` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.field definition
@@ -133,7 +133,7 @@ CREATE TABLE `field` (
   `light_yn` tinyint(1) NOT NULL,
   PRIMARY KEY (`field_id`),
   UNIQUE KEY `UIX_field` (`name`,`addr`,`number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.lv definition
@@ -143,7 +143,7 @@ CREATE TABLE `lv` (
   `lv_name` varchar(10) NOT NULL,
   PRIMARY KEY (`lv_id`),
   UNIQUE KEY `UIX_lv` (`lv_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.mtch_type definition
@@ -152,7 +152,7 @@ CREATE TABLE `mtch_type` (
   `mtch_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `mtch_type` varchar(10) NOT NULL,
   PRIMARY KEY (`mtch_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.rating_list definition
@@ -163,7 +163,7 @@ CREATE TABLE `rating_list` (
   `score` int(11) NOT NULL,
   PRIMARY KEY (`rating_list_id`),
   UNIQUE KEY `UIX_rating_list` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.region definition
@@ -173,7 +173,7 @@ CREATE TABLE `region` (
   `region_name` varchar(50) NOT NULL,
   PRIMARY KEY (`region_id`),
   UNIQUE KEY `UIX_region` (`region_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.`user` definition
@@ -191,7 +191,7 @@ CREATE TABLE `user` (
   `user_type` varchar(10) NOT NULL DEFAULT 'U',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `UIX_user` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.city definition
@@ -203,7 +203,7 @@ CREATE TABLE `city` (
   PRIMARY KEY (`city_id`),
   UNIQUE KEY `UIX_city` (`region_id`,`city_name`),
   CONSTRAINT `FK_region_TO_city` FOREIGN KEY (`region_id`) REFERENCES `region` (`region_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.court definition
@@ -219,7 +219,7 @@ CREATE TABLE `court` (
   KEY `FK_court_type_TO_court` (`court_type_id`),
   CONSTRAINT `FK_court_type_TO_court` FOREIGN KEY (`court_type_id`) REFERENCES `court_type` (`court_type_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_field_TO_court` FOREIGN KEY (`field_id`) REFERENCES `field` (`field_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.field_opr_hrs definition
@@ -232,7 +232,7 @@ CREATE TABLE `field_opr_hrs` (
   PRIMARY KEY (`opr_id`),
   KEY `FK_field_TO_field_opr_hrs` (`field_id`),
   CONSTRAINT `FK_field_TO_field_opr_hrs` FOREIGN KEY (`field_id`) REFERENCES `field` (`field_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.mgr definition
@@ -244,7 +244,7 @@ CREATE TABLE `mgr` (
   KEY `FK_city_TO_mgr` (`city_id`),
   CONSTRAINT `FK_city_TO_mgr` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_user_TO_mgr` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.social_mtch definition
@@ -266,7 +266,7 @@ CREATE TABLE `social_mtch` (
   CONSTRAINT `FK_court_TO_social_mtch` FOREIGN KEY (`court_id`) REFERENCES `court` (`court_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_mgr_TO_social_mtch` FOREIGN KEY (`user_id`) REFERENCES `mgr` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_mtch_type_TO_social_mtch` FOREIGN KEY (`mtch_type_id`) REFERENCES `mtch_type` (`mtch_type_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.cls definition
@@ -292,7 +292,7 @@ CREATE TABLE `cls` (
   KEY `FK_member_TO_cls` (`user_id`),
   CONSTRAINT `FK_city_TO_cls` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_cls` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.club definition
@@ -317,7 +317,7 @@ CREATE TABLE `club` (
   CONSTRAINT `FK_city_TO_club` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_lv_TO_club` FOREIGN KEY (`lv_id`) REFERENCES `lv` (`lv_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_club` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.club_mbr definition
@@ -332,7 +332,7 @@ CREATE TABLE `club_mbr` (
   KEY `FK_member_TO_club_mbr` (`user_id`),
   CONSTRAINT `FK_club_TO_club_mbr` FOREIGN KEY (`club_id`) REFERENCES `club` (`club_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_club_mbr` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.club_post definition
@@ -349,7 +349,7 @@ CREATE TABLE `club_post` (
   PRIMARY KEY (`post_id`),
   KEY `FK_club_mbr_TO_club_post` (`club_id`,`user_id`),
   CONSTRAINT `FK_club_mbr_TO_club_post` FOREIGN KEY (`club_id`, `user_id`) REFERENCES `club_mbr` (`club_id`, `user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.club_post_comment definition
@@ -366,7 +366,7 @@ CREATE TABLE `club_post_comment` (
   KEY `FK_member_TO_club_post_comment` (`user_id`),
   CONSTRAINT `FK_club_post_TO_club_post_comment` FOREIGN KEY (`post_id`) REFERENCES `club_post` (`post_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_club_post_comment` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.cmnty_post definition
@@ -383,7 +383,7 @@ CREATE TABLE `cmnty_post` (
   PRIMARY KEY (`post_id`),
   KEY `FK_member_TO_cmnty_post` (`user_id`),
   CONSTRAINT `FK_member_TO_cmnty_post` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.comment definition
@@ -400,7 +400,7 @@ CREATE TABLE `comment` (
   KEY `FK_member_TO_comment` (`user_id`),
   CONSTRAINT `FK_cmnty_post_TO_comment` FOREIGN KEY (`post_id`) REFERENCES `cmnty_post` (`post_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_comment` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.court_rsv definition
@@ -421,7 +421,7 @@ CREATE TABLE `court_rsv` (
   CONSTRAINT `FK_court_TO_court_rsv` FOREIGN KEY (`court_id`) REFERENCES `court` (`court_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_lime_cash_TO_court_rsv` FOREIGN KEY (`lime_id`) REFERENCES `lime_cash` (`lime_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_court_rsv` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.item definition
@@ -442,7 +442,7 @@ CREATE TABLE `item` (
   KEY `FK_member_TO_item` (`user_id`),
   CONSTRAINT `FK_city_TO_item` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_item` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.item_img definition
@@ -454,7 +454,7 @@ CREATE TABLE `item_img` (
   PRIMARY KEY (`item_img_id`),
   KEY `FK_item_TO_item_img` (`item_id`),
   CONSTRAINT `FK_item_TO_item_img` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.item_like definition
@@ -466,7 +466,7 @@ CREATE TABLE `item_like` (
   KEY `FK_member_TO_item_like` (`user_id`),
   CONSTRAINT `FK_item_TO_item_like` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_item_like` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.likes definition
@@ -479,7 +479,7 @@ CREATE TABLE `likes` (
   PRIMARY KEY (`likes_id`),
   UNIQUE KEY `UIX_likes` (`user_id`,`post_id`,`post_type`),
   CONSTRAINT `FK_member_TO_likes` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.lime_cash definition
@@ -493,7 +493,7 @@ CREATE TABLE `lime_cash` (
   PRIMARY KEY (`lime_id`),
   KEY `FK_member_TO_lime_cash` (`user_id`),
   CONSTRAINT `FK_member_TO_lime_cash` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.`member` definition
@@ -531,7 +531,7 @@ CREATE TABLE `member` (
   CONSTRAINT `FK_court_type_TO_member` FOREIGN KEY (`court_type_id`) REFERENCES `court_type` (`court_type_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_lv_TO_member` FOREIGN KEY (`lv_id`) REFERENCES `lv` (`lv_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_user_TO_member` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.msg definition
@@ -548,7 +548,7 @@ CREATE TABLE `msg` (
   KEY `FK_member_TO_msg2` (`receiver_no`),
   CONSTRAINT `FK_member_TO_msg` FOREIGN KEY (`sender_no`) REFERENCES `member` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_msg2` FOREIGN KEY (`receiver_no`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.post_img definition
@@ -560,7 +560,7 @@ CREATE TABLE `post_img` (
   PRIMARY KEY (`img_id`),
   KEY `FK_cmnty_post_TO_post_img` (`post_id`),
   CONSTRAINT `FK_cmnty_post_TO_post_img` FOREIGN KEY (`post_id`) REFERENCES `cmnty_post` (`post_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.rating_mbr definition
@@ -577,7 +577,7 @@ CREATE TABLE `rating_mbr` (
   KEY `FK_social_mtch_rsv_TO_rating_mbr` (`mtch_id`,`user_id`),
   CONSTRAINT `FK_rating_list_TO_rating_mbr` FOREIGN KEY (`rating_list_id`) REFERENCES `rating_list` (`rating_list_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_social_mtch_rsv_TO_rating_mbr` FOREIGN KEY (`mtch_id`, `user_id`) REFERENCES `social_mtch_rsv` (`mtch_id`, `user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.report definition
@@ -594,7 +594,7 @@ CREATE TABLE `report` (
   PRIMARY KEY (`report_id`),
   UNIQUE KEY `UIX_report` (`user_id`,`post_type`,`post_id`),
   CONSTRAINT `FK_member_TO_report` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.social_mtch_rsv definition
@@ -609,7 +609,7 @@ CREATE TABLE `social_mtch_rsv` (
   CONSTRAINT `FK_lime_cash_TO_social_mtch_rsv` FOREIGN KEY (`lime_id`) REFERENCES `lime_cash` (`lime_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_social_mtch_rsv` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_social_mtch_TO_social_mtch_rsv` FOREIGN KEY (`mtch_id`) REFERENCES `social_mtch` (`mtch_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.stnt definition
@@ -626,7 +626,7 @@ CREATE TABLE `stnt` (
   KEY `FK_member_TO_stnt` (`user_id`),
   CONSTRAINT `FK_cls_TO_stnt` FOREIGN KEY (`cls_id`) REFERENCES `cls` (`cls_no`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_stnt` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- limedb.trans_rpy definition
@@ -643,4 +643,4 @@ CREATE TABLE `trans_rpy` (
   KEY `FK_member_TO_trans_rpy` (`user_id`),
   CONSTRAINT `FK_item_TO_trans_rpy` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_member_TO_trans_rpy` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
