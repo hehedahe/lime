@@ -1,19 +1,20 @@
 
 html, body {
-    margin: 0;
     padding: 0;
     height: 100%;
+    
 }
 
 #body-wrapper {
     min-height: 100%;
     position: relative;
+    margin: 0px auto;
 }
 
 #body-content {
     font-family: 'NanumGothicExtraBold';
     margin-top: 100px;
-    padding-bottom: 1000px;
+    padding-bottom: 423px;
     background-color: bisque;
 }
 
@@ -27,26 +28,59 @@ html, body {
     background-color: #66C88D;
 }
 
-#footer-wrapper {
+.footer-wrapper {
     margin-top: 80px;
     margin-left: 150px;
     margin-right: 150px;
-    
+    border: 10px green;
+    position: relative;
+
 }
 
-#footer-nav {
+.footer-nav {
     font-family: 'NanumGothic';
-    color: aliceblue;
+    color: white;
+    position: absolute;
 
 }
 
-#footer-nav ul h5{
-    font-size: 150%;
-    
-}
-
-#footer-nav ul {
+.footer-nav > ul {
+    font-family: 'NanumGothicExtraBold';
     list-style-type: none;
     float: left;
     margin-right: 100px;
+}
+
+.footer-company {
+    margin-left: 800px;
+    color: white;
+}
+
+.footer-company h3 a {
+    font-family: 'NanumGothicExtraBold';
+    font-weight: bolder;
+    font-size: 120%;
+    font-style: italic;
+    text-decoration-line: none;
+    border-bottom: 7px solid #C3EB78;
+}
+
+.footer-wrapper a:link, .footer-wrapper a:visited {
+    text-decoration-line: none;
+    color: white;
+}
+
+.footer-nav ul a:hover {
+      background-color: gray;
+      border-radius: 5px;
+  }
+
+.footer-company > li {
+    list-style-type: none;
+    float: left;
+    margin-left: 5px;
+}
+
+.footer-company p {
+    margin-top: 15px;
 }
