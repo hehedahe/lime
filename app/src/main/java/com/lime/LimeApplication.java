@@ -3,12 +3,19 @@
  */
 package com.lime;
 
-public class LimeApplication {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RestController;
 
-    public static void main(String[] args) {
-        System.out.println(new LimeApplication().getGreeting());
-    }
+@RestController
+@SpringBootApplication
+public class LimeApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(LimeApplication.class, args);
+  }
+
+  public String getGreeting() {
+    return "Hello World!";
+  }
 }
