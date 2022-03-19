@@ -78,7 +78,25 @@
         <!-- <p>SNS계정으로 간편 로그인/회원가입</p> -->
         SNS계정으로 간편 로그인/회원가입
       </div>
-        <p class="mt-5 mb-3 text-muted">&copy; lime, Co., Ltd.. All Rights Reserved</p>
+      <!-- <button type="button" class="social-login"><img src="https://developers.kakao.com/tool/resource/static/img/button/kakaolink/kakaolink_btn_medium.png" alt=""></button> -->
+      <!-- <img class="social-login" src="https://developers.kakao.com/tool/resource/static/img/button/kakaolink/kakaolink_btn_medium.png" alt="">
+      -->
+      <div class="row justify-content-center mb-3">
+        <div id="facebook-login">
+           <!-- <img src="kakaolink_btn_medium.png" alt=""> -->
+          <com.facebook.login.widget.LoginButton android:id="@+id/login_button" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp" />
+         </div>
+        <div id="kakao-login">
+          <!-- <img src="kakaolink_btn_medium.png" alt=""> -->
+        </div>
+        <div id="naver-login">
+          <img src="naver_btn.png" alt="">
+        </div>
+      </div>
+      <div class="section-border"></div>
+      <p class="mt-5 mb-3 text-muted">&copy; lime, Co., Ltd.. All Rights Reserved</p>
     </form>
   </main>
 
