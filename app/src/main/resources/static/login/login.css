@@ -1,0 +1,116 @@
+html,
+body {
+  height: 100%;
+  font-family: 'NanumGothic';
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  /* background-color: #f5f5f5; */
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-radius: 5px;
+  border-color: rgb(224, 224, 224);
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border-color: rgb(224, 224, 224);
+}
+
+.btn {
+  background-color: #66C88D;
+  border: none;
+  height: 3.3rem;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #52b479;
+}
+
+#login-h {
+  text-align: left;
+  font-family: 'NanumBarunGothic';
+  font-weight: bold;
+}
+
+p {
+  font-size: x-small;
+}
+
+.form-floating {
+  margin-bottom: 0.8rem;
+}
+
+.form-floating>.form-control {
+  height: calc(3.1rem);
+}
+
+div.form-floating label {
+  font-size: 15px;
+  color: rgb(190, 190, 190);
+  padding: 0.8rem;
+  margin-left: 0.4rem;
+}
+
+#email-checkbox {
+  border-color: rgb(190, 190, 190);
+}
+
+/* .checkbox label {
+  float: left;
+} */
+
+.checkbox label {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+/* '이메일 저장하기' 텍스트 */
+.checkbox label span {
+  margin-left: 0.5rem;
+  font-size: 14px;
+}
+
+#password-join div {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(66, 66, 66);
+  margin-bottom: 0.7rem;
+}
+
+#password-join div:first-child {
+  padding-left: 3rem;
+}
+
+#password-join div:nth-child(2) {
+  padding-right: 3rem;
+}
+
+#password-join + div {
+  font-size: 0.75rem;
+  color: rgb(94, 94, 94);
+}
