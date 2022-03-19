@@ -1,0 +1,646 @@
+-- 사용자
+DROP TABLE IF EXISTS user;
+
+-- 구장
+DROP TABLE IF EXISTS field;
+
+-- 클래스
+DROP TABLE IF EXISTS cls;
+
+-- 클럽
+DROP TABLE IF EXISTS club;
+
+-- 회원
+DROP TABLE IF EXISTS member;
+
+-- 테니스숙련도
+DROP TABLE IF EXISTS lv;
+
+-- 코트
+DROP TABLE IF EXISTS court;
+
+-- 수강생
+DROP TABLE IF EXISTS stnt;
+
+-- 코트타입
+DROP TABLE IF EXISTS court_type;
+
+-- 코트사용예약
+DROP TABLE IF EXISTS court_rsv;
+
+-- 구장운영시간
+DROP TABLE IF EXISTS field_opr_hrs;
+
+-- 클럽회원
+DROP TABLE IF EXISTS club_mbr;
+
+-- 라임캐시
+DROP TABLE IF EXISTS lime_cash;
+
+-- 커뮤니티게시글
+DROP TABLE IF EXISTS cmnty_post;
+
+-- 게시판이미지
+DROP TABLE IF EXISTS post_img;
+
+-- 시군구
+DROP TABLE IF EXISTS city;
+
+-- 댓글
+DROP TABLE IF EXISTS comment;
+
+-- 신고
+DROP TABLE IF EXISTS report;
+
+-- 시도
+DROP TABLE IF EXISTS region;
+
+-- 은행타입
+DROP TABLE IF EXISTS bank_info;
+
+-- 중고거래물품
+DROP TABLE IF EXISTS item;
+
+-- 평가항목
+DROP TABLE IF EXISTS rating_list;
+
+-- 클럽게시글
+DROP TABLE IF EXISTS club_post;
+
+-- 경기운영자
+DROP TABLE IF EXISTS mgr;
+
+-- 물품사진
+DROP TABLE IF EXISTS item_img;
+
+-- 중고거래댓글
+DROP TABLE IF EXISTS trans_rpy;
+
+-- 회원평가
+DROP TABLE IF EXISTS rating_mbr;
+
+-- 소셜매치
+DROP TABLE IF EXISTS social_mtch;
+
+-- 물품찜
+DROP TABLE IF EXISTS item_like;
+
+-- 메시지
+DROP TABLE IF EXISTS msg;
+
+-- 소셜매치예약
+DROP TABLE IF EXISTS social_mtch_rsv;
+
+-- 좋아요
+DROP TABLE IF EXISTS likes;
+
+-- 클럽게시글댓글
+DROP TABLE IF EXISTS club_post_comment;
+
+-- 소셜매치유형
+DROP TABLE IF EXISTS mtch_type;
+
+-- limedb.bank_info definition
+
+CREATE TABLE bank_info (
+  bank_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  PRIMARY KEY (bank_id),
+  UNIQUE KEY UIX_bank_info (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.court_type definition
+
+CREATE TABLE court_type (
+  court_type_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  PRIMARY KEY (court_type_id),
+  UNIQUE KEY UIX_court_type (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.field definition
+
+CREATE TABLE field (
+  field_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  addr varchar(255) NOT NULL,
+  number varchar(30) NOT NULL,
+  ind_yn tinyint(1) NOT NULL,
+  court_cnt int(11) NOT NULL,
+  parking_area tinyint(1) NOT NULL,
+  light_yn tinyint(1) NOT NULL,
+  PRIMARY KEY (field_id),
+  UNIQUE KEY UIX_field (name,addr,number)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.lv definition
+
+CREATE TABLE lv (
+  lv_id int(11) NOT NULL AUTO_INCREMENT,
+  lv_name varchar(10) NOT NULL,
+  PRIMARY KEY (lv_id),
+  UNIQUE KEY UIX_lv (lv_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.mtch_type definition
+
+CREATE TABLE mtch_type (
+  mtch_type_id int(11) NOT NULL AUTO_INCREMENT,
+  mtch_type varchar(10) NOT NULL,
+  PRIMARY KEY (mtch_type_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.rating_list definition
+
+CREATE TABLE rating_list (
+  rating_list_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  score int(11) NOT NULL,
+  PRIMARY KEY (rating_list_id),
+  UNIQUE KEY UIX_rating_list (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.region definition
+
+CREATE TABLE region (
+  region_id int(11) NOT NULL AUTO_INCREMENT,
+  region_name varchar(50) NOT NULL,
+  PRIMARY KEY (region_id),
+  UNIQUE KEY UIX_region (region_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.user definition
+
+CREATE TABLE user (
+  user_id int(11) NOT NULL,
+  email varchar(50) NOT NULL,
+  name varchar(50) NOT NULL,
+  phone_no varchar(30) NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  unrgt_date timestamp NULL DEFAULT NULL,
+  unrgt_yn tinyint(1) NOT NULL DEFAULT 0,
+  pwd varchar(20) NOT NULL,
+  user_img varchar(500) DEFAULT NULL,
+  user_type varchar(10) NOT NULL DEFAULT 'U',
+  PRIMARY KEY (user_id),
+  UNIQUE KEY UIX_user (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.city definition
+
+CREATE TABLE city (
+  city_id int(11) NOT NULL AUTO_INCREMENT,
+  region_id int(11) NOT NULL,
+  city_name varchar(50) NOT NULL,
+  PRIMARY KEY (city_id),
+  UNIQUE KEY UIX_city (region_id,city_name),
+  CONSTRAINT FK_region_TO_city FOREIGN KEY (region_id) REFERENCES region (region_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.court definition
+
+CREATE TABLE court (
+  court_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  court_type_id int(11) NOT NULL,
+  field_id int(11) NOT NULL,
+  fee int(11) NOT NULL DEFAULT 50000,
+  PRIMARY KEY (court_id),
+  UNIQUE KEY UIX_court (field_id,name),
+  KEY FK_court_type_TO_court (court_type_id),
+  CONSTRAINT FK_court_type_TO_court FOREIGN KEY (court_type_id) REFERENCES court_type (court_type_id) ON DELETE CASCADE,
+  CONSTRAINT FK_field_TO_court FOREIGN KEY (field_id) REFERENCES field (field_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.field_opr_hrs definition
+
+CREATE TABLE field_opr_hrs (
+  opr_id int(11) NOT NULL AUTO_INCREMENT,
+  field_id int(11) NOT NULL,
+  st_time time NOT NULL,
+  end_time time NOT NULL,
+  PRIMARY KEY (opr_id),
+  KEY FK_field_TO_field_opr_hrs (field_id),
+  CONSTRAINT FK_field_TO_field_opr_hrs FOREIGN KEY (field_id) REFERENCES field (field_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.mgr definition
+
+CREATE TABLE mgr (
+  user_id int(11) NOT NULL AUTO_INCREMENT,
+  city_id int(11) NOT NULL,
+  PRIMARY KEY (user_id),
+  KEY FK_city_TO_mgr (city_id),
+  CONSTRAINT FK_city_TO_mgr FOREIGN KEY (city_id) REFERENCES city (city_id) ON DELETE CASCADE,
+  CONSTRAINT FK_user_TO_mgr FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.social_mtch definition
+
+CREATE TABLE social_mtch (
+  mtch_id int(11) NOT NULL AUTO_INCREMENT,
+  court_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  mtch_type_id int(11) NOT NULL,
+  mtch_date date NOT NULL,
+  st_time time NOT NULL,
+  end_time time NOT NULL,
+  fee int(11) NOT NULL DEFAULT 20000,
+  state varchar(10) NOT NULL DEFAULT 'O',
+  PRIMARY KEY (mtch_id),
+  KEY FK_court_TO_social_mtch (court_id),
+  KEY FK_mgr_TO_social_mtch (user_id),
+  KEY FK_mtch_type_TO_social_mtch (mtch_type_id),
+  CONSTRAINT FK_court_TO_social_mtch FOREIGN KEY (court_id) REFERENCES court (court_id) ON DELETE CASCADE,
+  CONSTRAINT FK_mgr_TO_social_mtch FOREIGN KEY (user_id) REFERENCES mgr (user_id) ON DELETE CASCADE,
+  CONSTRAINT FK_mtch_type_TO_social_mtch FOREIGN KEY (mtch_type_id) REFERENCES mtch_type (mtch_type_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.cls definition
+
+CREATE TABLE cls (
+  cls_no int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  city_id int(11) NOT NULL,
+  title varchar(255) NOT NULL,
+  intr varchar(255) NOT NULL,
+  img varchar(500) NOT NULL,
+  cost int(11) NOT NULL,
+  st_date date NOT NULL,
+  end_date date NOT NULL,
+  per_week int(11) NOT NULL,
+  level varchar(10) NOT NULL,
+  tchr_intr longtext NOT NULL,
+  dtl_intr longtext NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (cls_no),
+  KEY FK_city_TO_cls (city_id),
+  KEY FK_member_TO_cls (user_id),
+  CONSTRAINT FK_city_TO_cls FOREIGN KEY (city_id) REFERENCES city (city_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_cls FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.club definition
+
+CREATE TABLE club (
+  club_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  city_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  lv_id int(11) NOT NULL,
+  club_img varchar(500) NOT NULL,
+  activity_time varchar(20) NOT NULL,
+  activity_day varchar(10) NOT NULL,
+  min_age int(11) NOT NULL,
+  max_age int(11) NOT NULL,
+  headcnt int(11) NOT NULL,
+  PRIMARY KEY (club_id),
+  UNIQUE KEY UIX_club (user_id),
+  UNIQUE KEY UIX_club2 (name),
+  KEY FK_city_TO_club (city_id),
+  KEY FK_lv_TO_club (lv_id),
+  CONSTRAINT FK_city_TO_club FOREIGN KEY (city_id) REFERENCES city (city_id) ON DELETE CASCADE,
+  CONSTRAINT FK_lv_TO_club FOREIGN KEY (lv_id) REFERENCES lv (lv_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_club FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.club_mbr definition
+
+CREATE TABLE club_mbr (
+  club_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  state varchar(10) NOT NULL DEFAULT 'A',
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (club_id,user_id),
+  KEY FK_member_TO_club_mbr (user_id),
+  CONSTRAINT FK_club_TO_club_mbr FOREIGN KEY (club_id) REFERENCES club (club_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_club_mbr FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.club_post definition
+
+CREATE TABLE club_post (
+  post_id int(11) NOT NULL AUTO_INCREMENT,
+  club_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  title varchar(255) NOT NULL,
+  content longtext NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  view_cnt int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (post_id),
+  KEY FK_club_mbr_TO_club_post (club_id,user_id),
+  CONSTRAINT FK_club_mbr_TO_club_post FOREIGN KEY (club_id, user_id) REFERENCES club_mbr (club_id, user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.club_post_comment definition
+
+CREATE TABLE club_post_comment (
+  club_comment_id int(11) NOT NULL AUTO_INCREMENT,
+  post_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  content longtext NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (club_comment_id),
+  KEY FK_club_post_TO_club_post_comment (post_id),
+  KEY FK_member_TO_club_post_comment (user_id),
+  CONSTRAINT FK_club_post_TO_club_post_comment FOREIGN KEY (post_id) REFERENCES club_post (post_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_club_post_comment FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.cmnty_post definition
+
+CREATE TABLE cmnty_post (
+  post_id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  category varchar(10) NOT NULL,
+  title varchar(255) NOT NULL,
+  content longtext NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  view_count int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (post_id),
+  KEY FK_member_TO_cmnty_post (user_id),
+  CONSTRAINT FK_member_TO_cmnty_post FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.comment definition
+
+CREATE TABLE comment (
+  comment_id int(11) NOT NULL AUTO_INCREMENT,
+  post_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  content longtext NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (comment_id),
+  KEY FK_cmnty_post_TO_comment (post_id),
+  KEY FK_member_TO_comment (user_id),
+  CONSTRAINT FK_cmnty_post_TO_comment FOREIGN KEY (post_id) REFERENCES cmnty_post (post_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_comment FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.court_rsv definition
+
+CREATE TABLE court_rsv (
+  rsv_id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  court_id int(11) NOT NULL,
+  lime_id int(11) NOT NULL,
+  rsv_date date NOT NULL,
+  st_time time NOT NULL,
+  end_time time NOT NULL,
+  state varchar(10) NOT NULL,
+  PRIMARY KEY (rsv_id),
+  KEY FK_court_TO_court_rsv (court_id),
+  KEY FK_lime_cash_TO_court_rsv (lime_id),
+  KEY FK_member_TO_court_rsv (user_id),
+  CONSTRAINT FK_court_TO_court_rsv FOREIGN KEY (court_id) REFERENCES court (court_id) ON DELETE CASCADE,
+  CONSTRAINT FK_lime_cash_TO_court_rsv FOREIGN KEY (lime_id) REFERENCES lime_cash (lime_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_court_rsv FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.item definition
+
+CREATE TABLE item (
+  item_id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  city_id int(11) NOT NULL,
+  item_name varchar(255) NOT NULL,
+  item_cost int(11) NOT NULL,
+  content longtext NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  trans_state varchar(10) NOT NULL DEFAULT 'S',
+  view_cnt int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (item_id),
+  KEY FK_city_TO_item (city_id),
+  KEY FK_member_TO_item (user_id),
+  CONSTRAINT FK_city_TO_item FOREIGN KEY (city_id) REFERENCES city (city_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_item FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.item_img definition
+
+CREATE TABLE item_img (
+  item_img_id int(11) NOT NULL AUTO_INCREMENT,
+  item_id int(11) NOT NULL,
+  file_path varchar(500) NOT NULL,
+  PRIMARY KEY (item_img_id),
+  KEY FK_item_TO_item_img (item_id),
+  CONSTRAINT FK_item_TO_item_img FOREIGN KEY (item_id) REFERENCES item (item_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.item_like definition
+
+CREATE TABLE item_like (
+  item_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  PRIMARY KEY (item_id,user_id),
+  KEY FK_member_TO_item_like (user_id),
+  CONSTRAINT FK_item_TO_item_like FOREIGN KEY (item_id) REFERENCES item (item_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_item_like FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.likes definition
+
+CREATE TABLE likes (
+  likes_id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  post_type varchar(50) NOT NULL,
+  post_id int(11) NOT NULL,
+  PRIMARY KEY (likes_id),
+  UNIQUE KEY UIX_likes (user_id,post_id,post_type),
+  CONSTRAINT FK_member_TO_likes FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.lime_cash definition
+
+CREATE TABLE lime_cash (
+  lime_id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  amt int(11) NOT NULL,
+  date timestamp NOT NULL DEFAULT current_timestamp(),
+  type_use varchar(10) NOT NULL,
+  PRIMARY KEY (lime_id),
+  KEY FK_member_TO_lime_cash (user_id),
+  CONSTRAINT FK_member_TO_lime_cash FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.member definition
+
+CREATE TABLE member (
+  user_id int(11) NOT NULL AUTO_INCREMENT,
+  club_id int(11) DEFAULT 0,
+  gender varchar(10) NOT NULL,
+  brth_date date NOT NULL,
+  social_id int(11) DEFAULT 0,
+  social_yn tinyint(1) NOT NULL,
+  bank_id int(11) NOT NULL,
+  acnt_no int(11) NOT NULL,
+  acnt_holder varchar(50) NOT NULL,
+  evnt_yn tinyint(1) NOT NULL,
+  scope int(11) NOT NULL,
+  preferred_weekdays time NOT NULL,
+  preferred_weekends time NOT NULL,
+  city_id int(11) NOT NULL,
+  court_type_id int(11) NOT NULL,
+  lefty_yn varchar(10) NOT NULL,
+  lv_id int(11) NOT NULL,
+  manner_score int(11) NOT NULL DEFAULT 100,
+  block_date timestamp NULL DEFAULT NULL,
+  block_yn tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (user_id),
+  KEY FK_bank_info_TO_member (bank_id),
+  KEY FK_city_TO_member (city_id),
+  KEY FK_club_TO_member (club_id),
+  KEY FK_court_type_TO_member (court_type_id),
+  KEY FK_lv_TO_member (lv_id),
+  CONSTRAINT FK_bank_info_TO_member FOREIGN KEY (bank_id) REFERENCES bank_info (bank_id) ON DELETE CASCADE,
+  CONSTRAINT FK_city_TO_member FOREIGN KEY (city_id) REFERENCES city (city_id) ON DELETE CASCADE,
+  CONSTRAINT FK_club_TO_member FOREIGN KEY (club_id) REFERENCES club (club_id) ON DELETE CASCADE,
+  CONSTRAINT FK_court_type_TO_member FOREIGN KEY (court_type_id) REFERENCES court_type (court_type_id) ON DELETE CASCADE,
+  CONSTRAINT FK_lv_TO_member FOREIGN KEY (lv_id) REFERENCES lv (lv_id) ON DELETE CASCADE,
+  CONSTRAINT FK_user_TO_member FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.msg definition
+
+CREATE TABLE msg (
+  msg_no int(11) NOT NULL AUTO_INCREMENT,
+  sender_no int(11) NOT NULL,
+  receiver_no int(11) NOT NULL,
+  content longtext NOT NULL,
+  read_yn tinyint(1) NOT NULL DEFAULT 0,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (msg_no),
+  KEY FK_member_TO_msg (sender_no),
+  KEY FK_member_TO_msg2 (receiver_no),
+  CONSTRAINT FK_member_TO_msg FOREIGN KEY (sender_no) REFERENCES member (user_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_msg2 FOREIGN KEY (receiver_no) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.post_img definition
+
+CREATE TABLE post_img (
+  img_id int(11) NOT NULL AUTO_INCREMENT,
+  post_id int(11) NOT NULL,
+  file_path varchar(500) NOT NULL,
+  PRIMARY KEY (img_id),
+  KEY FK_cmnty_post_TO_post_img (post_id),
+  CONSTRAINT FK_cmnty_post_TO_post_img FOREIGN KEY (post_id) REFERENCES cmnty_post (post_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.rating_mbr definition
+
+CREATE TABLE rating_mbr (
+  rating_id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  mtch_id int(11) NOT NULL,
+  rating_list_id int(11) NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (rating_id),
+  KEY FK_rating_list_TO_rating_mbr (rating_list_id),
+  KEY FK_social_mtch_rsv_TO_rating_mbr (mtch_id,user_id),
+  CONSTRAINT FK_rating_list_TO_rating_mbr FOREIGN KEY (rating_list_id) REFERENCES rating_list (rating_list_id) ON DELETE CASCADE,
+  CONSTRAINT FK_social_mtch_rsv_TO_rating_mbr FOREIGN KEY (mtch_id, user_id) REFERENCES social_mtch_rsv (mtch_id, user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.report definition
+
+CREATE TABLE report (
+  report_id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  post_type varchar(10) NOT NULL,
+  menu varchar(10) NOT NULL,
+  post_id int(11) NOT NULL,
+  report_type varchar(50) NOT NULL,
+  PRIMARY KEY (report_id),
+  UNIQUE KEY UIX_report (user_id,post_type,post_id),
+  CONSTRAINT FK_member_TO_report FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.social_mtch_rsv definition
+
+CREATE TABLE social_mtch_rsv (
+  mtch_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  lime_id int(11) NOT NULL,
+  PRIMARY KEY (mtch_id,user_id),
+  UNIQUE KEY UIX_social_mtch_rsv (lime_id),
+  KEY FK_member_TO_social_mtch_rsv (user_id),
+  CONSTRAINT FK_lime_cash_TO_social_mtch_rsv FOREIGN KEY (lime_id) REFERENCES lime_cash (lime_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_social_mtch_rsv FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE,
+  CONSTRAINT FK_social_mtch_TO_social_mtch_rsv FOREIGN KEY (mtch_id) REFERENCES social_mtch (mtch_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.stnt definition
+
+CREATE TABLE stnt (
+  cls_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  state varchar(10) NOT NULL DEFAULT 'A',
+  cls_rate int(11) NOT NULL,
+  rev_content longtext NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (cls_id,user_id),
+  KEY FK_member_TO_stnt (user_id),
+  CONSTRAINT FK_cls_TO_stnt FOREIGN KEY (cls_id) REFERENCES cls (cls_no) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_stnt FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- limedb.trans_rpy definition
+
+CREATE TABLE trans_rpy (
+  trans_rpy_no int(11) NOT NULL AUTO_INCREMENT,
+  item_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  content longtext NOT NULL,
+  rgt_date timestamp NOT NULL DEFAULT current_timestamp(),
+  mdfy_date timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (trans_rpy_no),
+  KEY FK_item_TO_trans_rpy (item_id),
+  KEY FK_member_TO_trans_rpy (user_id),
+  CONSTRAINT FK_item_TO_trans_rpy FOREIGN KEY (item_id) REFERENCES item (item_id) ON DELETE CASCADE,
+  CONSTRAINT FK_member_TO_trans_rpy FOREIGN KEY (user_id) REFERENCES member (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -105,13 +105,13 @@ CREATE TABLE user (
 	user_id INTEGER NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	name VARCHAR(50) NOT NULL,
-	phone_no INTEGER NOT NULL,
+	phone_no VARCHAR(30) NOT NULL,
 	rgt_date TIMESTAMP NOT NULL,
 	unrgt_date TIMESTAMP NULL,
-	unrgt_yn BOOLEAN NOT NULL,
-	pwd INTEGER NOT NULL,
-	user_img VARCHAR(255) NULL,
-	user_type VARCHAR(10) NOT NULL
+	unrgt_yn BOOLEAN DEFAULT '0',
+	pwd VARCHAR(20) NOT NULL,
+	user_img VARCHAR(500) NULL,
+	user_type VARCHAR(10) DEFAULT 'U'
 );
 
 -- 사용자
@@ -164,17 +164,16 @@ CREATE TABLE cls (
 	city_id INTEGER NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	intr VARCHAR(255) NOT NULL,
-	img VARCHAR(255) NOT NULL,
+	img VARCHAR(500) NOT NULL,
 	cost INTEGER NOT NULL,
 	st_date DATE NOT NULL,
 	end_date DATE NOT NULL,
 	per_week INTEGER NOT NULL,
-	max_ppl INTEGER NOT NULL,
 	level VARCHAR(10) NOT NULL,
 	tchr_intr LONGTEXT NOT NULL,
 	dtl_intr LONGTEXT NOT NULL,
 	rgt_date TIMESTAMP NOT NULL,
-	mdfy_date TIMESTAMP NOT NULL
+	mdfy_date TIMESTAMP NULL
 );
 
 -- 클래스
@@ -194,7 +193,7 @@ CREATE TABLE club (
 	city_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
 	lv_id INTEGER NOT NULL,
-	club_img VARCHAR(255) NOT NULL,
+	club_img VARCHAR(500) NOT NULL,
 	activity_time VARCHAR(20) NOT NULL,
 	activity_day VARCHAR(10) NOT NULL,
 	min_age INTEGER NOT NULL,
@@ -227,11 +226,11 @@ ALTER TABLE club
 -- 회원
 CREATE TABLE member (
 	user_id INTEGER NOT NULL,
-	club_id INTEGER NULL,
+	club_id INTEGER DEFAULT '0',
 	gender VARCHAR(10) NOT NULL,
 	brth_date DATE NOT NULL,
+	social_id INTEGER DEFAULT '0',
 	social_yn BOOLEAN NOT NULL,
-	socail_id INTEGER NULL,
 	bank_id INTEGER NOT NULL,
 	acnt_no INTEGER NOT NULL,
 	acnt_holder VARCHAR(50) NOT NULL,
@@ -245,7 +244,7 @@ CREATE TABLE member (
 	lv_id INTEGER NOT NULL,
 	manner_score INTEGER DEFAULT '100',
 	block_date TIMESTAMP NULL,
-	block_yn BOOLEAN NOT NULL
+	block_yn BOOLEAN DEFAULT '0'
 );
 
 -- 회원
@@ -286,8 +285,7 @@ CREATE TABLE court (
 	name VARCHAR(50) NOT NULL,
 	court_type_id INTEGER NOT NULL,
 	field_id INTEGER NOT NULL,
-	fee INTEGER NOT NULL,
-	mdfy_date TIMESTAMP NULL
+	fee INTEGER DEFAULT '50000'
 );
 
 -- 코트
@@ -311,11 +309,11 @@ ALTER TABLE court
 CREATE TABLE stnt (
 	cls_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
-	state VARCHAR(10) NOT NULL,
+	state VARCHAR(10) DEFAULT 'A',
 	cls_rate INTEGER NOT NULL,
 	rev_content LONGTEXT NOT NULL,
 	rgt_date TIMESTAMP NOT NULL,
-	mdfy_date TIMESTAMP NOT NULL
+	mdfy_date TIMESTAMP NULL
 );
 
 -- 수강생
@@ -394,10 +392,9 @@ ALTER TABLE field_opr_hrs
 CREATE TABLE club_mbr (
 	club_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
-	state INTEGER NOT NULL,
-	rmk LONGTEXT NULL,
+	state VARCHAR(10) DEFAULT 'A',
 	rgt_date TIMESTAMP NOT NULL,
-	mdfy_date TIMESTAMP NOT NULL
+	mdfy_date TIMESTAMP NULL
 );
 
 -- 클럽회원
@@ -436,7 +433,7 @@ CREATE TABLE cmnty_post (
 	content LONGTEXT NOT NULL,
 	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NULL,
-	view_count INTEGER NOT NULL
+	view_count INTEGER DEFAULT '0'
 );
 
 -- 커뮤니티게시글
@@ -453,7 +450,7 @@ ALTER TABLE cmnty_post
 CREATE TABLE post_img (
 	img_id INTEGER NOT NULL,
 	post_id INTEGER NOT NULL,
-	file_path VARCHAR(255) NOT NULL
+	file_path VARCHAR(500) NOT NULL
 );
 
 -- 게시판이미지
@@ -478,6 +475,13 @@ ALTER TABLE city
 	ADD CONSTRAINT PK_city -- 시군구 기본키
 	PRIMARY KEY (
 	city_id -- 시군구번호
+	);
+
+-- 시군구 유니크 인덱스
+CREATE UNIQUE INDEX UIX_city
+	ON city ( -- 시군구
+				region_id ASC, -- 시도번호
+				city_name ASC  -- 시군구명
 	);
 
 ALTER TABLE city
@@ -510,6 +514,7 @@ CREATE TABLE report (
 	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NOT NULL,
 	post_type VARCHAR(10) NOT NULL,
+	menu VARCHAR(10) NOT NULL,
 	post_id INTEGER NOT NULL,
 	report_type VARCHAR(50) NOT NULL
 );
@@ -519,6 +524,14 @@ ALTER TABLE report
 	ADD CONSTRAINT PK_report -- 신고 기본키
 	PRIMARY KEY (
 	report_id -- 신고번호
+	);
+
+-- 신고 유니크 인덱스
+CREATE UNIQUE INDEX UIX_report
+	ON report ( -- 신고
+				user_id ASC,   -- 회원번호
+				post_type ASC, -- 글또는댓글
+				post_id ASC    -- 글번호
 	);
 
 ALTER TABLE report
@@ -534,7 +547,13 @@ CREATE TABLE region (
 ALTER TABLE region
 	ADD CONSTRAINT PK_region -- 시도 기본키
 	PRIMARY KEY (
-	region_id -- 지역번호
+	region_id -- 시도번호
+	);
+
+-- 시도 유니크 인덱스
+CREATE UNIQUE INDEX UIX_region
+	ON region ( -- 시도
+				region_name ASC -- 시도명
 	);
 
 ALTER TABLE region
@@ -572,7 +591,7 @@ CREATE TABLE item (
 	content LONGTEXT NOT NULL,
 	rgt_date TIMESTAMP NOT NULL,
 	mdfy_date TIMESTAMP NULL,
-	trans_state INTEGER NOT NULL,
+	trans_state VARCHAR(10) DEFAULT 'S',
 	view_cnt INTEGER DEFAULT '0'
 );
 
@@ -617,7 +636,7 @@ CREATE TABLE club_post (
 	title VARCHAR(255) NOT NULL,
 	content LONGTEXT NOT NULL,
 	rgt_date TIMESTAMP NOT NULL,
-	mdfy_date TIMESTAMP NOT NULL,
+	mdfy_date TIMESTAMP NULL,
 	view_cnt INTEGER DEFAULT '0'
 );
 
@@ -651,7 +670,7 @@ ALTER TABLE mgr
 CREATE TABLE item_img (
 	item_img_id INTEGER NOT NULL,
 	item_id INTEGER NOT NULL,
-	file_path VARCHAR(255) NOT NULL
+	file_path VARCHAR(500) NOT NULL
 );
 
 -- 물품사진
@@ -708,12 +727,12 @@ CREATE TABLE social_mtch (
 	mtch_id INTEGER NOT NULL,
 	court_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
+	mtch_type_id INTEGER NOT NULL,
 	mtch_date TIMESTAMP NOT NULL,
 	st_time TIME NOT NULL,
 	end_time TIME NOT NULL,
-	state INTEGER NOT NULL,
-	fee INTEGER NOT NULL,
-	mtch_type_id INTEGER NOT NULL
+	fee INTEGER DEFAULT '20000',
+	state VARCHAR(10) DEFAULT 'O'
 );
 
 -- 소셜매치
@@ -746,7 +765,7 @@ CREATE TABLE msg (
 	sender_no INTEGER NOT NULL,
 	receiver_no INTEGER NOT NULL,
 	content LONGTEXT NOT NULL,
-	read_yn BOOLEAN NOT NULL,
+	read_yn BOOLEAN DEFAULT '0',
 	rgt_date TIMESTAMP NOT NULL
 );
 
@@ -762,8 +781,8 @@ ALTER TABLE msg
 
 -- 소셜매치예약
 CREATE TABLE social_mtch_rsv (
-	user_id INTEGER NOT NULL,
 	mtch_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
 	lime_id INTEGER NOT NULL
 );
 
@@ -771,8 +790,8 @@ CREATE TABLE social_mtch_rsv (
 ALTER TABLE social_mtch_rsv
 	ADD CONSTRAINT PK_social_mtch_rsv -- 소셜매치예약 기본키
 	PRIMARY KEY (
-	user_id, -- 회원번호
-	mtch_id  -- 매칭번호
+	mtch_id, -- 매칭번호
+	user_id  -- 회원번호
 	);
 
 -- 소셜매치예약 유니크 인덱스
@@ -796,6 +815,14 @@ ALTER TABLE likes
 	likes_id -- 좋아요번호
 	);
 
+-- 좋아요 유니크 인덱스
+CREATE UNIQUE INDEX UIX_likes
+	ON likes ( -- 좋아요
+				user_id ASC,   -- 회원번호
+				post_id ASC,   -- 게시글번호
+				post_type ASC  -- 게시글유형
+	);
+
 ALTER TABLE likes
 	MODIFY COLUMN likes_id INTEGER NOT NULL AUTO_INCREMENT;
 
@@ -806,7 +833,7 @@ CREATE TABLE club_post_comment (
 	user_id INTEGER NOT NULL,
 	content LONGTEXT NOT NULL,
 	rgt_date TIMESTAMP NOT NULL,
-	mdfy_date TIMESTAMP NOT NULL
+	mdfy_date TIMESTAMP NULL
 );
 
 -- 클럽게시글댓글
@@ -1082,7 +1109,7 @@ ALTER TABLE city
 	region_id -- 시도번호
 	)
 	REFERENCES region ( -- 시도
-	region_id -- 지역번호
+	region_id -- 시도번호
 	);
 
 -- 댓글
@@ -1211,12 +1238,12 @@ ALTER TABLE rating_mbr
 ALTER TABLE rating_mbr
 	ADD CONSTRAINT FK_social_mtch_rsv_TO_rating_mbr -- 소셜매치예약 -> 회원평가
 	FOREIGN KEY (
-	user_id, -- 회원번호
-	mtch_id  -- 매칭번호
+	mtch_id, -- 매칭번호
+	user_id  -- 회원번호
 	)
 	REFERENCES social_mtch_rsv ( -- 소셜매치예약
-	user_id, -- 회원번호
-	mtch_id  -- 매칭번호
+	mtch_id, -- 매칭번호
+	user_id  -- 회원번호
 	);
 
 -- 소셜매치
