@@ -13,7 +13,7 @@ body {
 
 .h-lime {
   text-align: left;
-  font-family: 'NanumBarunGothic';
+  /* font-family: 'NanumBarunGothic'; */
   font-weight: bold;
 }
 
@@ -78,7 +78,7 @@ body {
 .form-lime {
   width: 100%;
   max-width: 400px;
-  padding: 15px;
+  padding: 10px;
   margin: auto;
 }
 
@@ -92,6 +92,7 @@ body {
 
 .form-control:focus {
   box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+  border-color: rgb(224, 224, 224);
 }
 
 .form-signup input {
@@ -138,7 +139,7 @@ div.col-4.input-phone {
 
 #phoneCheck {
   height: 2.5rem;
-  width: 7.2rem;
+  width: 7.4rem;
   font-size: 15px;
   font-weight: bold;
   color: rgb(127, 127, 127);
