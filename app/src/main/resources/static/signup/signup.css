@@ -98,6 +98,13 @@ input.form-control::placeholder {
   font-size: 14px;
 }
 
+.form-lime label {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-weight: bold;
+}
+
 #password-join div {
   font-size: 15px;
   font-weight: bold;
@@ -122,7 +129,7 @@ a:hover {
   padding-right: 3rem;
 }
 
-#password-join + div {
+#login-h + div {
   font-size: 0.75rem;
   color: rgb(94, 94, 94);
 }
@@ -190,3 +197,4 @@ a:hover {
 .section-border {
   border-top: 1px solid rgb(224, 224, 224);
 }
+
