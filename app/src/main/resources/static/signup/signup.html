@@ -51,9 +51,9 @@
 
 <body class="text-center">
 
-  <main class="form-signin">
+  <main class="form-lime">
     <form>
-      <h1 class="h2 mb-4" id="login-h">회원가입</h1>
+      <h1 class="h2 mb-4 h-lime">회원가입</h1>
       <div>
         SNS계정으로 간편 로그인/회원가입
       </div>
@@ -96,24 +96,65 @@
       <div class="section-border"></div>
       <br>
 
-      <div class="form-lime">
+      <div class="form-signup">
         <label for="inputEmail" class="form-label">이메일</label>
         <input type="email" class="form-control" id="inputEmail" placeholder="이메일">
       </div>
-      <div class="form-lime">
+      <div class="form-signup">
+        <label for="inputPassword" class="form-label">비밀번호</label>
+        <div id="passwordHelp" class="form-text mb-2">영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</div>
         <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호">
       </div>
+      <div class="form-signup">
+        <label for="inputPassword2" class="form-label">비밀번호 확인</label>
+        <input type="password" class="form-control" id="inputPassword2" placeholder="비밀번호 확인">
+      </div>
+      <div class="form-signup">
+        <label for="inputName" class="form-label">이름</label>
+        <input class="form-control" id="inputName" placeholder="이름(실명)">
+      </div>
+      <div class="form-signup">
+        <label for="inputPhone" class="form-label">휴대폰 번호</label>
+        <div class="row">
+          <div class="col-8 input-phone">
+            <input class="form-control" id="inputPhone" placeholder="휴대폰번호(-없이 입력)">
+          </div>
+          <div class="col-4 input-phone">
+            <button class="btn col" id="phoneCheck">인증요청</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-signup">
+        <label for="inputName" class="form-label">약관동의</label>
+        <div class="checkbox mb-3">
+          <div>
+            <input type="checkbox" value="remember-me" class="signupCheckbox">
+            이용약관<span>(필수)</span>
+          </div>
+          <div>
+            <input type="checkbox" value="remember-me" class="signupCheckbox">
+            개인정보수집 및 이용동의<span>(필수)</span>
+          </div>
+          <div>
+            <input type="checkbox" value="remember-me" class="signupCheckbox">
+            이벤트 및 프로모션 알림 받기<span>(선택)</span>
+          </div>
+        </div>
+      </div>
+
+      
+      
 
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me" id="email-checkbox"> <span>이메일 저장하기</span>
+          <input type="checkbox" value="remember-me" class="signupCheckbox">
+          <span>라임 서비스 이용 약관 및 개인 정보 수집 및 이용에 동의합니다.</span>
         </label>
       </div>
-      <button class="w-100 btn btn-primary mb-4" type="submit">로그인</button>
+      <button class="w-100 btn btn-primary mb-4" type="submit" id="btn-signup">가입하기</button>
       <div class="row mb-4" id="password-join">
-        <div class="col"><a href="">비밀번호 찾기</a></div><div class="col"><a href="">회원가입</a></div>
+        <div class="col">이미 아이디가 있으신가요?<a href="">로그인</a></div>
       </div>
-      <p class="mt-5 mb-3 text-muted">&copy; lime, Co., Ltd.. All Rights Reserved</p>
     </form>
   </main>
 
