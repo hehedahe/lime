@@ -9,7 +9,6 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  /* background-color: #f5f5f5; */
 }
 
 .form-signin {
@@ -23,8 +22,12 @@ body {
   font-weight: 400;
 }
 
-.form-signin .form-floating:focus-within {
+/* .form-signin .form-floating:focus-within {
   z-index: 2;
+} */
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
 }
 
 .form-signin input[type="email"] {
@@ -32,6 +35,11 @@ body {
   border-radius: 5px;
   border-color: rgb(224, 224, 224);
 }
+
+/* #floatingInput {
+  padding-top: 10px;
+  padding-bottom: 10px;
+} */
 
 .form-signin input[type="password"] {
   margin-bottom: 10px;
@@ -60,19 +68,19 @@ p {
   font-size: x-small;
 }
 
-.form-floating {
+.form-lime {
   margin-bottom: 0.8rem;
 }
 
-.form-floating>.form-control {
-  height: calc(3.1rem);
+.form-lime .form-control {
+  height: 3.1rem;
 }
 
-div.form-floating label {
+input.form-control::placeholder {
   font-size: 15px;
   color: rgb(190, 190, 190);
-  padding: 0.8rem;
-  margin-left: 0.4rem;
+  /* padding: 0.8rem;
+  margin-left: 0.4rem; */
 }
 
 #email-checkbox {
