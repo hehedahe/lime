@@ -1,0 +1,67 @@
+@import "signup.css";
+@import "signup2.css";
+@import "signup3.css";
+
+.indicator div:nth-child(2) {
+  background-color: rgb(240, 240, 240);
+}
+
+.indicator div:nth-child(3) {
+  background-color: #66C88D;
+}
+
+.signup-region .col:first-child {
+  padding-left: 0;
+}
+
+.signup-region .col:last-child {
+  padding-right: 0;
+}
+
+.signup-region .col label {
+  font-size: 13px;
+}
+
+.signup-scope .btn {
+  height: 3rem;
+  margin: 0 0.2rem;
+  font-size: small;
+  color: #212529;
+  background-color: rgb(245, 245, 245);
+  border: none;
+}
+
+.signup-time .btn {
+  height: 4.1rem;
+  margin: 1rem 0.2rem;
+  font-size: 14px;
+  color: #212529;
+  background-color: rgb(245, 245, 245);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-time .btn img {
+  width: 1.5rem;
+}
+
+.signup-time .btn label {
+  text-align: center;
+  font-size: small;
+  margin-top: 0.2rem;
+}
+
+.signup-court .row .col:first-child {
+  padding-left: 0;
+}
+
+.signup-court .row .col:last-child {
+  padding-right: 0;
+}
+
+.form-lime {
+  max-width: 450px;
+}
