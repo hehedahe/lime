@@ -107,7 +107,7 @@ body {
   font-weight: bold;
 }
 
-.btn:hover {
+#btn-signup:hover {
   background-color: #52b479;
 }
 
@@ -147,8 +147,8 @@ div.col-4.input-phone {
   border-color: rgb(224, 224, 224);
 }
 
-.signupCheckbox {
-  border-color: rgb(190, 190, 190);
+#phoneCheck:hover {
+  background-color: #e1e1e1;
 }
 
 /* .checkbox label {
@@ -207,5 +207,12 @@ a {
   color: rgb(150, 150, 150);
 }
 
+.form-signup .form-check-input {
+  margin-top: 0;
+  border-color: rgb(190, 190, 190);
+}
 
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+}
 
