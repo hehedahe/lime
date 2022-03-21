@@ -1,7 +1,7 @@
 
 @font-face {
-    font-family: 'NGExtraBold';
-    src: url("../asset/font/NanumGothicExtraBold.woff") format("woff");
+    font-family: 'NGBold';
+    src: url("../asset/font/NanumGothicBold.woff") format("woff");
 }
 
 @font-face {
@@ -32,13 +32,15 @@ nav {
 .nav-logo > a {
     text-decoration: none;
     color: #92DB82;
-
 }
-.nav-menu > li {
 
+.nav-menu > ul > li {
+    list-style: none;
+    color: black;
 }
 .nav-menu > li > a {
     text-decoration: none;
+    color: black;
 }
 
 
