@@ -9,7 +9,7 @@ plugins {
 eclipse {
     project {
         name = "lime"
-    } 
+    }
 }
 
 group = 'com.lime'
@@ -37,6 +37,9 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+  // 인텔리j 서버 재시작없이 class & resources 적용
+  implementation 'org.springframework.boot:spring-boot-devtools:2.6.2'
 }
 
 test {
