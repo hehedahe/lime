@@ -19,8 +19,8 @@
 }
 
 .indicator div {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.7rem;
+  height: 0.7rem;
   border-radius: 50%;
   background-color: rgb(240, 240, 240);
   display: inline-block;
