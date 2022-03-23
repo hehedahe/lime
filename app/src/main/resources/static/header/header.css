@@ -26,56 +26,96 @@ ul {
 
 a {
     text-decoration: none;
-    color: black;
+    color: #000;
 }
 
 
 /* header 전체*/
 nav {
-    border: 1px solid gray;
-    font-family: 'NG';
-    height: 60px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
     padding: 2vh 20vw;
+    height: 60px;
     display: flex;
     align-items: center;
+    font-family: 'NG';
 }
 
 /* 로고 */
 .nav-logo {
     font-family: 'CooperBlack';
     font-size: xxx-large;
-    margin-right: 3vw;
-    margin-bottom: 40px;
+    margin: 0 30px 30px 0;
     height: 30px;
 }
 
 .nav-logo > a {
-    text-decoration: none;
     color: #92DB82;
 }
-
 /* 메뉴 */
 .nav-menu {
     display: flex;
     width: 35vw;
-    height: 30px;
-    justify-content: space-between;
+    height: 90px;
+    /*padding: 10px 0 0 0;*/
     font-size: medium;
+    color: rgba(0,0,0, 0.7);
+    justify-content: space-around;
     align-items: center;
 }
 
-.nav-menu > li:hover > a {
+.nav-menu li {
+    display: flex;
+    flex-basis: 20%;
+    justify-content: center;
+}
+
+.nav-menu a {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+    letter-spacing: 2px;
+    position: relative;
+    /*background-color: darksalmon;*/
+    padding: 40% 0 35% 0;
+}
+
+
+.nav-menu a:before,
+.nav-menu a:after {
+    transition: all 0.35s ease;
+    -webkit-transition: all 0.35s ;
+}
+
+.nav-menu a:after {
+    position: absolute;
+    background-color: #92DB82;
+    height: 3px;
+    width: 0%;
+    content: "";
+    left: 0;
+    top : 100%;
+    overflow: hidden;
+}
+
+.nav-menu li:hover a {
     font-family: 'NGBold';
     color: #92DB82;
 }
 
+.nav-menu a:hover:after {
+    opacity: 1;
+    width: 100%;
+}
+
+
+
 /* 마이페이지 */
 .nav-links {
+    font-family: 'Font Awesome 5 Free';
     margin-left: 5vw;
     width: 8vw;
     height: 30px;
     justify-content: space-between;
-    font-family: 'Font Awesome 5 Free';
     align-items: center;
 }
 
