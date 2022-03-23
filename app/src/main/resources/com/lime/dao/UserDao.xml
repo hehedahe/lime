@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.lime.dao.UserDao">
+
+  <resultMap type="user" id="userMap">
+    <id column="user_id" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="phone_no" property="phone"/>
+    <result column="rgt_date" property="rgtDate"/>
+    <result column="unrgt_date" property="unrgtDate"/>
+    <result column="unrgt_yn" property="unrgtYn"/>
+    <result column="pwd" property="password"/>
+    <result column="user_img" property="userImg"/>
+    <result column="user_type" property="userType"/>
+    
+  </resultMap>
+
+  <select id="countAll" resultType="int">
+    select count(*) from user
+  </select>
+  
+  <select id="findAll" resultMap="userMap">
+    select 
+      user_id,
+      email,
+      name,
+      phone_no
+    from 
+      user 
+    order by 
+      user_id asc
+  </select>
+  
+  <insert id="insert" parameterType="user">
+    insert into user(email,name,phone_no,pwd) 
+    values(#{email},#{name},#{phone},#{password})
+  </insert>
+  
+  <select id="findByNo" resultMap="userMap" parameterType="int">
+    select 
+      *
+    from 
+      user 
+    where 
+      user_id=#{no}
+  </select>
+
+  <select id="findByEmail" resultMap="userMap" parameterType="string">
+    select 
+      *
+    from 
+      user 
+    where 
+      email=#{email}
+  </select>
+
+  <select id="findByName" resultMap="userMap" parameterType="string">
+    select 
+      *
+    from 
+      user 
+    where 
+      name=#{name}
+  </select>
+  
+  <update id="update" parameterType="user">
+    update user set 
+      name=#{name}, 
+      phone_no=#{phone},
+      email=#{email}
+    where 
+      user_id=#{no}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    delete from user 
+    where user_id=#{no}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+
+
