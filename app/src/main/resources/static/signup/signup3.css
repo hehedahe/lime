@@ -1,0 +1,10 @@
+@import "signup1.css";
+@import "signup2.css";
+
+.indicator div:first-child {
+  background-color: rgb(240, 240, 240);
+}
+
+.indicator div:nth-child(2) {
+  background-color: #66C88D;
+}

@@ -1,7 +1,7 @@
 package com.eomcs.mylist.service;
 
 import java.util.List;
-import com.eomcs.mylist.domain.Contact;
+import com.lime.domain.Market;
 
 public interface ContactService {
 

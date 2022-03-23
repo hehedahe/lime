@@ -16,7 +16,6 @@ public class LimeApplication {
     SpringApplication.run(LimeApplication.class, args);
   }
 
-
   //@Bean
   public CommandLineRunner commandLineRunner(ApplicationContext beanContainer) {
     return args -> {
@@ -37,5 +36,8 @@ public class LimeApplication {
     return "Hello World!";
   }
 
+  public String getGreeting() {
+    return "Hello World!";
+  }
 }
 
