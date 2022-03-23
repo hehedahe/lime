@@ -29,23 +29,29 @@ a {
     color: #000;
 }
 
-
 /* header 전체*/
 nav {
-    border-bottom: 1px solid rgba(0,0,0,0.3);
-    padding: 2vh 20vw;
-    height: 60px;
+    width: 100vw;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.header {
+    width: 80vw;
+    margin: 0 10vw;
+    padding: 1vh 0;
+    height: 10vh;
     display: flex;
     align-items: center;
     font-family: 'NG';
+    justify-content: space-evenly;
 }
 
 /* 로고 */
 .nav-logo {
     font-family: 'CooperBlack';
     font-size: xxx-large;
-    margin: 0 30px 30px 0;
-    height: 30px;
+    padding-top: 1vh;
+    height: 10vh;
 }
 
 .nav-logo > a {
@@ -55,7 +61,7 @@ nav {
 .nav-menu {
     display: flex;
     width: 35vw;
-    height: 90px;
+    height: 10vh;
     /*padding: 10px 0 0 0;*/
     font-size: medium;
     color: rgba(0,0,0, 0.7);
@@ -75,8 +81,8 @@ nav {
     justify-content: center;
     letter-spacing: 2px;
     position: relative;
-    /*background-color: darksalmon;*/
-    padding: 40% 0 35% 0;
+    padding: 4.5vh 0;
+    /*background-color: skyblue;*/
 }
 
 
@@ -123,27 +129,25 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 30px;
+    height: 30px;
 }
 
 .nav-links-user {
     width: 25px;
-    height: 25px;
+    hegiht: 25px;
     border-radius: 50px;
-    border: 3px solid #ffffff;
+    border: 2px solid #ffffff;
     color: white;
     /*box-shadow: 0 0 13px rgb(217, 217, 217);*/
     background-color: rgb(195, 235, 120);
+
 }
 
 .nav-links-user:hover {
-    border: 3px solid rgb(195, 235, 120);
+    border: 2px solid rgb(195, 235, 120);
     color: rgb(195, 235, 120);
     background-color: #fff;
-}
-
-.nav-links-cal, .nav-links-msg {
-    width: 30px;
-    height: 30px;
 }
 
 
