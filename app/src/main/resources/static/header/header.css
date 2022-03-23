@@ -83,7 +83,7 @@ nav {
 .nav-menu a:before,
 .nav-menu a:after {
     transition: all 0.35s ease;
-    -webkit-transition: all 0.35s ;
+    -webkit-transition: all 0.35s ease-in-out;
 }
 
 .nav-menu a:after {
