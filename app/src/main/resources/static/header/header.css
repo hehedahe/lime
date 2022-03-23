@@ -36,14 +36,14 @@ nav {
 }
 
 .header {
-    width: 80vw;
-    margin: 0 10vw;
+    width: 70vw;
+    margin: 0 15vw;
     padding: 1vh 0;
     height: 10vh;
     display: flex;
     align-items: center;
     font-family: 'NG';
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 /* 로고 */
@@ -60,12 +60,12 @@ nav {
 /* 메뉴 */
 .nav-menu {
     display: flex;
-    width: 35vw;
+    width: 40vw;
     height: 10vh;
-    /*padding: 10px 0 0 0;*/
-    font-size: medium;
-    color: rgba(0,0,0, 0.7);
-    justify-content: space-around;
+    font-size: 1.2rem;
+    padding: 0 5vw;
+    color: rgba(0,0,0, 0.5);
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -79,9 +79,9 @@ nav {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     position: relative;
-    padding: 4.5vh 0;
+    padding: 4vh 0;
     /*background-color: skyblue;*/
 }
 
@@ -105,6 +105,7 @@ nav {
 
 .nav-menu li:hover a {
     font-family: 'NGBold';
+    font-size: 1.2rem;
     color: #92DB82;
 }
 
@@ -113,41 +114,35 @@ nav {
     width: 100%;
 }
 
-
-
 /* 마이페이지 */
 .nav-links {
-    font-family: 'Font Awesome 5 Free';
-    margin-left: 5vw;
+    display: flex;
     width: 8vw;
-    height: 30px;
-    justify-content: space-between;
+    height: 10vh;
     align-items: center;
+    justify-content: space-between;
 }
 
 .nav-links > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    /*padding: 0 3px;*/
 }
 
 .nav-links-user {
-    width: 25px;
-    hegiht: 25px;
+    background-image: url("../asset/image/user2b.png");
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
     border-radius: 50px;
-    border: 2px solid #ffffff;
-    color: white;
-    /*box-shadow: 0 0 13px rgb(217, 217, 217);*/
-    background-color: rgb(195, 235, 120);
+    border: 2px solid #92DB82;
+/*    !*box-shadow: 0 0 13px rgb(217, 217, 217);*!*/
 
 }
 
 .nav-links-user:hover {
-    border: 2px solid rgb(195, 235, 120);
-    color: rgb(195, 235, 120);
-    background-color: #fff;
+    background-image: url("../asset/image/user2a.png");
 }
 
 
