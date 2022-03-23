@@ -1,0 +1,115 @@
+@import "signup1.css";
+@import "signup2.css";
+@import "signup3.css";
+
+.indicator div:nth-child(2) {
+  background-color: rgb(240, 240, 240);
+}
+
+.indicator div:nth-child(3) {
+  background-color: #66C88D;
+}
+
+.signup-region .col:first-child {
+  padding-left: 0;
+}
+
+.signup-region .col:last-child {
+  padding-right: 0;
+}
+
+.signup-region .col label {
+  font-size: 13px;
+}
+
+.signup-scope .btn {
+  height: 3rem;
+  margin: 0 0.2rem;
+  font-size: small;
+  color: #212529;
+  background-color: rgb(245, 245, 245);
+  border: none;
+}
+
+.signup-scope .btn:hover {
+  box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+}
+
+
+.signup-time .btn {
+  height: 4.1rem;
+  margin: 1rem 0.2rem;
+  font-size: small;
+  color: #212529;
+  background-color: rgb(245, 245, 245);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-time .btn:hover {
+  box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+}
+
+.btn-check:focus {
+  /* box-shadow: none; */
+  box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+}
+
+.btn:focus {
+  /* box-shadow: none; */
+  box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+}
+
+.signup-time .btn-check:checked + label.btn {
+  background-color: #66C88D;
+  color: white;
+  box-shadow: none;
+}
+
+.signup-time .btn-check:focus {
+  box-shadow: none;
+}
+
+.signup-time .btn img {
+  width: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.signup-time label.btn {
+  /* text-align: center; */
+  font-size: small;
+  font-weight: 400;
+  /* margin-top: 0.2rem; */
+}
+
+.signup-court .row .col:first-child {
+  padding-left: 0;
+}
+
+.signup-court .row .col:last-child {
+  padding-right: 0;
+}
+
+.form-lime {
+  max-width: 450px;
+}
+
+.signup-scope .row label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+}
+
+.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle {
+    background-color: #66C88D;
+}
+
+.signup-scope .btn-check:checked + label.btn {
+  background-color: #66C88D;
+  color: white;
+  box-shadow: none;
+}
