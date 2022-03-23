@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+  namespace = "인터페이스의 패키지 및 이름"과 일치해야 한다.
+ -->
+<mapper namespace="com.eomcs.mylist.dao.ContactDao">
+
+  <!--  테이블의 컬럼과 객체 필드를 연결한다. -->
+  <resultMap type="contact" id="contactMap">
+  
+    <id column="contact_no" property="no"/>
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+    <result column="company" property="company"/>
+    
+    <collection property="tels" ofType="contactTel">
+      <id column="ct_no" property="no"/>
+      <result column="tt_no" property="telTypeNo"/>
+      <result column="tel" property="tel"/>
+    </collection>
+    
+  </resultMap>
+  
+  <resultMap type="contactTel" id="contactTelMap">
+    <id column="ct_no" property="no"/>
+    <result column="contact_no" property="contactNo"/>
+    <result column="tt_no" property="telTypeNo"/>
+    <result column="tel" property="tel"/>
+  </resultMap>
+
+  <!-- 
+    id => 인터페이스의 메서드 이름과 일치해야 한다.
+   -->
+  <select id="countAll" resultType="int">
+    select count(*) from ml_contact
+  </select>
+  
+  <select id="findAll" resultMap="contactMap">
+    select
+      c.contact_no,
+      c.name,
+      c.email,
+      c.company,
+      t.ct_no,
+      t.tt_no,
+      t.tel
+    from 
+      ml_contact c
+      left outer join ml_cont_tel t on c.contact_no=t.contact_no
+    order by 
+      c.name asc
+  </select>
+  
+  <!-- 자동 증가된 PK 값을 받고 싶을 때! -->
+  <insert id="insert" parameterType="contact" keyProperty="no" keyColumn="contact_no" useGeneratedKeys="true">
+    insert into ml_contact(name,email,company)
+    values(#{name},#{email},#{company})
+  </insert>
+  
+  <select id="findByNo" resultMap="contactMap" parameterType="int">
+	  select
+	    c.contact_no,
+      c.name,
+      c.email,
+      c.company,
+      t.ct_no,
+      t.tt_no,
+      t.tel
+	  from
+	    ml_contact c
+	    left outer join ml_cont_tel t on c.contact_no=t.contact_no
+	  where
+	    c.contact_no=#{no}
+  </select>
+  
+  <select id="findByEmail" resultMap="contactMap" parameterType="string">
+    select
+      c.contact_no,
+      c.name,
+      c.email,
+      c.company,
+      t.ct_no,
+      t.tt_no,
+      t.tel
+    from
+      ml_contact c
+      left outer join ml_cont_tel t on c.contact_no=t.contact_no
+    where
+      c.email=#{email}
+  </select>
+  
+  <select id="findByName" resultMap="contactMap" parameterType="string">
+    select
+      c.contact_no,
+      c.name,
+      c.email,
+      c.company,
+      t.ct_no,
+      t.tt_no,
+      t.tel
+    from
+      ml_contact c
+      left outer join ml_cont_tel t on c.contact_no=t.contact_no
+    where
+      c.name=#{name}
+  </select>
+  
+  <update id="update" parameterType="contact">
+    update ml_contact set 
+      name=#{name},
+      email=#{email},
+      company=#{company}
+    where 
+      contact_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from ml_contact
+    where contact_no=#{no}
+  </delete>
+  
+  <select id="findTelByContactNo" parameterType="int" resultMap="contactTelMap">
+    select
+      ct_no,
+      contact_no,
+      tt_no,
+      tel
+    from
+      ml_cont_tel
+    where
+      contact_no=#{no}
+  </select>
+  
+  <insert id="insertTel" parameterType="contactTel">
+    insert into ml_cont_tel(contact_no,tt_no,tel)
+    values(#{contactNo}, #{telTypeNo}, #{tel})
+  </insert>
+  
+  <insert id="insertTels">
+    insert into ml_cont_tel(contact_no,tt_no,tel)
+    values
+    <foreach collection="tels" item="contactTel" separator=",">
+    (#{contactNo}, #{contactTel.telTypeNo}, #{contactTel.tel})
+    </foreach>
+  </insert>
+  
+  <update id="updateTel" parameterType="contactTel">
+    update ml_cont_tel set
+      tt_no=#{telTypeNo},
+      tel=#{tel}
+    where
+      ct_no=#{no}
+  </update>
+  
+  <delete id="deleteTel" parameterType="int">
+    delete from ml_cont_tel
+    where ct_no=#{no}
+  </delete>
+  
+  <delete id="deleteTelByContactNo" parameterType="int">
+    delete from ml_cont_tel
+    where contact_no=#{no}
+  </delete>
+  
+</mapper>
