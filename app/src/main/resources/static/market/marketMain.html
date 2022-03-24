@@ -80,11 +80,11 @@ var contentBody = document.querySelector("#content-body")
     
   console.log(regionSelect.value);
   
-    
+    var colcol = document.querySelectorAll(".col");
 
       var selectBoxChange = function(value){
-        $("#div-remove").remove();
-        //console.log($("#div-remove"));
+        console.log(colcol);
+       
         if(value == "지역") {
           return;
         }
@@ -95,12 +95,11 @@ var contentBody = document.querySelector("#content-body")
       })
       .then(function(regionData){
         console.log(regionData);
-        var divs2 = document.createElement("div");
-        divs2.setAttribute('id','div-remove');
-
+        
         for (var list of regionData) {
-         var divs = document.createElement("div");
-         divs.innerHTML = `<div class="card h-100">
+         var cols = document.createElement("div");
+         cols.setAttribute('class', 'col');
+         cols.innerHTML = `<div class="card h-100">
           <img src="../ok_photo.jfif" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
@@ -109,9 +108,8 @@ var contentBody = document.querySelector("#content-body")
             <p>조회 ${list.viewCount}</p>
           </div>
           </div>`
-          divs2.appendChild(divs);
-       }
-       contentBody.appendChild(divs2);
+       };
+       contentBody.appendChild(cols);
       })
       }
 
