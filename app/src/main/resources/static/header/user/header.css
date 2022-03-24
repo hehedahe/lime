@@ -1,17 +1,17 @@
 
 @font-face {
     font-family: 'NG';
-    src: url("../asset/font/NanumGothic.woff") format("woff");
+    src: url("../../asset/font/NanumGothic.woff") format("woff");
 }
 
 @font-face {
     font-family: 'NGBold';
-    src: url("../asset/font/NanumGothicBold.woff") format("woff");
+    src: url("../../asset/font/NanumGothicBold.woff") format("woff");
 }
 
 @font-face {
     font-family: 'CooperBlack';
-    src: url("../asset/font/Cooper-Black-BT.woff") format("woff");
+    src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
 }
 
 * {
