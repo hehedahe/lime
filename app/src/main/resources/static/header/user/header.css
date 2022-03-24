@@ -10,6 +10,11 @@
 }
 
 @font-face {
+    font-family: 'NGEB';
+    src: url("../../asset/font/NanumGothicExtraBold.woff") format("woff");
+}
+
+@font-face {
     font-family: 'CooperBlack';
     src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
 }
@@ -38,12 +43,11 @@ nav {
 .header {
     width: 70vw;
     margin: 0 15vw;
-    padding: 1vh 0;
     height: 10vh;
     display: flex;
     align-items: center;
     font-family: 'NG';
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /* 로고 */
@@ -74,17 +78,18 @@ nav {
     display: flex;
     flex-basis: 20%;
     justify-content: center;
+    align-content: center;
 }
 
 .nav-menu a {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
-    align-self: inherit;
+    align-self: center;
     letter-spacing: 1px;
     position: relative;
-    height: 11.5vh;
-    line-height: 12vh;
+    height: 9vh;
+    line-height: 10vh;
 }
 
 
@@ -97,7 +102,7 @@ nav {
 .nav-menu a:after {
     position: absolute;
     background-color: #92DB82;
-    height: 3px;
+    height: 4px;
     width: 0%;
     content: "";
     left: 0;
@@ -106,7 +111,7 @@ nav {
 }
 
 .nav-menu li:hover a {
-    font-family: 'NGBold';
+    font-family: 'NGEB';
     font-size: 1.2rem;
     color: #92DB82;
 }
@@ -132,6 +137,7 @@ nav {
 
 .nav-links > li:nth-child(odd):hover > a {
     color: #92DB82;
+    font-family: NGBold;
 }
 
 /*
