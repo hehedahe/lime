@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <title>Lime header</title>
     <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="../sidebar/sidebar.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -20,5 +23,15 @@
     </div>
 </nav>
 
+
+<div class="container-fluid"></div>
+
+<div id="sidebar-wrapper"></div>
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- header, footer 삽입 제이쿼리-->
+<script type="text/javascript">
+            $("#sidebar-wrapper").load("../sidebar/sidebar.html");
+</script>
 </body>
 </html>

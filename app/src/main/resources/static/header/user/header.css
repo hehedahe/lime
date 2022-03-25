@@ -131,7 +131,7 @@ nav {
     justify-content: space-between;
 }
 
-.nav-links > li:nth-child(2) > a {
+.nav-links > l  i:nth-child(2) > a {
     color: rgb(190, 190, 190);
 }
 
@@ -140,7 +140,7 @@ nav {
     font-family: NGBold;
 }
 
-/*
+
 .nav-links > div {
     display: flex;
     align-items: center;
@@ -148,7 +148,7 @@ nav {
 }
 
 .nav-links-user {
-    background-image: url("../asset/image/user2b.png");
+    background-image: url("../../asset/image/user2b.png");
     background-size: 30px;
     width: 30px;
     height: 30px;
@@ -157,7 +157,7 @@ nav {
 }
 
 .nav-links-user:hover {
-    background-image: url("../asset/image/user2a.png");
+    background-image: url("../../asset/image/user2a.png");
 }
-*/
+
 
