@@ -8,6 +8,7 @@
 }
 
 .row {
+    font-family: 'NanumGothic';
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -15,13 +16,35 @@
     margin-right: 200px;
 }
 
-.col {
-    width: 300px;
-    height: 500px;
-    background-color: aqua;
-    padding: 30px;
+.card-body > .card-title > a{
+    color: black;
+    text-decoration-line: none;
+    
 }
 
-#div-remove {
-    width: 1000px;
+.card-body > .item-price {
+    font-weight: bolder;
+    font-size: 1.1rem;
 }
+
+.view-count {
+    color: rgb(127, 127, 127);
+    font-size: 0.9rem;
+}
+
+.card-body > span > .R {
+    padding: 3px 5px;
+    color: white;
+    font-size: 0.8rem;
+    background-color: rgb(27, 188, 156);
+    border-radius: 3px;
+}
+
+.card-body > span > .E {
+    padding: 3px 5px;
+    color: white;
+    font-size: 0.8rem;
+    background-color: rgb(158, 158, 158);
+    border-radius: 3px;
+}
+
