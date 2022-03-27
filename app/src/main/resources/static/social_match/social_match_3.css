@@ -4,12 +4,12 @@ body {
   font-family: "NanumGothic";
 }
 
-body {
+/* body {
   display: flex;
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-}
+} */
 
 .social-match {
   width: 100%;
@@ -78,4 +78,22 @@ a:hover {
 #prefered {
   width: 6rem;
   margin-right: 0;
+}
+
+.nav-menu {
+  padding: 0;
+}
+
+.nav-links {
+  padding: 0;
+}
+
+.nav-menu-div {
+  margin-top: 1rem;
+  padding-left: 5.3125rem;
+  padding-right: 5.3125rem;
+}
+
+.nav-links-div {
+  margin-top: 1.1rem;
 }

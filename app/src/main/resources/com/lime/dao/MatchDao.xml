@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.lime.dao.MatchDao">
+
+  <resultMap type="match" id="matchMap">
+    <id column="mtch_id" property="no"/>
+    <result column="court_id" property="courtNo"/>
+    <result column="user_id" property="managerNo"/>
+    <result column="mtch_type_id" property="matchTypeNo"/>
+    <result column="mtch_date" property="matchDate"/>
+    <result column="st_time" property="startTime"/>
+    <result column="end_time" property="endTime"/>
+    <result column="fee" property="fee"/>
+    <result column="state" property="state"/>
+  </resultMap>
+
+  <select id="countAll" resultType="int">
+    select count(*) from social_mtch
+  </select>
+  
+  <select id="findAll" resultMap="matchMap">
+    select * from social_mtch
+  </select>
+</mapper>
