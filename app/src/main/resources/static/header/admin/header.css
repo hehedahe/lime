@@ -14,6 +14,10 @@
     src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
 }
 
+html {
+    overflow: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -32,6 +36,7 @@ a {
 /* header 전체*/
 nav {
     width: 100vw;
+    overflow: hidden;
 }
 
 .header {
