@@ -1,73 +1,73 @@
-
-html, body {
-    padding: 0;
-    height: 100%;
-    
+html,
+body {
+  padding: 0;
+  height: 100%;
 }
 
 #body-wrapper {
-    min-height: 100%;
-    position: relative;
-    margin: 0px auto;
+  min-height: 100%;
+  position: relative;
+  margin: 0px auto;
 }
 
 #body-content {
-    font-family: 'NanumGothicExtraBold';
-    margin-top: 100px;
-    padding-bottom: 10px;
-    background-color: bisque;
+  font-family: "NanumGothicExtraBold";
+  margin-top: 100px;
+  padding-bottom: 10px;
+  background-color: bisque;
 }
 
 #footer {
-    font-family: 'NanumGothic';
-    background-color: #66C88D;
+  font-family: "NanumGothic";
+  background-color: #66c88d;
 }
 
 .footer-wrapper {
-    max-width: 1600px;
-    padding: 80px 80px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  max-width: 1600px;
+  padding: 80px 80px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .footer-nav {
-    font-family: 'NanumGothic';
-    color: white;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 50%;
+  font-family: "NanumGothic";
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 50%;
 }
 
 .footer-nav > ul {
-    font-family: 'NanumGothicExtraBold';
-    list-style-type: none;
+  font-family: "NanumGothicExtraBold";
+  list-style-type: none;
 }
 
 .footer-company {
-    color: white;
-    margin-left: 50px;
-    text-align: left;
-    width: 40%;
+  color: white;
+  margin-left: 50px;
+  text-align: left;
+  width: 40%;
 }
 
 .footer-company h3 a {
-    font-family: 'NanumGothicExtraBold';
-    font-weight: bolder;
-    font-size: 120%;
-    font-style: italic;
-    text-decoration-line: none;
-    border-bottom: 7px solid #C3EB78;
+  font-family: "NanumGothicExtraBold";
+  font-weight: bolder;
+  font-size: 120%;
+  font-style: italic;
+  text-decoration-line: none;
+  border-bottom: 7px solid #c3eb78;
 }
 
-.footer-wrapper a:link, .footer-wrapper a:visited {
-    text-decoration-line: none;
-    color: white;
+.footer-wrapper a:link,
+.footer-wrapper a:visited {
+  text-decoration-line: none;
+  color: white;
 }
 
 .footer-nav ul a:hover {
-      background-color: gray;
-      border-radius: 5px;
-  }
+  background-color: gray;
+  border-radius: 5px;
+}
