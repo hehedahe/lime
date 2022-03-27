@@ -37,7 +37,7 @@
     </nav>
 </div>
 <div id="content-body" class="row row-cols-1 row-cols-md-3 g-4">
-    
+  
     
 </div>
 
@@ -54,66 +54,140 @@
 <script>
 
 var contentBody = document.querySelector("#content-body")
+var contentBody2 = document.querySelector("#content-body2")
   
-  fetch("/market/list")
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(lists) {
-       for (var list of lists) {
-         var div = document.createElement("div");
-         div.setAttribute('id','div-remove');
-         div.innerHTML = `<div class="card h-100">
-          <img src="../ok_photo.jfif" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
-            <p>${list.itemCost}원</p><p>${list.transState}</p>
-            <p>${list.regionName} ${list.cityName}</p>
-            <p>조회 ${list.viewCount}</p>
-          </div>
-          </div>`
-          contentBody.appendChild(div);
-       }
-    });
+  // fetch("/market/list")
+  //   .then(function(response) {
+  //     return response.json();
+  //   })
+  //   .then(function(lists) {
+  //      for (var list of lists) {
+  //        var div = document.createElement("div");
+  //        div.setAttribute('id','div-remove');
+  //        div.innerHTML = `<div class="card h-100">
+  //         <img src="../ok_photo.jfif" class="card-img-top" alt="...">
+  //         <div class="card-body">
+  //           <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
+  //           <p>${list.itemCost}원</p><p>${list.transState}</p>
+  //           <p>${list.regionName} ${list.cityName}</p>
+  //           <p>조회 ${list.viewCount}</p>
+  //         </div>
+  //         </div>`
+  //         contentBody.appendChild(div);
+  //      }
+  //   });
 
     var regionSelect = document.querySelector("#region");
-    
-  console.log(regionSelect.value);
   
-    
-
-      var selectBoxChange = function(value){
-        //$("#div-remove").remove();
-        if(value == "지역") {
-          return;
-        }
-        console.log(value);
-        fetch(`/market/list/region?regionName=${regionSelect.value}`)
+    fetch(`/market/list`)
       .then(function(response){
         return response.json();
       })
-      .then(function(regionData){
-        console.log(regionData);
-        var divs2 = document.createElement("div");
-        divs2.setAttribute('id','div-remove');
+      .then(function(lists){
+        console.log(lists);
+        
+        for (var list of lists) {
+          let transState1 = list.transState;
+          if (transState1 == "S") {
+          transState1 = "";
+        }
+        else if (transState1 == "R") {
+          transState1 = `<span class="R">예약중</span>`;
+        }
+        else if (transState1 == "E") {
+          transState1 = `<span class="E">거래완료</span>`;
+        }
 
-        for (var list of regionData) {
-         var divs = document.createElement("div");
-         divs.innerHTML = `<div class="card h-100">
+         var cols = document.createElement("div");
+         cols.setAttribute('class', 'col');
+         cols.innerHTML = `<div class="card h-100">
           <img src="../ok_photo.jfif" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
-            <p>${list.itemCost}원</p><p>${list.transState}</p>
-            <p>${list.regionName} ${list.cityName}</p>
-            <p>조회 ${list.viewCount}</p>
+            <span class="item-price">${list.itemCost}원 ${transState1}</span><br>
+            <span>${list.regionName} ${list.cityName}</span><br>
+            <span class="view-count">조회 ${list.viewCount}</span>
           </div>
           </div>`
-          divs2.appendChild(divs);
-       }
-       
+          contentBody.appendChild(cols);
+        }
+        
       })
-      }
 
+      var selectBoxChange = function(value){
+       $(".col").remove();
+        if(value == "지역") {
+          fetch(`/market/list`)
+          .then(function(response){
+            return response.json();
+          })
+          .then(function(lists){
+            console.log(lists);
+            
+            for (var list of lists) {
+              let transState1 = list.transState;
+              if (transState1 == "S") {
+              transState1 = "";
+            }
+            else if (transState1 == "R") {
+              transState1 = `<span class="R">예약중</span>`;
+            }
+            else if (transState1 == "E") {
+              transState1 = `<span class="E">거래완료</span>`;
+            }
+
+            var cols = document.createElement("div");
+            cols.setAttribute('class', 'col');
+            cols.innerHTML = `<div class="card h-100">
+              <img src="../ok_photo.jfif" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
+                <span class="item-price">${list.itemCost}원 ${transState1}</span><br>
+                <span>${list.regionName} ${list.cityName}</span><br>
+                <span class="view-count">조회 ${list.viewCount}</span>
+              </div>
+              </div>`
+              contentBody.appendChild(cols);
+            }
+            
+          })
+        }
+        console.log(value);
+        fetch(`/market/list/region?regionName=${regionSelect.value}`)
+        .then(function(response){
+          return response.json();
+        })
+        .then(function(regionData){
+          console.log(regionData);
+          
+          for (var list of regionData) {
+            console.log(list.transState);
+            let transState1 = list.transState;
+            if (transState1 == "S") {
+            transState1 = "";
+          }
+          else if (transState1 == "R") {
+            transState1 = `<span class="R">예약중</span>`;
+          }
+          else if (transState1 == "E") {
+            transState1 = `<span class="E">거래완료</span>`;
+          }
+          var cols = document.createElement("div");
+          cols.setAttribute('class', 'col');
+          cols.innerHTML = `<div class="card h-100">
+            <img src="../ok_photo.jfif" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
+              <span class="item-price">${list.itemCost}원 ${transState1}</span><br>
+              <span>${list.regionName} ${list.cityName}</span><br>
+              <span class="view-count">조회 ${list.viewCount}</span>
+            </div>
+            </div>`
+            contentBody.appendChild(cols);
+          }
+          
+        })
+      }
 
 
 

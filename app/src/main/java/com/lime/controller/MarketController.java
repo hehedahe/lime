@@ -18,7 +18,7 @@ public class MarketController {
 
   @RequestMapping("/market/list/region")
   public Object listRegion(String regionName) {
-    regionName += "\r";
+    //regionName += "\r";
     System.out.println(regionName);
     return marketService.listRegion(regionName);
   }

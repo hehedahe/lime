@@ -1,17 +1,22 @@
 
 @font-face {
     font-family: 'NG';
-    src: url("../asset/font/NanumGothic.woff") format("woff");
+    src: url("../../asset/font/NanumGothic.woff") format("woff");
 }
 
 @font-face {
     font-family: 'NGBold';
-    src: url("../asset/font/NanumGothicBold.woff") format("woff");
+    src: url("../../asset/font/NanumGothicBold.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'NGEB';
+    src: url("../../asset/font/NanumGothicExtraBold.woff") format("woff");
 }
 
 @font-face {
     font-family: 'CooperBlack';
-    src: url("../asset/font/Cooper-Black-BT.woff") format("woff");
+    src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
 }
 
 * {
@@ -38,20 +43,20 @@ nav {
 .header {
     width: 70vw;
     margin: 0 15vw;
-    padding: 1vh 0;
     height: 10vh;
     display: flex;
     align-items: center;
     font-family: 'NG';
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /* 로고 */
 .nav-logo {
     font-family: 'CooperBlack';
     font-size: xxx-large;
-    padding-top: 1vh;
     height: 10vh;
+    display: flex;
+    align-items: center;
 }
 
 .nav-logo > a {
@@ -73,16 +78,18 @@ nav {
     display: flex;
     flex-basis: 20%;
     justify-content: center;
+    align-content: center;
 }
 
 .nav-menu a {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
+    align-self: center;
     letter-spacing: 1px;
     position: relative;
-    padding: 4vh 0;
-    /*background-color: skyblue;*/
+    height: 9vh;
+    line-height: 10vh;
 }
 
 
@@ -95,7 +102,7 @@ nav {
 .nav-menu a:after {
     position: absolute;
     background-color: #92DB82;
-    height: 3px;
+    height: 4px;
     width: 0%;
     content: "";
     left: 0;
@@ -104,7 +111,7 @@ nav {
 }
 
 .nav-menu li:hover a {
-    font-family: 'NGBold';
+    font-family: 'NGEB';
     font-size: 1.2rem;
     color: #92DB82;
 }
@@ -115,6 +122,7 @@ nav {
 }
 
 /* 마이페이지 */
+
 .nav-links {
     display: flex;
     width: 8vw;
@@ -123,26 +131,33 @@ nav {
     justify-content: space-between;
 }
 
+.nav-links > l  i:nth-child(2) > a {
+    color: rgb(190, 190, 190);
+}
+
+.nav-links > li:nth-child(odd):hover > a {
+    color: #92DB82;
+    font-family: NGBold;
+}
+
+
 .nav-links > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*padding: 0 3px;*/
 }
 
 .nav-links-user {
-    background-image: url("../asset/image/user2b.png");
+    background-image: url("../../asset/image/user2b.png");
     background-size: 30px;
     width: 30px;
     height: 30px;
     border-radius: 50px;
     border: 2px solid #92DB82;
-/*    !*box-shadow: 0 0 13px rgb(217, 217, 217);*!*/
-
 }
 
 .nav-links-user:hover {
-    background-image: url("../asset/image/user2a.png");
+    background-image: url("../../asset/image/user2a.png");
 }
 
 
