@@ -1,0 +1,76 @@
+.search {
+    margin-top: 30px;
+    margin-left: 150px;
+    margin-bottom: 15px;
+    margin-right: 150px;
+}
+input {
+    border-radius: 25px;
+    border: 1px solid #bbb;
+    padding: 10px 12px
+}
+
+input::placeholder {
+    color: gray;
+}
+.fa-search {
+    margin-left: 50px;
+}
+.div-container {
+    margin-right: 150px;
+    margin-left: 150px;
+}
+.card {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+#open-btn {
+    width: 250px;
+    margin-left: 250px;
+    background-color: rgb(102,200,141);
+    border-radius: 5px;
+    height: 50px;
+    border: white;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+.re-search {
+    margin-left: 10px;
+    border-radius: 25px;
+    padding: 10px;
+    width: 150px;
+}
+.tag-btn {
+    margin-top: 15px;
+    margin-left: 10px;
+    border-radius: 25px;
+}
+.tag-btn button {
+    border: white;
+    color: rgb(131,131,131);
+    background-color: rgb(250,250,250);
+    padding: 10px;
+    border-radius: 25px;
+    font-size: small;
+    font-weight: bold;
+}
+#lv-btn {
+    margin-left: 10px;
+}
+#re-btn {
+    width: 70px;
+}
+.tag-btn button:hover {
+    background-color: white;
+    border: rgb(102,200,141);
+    color: rgb(102,200,141);
+    outline: 1px solid rgb(102,200,141);
+}
+
+#open-btn:hover {
+    background-color: white;
+    border: rgb(102,200,141);
+    color: rgb(102,200,141);
+    outline: 1px solid rgb(102,200,141);
+}
