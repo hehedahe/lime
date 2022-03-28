@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<table id="x-board-table" border="1">
+<thead>
+  <tr>
+    <th>번호</th>
+    <th>이름</th>
+    <th>이메일</th>
+    <th>회원유형</th>
+    <th>가입일자</th>
+    <th>라임캐시</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<script type="text/javascript">
+  var tbody = document.querySelector("#x-board-table tbody")
+
+  fetch("/manage/user/list")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(manages) {
+      console.log(manages);
+      for (var manage of manages) {
+        var tr = document.createElement("tr");
+        tr.innerHTML = `<td>${manage.userId}</td>
+        <td>${manage.name}</a></td>
+        <td>${manage.email}</td>
+        <td>${manage.userType}</td>
+        <td>${manage.rgtDate}</td>
+        <td>${manage.sum}</td>
+        <td><button type="button">상세버튼</button></td>`;
+        tbody.appendChild(tr);
+      }
+    });
+</script>
+</body>
+</html>
