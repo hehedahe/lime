@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lime.dao.ManageDao">
+
+	<resultMap type="user" id="userMap">
+		<id column="userId" property="no" />
+		<result column="userId" property="userId" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="userType" property="userType" />
+		<result column="rgtDate" property="rgtDate" />
+		<result column="userType" property="userType" />
+		<result column="rgtDate" property="rgtDate" />
+		<result column="sum" property="sum" />
+		<result column="gender" property="gender" />
+		<result column="bankName" property="bankName" />
+	</resultMap>
+	
+ 	 <resultMap type="field" id="fieldMap">
+    <id column="fieldId" property="no" />
+    <result column="fieldId" property="fieldId" />
+    <result column="fName" property="fName" />
+    <result column="addr" property="addr" />
+    <result column="courtType" property="courtType" />
+    <result column="parkingAvt" property="parkingAvt" />
+    <result column="indYn" property="indYn" />
+    <result column="lightYn" property="lightYn" />
+  </resultMap>
+
+	<select id="findAll" resultMap="userMap">
+		SELECT
+					tt.userId userId,
+					tt.name name,
+					tt.email email,
+					tt.userType userType,
+					tt.rgtDate rgtDate,
+					(case
+					when tt.sum IS null
+					then 0
+					ELSE tt.sum
+					end
+					) sum,
+					tt.gender gender,
+					replace(tt.bankName,'\r','') bankName,
+					tt.acnt_no acntNo,
+					tt.acnt_holder acntHolder,
+					block_date blockDate
+		from
+					(SELECT
+					u.user_id userId,
+					u.name name,
+					u.email email,
+					(CASE
+					WHEN replace(u.user_type,'\r','') = 'U' THEN '유저'
+					WHEN replace(u.user_type,'\r','') = "M" THEN '매니저'
+					ELSE 'admin' END) userType,
+					u.rgt_date rgtDate ,
+					(SELECT
+					SUM(case
+					when
+					lc2.type_use = 'U'
+					then CONCAT('-',lc2.amt)
+					when lc2.type_use = 'C'
+					then CONCAT(lc2.amt)
+					ELSE lc2.amt
+					end)
+					FROM lime_cash lc2
+					WHERE lc2.user_id =u.user_id) SUM,
+					-- 성별, 은행명, 계좌번호, 예금주명, 제재
+					(SELECT
+					case
+					when
+					m2.gender = 'M'
+					then '남성'
+					ELSE '여성'
+					end
+					FROM member m2
+					WHERE m2.user_id = m.user_id
+					) gender,
+					bi.name bankName,
+					m.acnt_no acnt_no
+					,m.acnt_holder acnt_holder
+					,m.block_date block_date
+					FROM user u
+					LEFT JOIN member m
+					ON u.user_id = m.user_id
+					left
+					JOIN bank_info bi
+					ON m.bank_id = bi.bank_id
+					left JOIN lime_cash lc
+					ON
+					m.user_id = lc.user_id
+					GROUP BY u.user_id
+					) tt
+			WHERE tt.userType = '유저'
+	</select>
+	<select id="findByNo" resultMap="userMap" parameterType="int">
+		SELECT
+					tt.userId userId,
+					tt.name name,
+					tt.email email,
+					tt.userType userType,
+					tt.rgtDate rgtDate,
+					(case
+					when tt.sum IS null
+					then 0
+					ELSE tt.sum
+					end
+					) sum,
+					tt.gender gender,
+					replace(tt.bankName,'\r','') bankName,
+					tt.acnt_no acntNo,
+					tt.acnt_holder acntHolder,
+					block_date blockDate
+		from
+					(SELECT
+					u.user_id userId,
+					u.name name,
+					u.email email,
+					(CASE
+					WHEN replace(u.user_type,'\r','') = "U" THEN '유저'
+					WHEN replace(u.user_type,'\r','') = "M" THEN '매니저'
+					ELSE 'admin' END) userType,
+					u.rgt_date rgtDate ,
+					(SELECT
+					SUM(case
+					when
+					lc2.type_use = 'U'
+					then CONCAT('-',lc2.amt)
+					when lc2.type_use = 'C'
+					then CONCAT(lc2.amt)
+					ELSE lc2.amt
+					end)
+					FROM lime_cash lc2
+					WHERE lc2.user_id =u.user_id) SUM,
+					-- 성별, 은행명, 계좌번호, 예금주명, 제재
+					(SELECT
+					case
+					when
+					m2.gender = 'M'
+					then '남성'
+					ELSE '여성'
+					end
+					FROM member m2
+					WHERE m2.user_id = m.user_id
+					) gender,
+					bi.name bankName,
+					m.acnt_no acnt_no
+					,m.acnt_holder acnt_holder
+					,m.block_date block_date
+					FROM user u
+					LEFT JOIN member m
+					ON u.user_id = m.user_id
+					left JOIN bank_info bi
+					ON m.bank_id = bi.bank_id
+					left JOIN lime_cash lc
+					ON m.user_id = lc.user_id
+					GROUP BY u.user_id
+					) tt
+		WHERE tt.userType = '유저'
+		and tt.userId = #{no}
+	</select>
+	<select id="findFieldAll" resultMap="fieldMap">
+		SELECT  
+					  f.field_id fieldId,
+					  f.name fName,
+					  f.addr addr,
+					  (case
+					    when ct.name = 'H'
+					      then '하드코트'
+					          when ct.name = 'C'
+					      then '클레이코트'
+					          when ct.name = 'G'
+					      then '잔디코트'
+					      
+					      else '앙투라코트'
+					  end) courtType,
+					  (case
+					    when f.parking_area = 0 
+					      then '불가'
+					    ELSE '가능'
+					  END) parkingAvt,
+					  (CASE
+					    when ind_yn = 0
+					      then '실외'
+					    ELSE '실내'
+					  END) indYn,
+					  (CASE
+					    WHEN light_yn =0
+					      then '무'
+					      ELSE '유'
+					  END) lightYn    
+		FROM field f
+					left JOIN court c
+					ON f.field_id = c.field_id
+					left JOIN court_type ct
+					ON c.court_type_id = ct.court_type_id
+					GROUP BY f.field_id
+	</select>
+	<select id="findFieldByNo" parameterType="int" resultMap="fieldMap">	 
+		SELECT  
+					  f.field_id fieldId,
+					  f.name fName, -- 구장명,
+					  f.addr addr,-- 구장주소,
+					  (case
+					    when ct.name = 'H'
+					      then '하드코트'
+					          when ct.name = 'C'
+					      then '클레이코트'
+					          when ct.name = 'G'
+					      then '잔디코트'
+					      
+					      else '앙투라코트'
+					  end) courtType,
+					  c.fee fee,-- 이용요금,
+					  f.court_cnt, 
+					  (case
+					    when f.parking_area = 0 
+					      then '불가'
+					    ELSE '가능'
+					  END) parkingAvt,  -- 주차가능여부,
+					  (CASE
+					    when ind_yn = 0
+					      then '실외'
+					    ELSE '실내'
+					  END) indYn , 
+					  (CASE
+					    WHEN light_yn =0
+					      then '무'
+					      ELSE '유'
+					  END) lightYn    
+		FROM field f
+					left JOIN court c
+					ON f.field_id = c.field_id
+					left JOIN court_type ct
+					ON c.court_type_id = ct.court_type_id
+					GROUP BY f.field_id
+					HAVING f.field_id =#{no}
+	</select>	
+</mapper>
+
+
+
+
+
+
+
+
