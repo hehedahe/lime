@@ -118,6 +118,4 @@ public class User {
         + ", rgtDate=" + rgtDate + ", sum=" + sum + ", gender=" + gender + ", bankName=" + bankName
         + ", acntNo=" + acntNo + ", acntHolder=" + acntHolder + ", blockDate=" + blockDate + "]";
   }
-
-
 }
