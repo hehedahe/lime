@@ -13,7 +13,8 @@ body {
 
 .social-match {
   width: 100%;
-  max-width: 900px;
+  /* max-width: 900px; */
+  max-width: 1024px;
   padding: 15px;
   margin: auto;
 }
@@ -32,10 +33,6 @@ body {
 a {
   color: rgb(66, 66, 66);
   text-decoration: none;
-}
-
-a:hover {
-  color: rgb(66, 66, 66);
 }
 
 .match-info {
