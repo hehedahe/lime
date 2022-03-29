@@ -231,6 +231,10 @@ CREATE TABLE member (
 	brth_date DATE NOT NULL,
 	social_id INTEGER DEFAULT '0',
 	social_yn BOOLEAN NOT NULL,
+<<<<<<< HEAD
+	social_id INTEGER NULL,
+=======
+>>>>>>> main
 	bank_id INTEGER NOT NULL,
 	acnt_no INTEGER NOT NULL,
 	acnt_holder VARCHAR(50) NOT NULL,
