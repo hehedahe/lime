@@ -8,13 +8,19 @@ import com.lime.domain.Market;
 @Mapper
 public interface MarketDao {
 
-  int countAll();
-
+  //  int countAll();
+  //
   List<Market> findAll();
 
   List<Market> findByRegion(String regionName);
 
   List<Market> findByCity(@Param("regionName") String regionName, @Param("cityName") String cityName);
+
+  List<Market> findAllChecked();
+
+  List<Market> findByRegionChecked(String regionName);
+
+  List<Market> findByCityChecked(@Param("regionName") String regionName, @Param("cityName") String cityName);
 
   //  int insert(Market contact);
   //

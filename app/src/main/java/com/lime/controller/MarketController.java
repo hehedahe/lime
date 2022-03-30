@@ -11,22 +11,55 @@ public class MarketController {
   @Autowired
   MarketService marketService; // 클래스 대신 인터페이스를 지정한다.
 
+  //  @RequestMapping("/market/list")
+  //  public Object list() {
+  //    return marketService.list();
+  //  }
+
+  //  @RequestMapping("/market/list/region")
+  //  public Object listRegion(String regionName) {
+  //    System.out.println(regionName);
+  //    return marketService.listRegion(regionName);
+  //  }
+  //
+  //  @RequestMapping("/market/list/city")
+  //  public Object listCity(String regionName, String cityName) {
+  //    System.out.println(regionName);
+  //    System.out.println(cityName);
+  //    return marketService.listCity(regionName, cityName);
+  //  }
+
   @RequestMapping("/market/list")
-  public Object list() {
-    return marketService.list();
-  }
+  public Object list(String regionName, String cityName, boolean checked) {
+    if (checked == false) {
+      System.out.println(regionName);
+      System.out.println(cityName);
+      System.out.println(checked);
+      if (regionName.equals("지역") || regionName.equals("전체")) {
+        System.out.println(regionName);
+        return marketService.list();
+      }
 
-  @RequestMapping("/market/list/region")
-  public Object listRegion(String regionName) {
-    System.out.println(regionName);
-    return marketService.listRegion(regionName);
-  }
+      if (cityName.equals("도시")) {
+        System.out.println(regionName);
+        return marketService.listRegion(regionName);
+      }
 
-  @RequestMapping("/market/list/city")
-  public Object listCity(String regionName, String cityName) {
-    System.out.println(regionName);
-    System.out.println(cityName);
-    return marketService.listCity(regionName, cityName);
+      return marketService.listCity(regionName, cityName);
+
+    } else {
+      if (regionName.equals("지역") || regionName.equals("전체")) {
+        System.out.println(regionName);
+        return marketService.listChecked();
+      }
+
+      if (cityName.equals("도시")) {
+        System.out.println(regionName);
+        return marketService.listRegionChecked(regionName);
+      }
+
+      return marketService.listCityChecked(regionName, cityName);
+    }
   }
 
   //  @RequestMapping("/contact/add")

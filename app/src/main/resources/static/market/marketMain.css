@@ -84,8 +84,6 @@ input[type=search]::placeholder {
     color: rgb(190, 190, 190);
 }
 
-#market-write-wrap {
-}
 
 #market-write {
     width: 6rem;
@@ -112,6 +110,7 @@ input[type=search]::placeholder {
     margin-left: 200px;
     margin-right: 200px;
 }
+
 
 .card-body > .card-title > a{
     color: black;

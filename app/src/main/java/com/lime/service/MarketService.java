@@ -13,6 +13,12 @@ public interface MarketService {
 
   List<Market> listCity(String regionName, String cityName);
 
+  List<Market> listChecked();
+
+  List<Market> listRegionChecked(String regionName);
+
+  List<Market> listCityChecked(String regionName, String cityName);
+
   //Market get(int no);
 
   //int update(Market contact);
