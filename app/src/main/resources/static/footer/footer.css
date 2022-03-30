@@ -5,11 +5,11 @@ html, body {
     
 }
 
-#body-wrapper {
+/* #body-wrapper {
     min-height: 100%;
     position: relative;
     margin: 0px auto;
-}
+} */
 
 #body-content {
     font-family: 'NanumGothicExtraBold';
@@ -24,8 +24,8 @@ html, body {
 }
 
 .footer-wrapper {
-    max-width: 1600px;
-    padding: 80px 80px;
+    max-width: 1024px;
+    padding: 60px 0 80px 0;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
