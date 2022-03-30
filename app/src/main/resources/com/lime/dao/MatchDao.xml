@@ -22,6 +22,6 @@
   </select>
   
   <select id="findAll" resultMap="matchMap">
-    select * from social_mtch order by st_time asc
+    select * from social_mtch order by st_time asc, court_id asc
   </select>
 </mapper>
