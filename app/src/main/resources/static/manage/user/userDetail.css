@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+#x-thead-1, #x-thead-2  {
+
+}
+#xTr{
+  background-color: rgb(255, 255, 255) ;
+  color:white; ;
+}
+
+
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 4px;
+}
+
+.container{
+	width: 1024px;
+}
+
+.row {
+  font-family: 'NanumGothic';
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 200px;
+  margin-right: 200px;
+}
