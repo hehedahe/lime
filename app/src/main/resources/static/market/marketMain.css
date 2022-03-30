@@ -1,13 +1,108 @@
+* {
+    font-family: 'NanumGothic';
+}
 
 #market-content {
     width: 100%;
-    height: 20vh;
-    position: relative;
-    background-color: blue;
+    height: 100%;
     border: solid;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
-.row {
+#market-nav-wrap {
+    width: 100%;
+    max-width: 1024px;
+    height: 150px;
+    /* position: relative;
+    padding-top: 5rem;
+    
+    background-color: green;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; */
+}
+
+#market-nav {
+    max-width: 1024px;
+    min-width: 1024px;
+    position: absolute;
+    bottom: 0;
+}
+
+#region, #city {
+    font-size: 100%;
+    width: 180px;
+    height: 3rem;
+    border-radius: 20px;
+    border-color: rgb(190, 190, 190);
+}
+
+#checkbox-wrap {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+#nav-checkbox {
+    position: relative;
+    top: 6px;
+    zoom: 1.8;
+    border-color: rgb(190, 190, 190);
+    cursor: pointer;
+}
+
+label[id=nav-c-label] {
+    position: relative;
+    top: 6px;
+}
+
+.search-bar {
+    display: flex;
+    width: 300px;
+    height: 40px;
+    border-radius: 15px;
+    border: solid 1px;
+    border-color: rgb(190, 190, 190);
+    justify-content: center;
+    align-items: center;
+}
+
+input[type=search] {
+    width: 80%;
+    height: 80%;
+    border-style: none;
+    outline: none;
+    margin: 0 auto;
+}
+
+input[type=search]::placeholder {
+    font-weight: bold;
+    color: rgb(190, 190, 190);
+}
+
+
+#market-write {
+    width: 6rem;
+    height: 42.5px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    background-color: rgb(102, 200, 141);
+    border: none;
+    border-radius: 5px;
+    float: right;
+}
+
+#content-body {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+.row[name=c-body] {
     font-family: 'NanumGothic';
     display: flex;
     flex-wrap: wrap;
@@ -15,6 +110,7 @@
     margin-left: 200px;
     margin-right: 200px;
 }
+
 
 .card-body > .card-title > a{
     color: black;
