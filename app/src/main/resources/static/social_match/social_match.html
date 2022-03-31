@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>라임</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+
+
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="../header/user/u-header.css">
+  <link href="social_match.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- <nav id="u-nav-bar">
+    <div id="u-header" class="header">
+      <div class="nav-logo"><a href="/header/user/header.html">lime</a></div>
+      <div class="nav-menu-div">
+        <ul id="u-nav-menu">
+          <li><a href="#">소셜매치</a></li>
+          <li><a href="#">코트예약</a></li>
+          <li><a href="#">클래스</a></li>
+          <li><a href="#">라임마켓</a></li>
+          <li><a href="#">클럽</a></li>
+          <li><a href="#">커뮤니티</a></li>
+        </ul>
+      </div>
+      <div class="nav-links-div">
+        <ul class="u-nav-links">
+          <li><a href="../../login/login.html">로그인</a></li>
+          <li><a href="#">|</a></li>
+          <li><a href="../../signup/signup1.html">회원가입</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav> -->
+
+  <main class="social-match mt-5">
+
+    <div class="d-flex justify-content-between mb-3">
+      <div class="d-flex w-100">
+        <select class="form-select" aria-label="year" name="" id="">
+          <option selected>지역</option>
+        </select>
+        <select class="form-select" aria-label="year" name="" id="">
+          <option selected>도시</option>
+        </select>
+        <select class="form-select" aria-label="year" name="" id="">
+          <option selected>레벨</option>
+        </select>
+        <select class="form-select" aria-label="year" name="" id="">
+          <option selected>성별</option>
+        </select>
+        <select class="form-select" aria-label="year" name="" id="">
+          <option selected>코트</option>
+        </select>
+      </div>
+      <select class="form-select" aria-label="year" name="" id="prefered">
+        <option selected>내 선호</option>
+      </select>
+    </div>
+
+    <ul class="list-group list-group-flush match-list">
+      <!-- <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="me-4 match-time">10:00</div>
+              <div class="ms-1">
+                <h6 class="mb-1">인천 시립 테니스장 코트1</h6>
+                <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
+              </div>
+            </div>
+          </div>
+          <button class="btn match-btn">신청 가능</button>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="me-4 match-time">10:00</div>
+              <div class="ms-1">
+                <h6 class="mb-1">인천 시립 테니스장 코트1</h6>
+                <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
+              </div>
+            </div>
+          </div>
+          <button class="btn match-btn">신청 가능</button>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="me-4 match-time">10:00</div>
+              <div class="ms-1">
+                <h6 class="mb-1">인천 시립 테니스장 코트1</h6>
+                <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
+              </div>
+            </div>
+          </div>
+          <button class="btn match-btn">신청 가능</button>
+        </div>
+      </a> -->
+    </ul>
+
+
+  </main>
+
+  <!-- <script id="tr-template" type="text/x-handlebars-template">
+  {{#each this}}
+    <tr>
+      <td>{{no}}</td>
+      <td><a href="view.html?no={{no}}">{{name}}</a></td>
+      <td>{{email}}</td>
+      <td>{{tels.[0].tel}}</td>
+      <td>{{company}}</td>
+    </tr>
+  {{/each}}
+  </script> -->
+
+  <script id="match-list-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <a href="/social_match/social_match_3.html" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between align-items-center">
+        <div>
+          <div class="d-flex justify-content-start align-items-center">
+            <div class="me-4 match-time">{{startTime}}</div>
+            <div class="ms-1">
+              <h6 class="mb-1">{{courtNo}}</h6>
+              <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn match-btn">신청 가능</button>
+      </div>
+    </a>
+    {{/each}}
+  </script>
+
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script type="text/javascript">
+    var matchList = document.querySelector(".match-list")
+    console.log(matchList)
+
+    // 템플릿 엔진에서 사용할 HTML 조각을 가져오기
+    var matchListTemplate = document.querySelector("#match-list-template");
+    console.log(matchListTemplate)
+
+    //템플릿 엔진 준비
+    var htmlGenerator = Handlebars.compile(matchListTemplate.innerHTML);
+
+    fetch("/match/list")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (matches) {
+        for (var match of matches) {
+          console.log(typeof (match.startTime));
+        }
+        // 서버에서 받은 연락처 배열을 가지고 템플릿 엔진을 실행하여 tbody 콘텐트를 생성한다.
+        matchList.innerHTML = htmlGenerator(matches);
+      });
+  </script>
+
+</body>
+
+</html>

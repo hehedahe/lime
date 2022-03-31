@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>클래스 상세</title>
+    <link href="cC_CSS/createClass.css" rel="stylesheet">
+</head>
+<style>
+    body
+    {
+        margin: 0 auto;
+        width: 1024px;
+    }
+</style>
+<body>
+<div class="thumbnail">
+    <div>
+      <h2>&nbsp;&nbsp;썸네일</h2><br>
+        <input type=file name='file1' style='display: none;'>
+        <img src='img/img-select.PNG' border='0' style="width: 140px" onclick='document.all.file1.click();'><span id="base-sentence">&nbsp;&nbsp;&nbsp;이미지를 등록하지 않으시면 기본 이미지가 제공됩니다.</span>
+    </div>
+</div>
+<div class="wrapper">
+    <input id="class-name" type="text" placeholder="&nbsp;클래스 이름을 입력해주세요." style="width:300px;" onfocus="this.placeholder=''" onblur="this.placeholder='클래스 이름을 입력해주세요.'">
+</div>
+<div class="wrapper">
+    <input id="one-intro"type="text" placeholder="&nbsp;클래스 한줄소개를 입력해주세요." style="width:300px;" onfocus="this.placeholder=''" onblur="this.placeholder='클래스 한줄소개를 입력해주세요.'">
+</div>
+<ul id="re-ul" class="chose">지역
+    <li class="re-ci-choose">
+        <select class="search-wrapper">
+            <option>&nbsp;&nbsp;서울특별시</option>
+        </select>
+    </li>
+</ul>
+<ul id="city-ul" class="chose">도시
+    <li class="re-ci-choose">
+        <select  class="search-wrapper">
+            <option>&nbsp;&nbsp;관악구</option>
+        </select>
+    </li>
+</ul>
+<div>
+    <span id="open-date-intro">클래스 개설일을 선택해주세요. (최소1달)</span>
+</div>
+<ul id="st-ul" class="st-end-chose" style="font-weight: bold">시작일
+    <li class="cl-st-end">
+        <select>
+            <option>YYYY-MM-DD</option>
+        </select>
+    </li>
+</ul>
+<ul id="end-ul" class="st-end-chose" style="font-weight: bold">종료일
+    <li class="cl-st-end">
+        <select>
+            <option>YYYY-MM-DD</option>
+        </select>
+    </li>
+</ul>
+<div class="page-turn">
+    <button id="pre-btn" class="page" type="button">나가기</button>
+    <span id="page-no">1/3</span>
+    <button id="next-btn" class="page" type="button">다음</button>
+</div>
+</body>
+</html>

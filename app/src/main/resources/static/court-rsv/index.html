@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+
+    <title>구장예약</title>
+
+    <!--&lt;!&ndash; header, footer 삽입 제이쿼리&ndash;&gt;-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $("#x-header").load("/header/user/loggedheader.html");  //헤더 인클루드-->
+        //   $("#x-footer").load("/footer/footer.html");  //헤더 인클루드-->
+        });
+    </script>
+ </head>
+
+<body>
+<div id="x-header" class="d-flex bd-highlight mb-3"></div>
+
+<div class="container"> <!-- 컨텐츠들을 .container div로 감싸주고 .css 파일에서 max-width: 1024; 주기 -->
+
+    <div id="drop-menu" class="row">
+
+        <div class="btn-group col-2 p-2 bd-highlight" id="drop-region">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                지역
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">서울</a></li>
+                <li><a class="dropdown-item" href="#">부산</a></li>
+                <li><a class="dropdown-item" href="#">대구</a></li>
+                <li><a class="dropdown-item" href="#">인천</a></li>
+                <li><a class="dropdown-item" href="#">광주</a></li>
+                <li><a class="dropdown-item" href="#">대전</a></li>
+                <li><a class="dropdown-item" href="#">울산</a></li>
+                <li><a class="dropdown-item" href="#">세종</a></li>
+                <li><a class="dropdown-item" href="#">경기도</a></li>
+                <li><a class="dropdown-item" href="#">강원도</a></li>
+                <li><a class="dropdown-item" href="#">충청북도</a></li>
+                <li><a class="dropdown-item" href="#">충청남도</a></li>
+                <li><a class="dropdown-item" href="#">전라북도</a></li>
+                <li><a class="dropdown-item" href="#">전라남도</a></li>
+                <li><a class="dropdown-item" href="#">경상북도</a></li>
+                <li><a class="dropdown-item" href="#">경상남도</a></li>
+                <li><a class="dropdown-item" href="#">제주도</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group col-2 p-2 bd-highlight" id="drop-city">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                도시
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group col-2 ms-auto p-2 bd-highlight" id="drop-preference">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                선호지역
+            </button>
+            <ul class="dropdown-menu col-2">
+                <li><a class="dropdown-item" href="#">인천 연수구</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="crt-info">
+        <div class="direction-btn"></div>
+
+        <div class="d-flex justify-content-center" id="crt-card">
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">테니스장1</h5>
+                        <p class="card-text">#하드코트</p>
+                        <div class="content3">
+                            <p class="card-text">300m</p>
+                            <a href="#" class="btn btn-sm crt-info">정보</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button class="card b-ca">
+                    <div class="card-body">
+                        <h5 class="card-title">테니스장2</h5>
+                        <p class="card-text">#소프트코트</p>
+                        <div class="content3">
+                            <p class="card-text">300m</p>
+                            <a href="#" class="btn btn-sm crt-info">정보</a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">테니스장3</h5>
+                        <p class="card-text">#잔디코트</p>
+                        <div class="content3">
+                            <span class="card-text">300m</span>
+                            <a class="btn btn-sm crt-info">정보</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="direction-btn"></div>
+    </div>
+</div>
+
+<div id="x-footer"></div>
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c77b7df52ca018e8760dea5bc1e3c519"></script>
+<script>
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+</script>
+<script src="index.js" type="module"></script>
+</body>
+</html>
