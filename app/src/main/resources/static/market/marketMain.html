@@ -63,7 +63,7 @@
         
     </div>
 </div>
-<div id="content-body" class="row row-cols-1 row-cols-md-3 g-4">
+<div id="content-body" class="row row-cols-1 row-cols-sm-3 g-5">
   
     
 </div>
@@ -145,13 +145,6 @@ function listFetch() {
 
 listFetch(); // 첫 화면
 
-// 거래가능만 보기
-$("#nav-checkbox").on("change", function(){
-  console.log($("#nav-checkbox").is(":checked"));
-  $("div[name=card-col]").remove();
-  listFetch();
-});
-
 // 지역 선택
 var regionChange = function(value) {
   $("div[name=card-col]").remove();
@@ -212,183 +205,12 @@ var cityChange = function(value){
   listFetch();
   }
 
-  
-// function listFetchBody(lists) {   
-//   for (var list of lists) {
-//     let transState1 = list.transState;
-//     if (transState1 == "S") {
-//     transState1 = "";
-//     }
-//     else if (transState1 == "R") {
-//       transState1 = `<span class="R">예약중</span>`;
-//     }
-//     else if (transState1 == "E") {
-//       transState1 = `<span class="E">거래완료</span>`;
-//     }
-
-//     var cols = document.createElement("div");
-//     cols.setAttribute('class', 'col');
-//     cols.setAttribute('name', 'card-col');
-//     cols.innerHTML = `<div class="card h-100">
-//     <img src="../ok_photo.jfif" class="card-img-top" alt="...">
-//     <div class="card-body">
-//       <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
-//       <span class="item-price">${list.itemCost}원 ${transState1}</span><br>
-//       <span>${list.regionName} ${list.cityName}</span><br>
-//       <span class="view-count">조회 ${list.viewCount}</span>
-//     </div>
-//     </div>`
-//     contentBody.appendChild(cols);
-//   }      
-// }
-
-// function checkboxListFetchBody(lists) {
-//   for (var list of lists) {
-//     let transState1 = list.transState;
-//     if (transState1 == "S") {
-//       transState1 = "";
-//       var cols = document.createElement("div");
-//       cols.setAttribute('class', 'col');
-//       cols.setAttribute('name', 'card-col');
-//       cols.innerHTML = `<div class="card h-100">
-//       <img src="../ok_photo.jfif" class="card-img-top" alt="...">
-//       <div class="card-body">
-//         <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
-//         <span class="item-price">${list.itemCost}원 ${transState1}</span><br>
-//         <span>${list.regionName} ${list.cityName}</span><br>
-//         <span class="view-count">조회 ${list.viewCount}</span>
-//       </div>
-//       </div>`
-//       contentBody.appendChild(cols);
-//     }
-//   }      
-// }
-
-// // 첫화면
-// fetch(`/market/list`)
-// .then(function(response){
-//   return response.json();
-// })
-// .then(function(lists){
-//   listFetchBody(lists);
-// })
-
-// // 첫화면 체크박스적용
-// $("#nav-checkbox").on("change", function(){
-//   if ($("#nav-checkbox").is(":checked") == true) {
-//     $("div[name=card-col]").remove();
-//     fetch(`/market/list`)
-//     .then(function(response){
-//       return response.json();
-//     })
-//     .then(function(lists){
-//       checkboxListFetchBody(lists);
-//     })
-//   } else {
-//     $("div[name=card-col]").remove();
-//     fetch(`/market/list`)
-//     .then(function(response){
-//       return response.json();
-//     })
-//     .then(function(lists){
-//       listFetchBody(lists);
-//     })
-//   }
-// });
-
-// var regionChange = function(value){
-//   $("div[name=card-col]").remove();
-//   if(value == "전체") {
-//     fetch(`/market/list`)
-//     .then(function(response){
-//       return response.json();
-//     })
-//     .then(function(lists){
-//       listFetchBody(lists);
-//     })
-//   }
-  
-//   if (value == "서울특별시") {
-//     add = seoul;
-//   } else if (value == "부산광역시") {
-//     add = busan;
-//   } else if (value == "대구광역시") {
-//     add = daegu;
-//   } else if (value == "인천광역시") {
-//     add = incheon;
-//   } else if (value == "광주광역시") {
-//     add = gwangju;
-//   } else if (value == "대전광역시") {
-//     add = daejeon;
-//   } else if (value == "울산광역시") {
-//     add = ulsan;
-//   } else if (value == "세종특별자치시") {
-//     add = sejong;
-//   } else if (value == "경기도") {
-//     add = gyeonggi;
-//   } else if (value == "강원도") {
-//     add = gangwon;
-//   } else if (value == "충청북도") {
-//     add = chungbuk;
-//   } else if (value == "충청남도") {
-//     add = chungnam;
-//   } else if (value == "전라북도") {
-//     add = jeonbuk;
-//   } else if (value == "전라남도") {
-//     add = jeonnam;
-//   } else if (value == "경상북도") {
-//     add = gyeongbuk;
-//   } else if (value == "경상남도") {
-//     add = gyeongnam;
-//   } else if (value == "제주도") {
-//     add = jeju;
-//   } else if(value == "전체") {
-//     add = ["도시"];
-//   }
-//   city.options.length = 1;
-
-//   for (property in add) {
-//     let opt = document.createElement("option");
-//     opt.value = add[property];
-//     opt.innerHTML = add[property];
-//     city.appendChild(opt);
-//   }
-
-//   fetch(`/market/list/region?regionName=${regionSelect.value}`)
-//   .then(function(response){
-//     return response.json();
-//   })
-//   .then(function(regionData){
-//     listFetchBody(regionData);
-//   }) 
-// }
-
-// var cityChange = function(value) {
-//   if (city.value == "도시" && regionSelect.value != "전체") {
-//     console.log("도시선택됨!");
-//     $("div[name=card-col").remove();
-//     fetch(`/market/list/region?regionName=${regionSelect.value}`)
-//     .then(function(response){
-//       return response.json();
-//     })
-//     .then(function(regionData){
-//       listFetchBody(regionData);
-//     })
-//   }
-
-//   if (city.value == "도시" && regionSelect.value == "전체") {
-//     return;
-//   }
-
-//   $("div[name=card-col").remove();
-//   fetch(`/market/list/city?regionName=${regionSelect.value}&cityName=${city.value}`)
-//   .then(function(response){
-//     return response.json();
-//   })
-//   .then(function(cityData){
-//     listFetchBody(cityData);
-//   })
-// }
+// 거래가능만 보기
+$("#nav-checkbox").on("change", function(){
+  console.log($("#nav-checkbox").is(":checked"));
+  $("div[name=card-col]").remove();
+  listFetch();
+});
 
 
 </script>
