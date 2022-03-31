@@ -22,6 +22,19 @@
   </select>
   
   <select id="findAll" resultMap="matchMap">
-    select * from social_mtch order by st_time asc, court_id asc
+    select
+      mtch_id,
+      court_id,
+      user_id,
+      mtch_type_id,
+      mtch_date,
+      st_time,
+      end_time,
+      fee,
+      state
+    from 
+      social_mtch 
+    order by 
+      st_time asc, court_id asc
   </select>
 </mapper>

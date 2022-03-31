@@ -188,7 +188,7 @@
       })
       .then(function (matches) {
         for (var match of matches) {
-          console.log(match);
+          console.log(typeof (match.startTime));
         }
         // 서버에서 받은 연락처 배열을 가지고 템플릿 엔진을 실행하여 tbody 콘텐트를 생성한다.
         matchList.innerHTML = htmlGenerator(matches);
