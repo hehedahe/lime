@@ -6,26 +6,68 @@
 }
 
 ul {
-    margin: 0px;
+    margin: 0;
+}
+
+p {
+    margin: 2px 0;
 }
 
 .container {
-    max-width: 1024px;
+    max-width: 1024px; /* 컨텐츠 width 1024로 맞춰주기 */
     height: 100vh;
     padding: 0;
-    border: 1px solid darkolivegreen;
 }
 
+/* 드롭다운 메뉴 */
 #drop-menu {
     width: 1024px;
     heigth: 10vh;
     padding: 20px;
-    border: 1px solid blueviolet;
     margin: 0px;
 }
+
 
 /* 드롭다운 메뉴 테두리 */
 .dropdown-toggle {
     border: 1px solid rgb(190, 190, 190);
     border-radius: 50px;
+}
+
+.dropdown-menu {
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 20px;
+}
+
+/* 지도 */
+#map {
+    width: 1024px;
+    /*height: 700px;*/
+    height: 300px;
+}
+
+/* 지도 안 코트 정보 카드*/
+.card {
+    border-radius: 25px;
+    /*border: 0px;*/
+}
+
+.b-ca:focus {
+    background-color: rgb(249, 248, 113);
+}
+
+/* 코트 카드 안 정보 버튼*/
+.crt-info {
+    background-color: rgb(203, 203, 203);
+    color: #fff;
+    border-radius: 20px;
+    height: 25px;
+    width: 60px;
+    line-height: 15px;
+}
+
+/* 코트 카드 3번째 줄*/
+.content3 {
+    display: flex;
+    justify-content: space-between;
 }
