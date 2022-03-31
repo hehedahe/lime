@@ -37,14 +37,14 @@ a {
 }
 
 /* header 전체*/
-nav {
+#u-nav-bar {
     width: 100vw;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     display: flex;
     justify-content: center;
 }
 
-.header {
+#u-header {
     width: 1024px;
     margin: 0 23vw;
     height: 10vh;
@@ -55,7 +55,7 @@ nav {
 }
 
 /* 로고 */
-.nav-logo {
+#nav-logo {
     font-family: 'CooperBlack';
     font-size: xxx-large;
     height: 10vh;
@@ -63,11 +63,11 @@ nav {
     align-items: center;
 }
 
-.nav-logo > a {
+#nav-logo > a {
     color: #92DB82;
 }
 /* 메뉴 */
-.nav-menu {
+#u-nav-menu {
     display: flex;
     width: 40vw;
     height: 10vh;
@@ -78,14 +78,14 @@ nav {
     align-items: center;
 }
 
-.nav-menu li {
+#u-nav-menu li {
     display: flex;
     flex-basis: 20%;
     justify-content: center;
     align-content: center;
 }
 
-.nav-menu a {
+#u-nav-menu a {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
@@ -97,13 +97,13 @@ nav {
 }
 
 
-.nav-menu a:before,
-.nav-menu a:after {
+#u-nav-menu a:before,
+#u-nav-menu a:after {
     transition: all 0.35s ease;
     -webkit-transition: all 0.35s ease-in-out;
 }
 
-.nav-menu a:after {
+#u-nav-menu a:after {
     position: absolute;
     background-color: #92DB82;
     height: 4px;
@@ -114,19 +114,19 @@ nav {
     overflow: hidden;
 }
 
-.nav-menu li:hover a {
+#u-nav-menu li:hover a {
     font-family: 'NGEB';
     color: #92DB82;
 }
 
-.nav-menu a:hover:after {
+#u-nav-menu a:hover:after {
     opacity: 1;
     width: 100%;
 }
 
 /* 마이페이지 */
 
-.nav-links {
+#u-nav-links {
     display: flex;
     width: 9vw;
     height: 10vh;
@@ -134,7 +134,7 @@ nav {
     justify-content: space-between;
 }
 
-.nav-links li a {
+#u-nav-links li a {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
@@ -144,22 +144,22 @@ nav {
     line-height: 10vh;
 }
 
-.nav-links > li:nth-child(2) > a {
+#u-nav-links > li:nth-child(2) > a {
     color: rgb(190, 190, 190);
 }
 
-.nav-links > li:nth-child(odd):hover > a {
+#u-nav-links > li:nth-child(odd):hover > a {
     color: #92DB82;
     font-family: 'NGBold';
 }
 
-.nav-links > div {
+#u-nav-links > div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.nav-links-user {
+#u-links-user {
     background-image: url("../../asset/image/header/user2b.png");
     background-size: 30px;
     width: 30px;
@@ -168,7 +168,7 @@ nav {
     border: 2px solid #92DB82;
 }
 
-.nav-links-user:hover {
+#u-links-user:hover {
     background-image: url("../../asset/image/header/user2a.png");
 }
 
