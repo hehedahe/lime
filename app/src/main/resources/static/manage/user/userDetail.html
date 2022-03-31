@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Columns & Gutter</title>
+
+  <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="manageUser.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+</head>
+<body>
+  <div id="tables" class="container table-responsive">
+    <table id="x-table" class="table table-striped table-hover table-bordered border-primary text-center">
+      <!-- table-dark table-success table-borderless etc -->
+      <thead>
+        <tr id="x-thead-1">
+          <th scope="col">이름</th>
+          <th scope="col">이메일</th>
+          <th scope="col">회원유형</th>
+          <th scope="col">가입일자</th>
+          <th scope="col">라임캐시</th>
+        </tr>
+      </thead>
+      <tbody id ="x-tbody-1">
+      </tbody>
+      <thead>
+        <tr id="x-thead-2">
+          <th scope="col">성별</th>
+          <th scope="col">은행명</th>
+          <th scope="col">계좌번호</th>
+          <th scope="col">예금주명</th>
+          <th scope="col">제재일</th>
+        </tr>
+      </thead>
+      <tbody id ="x-tbody-2">
+      </tbody>
+    </table>
+  </div>
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){  
+  var arr = location.href.split("?");
+  console.log(arr);
+
+  if (arr.length == 1) {
+    alert("요청 형식이 옳바르지 않습니다.")
+    throw "URL 형식 오류!";
+  }
+
+  var qs = arr[1];
+  console.log(qs);
+
+  var params = new URLSearchParams(qs);
+  var no = params.get("no");
+  var xTbody1 = document.querySelector("#x-tbody-1"); 
+  var xTbody2 = document.querySelector("#x-tbody-2"); 
+  var content1= '';
+  var content2= '';
+
+  if (no == null) {
+    alert("해당 번호의 연락처가 없습니다.");
+    throw "파라미터 오류!";
+  }
+  fetch(`/manage/user/get?no=${no}`)
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(detail){
+        console.log(detail);
+        content1+= `
+        <tr id = "xTr">
+          <td>${detail.name}</td>
+          <td>${detail.email}</td>
+          <td>${detail.userType}</td>
+          <td>${detail.rgtDate}</td>
+          <td>${detail.sum}</td>
+        </tr>`
+        content2+= `
+        <tr id = "xTr">
+          <td>${detail.gender}</td>
+          <td>${detail.bankName}</td>
+          <td>${detail.acntNo}</td>
+          <td>${detail.acntHolder}</td>
+          <td>${detail.blockDate}</td>
+        </tr>`  
+        xTbody1.innerHTML = content1;
+        xTbody2.innerHTML = content2;
+  });
+});
+
+</script>
+</body>
+</html>

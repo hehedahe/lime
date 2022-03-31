@@ -45,11 +45,49 @@ SELECT
    </select>
    
    <select id="findByRegion" resultMap="marketMap" parameterType="string">
+		SELECT 
+		      i.item_name as item_name,
+		      i.item_cost as item_cost,
+		      replace(rg.region_name, '\r', '') as region_name,
+		      replace(ct.city_name, '\r', '') as city_name,
+		      i.view_cnt as view_cnt,
+		      i.rgt_date as rgt_date,
+		      i.trans_state as trans_state
+		FROM item i
+		  LEFT JOIN city ct
+		   ON i.city_id = ct.city_id
+		  LEFT JOIN region rg 
+		   ON ct.region_id = rg.region_id
+		where region_name=#{regionName}
+		   order by rgt_date desc
+
+    </select>
+    
+    <select id="findByCity" resultMap="marketMap" resultType="string">
+    SELECT 
+          i.item_name as item_name,
+          i.item_cost as item_cost,
+          replace(rg.region_name, '\r', '') as region_name,
+          replace(ct.city_name, '\r', '') as city_name,
+          i.view_cnt as view_cnt,
+          i.rgt_date as rgt_date,
+          i.trans_state as trans_state
+    FROM item i
+      LEFT JOIN city ct
+       ON i.city_id = ct.city_id
+      LEFT JOIN region rg 
+       ON ct.region_id = rg.region_id
+    where region_name=#{regionName} AND city_name=#{cityName}
+       order by rgt_date desc
+
+    </select>
+    
+    <select id="findAllChecked" resultMap="marketMap">
 SELECT 
       i.item_name as item_name,
       i.item_cost as item_cost,
-      replace(rg.region_name, '\r', '') as region_name,
-      replace(ct.city_name, '\r', '') as city_name,
+      rg.region_name as region_name,
+      ct.city_name as city_name,
       i.view_cnt as view_cnt,
       i.rgt_date as rgt_date,
       i.trans_state as trans_state
@@ -58,10 +96,56 @@ SELECT
    ON i.city_id = ct.city_id
    LEFT JOIN region rg 
    ON ct.region_id = rg.region_id
-   where region_name=#{regionName}
+   where trans_state="S"
    order by rgt_date desc
+   
+   </select>
+    
+    <select id="findByRegionChecked" resultMap="marketMap" parameterType="string">
+    SELECT 
+          i.item_name as item_name,
+          i.item_cost as item_cost,
+          replace(rg.region_name, '\r', '') as region_name,
+          replace(ct.city_name, '\r', '') as city_name,
+          i.view_cnt as view_cnt,
+          i.rgt_date as rgt_date,
+          i.trans_state as trans_state
+    FROM item i
+      LEFT JOIN city ct
+       ON i.city_id = ct.city_id
+      LEFT JOIN region rg 
+       ON ct.region_id = rg.region_id
+    where region_name=#{regionName} AND trans_state="S"
+       order by rgt_date desc
 
-  </select>
+    </select>
+    
+    <select id="findByCityChecked" resultMap="marketMap" resultType="string">
+    SELECT 
+          i.item_name as item_name,
+          i.item_cost as item_cost,
+          replace(rg.region_name, '\r', '') as region_name,
+          replace(ct.city_name, '\r', '') as city_name,
+          i.view_cnt as view_cnt,
+          i.rgt_date as rgt_date,
+          i.trans_state as trans_state
+    FROM item i
+      LEFT JOIN city ct
+       ON i.city_id = ct.city_id
+      LEFT JOIN region rg 
+       ON ct.region_id = rg.region_id
+    where region_name=#{regionName} AND city_name=#{cityName} AND trans_state="S"
+       order by rgt_date desc
+
+    </select>
+    
+    
+    
+    
+    
+    
+    
+    
   
     <select id="findByNo" resultMap="marketMap" parameterType="int">
 	  select

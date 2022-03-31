@@ -30,6 +30,27 @@ public class DefaultMarketService implements MarketService {
   public List<Market> listRegion(String regionName) {
     return marketDao.findByRegion(regionName);
   }
+
+  @Override
+  public List<Market> listCity(String regionName, String cityName) {
+    return marketDao.findByCity(regionName, cityName);
+  }
+
+  @Override
+  public List<Market> listChecked() {
+    return marketDao.findAllChecked();
+  }
+
+  @Override
+  public List<Market> listRegionChecked(String regionName) {
+    return marketDao.findByRegionChecked(regionName);
+  }
+
+  @Override
+  public List<Market> listCityChecked(String regionName, String cityName) {
+    return marketDao.findByCityChecked(regionName, cityName);
+  }
+
   //
   //  @Override
   //  public Market get(int no) {

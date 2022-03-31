@@ -1,17 +1,24 @@
 
+@charset "UTF-8";
+
 @font-face {
     font-family: 'NG';
-    src: url("../asset/font/NanumGothic.woff") format("woff");
+    src: url("../../asset/font/NanumGothic.woff") format("woff");
 }
 
 @font-face {
     font-family: 'NGBold';
-    src: url("../asset/font/NanumGothicBold.woff") format("woff");
+    src: url("../../asset/font/NanumGothicBold.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'NGEB';
+    src: url("../../asset/font/NanumGothicExtraBold.woff") format("woff");
 }
 
 @font-face {
     font-family: 'CooperBlack';
-    src: url("../asset/font/Cooper-Black-BT.woff") format("woff");
+    src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
 }
 
 * {
@@ -30,35 +37,37 @@ a {
 }
 
 /* header 전체*/
-nav {
+#u-nav-bar {
     width: 100vw;
     border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
 }
 
-.header {
-    width: 70vw;
-    margin: 0 15vw;
-    padding: 1vh 0;
+#u-header {
+    width: 1024px;
+    margin: 0 23vw;
     height: 10vh;
     display: flex;
     align-items: center;
     font-family: 'NG';
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /* 로고 */
-.nav-logo {
+#nav-logo {
     font-family: 'CooperBlack';
     font-size: xxx-large;
-    padding-top: 1vh;
     height: 10vh;
+    display: flex;
+    align-items: center;
 }
 
-.nav-logo > a {
+#nav-logo > a {
     color: #92DB82;
 }
 /* 메뉴 */
-.nav-menu {
+#u-nav-menu {
     display: flex;
     width: 40vw;
     height: 10vh;
@@ -69,80 +78,98 @@ nav {
     align-items: center;
 }
 
-.nav-menu li {
+#u-nav-menu li {
     display: flex;
     flex-basis: 20%;
     justify-content: center;
+    align-content: center;
 }
 
-.nav-menu a {
+#u-nav-menu a {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
-    letter-spacing: 1px;
+    align-self: center;
+    letter-spacing: 2px;
     position: relative;
-    padding: 4vh 0;
-    /*background-color: skyblue;*/
+    height: 9vh;
+    line-height: 10vh;
 }
 
 
-.nav-menu a:before,
-.nav-menu a:after {
+#u-nav-menu a:before,
+#u-nav-menu a:after {
     transition: all 0.35s ease;
     -webkit-transition: all 0.35s ease-in-out;
 }
 
-.nav-menu a:after {
+#u-nav-menu a:after {
     position: absolute;
     background-color: #92DB82;
-    height: 3px;
-    width: 0%;
+    height: 4px;
+    width: 0;
     content: "";
     left: 0;
-    top : 100%;
+    top : 101%;
     overflow: hidden;
 }
 
-.nav-menu li:hover a {
-    font-family: 'NGBold';
-    font-size: 1.2rem;
+#u-nav-menu li:hover a {
+    font-family: 'NGEB';
     color: #92DB82;
 }
 
-.nav-menu a:hover:after {
+#u-nav-menu a:hover:after {
     opacity: 1;
     width: 100%;
 }
 
 /* 마이페이지 */
-.nav-links {
+
+#u-nav-links {
     display: flex;
-    width: 8vw;
+    width: 9vw;
     height: 10vh;
     align-items: center;
     justify-content: space-between;
 }
 
-.nav-links > div {
+#u-nav-links li a {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+    align-self: center;
+    position: relative;
+    height: 9vh;
+    line-height: 10vh;
+}
+
+#u-nav-links > li:nth-child(2) > a {
+    color: rgb(190, 190, 190);
+}
+
+#u-nav-links > li:nth-child(odd):hover > a {
+    color: #92DB82;
+    font-family: 'NGBold';
+}
+
+#u-nav-links > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*padding: 0 3px;*/
 }
 
-.nav-links-user {
-    background-image: url("../asset/image/user2b.png");
+#u-links-user {
+    background-image: url("../../asset/image/header/user2b.png");
     background-size: 30px;
     width: 30px;
     height: 30px;
     border-radius: 50px;
     border: 2px solid #92DB82;
-/*    !*box-shadow: 0 0 13px rgb(217, 217, 217);*!*/
-
 }
 
-.nav-links-user:hover {
-    background-image: url("../asset/image/user2a.png");
+#u-links-user:hover {
+    background-image: url("../../asset/image/header/user2a.png");
 }
 
 

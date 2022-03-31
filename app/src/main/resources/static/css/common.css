@@ -1,5 +1,28 @@
 @charset "UTF-8";
 
-div.container {
-	width: 920px;
+
+#headers {
+    border: 1px solid blue;
+    height: 50px;
+    width: 1024px;
+}
+​
+#sidebar {
+    border: 1px solid red;
+    float: left;
+    width: 120px;
+    min-height: 300px;
+}
+​
+#content {
+    border: 1px solid black;
+    height: 500px;
+    margin: 120px;
+}
+​
+.container {
+    position: relative;
+    border: 5px solid gray;
+    margin-left: 200px;
+    margin-right: 200px;
 }
