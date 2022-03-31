@@ -37,33 +37,29 @@
 
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="../header/user/u-header.css">
+  <link href="header.css" rel="stylesheet">
   <link href="signup1.css" rel="stylesheet">
 
+  <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#x-header").load("/header/user/header.html");  //헤더 인클루드
+  });
+  </script> -->
 </head>
 
-<body class="text-center">
+<body>
+
+  <!-- <div id="x-header" class="d-flex bd-highlight mb-3"></div> -->
 
   <nav>
-    <div class="header">
+    <div class="signup-header">
       <div class="nav-logo"><a href="/header/header.html">lime</a></div>
-      <div class="nav-menu-div">
-        <ul class="nav-menu">
-          <li><a href="#">소셜매치</a></li>
-          <li><a href="#">코트예약</a></li>
-          <li><a href="#">클래스</a></li>
-          <li><a href="#">라임마켓</a></li>
-          <li><a href="#">클럽</a></li>
-          <li><a href="#">커뮤니티</a></li>
-        </ul>
-      </div>
       <div class="nav-links-div">
-        <ul class="nav-links">
-          <li><a href="../../login/login.html">로그인</a></li>
-          <li><a href="#">|</a></li>
-          <li><a href="../../signup/signup1.html">회원가입</a></li>
-        </ul>
+        <a href="../../login/login.html">로그인</a>
+        <span>|</span>
+        <a href="../../signup/signup1.html">회원가입</a>
       </div>
     </div>
   </nav>
@@ -71,7 +67,7 @@
   <main class="form-lime mt-5">
     <form>
       <h1 class="h3 mb-4 h-lime">회원가입</h1>
-      <div>
+      <div class="text-center">
         SNS계정으로 간편 로그인/회원가입
       </div>
       <div class="row justify-content-center mb-3">
@@ -170,15 +166,18 @@
         </div>
       </div>
 
-      <button class="w-100 btn btn-primary mb-4" type="submit" id="btn-signup">가입하기</button>
+      <button class="w-100 btn btn-primary mb-4" type="button" id="btn-signup"
+        onclick="location.href='signup2.html'">가입하기</button>
 
       <div class="row mb-5" id="footer-login">
-        <div class="col">이미 아이디가 있으신가요?<a href="">로그인</a></div>
+        <div class="col text-center">이미 아이디가 있으신가요?<a href="../login/login.html">로그인</a></div>
       </div>
     </form>
   </main>
 
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
 </body>
 
