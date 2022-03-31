@@ -40,10 +40,8 @@ public class ManageController {
   //구장관리- 리스트
   @RequestMapping("/manage/field/list")
   public Object fieldList() {
-    System.out.println(">>>>>>>>>>");
     Object obj=  manageService.fieldList();
-    
-    System.out.println(">>>>>>>>> obj: "+obj);
+    System.out.println(obj);
     return manageService.fieldList();
   }
   //회원관리-특정회원 정보 리스트

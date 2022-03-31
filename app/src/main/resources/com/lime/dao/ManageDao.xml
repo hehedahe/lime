@@ -27,6 +27,7 @@
     <result column="courtType" property="courtType" />
     <result column="parkingAvt" property="parkingAvt" />
     <result column="indYn" property="indYn" />
+    <result column="courtCnt" property="courtCnt" />
     <result column="lightYn" property="lightYn" />
   </resultMap>
 
@@ -36,7 +37,7 @@
 					tt.name name,
 					tt.email email,
 					tt.userType userType,
-					tt.rgtDate rgtDate,
+          date_format(tt.rgtDate ,'%Y-%m-%d') rgtDate,
 					(case
 					when tt.sum IS null
 					then 0
@@ -47,7 +48,7 @@
 					replace(tt.bankName,'\r','') bankName,
 					tt.acnt_no acntNo,
 					tt.acnt_holder acntHolder,
-          IFNULL(date_format(tt.block_date ,'%Y-%m-%d.'),'기록 없음') blockDate
+          IFNULL(date_format(tt.block_date ,'%Y-%m-%d'),'기록 없음') blockDate
 		from
 					(SELECT
 					u.user_id userId,
@@ -104,7 +105,7 @@
           tt.name name,
           tt.email email,
           tt.userType userType,
-          tt.rgtDate rgtDate,
+          date_format(tt.rgtDate ,'%Y-%m-%d') rgtDate,
           (case
           when tt.sum IS null
           then 0
@@ -193,13 +194,15 @@
 					    WHEN light_yn =0
 					      then '무'
 					      ELSE '유'
-					  END) lightYn    
+					  END) lightYn,
+					  f.court_cnt courtCnt    
 		FROM field f
 					left JOIN court c
 					ON f.field_id = c.field_id
 					left JOIN court_type ct
 					ON c.court_type_id = ct.court_type_id
 					GROUP BY f.field_id
+					limit 10
 	</select>
 	<select id="findFieldByNo" parameterType="int" resultMap="fieldMap">	 
 		SELECT  
@@ -232,7 +235,8 @@
 					    WHEN light_yn =0
 					      then '무'
 					      ELSE '유'
-					  END) lightYn    
+					  END) lightYn,
+					  f.court_cnt courtCnt
 		FROM field f
 					left JOIN court c
 					ON f.field_id = c.field_id
