@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>구장예약</title>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./index.css">
-<script>
-    $(document).ready(function(){
-        $('.headers').load('../header/user/loggedheader.html')
-    })
-</script>
 
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+
+    <title>구장예약</title>
+
+    <!--&lt;!&ndash; header, footer 삽입 제이쿼리&ndash;&gt;-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $("#x-header").load("/header/user/loggedheader.html");  //헤더 인클루드-->
+        });
+    </script>
  </head>
 <body>
-
-<div class="headers"></div>
+<div id="x-header"></div>
 
 <div class="container">
+
+  <div id="content">
     <div class="dropdown-menu">
         <div></div>
         <div></div>
@@ -36,19 +41,10 @@
             <div></div>
         </div>
     </div>
-
+  </div>
 </div>
 
 
-
-
-
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-<!--&lt;!&ndash; header, footer 삽입 제이쿼리&ndash;&gt;-->
-<!--<script type="text/javascript">-->
-<!--            $("#headers").load("../header/user/header.html");  //헤더 인클루드-->
-<!--</script>-->
 
 </body>
 </html>

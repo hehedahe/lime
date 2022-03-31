@@ -1,0 +1,186 @@
+html {
+    width : 1024px;
+}
+body {
+    align-items: center;
+    margin: 0 auto;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.wrapper input {
+    border: 1px solid #bbb;
+    height: 40px;
+    border-radius: 0.5rem;
+}
+
+.wrapper input:focus{
+    outline:2px solid rgb(146, 219, 130);
+    border: none;
+}
+input::placeholder {
+    color: gray;
+}
+.thumbnail {
+    margin-left: 35vw;
+    margin-bottom: 100px;
+}
+
+#thum-comment {
+    margin-left: 700px;
+}
+#base-sentence {
+    color: gray;
+}
+.chose {
+    float: left;
+
+}
+ul{
+    list-style:none;
+    font-size: small;
+}
+#re-ul {
+    margin-left: 31.5vw;
+}
+
+.search-wrapper {
+    margin-top: 10px;
+}
+.re-ci-choose > select {
+    border-radius: 5px;
+    width: 18vw;
+    height: 55px;
+    font-weight: bold;
+    background-color: rgb(250, 250, 250);
+    border: 1px solid #bbb;
+    margin-bottom: 3vw;
+}
+#open-date-intro {
+    margin-left: 31.5vw;
+    padding: 3.5vw;
+    font-weight: bold;
+
+}
+.st-end-chose {
+    margin-top: 3vw;
+    float: left;
+}
+.st-end-chose > li {
+    margin-top: 10px;
+}
+
+.st-end-chose > li > select {
+    border-radius: 5px;
+    height: 4vh;
+}
+
+#st-ul {
+    margin-left: 31.5vw;
+    margin-right: 1vw;
+}
+#page-turn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-turn {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 20vh;
+
+}
+.page-turn #page-no {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: x-large;
+}
+#pre-btn {
+    margin-right: 15vw;
+    background-color: white;
+    border-radius: 5px;
+    width: 90px;
+    height: 50px;
+    border-color: rgb(102,200,141);
+    color: rgb(102,200,141);
+    font-weight: bold;
+    font-size: large;
+    border: 1px solid;
+}
+#next-btn {
+    margin-left: 15vw;
+    background-color: rgb(102,200,141);
+    border-radius: 5px;
+    width: 90px;
+    height: 50px;
+    border: white;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+#pre-btn:hover {
+    background-color: rgb(102,200,141);
+    border: rgb(102,200,141);
+    color: white;
+    outline: 1px solid rgb(102,200,141);
+}
+
+#next-btn:hover {
+    background-color: white;
+    border: rgb(102,200,141);
+    color: rgb(102,200,141);
+    outline: 1px solid rgb(102,200,141);
+}
+.class-cont {
+    height: 40px;
+    border-radius: 5px;
+    margin-bottom: 70px;
+    margin-left: 35vw;
+}
+.class-cont > select {
+    border: 1px solid #bbb;
+}
+#top-div {
+    margin-top: 100px;
+}
+#second-div {
+    margin-top: 100px;
+}
+#third-div {
+    margin-top: 100px;
+    margin-bottom: 117px;
+}
+.cl-info-comment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+textarea {
+    resize: none;
+    border-radius: 10px;
+    margin-bottom: -15px;
+}
+#detail-info {
+}
+#text-title {
+    margin-top: 50px;
+    margin-right: 40px;
+}
+#qna {
+    margin-top: 100px;
+    margin-right: 390px;
+}
+#qna-text{
+    margin-bottom: -58px;
+}
+
+textarea:focus {
+    outline: 3px solid rgb(146, 219, 130);
+    border: none;
+}
