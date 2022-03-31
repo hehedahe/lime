@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Data
-@Accessors
 public class Clazz {
 	int no;
 	int userId;
 	int cityId;
 	String title;
 	String intro;
+	String img;
 	int cost;
 	String startDate;
 	String endDate;
@@ -22,5 +22,6 @@ public class Clazz {
 	String dtlIntro;
 	Date rgtDate;
 	Date mdfyDate;
+	
 	
 }
