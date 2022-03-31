@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../header/manager/header.css">
+    <link rel="stylesheet" href="../../header/sidebar/sidebar.css">
+    <link rel="stylesheet" href="manageFiled.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col" id="headers"></div>
+        <div class="col" id="sidebar"></div>
+        <div class="col" id="content"></div>
+    </div>
+</div>
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--&lt;!&ndash; header, footer 삽입 제이쿼리&ndash;&gt;-->
+<script type="text/javascript">
+   $("#headers").load("../../header/manager/header.html");  //헤더 인클루드&ndash;&gt;
+    $("#sidebar").load("../../header/sidebar/sidebar.html");  //헤더 인클루드-->
+    var arr = location.href.split("?");
+    console.log(arr);
+
+    if (arr.length == 1) {
+        alert("요청 형식이 옳바르지 않습니다.")
+        throw "url 형식 오류!";
+    }
+
+    var qs = arr[1];
+    console.log(qs);
+
+    var params = new URLSearchParams(qs);
+    var page =  params.get("page");
+    $("#content").load(page + ".html");
+</script>
+</body>
+</html>
