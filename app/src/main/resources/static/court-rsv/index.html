@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+
+    <title>구장예약</title>
+
+    <!--&lt;!&ndash; header, footer 삽입 제이쿼리&ndash;&gt;-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $("#x-header").load("/header/user/header.html");  //헤더 인클루드-->
+        });
+    </script>
+ </head>
+
+<body>
+<div id="x-header" class="d-flex bd-highlight mb-3"></div>
+
+<div class="container">
+    <div id="drop-menu" class="row">
+
+        <div class="btn-group col-2 p-2 bd-highlight" id="drop-region">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                지역
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">서울</a></li>
+                <li><a class="dropdown-item" href="#">부산</a></li>
+                <li><a class="dropdown-item" href="#">대구</a></li>
+                <li><a class="dropdown-item" href="#">인천</a></li>
+                <li><a class="dropdown-item" href="#">광주</a></li>
+                <li><a class="dropdown-item" href="#">대전</a></li>
+                <li><a class="dropdown-item" href="#">울산</a></li>
+                <li><a class="dropdown-item" href="#">세종</a></li>
+                <li><a class="dropdown-item" href="#">경기도</a></li>
+                <li><a class="dropdown-item" href="#">강원도</a></li>
+                <li><a class="dropdown-item" href="#">충청북도</a></li>
+                <li><a class="dropdown-item" href="#">충청남도</a></li>
+                <li><a class="dropdown-item" href="#">전라북도</a></li>
+                <li><a class="dropdown-item" href="#">전라남도</a></li>
+                <li><a class="dropdown-item" href="#">경상북도</a></li>
+                <li><a class="dropdown-item" href="#">경상남도</a></li>
+                <li><a class="dropdown-item" href="#">제주도</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group col-2 p-2 bd-highlight" id="drop-city">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                도시
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group col-2 ms-auto p-2 bd-highlight" id="drop-preference">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                선호지역
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="map">
+        <div></div>
+        <div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+</body>
+</html>
