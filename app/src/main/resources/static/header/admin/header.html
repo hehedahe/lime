@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Lime header</title>
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="../sidebar/sidebar.css">
+    <link rel="stylesheet" href="../admin/header.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -23,15 +21,21 @@
     </div>
 </nav>
 
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">공지사항</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">프로필 설정</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">소셜매치</a>
+        </div>
+    </div>
+</div>
 
-<div class="container-fluid"></div>
+<!--<div class="container-fluid"></div>-->
 
-<div id="sidebar-wrapper"></div>
 
-<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-<!-- header, footer 삽입 제이쿼리-->
-<script type="text/javascript">
-            $("#sidebar-wrapper").load("../sidebar/sidebar.html");
-</script>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

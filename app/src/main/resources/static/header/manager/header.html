@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Lime header</title>
-    <link rel="stylesheet" href="../header.css">
-    <link rel="stylesheet" href="../sidebar/sidebar.css">
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../manager/header.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-
 </head>
 <body>
-
-
 
 <nav>
     <div class="header">
@@ -24,19 +22,16 @@
     </div>
 </nav>
 
-<div id="sidebar-wrapper">
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">공지사항</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">프로필 설정</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">소셜매치</a>
+        </div>
+    </div>
 </div>
-
-
-<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-<!-- header, footer 삽입 제이쿼리-->
-<script type="text/javascript">
-    $(document).ready( function() {
-            $("#sidebar-wrapper").load("../sidebar/sidebar.html");  //헤더 인클루드
-        }
-    ); 
-</script>
 
 
 </body>
