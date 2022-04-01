@@ -94,3 +94,7 @@ a {
 .nav-links-div {
   margin-top: 1.1rem;
 }
+
+ul {
+  margin: 0;
+}
