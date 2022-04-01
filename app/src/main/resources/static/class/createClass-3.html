@@ -6,6 +6,16 @@
     <link href="cC_CSS/createClass.css" rel="stylesheet">
 
 </head>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- header, footer 삽입 제이쿼리-->
+<script type="text/javascript">
+
+
+    $(document).ready(function(){
+        $('.footer').load('../footer/footer.html');
+        $(".header").load("../header/user/loggedheader.html");
+    })
+</script>
 <style>
     body
     {
@@ -13,7 +23,9 @@
         width: 1024px;
     }
 </style>
+
 <body>
+
 <div id="text-title" class="cl-info-comment">수강생들에게 미리 제공할 정보를 적어주세요.(상세정보)</div>
 <div id="detail-info" class="cl-info-comment">
 <textarea id="intro-info" cols="60" rows="17" placeholder="
