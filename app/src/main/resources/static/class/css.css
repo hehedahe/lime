@@ -1,15 +1,22 @@
+html {
+    width : 1024px;
+}
+body {
+    align-items: center;
+    margin: 0 auto;
+}
+
 .search {
     margin-top: 30px;
     margin-left: 150px;
-    margin-bottom: 15px;
-    margin-right: 150px;
+    margin-bottom: 30px;
 }
 input {
     border-radius: 25px;
     border: 1px solid #bbb;
     padding: 10px 12px;
-    background-image : url('image.gif');
-    background-position:top right;
+    background-image : url('img/button_search.png');
+    background-position:95% 38%;
     background-repeat:no-repeat;
 }
 
@@ -17,7 +24,7 @@ input::placeholder {
     color: gray;
 }
 .fa-search {
-    margin-left: 50px;
+    margin-left: 10px;
 }
 .div-container {
     margin-right: 150px;
@@ -28,8 +35,8 @@ input::placeholder {
     margin-left: 5px;
 }
 #open-btn {
-    width: 250px;
-    margin-left: 250px;
+    margin-left: 10px;
+    width: 180px;
     background-color: rgb(102,200,141);
     border-radius: 5px;
     height: 50px;
@@ -42,7 +49,7 @@ input::placeholder {
     margin-left: 10px;
     border-radius: 25px;
     padding: 10px;
-    width: 150px;
+    width: 90px;
 }
 .tag-btn {
     margin-top: 15px;

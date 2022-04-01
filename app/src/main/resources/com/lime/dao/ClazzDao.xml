@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+  <mapper namespace="com.lime.dao.ClazzDao">
+  
+  
+  
+  <resultMap type="clazz" id="clsMap">
+  	<id column="cls_id" property="no"/>
+  	<result column="user_id" property="userId"/>
+    <result column="city_id" property="cityId"/>
+    <result column="title" property="title"/>
+    <result column="intr" property="intro"/>
+    <result column="img" property="img"/>
+    <result column="cost" property="cost"/>
+    <result column="st_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
+    <result column="per_week" property="perWeek"/>
+    <result column="level" property="level"/>
+    <result column="tchr_intr" property="tchrIntro"/>
+    <result column="dtl_intr" property="dtlIntro"/>
+    <result column="rgt_date" property="rgtDate"/>
+    <result column="mdfy_date" property="mdfyDate"/>
+  
+  </resultMap>
+  
+   <select id="findAll" resultMap="clsMap">
+    select 
+	*
+	from 
+	cls cl
+	left join city c
+	on cl.city_id=c.region_id
+	left join region r 
+	on c.region_id=r.region_id; 
+  </select>
+  
+  
+  
+  
+  </mapper>
