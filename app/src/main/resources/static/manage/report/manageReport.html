@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Columns & Gutter</title>
+
+  <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="manageFiled.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+</head>
+<body>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#qwe">QWE</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#asd">ASD</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#zxc">ZXC</a>
+  </li>
+</ul>
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+var xTbody = document.querySelector("#x-tbody"); 
+
+fetch(`/manage/field/list`)
+.then(function(response){
+  return response.json();
+})
+.then(function(fields){
+  console.log(fields);
+  var content= '';
+  for(var field of fields){
+    console.log(field)
+
+      content+= `
+        <tr id = "xTr">
+          <th scope="row">
+            <input type="checkbox">
+          </th>
+          <td id="x-no">${field.no}</td>
+          <td>${field.fName}</td>
+          <td>${field.addr}</td>
+          <td>${field.courtType}</td>
+          <td>${field.courtCnt}</td>
+          <td>${field.parkingAvt}</td>
+          <td>${field.indYn}</td>
+          <td>${field.lightYn}</td>
+          <td><button id="modifyBtn"  class="btn btn-outline-success" type="button" value= "${field.no}" margin-bottom ="10px">상세</td>
+        </tr>`
+    }
+    xTbody.innerHTML =content
+  });
+ 
+
+  $(document).ready(function () {
+  $(document).on("click", "button[id='detailBtn']", function () {
+      location.href = "userDetail.html?no=" +$(this).val();
+
+  });
+});
+  
+  
+</script>
+</body>
+</html>

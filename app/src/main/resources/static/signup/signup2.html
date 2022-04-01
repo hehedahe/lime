@@ -37,31 +37,19 @@
 
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="../header/user/u-header.css">
+  <link href="header.css" rel="stylesheet">
   <link href="signup2.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
 
   <nav>
-    <div class="header">
+    <div class="signup-header">
       <div class="nav-logo"><a href="/header/header.html">lime</a></div>
-      <div class="nav-menu-div">
-        <ul class="nav-menu">
-          <li><a href="#">소셜매치</a></li>
-          <li><a href="#">코트예약</a></li>
-          <li><a href="#">클래스</a></li>
-          <li><a href="#">라임마켓</a></li>
-          <li><a href="#">클럽</a></li>
-          <li><a href="#">커뮤니티</a></li>
-        </ul>
-      </div>
       <div class="nav-links-div">
-        <ul class="nav-links">
-          <li><a href="../../login/login.html">로그인</a></li>
-          <li><a href="#">|</a></li>
-          <li><a href="../../signup/signup1.html">회원가입</a></li>
-        </ul>
+        <a href="../../login/login.html">로그인</a>
+        <span>|</span>
+        <a href="../../signup/signup1.html">회원가입</a>
       </div>
     </div>
   </nav>
@@ -76,13 +64,13 @@
         <label for="inputEmail" class="form-label">생년월일</label>
         <div class="row day-of-birth">
           <select class="form-select col" aria-label="year" name="" id="">
-            <option selected>Year</option>
+            <option selected>년</option>
           </select>
           <select class="form-select col" aria-label="year" name="" id="">
-            <option selected>Month</option>
+            <option selected>월</option>
           </select>
           <select class="form-select col" aria-label="year" name="" id="">
-            <option selected>Day</option>
+            <option selected>일</option>
           </select>
         </div>
       </div>
@@ -105,7 +93,8 @@
         <div></div>
       </div>
 
-      <button class="w-100 btn btn-primary mb-4" type="submit" id="btn-signup">다음</button>
+      <button class="w-100 btn btn-primary mb-4" type="button" id="btn-signup"
+        onclick="location.href='signup3.html'">다음</button>
     </form>
   </main>
 
