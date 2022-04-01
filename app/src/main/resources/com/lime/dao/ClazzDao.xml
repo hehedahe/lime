@@ -8,7 +8,7 @@
   
   
   
-  <resultMap type="cls" id="clsMap">
+  <resultMap type="clazz" id="clsMap">
   	<id column="cls_id" property="no"/>
   	<result column="user_id" property="userId"/>
     <result column="city_id" property="cityId"/>
