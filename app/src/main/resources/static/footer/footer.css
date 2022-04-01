@@ -4,11 +4,11 @@ body {
   height: 100%;
 }
 
-/* #body-wrapper {
+#body-wrapper {
     min-height: 100%;
     position: relative;
     margin: 0px auto;
-} */
+}
 
 #body-content {
   font-family: "NanumGothicExtraBold";
@@ -20,6 +20,7 @@ body {
 #footer {
   font-family: "NanumGothic";
   background-color: #66c88d;
+  min-width: 1050px;
 }
 
 .footer-wrapper {
@@ -41,8 +42,11 @@ body {
 }
 
 .footer-nav > ul {
-  font-family: "NanumGothicExtraBold";
   list-style-type: none;
+}
+
+.footer-nav > ul > h4 {
+  font-weight: bold;
 }
 
 .footer-company {
@@ -53,7 +57,6 @@ body {
 }
 
 .footer-company h3 a {
-  font-family: "NanumGothicExtraBold";
   font-weight: bolder;
   font-size: 120%;
   font-style: italic;

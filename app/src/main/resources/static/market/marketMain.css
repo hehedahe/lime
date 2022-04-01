@@ -2,6 +2,12 @@
     font-family: 'NanumGothic';
 }
 
+#body-wrapper {
+    min-height: 100%;
+    position: relative;
+    margin: 0px auto;
+}
+
 #market-content {
     width: 100%;
     height: 100%;
