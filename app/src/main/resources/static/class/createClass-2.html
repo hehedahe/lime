@@ -6,6 +6,16 @@
     <link href="cC_CSS/createClass.css" rel="stylesheet">
 
 </head>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- header, footer 삽입 제이쿼리-->
+<script type="text/javascript">
+
+
+    $(document).ready(function(){
+        $('.footer').load('../footer/footer.html');
+        $(".header").load("../header/user/loggedheader.html");
+    })
+</script>
 <style>
     body
     {
@@ -13,6 +23,7 @@
         width: 1024px;
     }
 </style>
+<div id="body-wrapper">
 <body>
 
 <div id="top-div" class="cont-wrapper">
@@ -34,5 +45,7 @@
     <span id="page-no">2/3</span>
     <button id="next-btn" class="page" type="button">다음</button>
 </div>
+</div>
+<div class="footer"></div>
 </body>
 </html>
