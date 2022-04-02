@@ -43,18 +43,40 @@ p {
 #map {
     width: 1024px;
     height: 725px;
-    /*height: 300px;*/
 }
 
 /* 지도 안 코트 정보 카드*/
-.card {
+button.card {
     border-radius: 25px;
-    /*border: 0px;*/
+    width: 240px;
 }
 
-.b-ca:focus {
+
+
+/* 카드 안 컨텐트 정렬 */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    align-items: flex-start;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+/* 카드 클릭 시 */
+button.card:focus {
     background-color: rgb(249, 248, 113);
 }
+
+button.card:focus .crt-info {
+    background-color: #fff;
+    color: black;
+
+}
+
+
 
 /* 코트 카드 안 정보 버튼*/
 .crt-info {
@@ -66,8 +88,10 @@ p {
     line-height: 15px;
 }
 
+
 /* 코트 카드 3번째 줄*/
 .content3 {
+    width: 200px;
     display: flex;
     justify-content: space-between;
 }
