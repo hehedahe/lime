@@ -10,11 +10,24 @@
 
 .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
   border: 1px solid rgb(190, 190, 190);
-  border-radius: 4px;
+
+}
+
+body {
+  height: 80%;
 }
 
 .container{
 	width: 1024px;
+  height: 80%;
+}
+
+#tables {
+  height: 80%;
+  
+}
+.col {
+  height: 80%;
 }
 
 .row {
@@ -22,6 +35,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-left: 200px;
-  margin-right: 200px;
+
 }
+

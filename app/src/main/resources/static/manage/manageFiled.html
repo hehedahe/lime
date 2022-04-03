@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Columns & Gutter</title>
+
+  <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="manageFiled.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+</head>
+<body>
+  <header id ="x-header"></header>
+  <div id="tables" class="container table-responsive">
+    <div class=row>
+      <div id="col">
+        <button id = "addBtn">등록</button>
+      </div>
+      <div id="col">
+        <input type="text" id = "searchTxt"><img src="">
+      </div>
+    </div>
+      
+    <table id="x-table" class="table table-striped table-hover table-bordered border-primary text-center">
+      <!-- table-dark table-success table-borderless etc -->
+      <thead>
+        <tr id="x-thead">
+          <th scope="col"><input type="checkbox"></th>
+          <th scope="col">No.</th>
+          <th scope="col">구장명</th>
+          <th scope="col">구장주소</th>
+          <th scope="col">코트타입</th>
+          <th scope="col">코트갯수</th>
+          <th scope="col">주차장</th>
+          <th scope="col">실내외여부</th>
+          <th scope="col">야간라이트</th>
+          <th scope="col">정보</th>
+        </tr>
+      </thead>
+      <tbody id ="x-tbody">
+      </tbody>
+    </table>
+  </div>
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+var xTbody = document.querySelector("#x-tbody"); 
+
+fetch(`/manage/field/list`)
+.then(function(response){
+  return response.json();
+})
+.then(function(fields){
+  console.log(fields);
+  var content= '';
+  for(var field of fields){
+    console.log(field)
+
+      content+= `
+        <tr id = "xTr">
+          <th scope="row">
+            <input type="checkbox">
+          </th>
+          <td id="x-no">${field.no}</td>
+          <td>${field.fName}</td>
+          <td>${field.addr}</td>
+          <td>${field.courtType}</td>
+          <td>${field.courtCnt}</td>
+          <td>${field.parkingAvt}</td>
+          <td>${field.indYn}</td>
+          <td>${field.lightYn}</td>
+          <td><button id="modifyBtn"  class="btn btn-outline-success" type="button" value= "${field.no}">상세</td>
+        </tr>`
+    }
+    xTbody.innerHTML =content
+  });
+ 
+
+  $(document).ready(function () {
+
+    $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
+    $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
+  $(document).on("click", "button[id='detailBtn']", function () {
+
+      location.href = "userDetail.html?no=" +$(this).val();
+
+  });
+});
+  
+  
+</script>
+</body>
+</html>

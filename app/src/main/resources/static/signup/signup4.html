@@ -16,18 +16,9 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
-  <link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
-  <meta name="theme-color" content="#7952b3">
-
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
-  
+
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -46,12 +37,24 @@
 
 
   <!-- Custom styles for this template -->
+  <link href="header.css" rel="stylesheet">
   <link href="signup4.css" rel="stylesheet">
 </head>
 
-<body class="text-center">
+<body>
 
-  <main class="form-lime">
+  <nav>
+    <div class="signup-header">
+      <div class="nav-logo"><a href="/header/header.html">lime</a></div>
+      <div class="nav-links-div">
+        <a href="../../login/login.html">로그인</a>
+        <span>|</span>
+        <a href="../../signup/signup1.html">회원가입</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="form-lime mt-5">
     <form>
       <h1 class="h4 mb-4 h-lime">추가정보를 작성해주세요.</h1>
 
@@ -234,29 +237,29 @@
           </label>
         </div>
       </div>
-      
+
       <div class="form-signup signup-court">
         <div class="row">
-        <div class="col">
-          <label for="inputPassword" class="form-label mb-0">선호 코트</label>
-          <div class="form-text mt-0 mb-3 signup-help">선호하는 코트를 선택해주세요</div>
-          <select class="form-select" aria-label="gender" name="" id="">
-            <option selected>코트 타입</option>
-            <option value="1">하드</option>
-            <option value="2">클레이</option>
-            <option value="3">잔디</option>
-            <option value="4">앙투카</option>
-          </select>
-        </div>
-        <div class="col">
-          <label for="inputPassword" class="form-label mb-0">선호 손</label>
-          <div class="form-text mt-0 mb-3 signup-help">주로 사용하는 손을 선택해주세요</div>
-          <select class="form-select" aria-label="gender" name="" id="">
-            <option selected>선택</option>
-            <option value="1">오른손</option>
-            <option value="2">왼손</option>
-          </select>
-        </div>
+          <div class="col">
+            <label for="inputPassword" class="form-label mb-0">선호 코트</label>
+            <div class="form-text mt-0 mb-3 signup-help">선호하는 코트를 선택해주세요</div>
+            <select class="form-select" aria-label="gender" name="" id="">
+              <option selected>코트 타입</option>
+              <option value="1">하드</option>
+              <option value="2">클레이</option>
+              <option value="3">잔디</option>
+              <option value="4">앙투카</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="inputPassword" class="form-label mb-0">선호 손</label>
+            <div class="form-text mt-0 mb-3 signup-help">주로 사용하는 손을 선택해주세요</div>
+            <select class="form-select" aria-label="gender" name="" id="">
+              <option selected>선택</option>
+              <option value="1">오른손</option>
+              <option value="2">왼손</option>
+            </select>
+          </div>
         </div>
 
       </div>
@@ -267,11 +270,12 @@
         <div></div>
       </div>
 
-      <button class="w-100 btn btn-primary mb-4" type="submit" id="btn-signup">완료</button>
+      <button class="w-100 btn btn-primary mb-4" type="button" id="btn-signup"
+        onclick="location.href='/social_match/social_match.html'">완료</button>
     </form>
   </main>
 
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

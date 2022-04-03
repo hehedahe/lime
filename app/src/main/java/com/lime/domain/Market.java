@@ -17,5 +17,4 @@ public class Market {
   String regionName;
   String cityName;
   // List<ContactTel> tels;
-
 }

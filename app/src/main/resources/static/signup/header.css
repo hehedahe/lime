@@ -1,0 +1,172 @@
+@font-face {
+  font-family: "NG";
+  src: url("../../asset/font/NanumGothic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "NGBold";
+  src: url("../../asset/font/NanumGothicBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "NGEB";
+  src: url("../../asset/font/NanumGothicExtraBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "CooperBlack";
+  src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* header 전체*/
+nav {
+  width: 100vw;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.signup-header {
+  width: 100%;
+  max-width: 1024px;
+  /* width: 1024px; */
+  margin: 0 23vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  font-family: "NG";
+  justify-content: space-between;
+}
+
+/* 로고 */
+.nav-logo {
+  font-family: "CooperBlack";
+  font-size: xxx-large;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo > a {
+  color: #92db82;
+}
+/* 메뉴 */
+.nav-menu {
+  display: flex;
+  width: 40vw;
+  height: 10vh;
+  font-size: 1.2rem;
+  padding: 0 5vw;
+  color: rgba(0, 0, 0, 0.5);
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nav-menu li {
+  display: flex;
+  flex-basis: 20%;
+  justify-content: center;
+  align-content: center;
+}
+
+.nav-menu a {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  align-self: center;
+  letter-spacing: 1px;
+  position: relative;
+  height: 9vh;
+  line-height: 10vh;
+}
+
+.nav-menu a:before,
+.nav-menu a:after {
+  transition: all 0.35s ease;
+  -webkit-transition: all 0.35s ease-in-out;
+}
+
+.nav-menu a:after {
+  position: absolute;
+  background-color: #92db82;
+  height: 4px;
+  width: 0%;
+  content: "";
+  left: 0;
+  top: 100%;
+  overflow: hidden;
+}
+
+.nav-menu li:hover a {
+  font-family: "NGEB";
+  font-size: 1.2rem;
+  color: #92db82;
+}
+
+.nav-menu a:hover:after {
+  opacity: 1;
+  width: 100%;
+}
+
+/* 마이페이지 */
+
+.nav-links-div {
+  display: flex;
+}
+
+.nav-links-div span {
+  display: inline-block;
+  margin: 0 1rem;
+  color: rgb(190, 190, 190);
+}
+
+.nav-links {
+  display: flex;
+  width: 8vw;
+  height: 10vh;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links > l i:nth-child(2) > a {
+  color: rgb(190, 190, 190);
+}
+
+.nav-links > li:nth-child(odd):hover > a {
+  color: #92db82;
+  font-family: NGBold;
+}
+
+.nav-links > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-links-user {
+  background-image: url("../../asset/image/user2b.png");
+  background-size: 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  border: 2px solid #92db82;
+}
+
+.nav-links-user:hover {
+  background-image: url("../../asset/image/user2a.png");
+}
