@@ -13,6 +13,7 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
 </head>
 <body>
+  <header id ="x-header"></header>
   <div id="tables" class="container table-responsive">
     <div class=row>
       <div id="col">
@@ -80,6 +81,9 @@ fetch(`/manage/field/list`)
  
 
   $(document).ready(function () {
+
+    $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
+    $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
   $(document).on("click", "button[id='detailBtn']", function () {
 
       location.href = "userDetail.html?no=" +$(this).val();
