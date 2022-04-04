@@ -16,4 +16,8 @@ public class ClazzController {
 	public Object classList() {
 		return clazzService.clazzList();
 	}
+	
+	@RequestMapping("/class/add") {
+		public Object 
+	}
 }
