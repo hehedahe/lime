@@ -40,11 +40,12 @@ SELECT
    ON i.city_id = ct.city_id
    LEFT JOIN region rg 
    ON ct.region_id = rg.region_id
+   WHERE i.item_name like concat('%',#{keyword},'%')
    order by rgt_date desc
    
    </select>
    
-   <select id="findByRegion" resultMap="marketMap" parameterType="string">
+   <select id="findByRegion" resultMap="marketMap">
 		SELECT 
 		      i.item_name as item_name,
 		      i.item_cost as item_cost,
@@ -58,7 +59,7 @@ SELECT
 		   ON i.city_id = ct.city_id
 		  LEFT JOIN region rg 
 		   ON ct.region_id = rg.region_id
-		where region_name=#{regionName}
+		where region_name=#{regionName} AND i.item_name like concat('%',#{keyword},'%')
 		   order by rgt_date desc
 
     </select>
@@ -77,7 +78,7 @@ SELECT
        ON i.city_id = ct.city_id
       LEFT JOIN region rg 
        ON ct.region_id = rg.region_id
-    where region_name=#{regionName} AND city_name=#{cityName}
+    where region_name=#{regionName} AND city_name=#{cityName} AND i.item_name like concat('%',#{keyword},'%')
        order by rgt_date desc
 
     </select>
@@ -96,12 +97,12 @@ SELECT
    ON i.city_id = ct.city_id
    LEFT JOIN region rg 
    ON ct.region_id = rg.region_id
-   where trans_state="S"
+   where trans_state="S" AND i.item_name like concat('%',#{keyword},'%')
    order by rgt_date desc
    
    </select>
     
-    <select id="findByRegionChecked" resultMap="marketMap" parameterType="string">
+    <select id="findByRegionChecked" resultMap="marketMap">
     SELECT 
           i.item_name as item_name,
           i.item_cost as item_cost,
@@ -115,7 +116,7 @@ SELECT
        ON i.city_id = ct.city_id
       LEFT JOIN region rg 
        ON ct.region_id = rg.region_id
-    where region_name=#{regionName} AND trans_state="S"
+    where region_name=#{regionName} AND trans_state="S" AND i.item_name like concat('%',#{keyword},'%')
        order by rgt_date desc
 
     </select>
@@ -134,7 +135,7 @@ SELECT
        ON i.city_id = ct.city_id
       LEFT JOIN region rg 
        ON ct.region_id = rg.region_id
-    where region_name=#{regionName} AND city_name=#{cityName} AND trans_state="S"
+    where region_name=#{regionName} AND city_name=#{cityName} AND trans_state="S" AND i.item_name like concat('%',#{keyword},'%')
        order by rgt_date desc
 
     </select>

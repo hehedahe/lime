@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.lime.dao.FieldDao">
+
+<resultMap type="Field" id="fieldMap"></resultMap>
+
+<select id="findByLatLng" resultMap="fieldMap">
+ select  f.field_id,
+    f.name,
+    f.addr,
+    f.ind_yn,
+    f.parking_area,
+    f.lat,
+    f.lng,
+    c.court_id,
+    c.name courtName,
+    c.court_type_id,
+    (6371*acos(cos(radians(#{preferLat}))*cos(radians(lat))*cos(radians(lng)-radians(#{preferLng})) 
++sin(radians(#{preferLat}))*sin(radians(lat)))) AS distance
+from field f
+left outer join court c on f.field_id=c.field_id
+having distance &lt; 5
+order by distance DESC;
+</select>
+
+</mapper>

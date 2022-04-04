@@ -30,35 +30,38 @@ public class MarketController {
   //  }
 
   @RequestMapping("/market/list")
-  public Object list(String regionName, String cityName, boolean checked) {
+  public Object list(String regionName, String cityName, boolean checked, String keyword) {
+
     if (checked == false) {
+      System.out.println(keyword);
       System.out.println(regionName);
       System.out.println(cityName);
       System.out.println(checked);
       if (regionName.equals("지역") || regionName.equals("전체")) {
         System.out.println(regionName);
-        return marketService.list();
+        return marketService.list(keyword);
       }
 
       if (cityName.equals("도시")) {
         System.out.println(regionName);
-        return marketService.listRegion(regionName);
+        return marketService.listRegion(regionName, keyword);
       }
 
-      return marketService.listCity(regionName, cityName);
+      return marketService.listCity(regionName, cityName, keyword);
 
     } else {
+      System.out.println(keyword);
       if (regionName.equals("지역") || regionName.equals("전체")) {
         System.out.println(regionName);
-        return marketService.listChecked();
+        return marketService.listChecked(keyword);
       }
 
       if (cityName.equals("도시")) {
         System.out.println(regionName);
-        return marketService.listRegionChecked(regionName);
+        return marketService.listRegionChecked(regionName, keyword);
       }
 
-      return marketService.listCityChecked(regionName, cityName);
+      return marketService.listCityChecked(regionName, cityName, keyword);
     }
   }
 

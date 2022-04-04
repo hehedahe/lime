@@ -18,19 +18,11 @@ public interface ManageDao {
 
   List<User> findAll();
 
-  int insert(User user);
-
   User findByNo(int no);
   
   List<Field> findFieldAll();
   
   Field findFieldByNo(int no);
-
-  int update(User user);
-
-  int delete(int no);
-
-  int increaseViewCount(int no);
 }
 
 

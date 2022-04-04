@@ -5,10 +5,23 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="marketMain.css">
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+  <script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <title>MarketMain</title>
+
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#footer').load('/footer/footer.html');
+        $('#u-nav-bar').load('/header/user/header.html')
+    })
+  </script>
   
 </head>
 <body>
+<nav id="u-nav-bar"></nav>
+<div id="body-wrapper">
 <div id="market-content">
     <div class="container" id="market-nav-wrap">
       <div class="row" id="market-nav">
@@ -63,9 +76,14 @@
         
     </div>
 </div>
-<div id="content-body" class="row row-cols-1 row-cols-sm-3 g-5">
+<div id="content-body">
+
+  <div id="item-list" class="row row-cols-1 row-cols-sm-3 g-5"></div>
+</div>
   
     
+</div>
+<footer id="footer"></footer>
 </div>
 
 
@@ -74,14 +92,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  -->
  
-<script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
 
-var contentBody = document.querySelector("#content-body");
-var contentBody2 = document.querySelector("#content-body2");
+var itemList = document.querySelector("#item-list");
 var regionSelect = document.querySelector("#region");
 var city = document.getElementById("city");
 
@@ -107,11 +122,19 @@ var jeju = ["도시","서귀포시","제주시"];
 
 
 function listFetch() {
-  fetch(`/market/list?regionName=${regionSelect.value}&cityName=${city.value}&checked=${$("#nav-checkbox").is(":checked")}`)
+  $("div[name=card-col]").remove();
+  $("div[id=empty-notice]").remove();
+  fetch(`/market/list?regionName=${regionSelect.value}&cityName=${city.value}&checked=${$("#nav-checkbox").is(":checked")}&keyword=${$("input[type=search]").val()}`)
   .then(function(response){
     return response.json();
   })
   .then(function(lists){
+    if (lists.length == 0) {
+      var emptyNotice = document.createElement("div");
+      emptyNotice.setAttribute('id', 'empty-notice');
+      emptyNotice.innerHTML = `<p>찾으시는 물건이 없습니다!</p>`
+      itemList.appendChild(emptyNotice);
+    }
     console.log(lists);
     for (var list of lists) {
       let transState1 = list.transState;
@@ -137,7 +160,7 @@ function listFetch() {
         <span class="view-count">조회 ${list.viewCount}</span>
       </div>
       </div>`
-      contentBody.appendChild(cols);
+      itemList.appendChild(cols);
     }      
 })
 }
@@ -147,8 +170,7 @@ listFetch(); // 첫 화면
 
 // 지역 선택
 var regionChange = function(value) {
-  $("div[name=card-col]").remove();
-
+  
   if (value == "서울특별시") {
     add = seoul;
   } else if (value == "부산광역시") {
@@ -201,17 +223,31 @@ var regionChange = function(value) {
 
 // 도시 선택
 var cityChange = function(value){
-  $("div[name=card-col]").remove();
   listFetch();
   }
 
 // 거래가능만 보기
 $("#nav-checkbox").on("change", function(){
   console.log($("#nav-checkbox").is(":checked"));
-  $("div[name=card-col]").remove();
   listFetch();
 });
 
+$("input[type=search]").keyup(function(e) {
+    if (e.keyCode == 27) {
+      $(e.target).val("");
+
+    } else if (e.keyCode == 13) {
+      if ($(e.target).val() == "") {
+        window.alert("검색어를 입력해주세요.");
+        //Swal.fire("필수 입력 항목이 비어 있습니다.");
+        return;
+      }
+      console.log($(e.target).val());
+      console.log($("input[type=search]").val());
+
+      listFetch();
+    }
+  })
 
 </script>
 </body>

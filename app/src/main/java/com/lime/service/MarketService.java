@@ -7,17 +7,17 @@ public interface MarketService {
 
   //int add(Market contact);
 
-  List<Market> list();
+  List<Market> list(String keyword);
 
-  List<Market> listRegion(String regionName);
+  List<Market> listRegion(String regionName, String keyword);
 
-  List<Market> listCity(String regionName, String cityName);
+  List<Market> listCity(String regionName, String cityName, String keyword);
 
-  List<Market> listChecked();
+  List<Market> listChecked(String keyword);
 
-  List<Market> listRegionChecked(String regionName);
+  List<Market> listRegionChecked(String regionName, String keyword);
 
-  List<Market> listCityChecked(String regionName, String cityName);
+  List<Market> listCityChecked(String regionName, String cityName, String keyword);
 
   //Market get(int no);
 

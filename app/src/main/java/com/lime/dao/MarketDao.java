@@ -10,17 +10,17 @@ public interface MarketDao {
 
   //  int countAll();
   //
-  List<Market> findAll();
+  List<Market> findAll(String keyword);
 
-  List<Market> findByRegion(String regionName);
+  List<Market> findByRegion(@Param("regionName") String regionName, @Param("keyword") String keyword);
 
-  List<Market> findByCity(@Param("regionName") String regionName, @Param("cityName") String cityName);
+  List<Market> findByCity(@Param("regionName") String regionName, @Param("cityName") String cityName, @Param("keyword") String keyword);
 
-  List<Market> findAllChecked();
+  List<Market> findAllChecked(String keyword);
 
-  List<Market> findByRegionChecked(String regionName);
+  List<Market> findByRegionChecked(@Param("regionName") String regionName, @Param("keyword") String keyword);
 
-  List<Market> findByCityChecked(@Param("regionName") String regionName, @Param("cityName") String cityName);
+  List<Market> findByCityChecked(@Param("regionName") String regionName, @Param("cityName") String cityName, @Param("keyword") String keyword);
 
   //  int insert(Market contact);
   //
