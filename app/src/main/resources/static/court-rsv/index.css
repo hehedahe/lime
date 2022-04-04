@@ -77,9 +77,9 @@ p {
     color: #000;
 }
 
-
+/* 정보 카드 마진 */
 .card-cover {
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 /* 지도 안 코트 정보 카드*/
