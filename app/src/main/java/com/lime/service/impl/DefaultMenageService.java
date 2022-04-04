@@ -26,16 +26,6 @@ public class DefaultMenageService implements ManageService {
   }
 
   @Transactional
-  public int update(User manage) {
-    return manageDao.update(manage);
-  }
-
-  @Transactional
-  public int delete(int no) {
-    return manageDao.delete(no);
-  }
-
-  @Transactional
   public List<Field> fieldList() {
     return manageDao.findFieldAll();
   }
