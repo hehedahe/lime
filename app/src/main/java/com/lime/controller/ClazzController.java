@@ -17,7 +17,7 @@ public class ClazzController {
 		return clazzService.clazzList();
 	}
 	
-	@RequestMapping("/class/add") {
-		public Object 
-	}
+//	@RequestMapping("/class/add") {
+//		public Object 
+//	}
 }
