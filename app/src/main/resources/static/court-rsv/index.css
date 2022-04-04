@@ -46,16 +46,40 @@ p {
     height: 725px;
 }
 
+#crt-info {
+    z-index:9999;
+    margin-bottom: 10px;
+}
+
 /* 좌우 버튼 */
 #left-btn, #right-btn {
     width: 80px;
     height: 80px;
     display: flex;
     align-items: center;
+    border: 1px solid rgba(0,0,0,0);
+    background-color: rgba(255,255,255,0.5);
 }
 
-#crt-card {
-    width: 850px;
+#left-btn > i,
+#right-btn > i {
+    color: rgb(127, 127, 127);
+}
+
+/* 좌우 버튼 클릭 시*/
+#left-btn:hover,
+#right-btn:hover {
+    background-color: #fff;
+}
+
+#left-btn:hover > i,
+#right-btn:hover > i {
+    color: #000;
+}
+
+
+.card-cover {
+    margin: 0 20px;
 }
 
 /* 지도 안 코트 정보 카드*/
