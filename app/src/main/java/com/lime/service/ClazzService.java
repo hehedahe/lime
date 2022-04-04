@@ -6,4 +6,6 @@ import com.lime.domain.Clazz;
 
 public interface ClazzService {
 	List<Clazz> clazzList();
+	
+	int add(Clazz clazz);
 }

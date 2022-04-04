@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
   // MariaDB JDBC 드라이버
+  implementation 'net.coobird:thumbnailator:0.4.17'
   implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
   
   // Mybatis 프레임워크 (직접 구성)

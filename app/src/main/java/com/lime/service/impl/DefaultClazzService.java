@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.lime.dao.ClazzDao;
 import com.lime.domain.Clazz;
 import com.lime.service.ClazzService;
@@ -20,5 +19,10 @@ public class DefaultClazzService implements ClazzService{
 	  public List<Clazz> clazzList() {
 	    return clazzDao.findAll();
 	  }
-	
+	  @Override
+	  @Transactional
+	  public int add(Clazz clazz) {
+	    return clazzDao.insert(clazz);
+	  }
+
 }

@@ -39,6 +39,11 @@
   </select>
   
   
+   <insert id="insert" parameterType="clazz">
+    insert into ml_book(title,img) 
+    values(#{title},#{img})
+  </insert>
+  
   
   
   </mapper>
