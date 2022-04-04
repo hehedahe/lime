@@ -161,49 +161,36 @@
   {{/each}}
   </script> -->
 
-  <script id="match-list-template" type="text/x-handlebars-template">
-    {{#each this}}
-    <a href="/social_match/social_match_3.html" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between align-items-center">
-        <div>
-          <div class="d-flex justify-content-start align-items-center">
-            <div class="me-4 match-time">{{startTime}}</div>
-            <div class="ms-1">
-              <h6 class="mb-1">{{courtNo}}</h6>
-              <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
-            </div>
-          </div>
-        </div>
-        <button class="btn match-btn">신청 가능</button>
-      </div>
-    </a>
-    {{/each}}
-  </script>
-
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript">
-    var matchList = document.querySelector(".match-list")
-    console.log(matchList)
-
-    // 템플릿 엔진에서 사용할 HTML 조각을 가져오기
-    var matchListTemplate = document.querySelector("#match-list-template");
-    console.log(matchListTemplate)
-
-    //템플릿 엔진 준비
-    var htmlGenerator = Handlebars.compile(matchListTemplate.innerHTML);
-
-    fetch("/match/list")
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (matches) {
-        for (var match of matches) {
-          console.log(typeof (match.startTime));
+    $(document).ready(function () {
+      $.getJSON("http://localhost:8080/match/list", function (arr) {
+        console.log(arr)
+        const matchList = $(".match-list")
+        let str = ''
+        for (let i = 0; i < arr.length; i++) {
+          str += `
+          <a href="/social_match/social_match_3.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+              <div>
+                <div class="d-flex justify-content-start align-items-center">
+                  <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
+                  <div class="ms-1">
+                    <h6 class="mb-1">${arr[i].court.field.fName} ${arr[i].court.name}</h6>
+                    <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
+                  </div>
+                </div>
+              </div>
+              <button class="btn match-btn">신청 가능</button>
+              </div>
+            </a>`
         }
-        // 서버에서 받은 연락처 배열을 가지고 템플릿 엔진을 실행하여 tbody 콘텐트를 생성한다.
-        matchList.innerHTML = htmlGenerator(matches);
-      });
+        $(".match-list").html(str)
+      })
+    })
+
   </script>
 
 </body>

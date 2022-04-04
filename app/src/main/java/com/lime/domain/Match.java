@@ -10,9 +10,12 @@ public class Match {
   int courtNo;
   int managerNo;
   int matchTypeNo;
+  int levelNo;
   Date matchDate;
   LocalTime startTime;
   LocalTime endTime;
   int fee;
   String state;
+  String numOfPeople;
+  Court court;
 }
