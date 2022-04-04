@@ -102,6 +102,11 @@ input[type=search]::placeholder {
     float: right;
 }
 
+#content {
+    min-height: 1000px;
+    margin-bottom: 50px;
+}
+
 #content-body {
     width: 1050px;
     margin: 0 auto;
