@@ -4,14 +4,15 @@ import lombok.Data;
 
 @Data
 public class Field {
-  int no;
   int fieldId;
-  String fName;
+  String name;
   String addr;
-  String courtType;
-  String courtCnt;
-  String parkingAvt;
-  String indYn;
-  String lightYn;
- 
+  boolean indYn;
+  boolean parkingArea;
+  float lat;
+  float lng;
+  String courtName;
+  int courtId;
+  int courtTypeId;
+  float distance;
 }
