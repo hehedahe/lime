@@ -76,9 +76,9 @@
         
     </div>
 </div>
-<div id="content">
+<div id="content-body">
 
-  <div id="content-body" class="row row-cols-1 row-cols-sm-3 g-5"></div>
+  <div id="item-list" class="row row-cols-1 row-cols-sm-3 g-5"></div>
 </div>
   
     
@@ -96,8 +96,7 @@
 
 <script>
 
-var contentBody = document.querySelector("#content-body");
-var contentBody2 = document.querySelector("#content-body2");
+var itemList = document.querySelector("#item-list");
 var regionSelect = document.querySelector("#region");
 var city = document.getElementById("city");
 
@@ -123,11 +122,19 @@ var jeju = ["도시","서귀포시","제주시"];
 
 
 function listFetch() {
-  fetch(`/market/list?regionName=${regionSelect.value}&cityName=${city.value}&checked=${$("#nav-checkbox").is(":checked")}`)
+  $("div[name=card-col]").remove();
+  $("div[id=empty-notice]").remove();
+  fetch(`/market/list?regionName=${regionSelect.value}&cityName=${city.value}&checked=${$("#nav-checkbox").is(":checked")}&keyword=${$("input[type=search]").val()}`)
   .then(function(response){
     return response.json();
   })
   .then(function(lists){
+    if (lists.length == 0) {
+      var emptyNotice = document.createElement("div");
+      emptyNotice.setAttribute('id', 'empty-notice');
+      emptyNotice.innerHTML = `<p>찾으시는 물건이 없습니다!</p>`
+      itemList.appendChild(emptyNotice);
+    }
     console.log(lists);
     for (var list of lists) {
       let transState1 = list.transState;
@@ -153,7 +160,7 @@ function listFetch() {
         <span class="view-count">조회 ${list.viewCount}</span>
       </div>
       </div>`
-      contentBody.appendChild(cols);
+      itemList.appendChild(cols);
     }      
 })
 }
@@ -163,8 +170,7 @@ listFetch(); // 첫 화면
 
 // 지역 선택
 var regionChange = function(value) {
-  $("div[name=card-col]").remove();
-
+  
   if (value == "서울특별시") {
     add = seoul;
   } else if (value == "부산광역시") {
@@ -217,18 +223,31 @@ var regionChange = function(value) {
 
 // 도시 선택
 var cityChange = function(value){
-  $("div[name=card-col]").remove();
   listFetch();
   }
 
 // 거래가능만 보기
 $("#nav-checkbox").on("change", function(){
   console.log($("#nav-checkbox").is(":checked"));
-  $("div[name=card-col]").remove();
   listFetch();
 });
 
+$("input[type=search]").keyup(function(e) {
+    if (e.keyCode == 27) {
+      $(e.target).val("");
 
+    } else if (e.keyCode == 13) {
+      if ($(e.target).val() == "") {
+        window.alert("검색어를 입력해주세요.");
+        //Swal.fire("필수 입력 항목이 비어 있습니다.");
+        return;
+      }
+      console.log($(e.target).val());
+      console.log($("input[type=search]").val());
+
+      listFetch();
+    }
+  })
 
 </script>
 </body>

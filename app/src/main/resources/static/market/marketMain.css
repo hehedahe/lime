@@ -102,12 +102,12 @@ input[type=search]::placeholder {
     float: right;
 }
 
-#content {
+#content-body {
     min-height: 1000px;
     margin-bottom: 50px;
 }
 
-#content-body {
+#item-list {
     width: 1050px;
     margin: 0 auto;
 }
@@ -154,3 +154,20 @@ input[type=search]::placeholder {
     border-radius: 3px;
 }
 
+#empty-notice {
+    position: relative;
+    width: 100%;
+    height: 1000px;
+    border: 1px solid rgb(102, 200, 141);
+    border-radius: 20px;
+}
+
+#empty-notice > p {
+    font-size: 2em;
+    font-weight: bold;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
