@@ -27,37 +27,64 @@ p {
     margin: 0px;
 }
 
-
-/* 드롭다운 메뉴 테두리 */
-.dropdown-toggle {
-    border: 1px solid rgb(190, 190, 190);
+/*!* 드롭다운 메뉴 테두리 *!*/
+/*.dropdown-toggle {*/
+.form-select {
     border-radius: 50px;
+    /*width: 200px;*/
+    margin-right: 10px;
 }
 
-.dropdown-menu {
-    border: 1px solid rgb(190, 190, 190);
-    border-radius: 20px;
-}
+/*.dropdown-menu {*/
+/*    border: 1px solid rgb(190, 190, 190);*/
+/*    border-radius: 20px;*/
+/*}*/
 
 /* 지도 */
 #map {
     width: 1024px;
     height: 725px;
-    /*height: 300px;*/
+}
+
+/* 좌우 버튼 */
+#left-btn, #right-btn {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+#crt-card {
+    width: 850px;
 }
 
 /* 지도 안 코트 정보 카드*/
-.card {
+button.card {
     border-radius: 25px;
-    /*border: 0px;*/
+    width: 240px;
 }
 
-.b-ca:focus {
-    background-color: rgb(249, 248, 113);
+/* 카드 안 컨텐트 정렬 */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    align-items: flex-start;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+/* 코트 카드 3번째 줄*/
+.content3 {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* 코트 카드 안 정보 버튼*/
-.crt-info {
+.info-btn {
     background-color: rgb(203, 203, 203);
     color: #fff;
     border-radius: 20px;
@@ -66,8 +93,12 @@ p {
     line-height: 15px;
 }
 
-/* 코트 카드 3번째 줄*/
-.content3 {
-    display: flex;
-    justify-content: space-between;
+/* 카드 클릭 시 */
+button.card:focus {
+    background-color: rgb(249, 248, 113);
+}
+
+button.card:focus .info-btn {
+    background-color: #fff;
+    color: black;
 }

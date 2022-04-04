@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../header/manager/header.css">
-    <link rel="stylesheet" href="../../header/sidebar/sidebar.css">
-    <link rel="stylesheet" href="manageUser.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/header/manager/header.css">
+    <link rel="stylesheet" href="/header/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/manage/user/manageUser.css">
 </head>
 <body>
 <div class="container">
@@ -16,13 +16,14 @@
 
     <div id="content"></div>
 </div>
-<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 <!--&lt;!&ndash; header, footer 삽입 제이쿼리&ndash;&gt;-->
 <script type="text/javascript">
-   $("#headers").load("../../header/manager/header.html");  //헤더 인클루드&ndash;&gt;
-    $("#sidebar").load("../../header/sidebar/sidebar.html");  //헤더 인클루드-->
+   $("#headers").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
+    $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
+    
     var arr = location.href.split("?");
     console.log(arr);
 

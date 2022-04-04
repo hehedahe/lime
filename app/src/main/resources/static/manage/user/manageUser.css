@@ -13,8 +13,21 @@
 
 }
 
+body {
+  height: 80%;
+}
+
 .container{
 	width: 1024px;
+  height: 80%;
+}
+
+#tables {
+  height: 80%;
+  
+}
+.col {
+  height: 80%;
 }
 
 .row {
@@ -22,6 +35,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-left: 200px;
-  margin-right: 200px;
+
 }
+
