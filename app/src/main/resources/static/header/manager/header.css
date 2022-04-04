@@ -14,10 +14,6 @@
     src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
 }
 
-html {
-    overflow: hidden;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -39,7 +35,7 @@ nav {
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.header {
+/* .header {
     font-family: 'NG';
     width: 100vw;
     height: 10vh;
@@ -47,7 +43,7 @@ nav {
     align-items: center;
     justify-content: space-between;
 }
-
+ */
 /* 로고 */
 .nav-logo {
     height: 10vh;
