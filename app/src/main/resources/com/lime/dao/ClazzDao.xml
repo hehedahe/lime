@@ -12,6 +12,8 @@
   	<id column="cls_id" property="no"/>
   	<result column="user_id" property="userId"/>
     <result column="city_id" property="cityId"/>
+    <result column="city_name" property="cityName"/>
+    <result column="region_name" property="regionName"/>
     <result column="title" property="title"/>
     <result column="intr" property="intro"/>
     <result column="img" property="img"/>

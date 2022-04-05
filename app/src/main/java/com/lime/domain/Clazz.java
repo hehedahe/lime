@@ -23,6 +23,7 @@ public class Clazz {
 	String dtlIntro;
 	Date rgtDate;
 	Date mdfyDate;
-	
+	String regionName;
+	String cityName;
 	
 }
