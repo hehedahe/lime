@@ -23,7 +23,7 @@
 +sin(radians(#{preferLat}))*sin(radians(lat)))) AS distance
 from field f
 left outer join court c on f.field_id=c.field_id
-having distance &lt; 5
+having distance &lt; 1
 order by distance DESC;
 </select>
 
