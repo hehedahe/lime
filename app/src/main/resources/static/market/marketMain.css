@@ -121,6 +121,32 @@ input[type=search]::placeholder {
     margin-right: 200px;
 }
 
+.heart-click {
+    position: absolute;
+    right: 10px;
+    bottom: 150px;
+    
+}
+
+.heart-click:hover {
+    cursor: pointer;
+}
+
+.btn-like-on {
+    position: absolute;
+    right: 10px;
+    bottom: 150px;
+    
+}
+
+.btn-like-on:hover {
+    cursor: pointer;
+}
+
+/* .btn-like.done {
+    color: inherit;
+    text-shadow: 0;
+  } */
 
 .card-body > .card-title > a{
     color: black;

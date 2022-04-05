@@ -28,9 +28,12 @@
    -->
   <select id="findAll" resultMap="marketMap">
 SELECT 
+      i.user_id as user_id,
+      i.item_id as item_id,
       i.item_name as item_name,
       i.item_cost as item_cost,
       rg.region_name as region_name,
+      ct.city_id as city_id,
       ct.city_name as city_name,
       i.view_cnt as view_cnt,
       i.rgt_date as rgt_date,

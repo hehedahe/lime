@@ -1,81 +1,21 @@
 package com.lime.controller;
 
-import static com.lime.controller.ResultMap.SUCCESS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.lime.service.MarketService;
 
 @RestController 
-public class MarketController {
+public class LikeController {
 
   @Autowired
   MarketService marketService; // 클래스 대신 인터페이스를 지정한다.
 
-  //  @RequestMapping("/market/list")
-  //  public Object list() {
-  //    return marketService.list();
-  //  }
-
-  //  @RequestMapping("/market/list/region")
-  //  public Object listRegion(String regionName) {
-  //    System.out.println(regionName);
-  //    return marketService.listRegion(regionName);
-  //  }
-  //
-  //  @RequestMapping("/market/list/city")
-  //  public Object listCity(String regionName, String cityName) {
-  //    System.out.println(regionName);
-  //    System.out.println(cityName);
-  //    return marketService.listCity(regionName, cityName);
-  //  }
-
-  @RequestMapping("/market/list")
-  public Object list(String regionName, String cityName, boolean checked, String keyword) {
-
-    if (checked == false) {
-      System.out.println(keyword);
-      System.out.println(regionName);
-      System.out.println(cityName);
-      System.out.println(checked);
-      if (regionName.equals("지역") || regionName.equals("전체")) {
-        System.out.println(regionName);
-        return new ResultMap()
-            .setStatus(SUCCESS)
-            .setData(marketService.list(keyword));
-      }
-
-      if (cityName.equals("도시")) {
-        System.out.println(regionName);
-        return new ResultMap()
-            .setStatus(SUCCESS)
-            .setData(marketService.listRegion(regionName, keyword));
-      }
-
-      return new ResultMap()
-          .setStatus(SUCCESS)
-          .setData(marketService.listCity(regionName, cityName, keyword));
-
-    } else {
-      System.out.println(keyword);
-      if (regionName.equals("지역") || regionName.equals("전체")) {
-        System.out.println(regionName);
-        return new ResultMap()
-            .setStatus(SUCCESS)
-            .setData(marketService.listChecked(keyword));
-      }
-
-      if (cityName.equals("도시")) {
-        System.out.println(regionName);
-        return new ResultMap()
-            .setStatus(SUCCESS)
-            .setData(marketService.listRegionChecked(regionName, keyword));
-      }
-
-      return new ResultMap()
-          .setStatus(SUCCESS)
-          .setData(marketService.listCityChecked(regionName, cityName, keyword));
-    }
+  @RequestMapping("/like/list")
+  public Object list(int itemId, boolean done) {
+    System.out.println(itemId);
+    System.out.println(done);
+    return 1;
   }
 
   //  @RequestMapping("/contact/add")

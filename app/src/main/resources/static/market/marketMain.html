@@ -120,23 +120,63 @@ var gyeongnam = ["도시","거제시", "김해시", "밀양시", "사천시", "�
 var jeju = ["도시","서귀포시","제주시"];
 
 
+$(document).ready(function(e){
+            
+    // 버튼을 동적연결한다.
+    $(document).on("click", ".heart-click", function(){
+        let no = $(this).attr("idx");
+
+        if ($(this).children("svg").attr("class") == "bi bi-heart") {
+          fetch(`/like/list?itemId=${no}&done=${true}`)
+          .then(function(response) {
+            return response.text();
+          })
+          .then(function(result) {
+            console.log(result);
+          });
+
+          $(this).children("svg").toggleClass("bi-heart-fill");
+          $(this).html(`<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(102, 200, 141)" class="bi bi-heart-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>`)
+        }
+        else if ($(this).children("svg").attr("class") == "bi bi-heart-fill") {
+          fetch(`/like/list?itemId=${no}&done=${false}`)
+          .then(function(response) {
+            return response.text();
+          })
+          .then(function(result) {
+            console.log(result);
+          });
+
+          $(this).children("svg").toggleClass("bi-heart");
+          $(this).html(`<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-heart" viewBox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>`)
+        }
+    });
+});
+
 
 function listFetch() {
   $("div[name=card-col]").remove();
   $("div[id=empty-notice]").remove();
-  fetch(`/market/list?regionName=${regionSelect.value}&cityName=${city.value}&checked=${$("#nav-checkbox").is(":checked")}&keyword=${$("input[type=search]").val()}`)
+  fetch(`/market/list?regionName=${regionSelect.value}&cityName=${city.value}&checked=${$("#nav-checkbox").is(":checked")}
+  &keyword=${$("input[type=search]").val()}`)
   .then(function(response){
     return response.json();
   })
   .then(function(lists){
-    if (lists.length == 0) {
+    if (lists.status == "fail") {
+      window.alert("서버 요청 오류!");
+      return;
+    }
+    if (lists.data.length == 0) {
       var emptyNotice = document.createElement("div");
       emptyNotice.setAttribute('id', 'empty-notice');
       emptyNotice.innerHTML = `<p>찾으시는 물건이 없습니다!</p>`
       itemList.appendChild(emptyNotice);
     }
-    console.log(lists);
-    for (var list of lists) {
+    console.log(lists.data);
+    for (var list of lists.data) {
       let transState1 = list.transState;
       if (transState1 == "S") {
       transState1 = "";
@@ -151,8 +191,11 @@ function listFetch() {
       var cols = document.createElement("div");
       cols.setAttribute('class', 'col');
       cols.setAttribute('name', 'card-col');
-      cols.innerHTML = `<div class="card h-100">
+      cols.innerHTML = `<div class="card h-100" item-id=${list.itemId}>
       <img src="../ok_photo.jfif" class="card-img-top" alt="...">
+      <a class="heart-click" idx=${list.itemId}><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-heart" viewBox="0 0 16 16">
+  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+</svg></a>
       <div class="card-body">
         <h5 class="card-title"><a href="${list.itemName}">${list.itemName}</a></h5>
         <span class="item-price">${list.itemCost}원 ${transState1}</span><br>
