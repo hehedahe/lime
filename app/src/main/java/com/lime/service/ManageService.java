@@ -10,13 +10,11 @@ public interface ManageService {
 
   User userGet(int no);
 
-  int update(User manage);
   
   List<Field> fieldList();
 
   Field fieldGet(int no);
 
-  int delete(int no);
 }
 
 

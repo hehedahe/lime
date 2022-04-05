@@ -9,4 +9,5 @@ public class Court {
   int courtTypeNo;
   String name;
   int fee;
+  Field field;
 }

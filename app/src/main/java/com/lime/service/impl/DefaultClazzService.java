@@ -20,4 +20,5 @@ public class DefaultClazzService implements ClazzService{
 	  public List<Clazz> clazzList() {
 	    return clazzDao.findAll();
 	  }
+	
 }

@@ -91,6 +91,22 @@
   </main>
 
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.getJSON("http://localhost:8080/bank/list", function (arr) {
+        console.log(arr)
+        const bankList = $("option:first-child")
+        let str = ''
+        for (let i = 0; i < arr.length; i++) {
+          str += `<option value="${i}">${arr[i].name}</option>`
+        }
+        $("option:first-child").html(str)
+      })
+    })
+
+  </script>
 
 </body>
 

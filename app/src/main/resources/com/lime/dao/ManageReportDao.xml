@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace = "인터페이스의 패키지 및 이름"과 일치해야 한다. -->
+<mapper namespace="com.lime.dao.ManageReportDao">
+
+  <resultMap type="classes" id="classMap">
+    <id column="no" property="no" />
+    <result column="postId" property="postId" />
+    <result column="title" property="title" />
+    <result column="intr" property="intr" />
+    <result column="rgtDate" property="rgtDate" />
+    <result column="cName" property="cName" />
+  </resultMap>
+
+	<resultMap type="community" id="communityMap">
+		<id column="no" property="no" />
+		<result column="postId" property="postId" />
+		<result column="title" property="title" />
+		<result column="name" property="name" />
+		<result column="rgtDate" property="rgtDate" />
+	</resultMap>
+
+	<resultMap type="club" id="clubMap">
+		<id column="no" property="no" />
+		<result column="postId" property="postId" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="cName" property="cName" />
+	</resultMap>
+	
+	<!-- 클래스게시글 -->
+  <select id="findClassAll" resultMap="classMap">
+			SELECT 
+			  c.cls_id NO,  
+			  c.title title,
+			  c.intr intr,
+			  date_format(c.rgt_date, '%Y-%m-%d') rgtDate,
+			  u.name cName  
+			FROM 
+			cls c
+			inner JOIN user u
+			ON c.user_id = u.user_id
+  </select>
+  <select id="findClassByNo" resultMap="classMap"
+    parameterType="int">
+      SELECT 
+        c.cls_id clsId,  
+        c.title title,
+        c.intr intr,
+        date_format(c.rgt_date, '%Y-%m-%d') rgtDate,
+        u.name cName  
+      FROM 
+      cls c
+      inner JOIN user u
+      ON c.user_id = u.user_id
+      where 1=1
+      and clsId = #{no} 
+  </select>
+	
+	
+	<!-- 커뮤니티게시글 -->
+	<select id="findCommunityAll" resultMap="communityMap">
+		SELECT
+			post_id postId,
+			title title,
+				(SELECT
+				 u.name
+				FROM
+				member m
+				INNER JOIN user u
+				ON m.user_id = u.user_id
+				WHERE u.user_id = cp.user_id) NAME,
+			date_format(cp.rgt_date,'%Y-%m-%d') rgtDate
+		FROM
+		cmnty_post cp
+	</select>
+	<select id="findCommunityByNo" resultMap="communityMap"
+		parameterType="int">
+		SELECT
+			post_id postId,
+			title title,
+			(SELECT
+			u.name
+			FROM
+			member m
+			INNER JOIN user u
+			ON m.user_id = u.user_id
+			WHERE u.user_id = cp.user_id) NAME,
+		  date_format(cp.rgt_date,'%Y-%m-%d') rgtDate
+		FROM
+		cmnty_post cp
+		WHERE 1=1
+		AND post_id = #{no}
+	</select>
+
+  <!-- 클럽게시글 -->
+	<select id="findClubAll" resultMap="clubMap">
+		SELECT
+			post_id postId,
+				(select
+				  name
+				FROM club
+				WHERE club_id = cp.club_id) cName,
+			cp.title title,
+			cp.content content
+			FROM
+		club_post cp
+		INNER JOIN user u
+		ON cp.user_id = u.user_id
+	</select>
+	<select id="findClubByNo" resultMap="clubMap"
+		parameterType="int">
+		SELECT
+			post_id no,
+				(select
+					  name
+				FROM club
+				WHERE club_id = cp.club_id) cName,
+			cp.title title,
+			cp.content content
+		FROM
+		club_post cp
+		INNER JOIN user u
+		ON cp.user_id = u.user_id
+		WHERE 1=1
+		AND post_id = #{no}
+	</select>
+</mapper>

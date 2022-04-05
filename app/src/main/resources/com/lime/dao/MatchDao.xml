@@ -10,11 +10,42 @@
     <result column="court_id" property="courtNo"/>
     <result column="user_id" property="managerNo"/>
     <result column="mtch_type_id" property="matchTypeNo"/>
+    <result column="lv_id" property="levelNo"/>
     <result column="mtch_date" property="matchDate"/>
     <result column="st_time" property="startTime"/>
     <result column="end_time" property="endTime"/>
     <result column="fee" property="fee"/>
     <result column="state" property="state"/>
+    <result column="num_of_people" property="numOfPeople"/>
+    <collection property="court" ofType="court">
+      <id column="court_id" property="no"/>
+      <result column="name" property="name"/>
+      <result column="field_id" property="fieldNo"/>
+      <result column="court_type_id" property="courtTypeNo"/>
+      <collection property="field" ofType="Field">
+        <id column="field_id" property="no"/>
+        <result column="fName" property="fName"/>
+        <result column="addr" property="addr"/>
+      </collection>
+    </collection>
+  </resultMap>
+  
+  <resultMap type="Court" id="courtMap">
+    <id column="court_id" property="no"/>
+    <result column="name" property="name"/>
+    <result column="court_type_id" property="courtTypeNo"/>
+    <result column="field_id" property="fieldNo"/>
+    <association property="field" javaType="Field">
+      <id column="field_id" property="no"/>
+      <result column="name" property="fName"/>
+      <result column="addr" property="addr"/>
+    </association>
+  </resultMap>
+  
+  <resultMap type="Field" id="fieldMap">
+    <id column="field_id" property="no"/>
+    <result column="name" property="fName"/>
+    <result column="addr" property="addr"/>
   </resultMap>
 
   <select id="countAll" resultType="int">
@@ -22,19 +53,29 @@
   </select>
   
   <select id="findAll" resultMap="matchMap">
-    select
-      mtch_id,
-      court_id,
-      user_id,
-      mtch_type_id,
-      mtch_date,
-      st_time,
-      end_time,
-      fee,
-      state
-    from 
-      social_mtch 
-    order by 
-      st_time asc, court_id asc
+		select
+		  m.mtch_id,
+		  m.court_id,
+		  m.user_id,
+		  m.mtch_type_id,
+		  m.mtch_date,
+		  m.st_time,
+		  m.end_time,
+		  m.fee,
+		  m.state,
+		  m.num_of_people,
+		  m.lv_id,
+		  c.court_id,
+		  c.name,
+		  c.court_type_id,
+		  c.field_id,
+		  f.field_id,
+		  f.name as fName,
+		  f.addr
+		from social_mtch m
+		  left outer join court c on m.court_id=c.court_id
+		  left outer join field f on c.field_id=f.field_id
+		order by
+		  m.st_time asc, f.name asc
   </select>
 </mapper>
