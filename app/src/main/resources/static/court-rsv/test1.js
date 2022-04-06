@@ -1,15 +1,20 @@
-import {aaa,bbb} from './index.js'
+import {ccc} from "./test2";
 
-document.querySelector('.ttt').onclick=function (){
-    aaa();
+export function aaa() {
+    console.log("adddd")
 }
 
-export const ccc = async () => {
-const response = await fetch()
+export function bbb(){
+    console.log("dkdkkdk")
 }
 
-export async function ddd() {
-    const res = await fetch()
+function dml(o){
+    console.log(mmm)
 }
 
+
+const re = async () => {
+    const mmm = await ccc();
+    dml(mmm)
+}
 

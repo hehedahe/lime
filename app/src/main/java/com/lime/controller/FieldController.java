@@ -19,6 +19,12 @@ public class FieldController {
   @Autowired
   FieldService fieldService;
 
+  @GetMapping("/list")
+  public List<Field> findAll() {
+    return fieldService.findAll();
+  }
+
+
   @GetMapping("/distancelist")
   public List<Field> findByLatLng(float lat, float lng) {
     log.debug("테니스장 리스트 불러오기");
