@@ -31,6 +31,7 @@ public class ClazzController {
 		return clazzService.clazzList();
 	}
 	
+
 	
 	
 	 @RequestMapping("/class/add")
@@ -102,7 +103,4 @@ public class ClazzController {
 		    }
 		  }
 	  
-	  
-	  
-
 }
