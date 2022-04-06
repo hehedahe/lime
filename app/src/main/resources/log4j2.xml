@@ -10,5 +10,8 @@
     <Root level="info" additivity="false">
       <AppenderRef ref="stdout" />
     </Root>
+    <logger name="com.lime" additivity="true" >
+      <AppenderRef ref="stdout" level="debug" />
+    </logger>
   </Loggers>
 </Configuration>
