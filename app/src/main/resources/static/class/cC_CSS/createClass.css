@@ -187,3 +187,11 @@ textarea:focus {
     outline: 3px solid rgb(146, 219, 130);
     border: none;
 }
+.cl-st-end > input {
+    border-radius: 5px;
+    height: 30px;
+}
+
+.cl-st-end > input:focus {
+    border : none;
+}
