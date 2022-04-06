@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <!-- header, footer 삽입 제이쿼리-->
 <script type="text/javascript">
 
@@ -37,12 +36,9 @@
 </div>
 <div class="div-container">
 <div id="div-body" class="row row-cols-1 row-cols-md-3 g-4">
-
 </div>
 </div>
 <div class="footer"></div>
-
-<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <!-- header, footer 삽입 제이쿼리-->
 <!-- <script type="text/javascript">
 
@@ -54,8 +50,8 @@
 
 
 <script>
-
-    fetch("/class/list")
+function loadData(data) {
+    fetch(data)
       .then((response) => {
             return response.json()
       }).then((classList) => {
@@ -88,6 +84,22 @@
                  divBody.appendChild(divTag)
        }
     })
+}
+
+    
+loadData("/class/list")
+
+
+$(document).on('click', '#re-btn', (e) => {
+    const btnInfo = e.target.innerText
+    
+    if (btnInfo === "강서구") {
+        console.log("테스트 완료")
+    }
+    
+})
+
+
 </script>
 
 </body>

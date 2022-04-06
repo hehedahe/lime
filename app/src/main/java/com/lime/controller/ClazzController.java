@@ -25,15 +25,19 @@ public class ClazzController {
 	ClazzService clazzService;
 	
 	@RequestMapping("/class/list")
-	public Object classList() {
+	public Object classList(String regionName, String cityName) {
+		System.out.println(regionName);
+		System.out.println(cityName);
 		return clazzService.clazzList();
 	}
-	  @RequestMapping("/class/add")
-	  public Object add(Clazz clazz, MultipartFile file) {
-	    try {
-	      clazz.setImg(saveFile(file));
-	      return clazzService.add(clazz);
-
+	
+	
+	
+	 @RequestMapping("/class/add")
+	 public Object add(Clazz clazz, MultipartFile file) {
+	   try {
+	     clazz.setImg(saveFile(file));
+	     return clazzService.add(clazz);
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	      return "error!";
@@ -97,5 +101,8 @@ public class ClazzController {
 		      return null;
 		    }
 		  }
+	  
+	  
+	  
 
 }
