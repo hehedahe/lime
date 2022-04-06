@@ -11,11 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-<<<<<<< HEAD
-=======
 import org.springframework.web.multipart.MultipartFile;
 import com.lime.domain.Clazz;
->>>>>>> jjang
+
 import com.lime.service.ClazzService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -34,11 +32,6 @@ public class ClazzController {
 		return clazzService.clazzList();
 	}
 	
-<<<<<<< HEAD
-//	@RequestMapping("/class/add") {
-//		public Object 
-//	}
-=======
 	
 	
 	 @RequestMapping("/class/add")
@@ -110,8 +103,4 @@ public class ClazzController {
 		    }
 		  }
 	  
-	  
-	  
-
->>>>>>> jjang
 }
