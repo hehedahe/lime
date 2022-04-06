@@ -7,11 +7,11 @@
     </Console>
   </Appenders>
   <Loggers>
-    <Root level="info" additivity="false">
+    <Logger name="com.lime" level="debug">
+      <AppenderRef ref="stdout" />
+    </Logger>
+    <Root level="info">
       <AppenderRef ref="stdout" />
     </Root>
-    <logger name="com.lime" additivity="true" >
-      <AppenderRef ref="stdout" level="debug" />
-    </logger>
   </Loggers>
 </Configuration>
