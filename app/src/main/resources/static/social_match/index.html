@@ -171,6 +171,22 @@
         const matchList = $(".match-list")
         let str = ''
         for (let i = 0; i < arr.length; i++) {
+          let state = ''
+          let aaa = ''
+          if (arr[i].state === 'A') {
+            state = '신청 가능'
+          } else {
+            state = '마감'
+            aaa = 'closed-btn'
+          }
+          /*let matchType = ''
+          if (arr[i].matchTypeNo === 1) {
+            matchType = '남자'
+          } else if (arr[i].matchTypeNo === 2) {
+            matchType = '여자'
+          } else {
+            matchType = '혼성'
+          }*/
           str += `
           <a href="/social_match/social_match_3.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between align-items-center">
@@ -179,17 +195,46 @@
                   <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
                   <div class="ms-1">
                     <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
-                    <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
+                    <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkLevel(arr[i].levelNo)}</p>
                   </div>
                 </div>
               </div>
-              <button class="btn match-btn">신청 가능</button>
+              <button class="btn match-btn ${aaa}">${state}</button>
               </div>
             </a>`
         }
         $(".match-list").html(str)
       })
     })
+
+    function checkMatchType(matchTypeNo) {
+      switch (matchTypeNo) {
+        case 1: return '남자'
+        case 2: return '여자'
+        case 3: return '혼성'
+      }
+    }
+
+    function checkNumOfPeople(numOfPeople) {
+      switch (numOfPeople) {
+        case 'S': return '1vs1'
+        case 'D': return '2vs2'
+      }
+    }
+
+
+    function checkLevel(level) {
+      switch (level) {
+        case 1: return '모든 레벨'
+        case 2: return 'BEGINNER'
+        case 3: return 'INTERMEDIATE'
+        case 4: return 'ADVANCED'
+        case 5: return 'PRO'
+      }
+    }
+
+    console.log(checkLevel(5))
+
 
   </script>
 

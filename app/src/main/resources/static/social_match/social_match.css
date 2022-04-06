@@ -98,3 +98,13 @@ a {
 #u-nav-bar ul {
   margin: 0;
 }
+
+.closed-btn {
+  color: rgb(190, 190, 190);
+  background-color: rgb(240, 240, 240);
+}
+
+.closed-btn:hover {
+  color: rgb(190, 190, 190);
+  background-color: rgb(240, 240, 240);
+}
