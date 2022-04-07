@@ -3,41 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/header/manager/header.css">
-    <link rel="stylesheet" href="/header/sidebar/sidebar.css">
-    <link rel="stylesheet" href="/manage/user/manageUser.css">
+      <style>
+      
+  
+
+#body-content {
+    font-family: 'NanumGothicExtraBold';
+    margin-top: 100px;
+    padding-bottom: 10px;
+    background-color: bisque;
+}    
+  #header {
+    background-color: navy;
+    color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+  }
+  
+  #footer {
+    font-size: 0.8em 
+    background-color: gray;
+    height: 40px;
+    padding: 10px;
+  }
+  
+  #sidebar {
+    background-color :yellow;
+    position : absolute;
+    left:0px;
+    top: 50px;
+    width: 150px;
+    min-height: 200px;
+    height: calc(100%-400px);
+    padding: 0px 10px;
+  }
+</style>
 </head>
 <body>
-<div class="container">
-    <div id="headers"></div>
-
-    <div id="sidebar"></div>
-
-    <div id="content"></div>
-</div>
+    <div class="container">
+     <div id="headers"></div>
+     <div id="sidebar"></div>
+     <div id="content"></div>
+     <div id="footer" ></div>
+    </div>
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-<!--&lt;!&ndash; header, footer 삽입 제이쿼리&ndash;&gt;-->
 <script type="text/javascript">
-   $("#headers").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
-    $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
-    
-    var arr = location.href.split("?");
-    console.log(arr);
-
-    if (arr.length == 1) {
-        alert("요청 형식이 옳바르지 않습니다.")
-        throw "url 형식 오류!";
-    }
-
-    var qs = arr[1];
-    console.log(qs);
-
-    var params = new URLSearchParams(qs);
-    var page =  params.get("page");
-    $("#content").load(page + ".html");
+   $("#content").load("manageUser3.html");
+   $("#footer").load("/footer/footer.html");
 </script>
 </body>
 </html>

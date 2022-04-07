@@ -7,6 +7,7 @@ public class Market {
   int itemId;
   int userId;
   int cityId;
+  int transRpyId;
   String itemName;
   int itemCost;
   String content;

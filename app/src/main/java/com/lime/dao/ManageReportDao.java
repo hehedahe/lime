@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.lime.domain.Classes;
 import com.lime.domain.Club;
 import com.lime.domain.Community;
+import com.lime.domain.Market;
 
 
 @Mapper
@@ -23,4 +24,10 @@ public interface ManageReportDao {
   //클럽게시글관리
   List<Club> findClubAll();
   Club findClubByNo(int no);
+  
+  //마켓관리
+  List<Market> findItemAll();
+  /* Market findItemByNo(int no); */
+  List<Market> findItemCmtAll();
+  
 }
