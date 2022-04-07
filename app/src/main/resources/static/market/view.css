@@ -1,0 +1,59 @@
+* {
+    font-family: 'NanumGothic';
+}
+
+#body-wrapper {
+    min-height: 100%;
+    position: relative;
+    margin: 0px auto;
+}
+
+#content-body {
+    min-height: 1000px;
+    margin-top: 5em;
+    margin-bottom: 50px;
+}
+
+#item-box {
+    width: 1024px;
+    min-height: 1000px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+#item-region > p {
+    font-size: 1.1em;
+}
+
+#item-title > p {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#item-price > p {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+#manner {
+    padding: 3px 5px;
+    color: white;
+    background-color: #92DB82;
+    border-radius: 3px;
+}
+
+#ask {
+    padding: 0 10px;
+    height: 42.5px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    background-color: rgb(102, 200, 141);
+    border: none;
+    border-radius: 5px;
+    float: right;
+}
+
+#item-content > p {
+    width: inherit;
+}

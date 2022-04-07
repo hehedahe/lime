@@ -16,5 +16,8 @@ public class Market {
   int viewCount;
   String regionName;
   String cityName;
+  String userName;
+  int mannerScore;
+  String lvName;
   // List<ContactTel> tels;
 }

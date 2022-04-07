@@ -8,7 +8,7 @@
   <script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <title>MarketMain</title>
+  <title>라임마켓</title>
 
   <script type="text/javascript">
 
@@ -22,69 +22,67 @@
 <body>
 <nav id="u-nav-bar"></nav>
 <div id="body-wrapper">
-<div id="market-content">
-    <div class="container" id="market-nav-wrap">
-      <div class="row" id="market-nav">
-        <div class="col">
-          <select name="region" id="region" onchange="regionChange(regionSelect.value);">
-              <option selected disabled hidden>지역</option>
-              <option value="전체">전체</option>
-              <option value="서울특별시">서울특별시</option>
-              <option value="부산광역시">부산광역시</option>
-              <option value="대구광역시">대구광역시</option>
-              <option value="인천광역시">인천광역시</option>
-              <option value="광주광역시">광주광역시</option>
-              <option value="대전광역시">대전광역시</option>
-              <option value="울산광역시">울산광역시</option>
-              <option value="세종특별자치시">세종특별자치시</option>
-              <option value="경기도">경기도</option>
-              <option value="강원도">강원도</option>
-              <option value="충청북도">충청북도</option>
-              <option value="충청남도">충청남도</option>
-              <option value="전라북도">전라북도</option>
-              <option value="전라남도">전라남도</option>
-              <option value="경상북도">경상북도</option>
-              <option value="경상남도">경상남도</option>
-              <option value="제주도">제주도</option>
-          </select>
-        </div>
-        <div class="col">
-          <select name="city" id="city" onchange="cityChange(city.value);">
-              <option selected hidden>도시</option>
-          </select>
-        </div>
-        <div id="checkbox-wrap" class="col-2">
-          <input id="nav-checkbox" type="checkbox"><label id="nav-c-label">거래가능만 보기</label>
-        </div>
-        <div class="col">
-          <div class="search-bar">
-            <input type="search" placeholder="검색어를 입력해주세요">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="rgb(190, 190, 190)" class="bi bi-search" viewBox="0 0 18 18">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
+  <div id="market-content">
+      <div class="container" id="market-nav-wrap">
+        <div class="row" id="market-nav">
+          <div class="col">
+            <select name="region" id="region" onchange="regionChange(regionSelect.value);">
+                <option selected disabled hidden>지역</option>
+                <option value="전체">전체</option>
+                <option value="서울특별시">서울특별시</option>
+                <option value="부산광역시">부산광역시</option>
+                <option value="대구광역시">대구광역시</option>
+                <option value="인천광역시">인천광역시</option>
+                <option value="광주광역시">광주광역시</option>
+                <option value="대전광역시">대전광역시</option>
+                <option value="울산광역시">울산광역시</option>
+                <option value="세종특별자치시">세종특별자치시</option>
+                <option value="경기도">경기도</option>
+                <option value="강원도">강원도</option>
+                <option value="충청북도">충청북도</option>
+                <option value="충청남도">충청남도</option>
+                <option value="전라북도">전라북도</option>
+                <option value="전라남도">전라남도</option>
+                <option value="경상북도">경상북도</option>
+                <option value="경상남도">경상남도</option>
+                <option value="제주도">제주도</option>
+            </select>
           </div>
-        </div>
-        <div id="market-write-wrap" class="col">
-          <button id="market-write" name="btn123">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-pencil-square" viewBox="0 0 16 16">
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-            </svg>글쓰기
-          </button>
-        </div>
-      </div>
-        
-    </div>
-</div>
-<div id="content-body">
-
-  <div id="item-list" class="row row-cols-1 row-cols-sm-3 g-5"></div>
-</div>
+          <div class="col">
+            <select name="city" id="city" onchange="cityChange(city.value);">
+                <option selected hidden>도시</option>
+            </select>
+          </div>
+          <div id="checkbox-wrap" class="col-2">
+            <input id="nav-checkbox" type="checkbox"><label id="nav-c-label">거래가능만 보기</label>
+          </div>
+          <div class="col">
+            <div class="search-bar">
+              <input type="search" placeholder="검색어를 입력해주세요">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="rgb(190, 190, 190)" class="bi bi-search" viewBox="0 0 18 18">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+            </div>
+          </div>
+          <div id="market-write-wrap" class="col">
+            <button id="market-write" name="btn123">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+              </svg>글쓰기
+            </button>
+          </div>
+        </div> <!-- market-nav -->
+          
+      </div> <!-- market-nav-wrap -->
+  </div> <!-- market-content -->
   
-    
-</div>
-<footer id="footer"></footer>
-</div>
+  <div id="content-body">
+    <div id="item-list" class="row row-cols-1 row-cols-sm-3 g-5"></div>
+  </div>
+  
+  <footer id="footer"></footer>
+</div> <!-- body-wrapper -->
 
 
 
@@ -275,6 +273,7 @@ $("#nav-checkbox").on("change", function(){
   listFetch();
 });
 
+// 검색
 $("input[type=search]").keyup(function(e) {
     if (e.keyCode == 27) {
       $(e.target).val("");
@@ -287,8 +286,8 @@ $("input[type=search]").keyup(function(e) {
       }
       console.log($(e.target).val());
       console.log($("input[type=search]").val());
-
       listFetch();
+      
     }
   })
 
