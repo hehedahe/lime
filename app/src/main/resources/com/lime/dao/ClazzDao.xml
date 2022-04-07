@@ -51,6 +51,7 @@
   
   		select 
 		      cl.title as title,
+		      cl.level as level
 		      rg.region_name,
 		      c.city_name,
 		      cl.rgt_date as rgt_date		    
@@ -62,6 +63,24 @@
 		where region_name=#{regionName}
 		   order by rgt_date desc
     </select>
+  
+      <select id="findByCity" resultMap="clsMap" resultType="string">
+    select 
+          cl.title as title,
+          cl.level as level,
+          rg.region_name,
+          c.city_name
+    from cls cl
+      left join city c
+       on cl.city_id = c.city_id
+      left join region rg 
+       on c.region_id = rg.region_id
+    where region_name=#{regionName} and city_name=#{cityName}
+
+    </select>
+  
+  
+  
   
   
   </mapper>

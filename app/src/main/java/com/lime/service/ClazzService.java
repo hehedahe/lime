@@ -11,4 +11,6 @@ public interface ClazzService {
 	int add(Clazz clazz);
 	
 	List<Clazz> regionList(String regionName);
+
+	List<Clazz> cityList(String regionName, String cityName);
 }
