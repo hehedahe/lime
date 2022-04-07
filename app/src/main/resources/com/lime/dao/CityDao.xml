@@ -14,7 +14,7 @@
         <association property="region" javaType="region">
             <id column="region_id" property="regionId"/>
             <result column="region_name" property="regionName"/>
-            <result column="lat" property="reigonLat"/>
+            <result column="lat" property="regionLat"/>
             <result column="lng" property="regionLng"/>
         </association>
     </resultMap>
@@ -22,8 +22,8 @@
     <select id="findCityLatlng" resultMap="cityMap" parameterType="int">
         SELECT
             c.city_id,
-            c.lat cityLat,
-            c.lng cityLng,
+            c.lat,
+            c.lng,
             c.city_name,
             r.region_name
         from city c
@@ -34,8 +34,8 @@
     <select id="findRegionLatlng" resultMap="cityMap" parameterType="int">
         SELECT
             region_id,
-            lat regionLat,
-            lng regionLng,
+            lat,
+            lng,
             region_name
         from region
         where region_id=#{regionId};
