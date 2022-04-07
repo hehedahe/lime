@@ -29,5 +29,9 @@ public class DefaultClazzService implements ClazzService{
 	  public List<Clazz> regionList(String regionName) {
 	    return clazzDao.findByRegion(regionName);
 	  }
+	@Override
+	public List<Clazz> cityList(String regionName, String cityName) {
+		return clazzDao.findByCity(regionName, cityName);	
+		}
 
 }

@@ -24,14 +24,29 @@ public class ClazzController {
 	@Autowired
 	ClazzService clazzService;
 	
-	@RequestMapping("/class/list")
-	public Object classList(String regionName, String cityName) {
-		System.out.println(regionName);
-		System.out.println(cityName);
-		return clazzService.clazzList();
-	}
 	
+	 @RequestMapping("/class/list")
+	  public Object list(String regionName, String cityName) {
+		 System.out.println(regionName);
+		 System.out.println(cityName);
+	      if (regionName.equals("지역") || regionName.equals("전체")) {
+	        System.out.println(regionName);
+	        return clazzService.clazzList();
+	      }
 
+	      if (cityName.equals("도시")) {
+	        System.out.println(regionName);
+	        return clazzService.regionList(regionName);
+	      }
+
+	      return clazzService.cityList(regionName, cityName);
+
+	 }
+	
+	
+	
+	
+	
 	
 	
 	 @RequestMapping("/class/add")
