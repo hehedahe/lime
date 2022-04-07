@@ -1,8 +1,10 @@
 package com.lime.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 public class Field {
   int fieldId;
   String name;
