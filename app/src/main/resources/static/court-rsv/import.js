@@ -9,10 +9,11 @@ const dropCity = $('#drop-city')
 dropRegion.on('change', function (e) {
     selectCity(dropRegion.val());
 });
-infoBtn.on('click', function (e){
-    e.preventDefault()
-    e.stopPropagation()
-    console.log(dropCity.val());
-})
+
+// infoBtn.on('click', function (e){
+//     e.preventDefault()
+//     e.stopPropagation()
+//     console.log(dropCity.val());
+// })
 
 

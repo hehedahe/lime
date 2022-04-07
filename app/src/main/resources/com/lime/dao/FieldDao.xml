@@ -48,4 +48,5 @@ having distance &lt; 2
 order by distance DESC;
 </select>
 
+
 </mapper>
