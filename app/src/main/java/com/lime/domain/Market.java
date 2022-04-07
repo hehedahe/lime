@@ -4,6 +4,7 @@ public class Market {
   int itemId;
   int userId;
   int cityId;
+  int transRpyId;
   String itemName;
   int itemCost;
   String content;
@@ -13,14 +14,15 @@ public class Market {
   int viewCount;
   String regionName;
   String cityName;
-  // List<ContactTel> tels;
 
+  // List<ContactTel> tels;
   @Override
   public String toString() {
-    return "Market [itemId=" + itemId + ", userId=" + userId + ", cityId=" + cityId + ", itemName="
-        + itemName + ", itemCost=" + itemCost + ", content=" + content + ", rgtDate=" + rgtDate
-        + ", mdfyDate=" + mdfyDate + ", transState=" + transState + ", viewCount=" + viewCount
-        + "]";
+    return "Market [itemId=" + itemId + ", userId=" + userId + ", cityId=" + cityId
+        + ", transRpyId=" + transRpyId + ", itemName=" + itemName + ", itemCost=" + itemCost
+        + ", content=" + content + ", rgtDate=" + rgtDate + ", mdfyDate=" + mdfyDate
+        + ", transState=" + transState + ", viewCount=" + viewCount + ", regionName=" + regionName
+        + ", cityName=" + cityName + "]";
   }
 
   public int getItemId() {
@@ -45,6 +47,14 @@ public class Market {
 
   public void setCityId(int cityId) {
     this.cityId = cityId;
+  }
+
+  public int getTransRpyId() {
+    return transRpyId;
+  }
+
+  public void setTransRpyId(int transRpyId) {
+    this.transRpyId = transRpyId;
   }
 
   public String getItemName() {

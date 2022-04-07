@@ -1,0 +1,98 @@
+<style>
+
+@font-face {
+    font-family: 'NG';
+    src: url("../../asset/font/NanumGothic.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'NGBold';
+    src: url("../../asset/font/NanumGothicBold.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'CooperBlack';
+    src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'NG';
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* header 전체*/
+nav {
+    width: 100vw;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+/* .header {
+    font-family: 'NG';
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+ */
+/* 로고 */
+.nav-logo {
+    height: 10vh;
+    width: 15vw;
+    display: flex;
+    align-items: center;
+    padding: 2vh 0 0 4vw;
+}
+
+.nav-logo > li {
+    font-family: 'CooperBlack';
+}
+
+.nav-logo li:first-child {
+    font-size: xxx-large;
+    color: #92DB82;
+}
+
+.nav-logo > li:last-child {
+    height: 4vh;
+    align-self: flex-end;
+    color: rgb(190, 190, 190);
+    margin-left: 10px;
+}
+
+/* 마이페이지 */
+.nav-links {
+    display: flex;
+    width: 8vw;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links > a:hover {
+    font-family: NGBold;
+    color: #92DB82;
+}
+</style>
+
+<nav>
+    <div class="header">
+        <ul class="nav-logo">
+            <li>lime</li>
+            <li>manager</li>
+        </ul>
+        <div class="nav-links">
+            <a href="#">로그아웃</a>
+        </div>
+    </div>
+</nav>

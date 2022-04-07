@@ -1,22 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-  </style>
-  <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="manageUser.css">
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
-    <!--<link rel="import" href="static/footer/footer.html">-->
-    
-    <link rel="stylesheet" href="/header/header.css">
-    <link rel="stylesheet" href="../header/header.css">
-    <link rel="stylesheet" href="../../footer/footer.css">
-</head>
-<body>
+<style>
+  @charset "UTF-8";
+
+#detailBtn {
+  background-color: rgb(127, 127, 127) ;
+  color:white;
+}
+#x-thead {
+  background-color: rgb(191, 186, 178) ;
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+  border: 1px solid rgb(190, 190, 190);
+
+}
+
+
+.container{
+  position: absolute; 
+  width: 1024px;
+}
+
+#tables {
+  height: 80%;
+  
+}
+.col {
+  height: 80%;
+}
+
+
+.row {
+  font-family: 'NanumGothic';
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
   <div class="container">
     <div class="row justify-content-center">   
       <div class="col" id="headers">
@@ -52,7 +71,6 @@
     </div>
 </div>
 
-<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 
 var xTbody = document.querySelector("#x-tbody"); 
@@ -87,9 +105,6 @@ fetch(`/manage/user/list`)
  
 
   $(document).ready(function () {
-        $("#headers").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
-       // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
-        $("#footer").load("/footer/footer.html");  //헤더 인클루드-->
   $(document).on("click", "button[id='detailBtn']", function () {
 
       location.href = "userDetail.html?no=" +$(this).val();

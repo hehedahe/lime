@@ -4,6 +4,7 @@ import java.util.List;
 import com.lime.domain.Classes;
 import com.lime.domain.Club;
 import com.lime.domain.Community;
+import com.lime.domain.Market;
 
 
 public interface ManageReportService {
@@ -22,5 +23,10 @@ public interface ManageReportService {
   List<Club> clubList();
   Club getClub(int no);
   
+  //마켓관리
+  List<Market> marketList();
+  /* Market getMarket(int no); */
+  
+  List<Market> marketCmtList();
   
 }
