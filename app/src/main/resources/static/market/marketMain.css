@@ -1,4 +1,4 @@
-* {
+html,body {
     font-family: 'NanumGothic';
 }
 
@@ -41,8 +41,7 @@
     font-size: 100%;
     width: 180px;
     height: 3rem;
-    border-radius: 20px;
-    border-color: rgb(190, 190, 190);
+    border-radius: 50px;
 }
 
 #checkbox-wrap {
@@ -132,16 +131,6 @@ input[type=search]::placeholder {
     cursor: pointer;
 }
 
-.btn-like-on {
-    position: absolute;
-    right: 10px;
-    bottom: 150px;
-    
-}
-
-.btn-like-on:hover {
-    cursor: pointer;
-}
 
 /* .btn-like.done {
     color: inherit;
