@@ -53,6 +53,7 @@ SELECT
    
    <select id="findByRegion" resultMap="marketMap">
 		SELECT 
+		      i.item_id as item_id,
 		      i.item_name as item_name,
 		      i.item_cost as item_cost,
 		      replace(rg.region_name, '\r', '') as region_name,
@@ -72,6 +73,7 @@ SELECT
     
     <select id="findByCity" resultMap="marketMap" resultType="string">
     SELECT 
+          i.item_id as item_id,
           i.item_name as item_name,
           i.item_cost as item_cost,
           replace(rg.region_name, '\r', '') as region_name,
@@ -91,6 +93,7 @@ SELECT
     
     <select id="findAllChecked" resultMap="marketMap">
 SELECT 
+      i.item_id as item_id,
       i.item_name as item_name,
       i.item_cost as item_cost,
       rg.region_name as region_name,
@@ -110,6 +113,7 @@ SELECT
     
     <select id="findByRegionChecked" resultMap="marketMap">
     SELECT 
+          i.item_id as item_id,
           i.item_name as item_name,
           i.item_cost as item_cost,
           replace(rg.region_name, '\r', '') as region_name,
@@ -129,6 +133,7 @@ SELECT
     
     <select id="findByCityChecked" resultMap="marketMap" resultType="string">
     SELECT 
+          i.item_id as item_id,
           i.item_name as item_name,
           i.item_cost as item_cost,
           replace(rg.region_name, '\r', '') as region_name,
