@@ -67,9 +67,37 @@ a {
 
 .social-match .form-select {
   width: 5rem;
+  /* width: 100%; */
   margin-right: 0.5rem;
   font-size: 0.8rem;
   border-radius: 1rem;
+  border-color: rgb(224, 224, 224);
+}
+
+.social-match .form-select:nth-child(1) {
+  width: 8.5rem;
+}
+
+.social-match .form-select:nth-child(2) {
+  width: 6.1rem;
+}
+
+.social-match .form-select:nth-child(3) {
+  width: 8.9rem;
+}
+
+.social-match .form-select:nth-child(4) {
+  width: 6.1rem;
+}
+
+.social-match .form-select:nth-child(5) {
+  width: 5.5rem;
+}
+
+.social-match .form-select option {
+    /* background: black; */
+    /* color: #fff; */
+    padding: 3px 0;
 }
 
 #preferred {
@@ -108,3 +136,19 @@ a {
   color: rgb(190, 190, 190);
   background-color: rgb(240, 240, 240);
 }
+
+#my-preferred {
+  font-size: 1rem;
+  width: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+#my-preferred span {
+  font-size: 0.9rem;
+}
+
+#my-preferred .form-check-input {
+    margin: 0;
+}
+

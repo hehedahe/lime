@@ -67,3 +67,30 @@ from social_mtch m
   left outer join field f on c.field_id=f.field_id
 order by
   m.st_time asc, m.court_id asc
+
+select
+  m.mtch_id,
+  m.court_id,
+  m.user_id,
+  m.mtch_type_id,
+  m.mtch_date,
+  m.st_time,
+  m.end_time,
+  m.fee,
+  m.state,
+  m.num_of_people,
+  m.lv_id,
+  c.court_id,
+  c.name,
+  c.court_type_id,
+  c.field_id,
+  f.field_id,
+  f.name as fName,
+  f.addr
+from social_mtch m
+  left outer join court c on m.court_id=c.court_id
+  left outer join field f on c.field_id=f.field_id
+where
+  m.mtch_type_id = 1
+order by
+  m.st_time asc, f.name asc

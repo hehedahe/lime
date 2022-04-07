@@ -51,97 +51,60 @@
 
   <div id="x-header" class="d-flex bd-highlight mb-3"></div>
 
-  <!-- <nav id="u-nav-bar">
-    <div id="u-header" class="header">
-      <div class="nav-logo"><a href="/header/user/header.html">lime</a></div>
-      <div class="nav-menu-div">
-        <ul id="u-nav-menu">
-          <li><a href="#">소셜매치</a></li>
-          <li><a href="#">코트예약</a></li>
-          <li><a href="#">클래스</a></li>
-          <li><a href="#">라임마켓</a></li>
-          <li><a href="#">클럽</a></li>
-          <li><a href="#">커뮤니티</a></li>
-        </ul>
-      </div>
-      <div class="nav-links-div">
-        <ul class="u-nav-links">
-          <li><a href="../../login/login.html">로그인</a></li>
-          <li><a href="#">|</a></li>
-          <li><a href="../../signup/signup1.html">회원가입</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
-
   <main class="social-match my-5">
 
     <div class="d-flex justify-content-between mb-3">
       <div class="d-flex w-100">
-        <select class="form-select" aria-label="year" name="" id="">
+        <select class="form-select" aria-label="region" name="" id="">
           <option selected>지역</option>
+          <option value="1">모든 지역</option>
+          <option value="2">서울</option>
+          <option value="3">경기/강원</option>
+          <option value="4">인천</option>
+          <option value="5">대전/세종/충청</option>
+          <option value="6">대구/경북</option>
+          <option value="7">부산/울산/경남</option>
+          <option value="8">광주/전라</option>
+          <option value="9">제주</option>
         </select>
-        <select class="form-select" aria-label="year" name="" id="">
+        <select class="form-select" aria-label="city" name="" id="">
           <option selected>도시</option>
+          <option value="1">서귀포시</option>
         </select>
-        <select class="form-select" aria-label="year" name="" id="">
+        <select class="form-select" aria-label="level" name="" id="">
           <option selected>레벨</option>
+          <option value="1">모든 레벨</option>
+          <option value="2">BEGINNER</option>
+          <option value="3">INTERMEDIATE</option>
+          <option value="4">ADVANCED</option>
+          <option value="5">PRO</option>
         </select>
-        <select class="form-select" aria-label="year" name="" id="">
+        <select class="form-select" aria-label="gender" name="category" id="">
           <option selected>성별</option>
+          <option value="1">남자</option>
+          <option value="2">여자</option>
+          <option value="3">남녀모두</option>
         </select>
-        <select class="form-select" aria-label="year" name="" id="">
+        <select class="form-select" aria-label="court-type" name="" id="">
           <option selected>코트</option>
+          <option value="1">하드</option>
+          <option value="2">클레이</option>
+          <option value="3">잔디</option>
+          <option value="4">앙투카</option>
         </select>
       </div>
-      <select class="form-select" aria-label="year" name="" id="preferred">
+      <div id="my-preferred">
+        <input type="checkbox" value="" id="my-preferred-checkbox" class="form-check-input">
+        <!-- &nbsp;&nbsp;내 선호 -->
+        <span>&nbsp;&nbsp;내 선호</span>
+      </div>
+      <!-- <select class="form-select" aria-label="my-preferred" name="" id="preferred">
         <option selected>내 선호</option>
-      </select>
+      </select> -->
     </div>
 
     <ul class="list-group list-group-flush match-list">
-      <!-- <a href="#" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between align-items-center">
-          <div>
-            <div class="d-flex justify-content-start align-items-center">
-              <div class="me-4 match-time">10:00</div>
-              <div class="ms-1">
-                <h6 class="mb-1">인천 시립 테니스장 코트1</h6>
-                <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
-              </div>
-            </div>
-          </div>
-          <button class="btn match-btn">신청 가능</button>
-        </div>
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between align-items-center">
-          <div>
-            <div class="d-flex justify-content-start align-items-center">
-              <div class="me-4 match-time">10:00</div>
-              <div class="ms-1">
-                <h6 class="mb-1">인천 시립 테니스장 코트1</h6>
-                <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
-              </div>
-            </div>
-          </div>
-          <button class="btn match-btn">신청 가능</button>
-        </div>
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between align-items-center">
-          <div>
-            <div class="d-flex justify-content-start align-items-center">
-              <div class="me-4 match-time">10:00</div>
-              <div class="ms-1">
-                <h6 class="mb-1">인천 시립 테니스장 코트1</h6>
-                <p class="text-muted match-info">남녀혼성 · 1vs1 · 모든 레벨</p>
-              </div>
-            </div>
-          </div>
-          <button class="btn match-btn">신청 가능</button>
-        </div>
-      </a> -->
+
     </ul>
 
 
@@ -195,7 +158,7 @@
                   <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
                   <div class="ms-1">
                     <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
-                    <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkLevel(arr[i].levelNo)}</p>
+                    <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
                   </div>
                 </div>
               </div>
@@ -233,7 +196,28 @@
       }
     }
 
-    console.log(checkLevel(5))
+    function checkCourtType(courtTypeNo) {
+      switch (courtTypeNo) {
+        case 1: return '하드'
+        case 2: return '클레이'
+        case 3: return '잔디'
+        case 4: return '앙투카'
+      }
+    }
+
+    console.log(checkCourtType(4))
+
+    $("select[name='category']").on("change", function (e) {
+      const idx = e.target.value
+      console.log(idx)
+
+      if (idx < 0) {
+        return
+      }
+
+      // $(".match-list").html('')
+      // storeService.loadJson(idx, makeStores)
+    })
 
 
   </script>
