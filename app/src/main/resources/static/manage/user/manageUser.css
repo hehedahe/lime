@@ -13,11 +13,9 @@
 
 }
 
-body {
-  height: 80%;
-}
 
 .container{
+	position: absolute; 
 	width: 1024px;
   height: 80%;
 }

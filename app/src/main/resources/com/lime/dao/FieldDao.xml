@@ -8,6 +8,27 @@
 
 <resultMap type="Field" id="fieldMap"></resultMap>
 
+<select id="findAll" resultMap="fieldMap">
+    SELECT f.field_id,
+           f.name,
+           f.addr,
+           f.ind_yn,
+           f.parking_area,
+           f.lat,
+           f.lng,
+           c.court_id,
+           c.name courtName,
+           c.court_type_id,
+           ct.name cTypeName
+    FROM field f
+    LEFT OUTER JOIN court c
+        ON f.field_id=c.field_id
+    LEFT JOIN court_type ct
+        ON c.court_type_id=ct.court_type_id
+    WHERE f.field_type='R'
+    GROUP BY f.field_id;
+</select>
+
 <select id="findByLatLng" resultMap="fieldMap">
  select  f.field_id,
     f.name,
@@ -23,8 +44,9 @@
 +sin(radians(#{preferLat}))*sin(radians(lat)))) AS distance
 from field f
 left outer join court c on f.field_id=c.field_id
-having distance &lt; 1
+having distance &lt; 2
 order by distance DESC;
 </select>
+
 
 </mapper>

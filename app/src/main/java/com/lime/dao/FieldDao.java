@@ -7,6 +7,6 @@ import com.lime.domain.Field;
 
 @Mapper
 public interface FieldDao {
-
   List<Field> findByLatLng(@Param("preferLat")float preferLat, @Param("preferLng")float preferLng);
+  List<Field> findAll();
 }

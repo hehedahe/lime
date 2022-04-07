@@ -51,12 +51,12 @@ public class DefaultMarketService implements MarketService {
     return marketDao.findByCityChecked(regionName, cityName, keyword);
   }
 
-  //
-  //  @Override
-  //  public Market get(int no) {
-  //    return contactDao.findByNo(no);
-  //  }
-  //
+
+  @Override
+  public Market get(int no) {
+    return marketDao.findByNo(no);
+  }
+
   //  @Override
   //  @Transactional
   //  public int update(Market contact) {

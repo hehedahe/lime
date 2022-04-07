@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="index.css">
 
     <!-- fontawesome -->
-<!--    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">-->
+    <!--    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">-->
     <script src="https://kit.fontawesome.com/0b4dd5be7a.js" crossorigin="anonymous"></script>
 
-    <title>구장예약</title>
+
+    <title>코트예약</title>
 
     <!-- header, footer 삽입 제이쿼리 -->
     <script type="text/javascript">
@@ -76,16 +77,28 @@
 -->
     <div id="drop-menu" class="row w-100">
         <div class="d-flex col-2 p-2 bd-highlight">
-            <select class="form-select border col-1 text-center" aria-label="지역" id="drop-city">
+            <select class="form-select border col-1 text-center" id="drop-region">
                 <option selected disabled hidden>지역</option>
-                <option>전체</option>
-                <option>인천</option>
                 <option>서울</option>
-                <option>경기도</option>
+                <option>경기</option>
+                <option>인천</option>
+                <option>강원</option>
+                <option>대전</option>
+                <option>세종</option>
+                <option>부산</option>
+                <option>대구</option>
+                <option>광주</option>
+                <option>울산</option>
+                <option>충청북도</option>
+                <option>충청남도</option>
+                <option>전라북도</option>
+                <option>전라남도</option>
+                <option>경상북도</option>
+                <option>경상남도</option>
+                <option>제주</option>
             </select>
-            <select class="form-select border col-1 text-center" aria-label="year" id="drop-region">
+            <select class="form-select border col-1 text-center" aria-label="year" id="drop-city">
                 <option selected disabled hidden>도시</option>
-                <option>전체</option>
             </select>
         </div>
         <div class="col-2 ms-auto p-2 bd-highlight">
@@ -133,9 +146,9 @@
                 <button class="card border-0">
                     <div class="card-body">
                         <h5 class="card-title">테니스장1</h5>
-                        <p class="card-text">#하드코트</p>
+                        <p class="card-text text1">#하드코트</p>
                         <div class="content3">
-                            <p class="card-text">300m</p>
+                            <p class="card-text text2">300m</p>
                             <a href="#" class="btn btn-sm info-btn">정보</a>
                         </div>
                     </div>
@@ -151,44 +164,9 @@
 
 <div id="x-footer"></div>
 
-
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c77b7df52ca018e8760dea5bc1e3c519"></script>
-<script>
-    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-    var options = { //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(37.408, 126.708), //지도의 중심좌표.
-        level: 6 //지도의 레벨(확대, 축소 정도)
-    };
-
-    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-
-
-    var markerPosition;
-    var marker;
-
-
-    fetch("/field/distancelist?lat=37.408&lng=126.708").then(function (response) {
-        return response.json();
-    }).then(function (result) {
-        //console.log(result);
-        for (const mark of result) {
-            // 마커가 표시될 위치입니다
-            markerPosition = new kakao.maps.LatLng(mark.lat, mark.lng);
-            //console.log("positon:::", markerPosition)
-
-            // 마커를 생성합니다
-            marker = new kakao.maps.Marker({
-                position: markerPosition
-            });
-        marker.setMap(map);
-        }
-
-        // 마커가 지도 위에 표시되도록 설정합니다
-    });
-
-
-</script>
-<!--<script src="index.js" type="module"></script>-->
+<script type="text/javascript" src="index.js"></script>
+<!--<script src="../common/selectCity.js"></script>-->
+<script src="import.js" type="module"></script>
 </body>
 </html>

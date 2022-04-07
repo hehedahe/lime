@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <style>
+  </style>
   <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="../../css/common.css">-->
+    <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="manageUser.css">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
     <!--<link rel="import" href="static/footer/footer.html">-->
-    <link rel="stylesheet" href="/header/manager/header.css">
+    
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="../header/header.css">
     <link rel="stylesheet" href="../../footer/footer.css">
 </head>
 <body>
@@ -85,7 +88,7 @@ fetch(`/manage/user/list`)
 
   $(document).ready(function () {
         $("#headers").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
-        $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
+       // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
         $("#footer").load("/footer/footer.html");  //헤더 인클루드-->
   $(document).on("click", "button[id='detailBtn']", function () {
 

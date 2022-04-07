@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 public class Clazz {
 	int no;
 	int userId;
@@ -22,6 +23,7 @@ public class Clazz {
 	String dtlIntro;
 	Date rgtDate;
 	Date mdfyDate;
-	
+	String regionName;
+	String cityName;
 	
 }

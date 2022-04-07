@@ -17,4 +17,9 @@ public class DefaultFieldService implements FieldService {
   public List<Field> findByLatLng(float lat, float lng) {
     return fieldDao.findByLatLng(lat, lng);
   }
+
+  @Override
+  public List<Field> findAll() {
+    return fieldDao.findAll();
+  }
 }

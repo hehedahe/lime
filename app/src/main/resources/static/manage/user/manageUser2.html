@@ -1,0 +1,118 @@
+<style>
+  @charset "UTF-8";
+
+#detailBtn {
+  background-color: rgb(127, 127, 127) ;
+  color:white;
+}
+#x-thead {
+  background-color: rgb(191, 186, 178) ;
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+  border: 1px solid rgb(190, 190, 190);
+
+}
+
+
+.container{
+  position: absolute; 
+  width: 1024px;
+}
+
+#tables {
+  height: 80%;
+  
+}
+.col {
+  height: 80%;
+}
+
+
+.row {
+  font-family: 'NanumGothic';
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+  <div class="container">
+    <div class="row justify-content-center">   
+      <div class="col" id="headers">
+      </div>
+    </div>
+    <div class="row justify-content-center">      
+      <div class="col">
+        <div id="tables" class="table-responsive">
+          <table id="x-table" class="table table-striped table-hover table-bordered border-primary text-center">
+            <!-- table-dark table-success table-borderless etc -->
+            <thead>
+              <tr id="x-thead">
+                <th scope="col"><input type="checkbox"></th>
+                <th scope="col">번호</th>
+                <th scope="col">이름</th>
+                <th scope="col">이메일</th>
+                <th scope="col">회원유형</th>
+                <th scope="col">가입일자</th>
+                <th scope="col">라임캐시</th>
+                <th scope="col">상세</th>
+              </tr>
+            </thead>
+            <tbody id ="x-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col" id="footer"></div>
+      </div>
+      <div>
+      </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+var xTbody = document.querySelector("#x-tbody"); 
+
+fetch(`/manage/user/list`)
+.then(function(response){
+  return response.json();
+})
+.then(function(manages){
+  console.log(manages);
+  var content= '';
+  for(var manage of manages){
+    console.log( manage)
+
+      content+= `
+        <tr id = "xTr">
+          <th scope="row">
+            <input type="checkbox">
+          </th>
+          <td id="x-no">${manage.no}</td>
+          <td>${manage.name}</td>
+          <td>${manage.email}</td>
+          <td>${manage.userType}</td>
+          <td>${manage.rgtDate}</td>
+          <td>${manage.sum}</td>
+          <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${manage.no}">상세</td>
+        </tr>`
+
+    }
+    xTbody.innerHTML =content
+  });
+ 
+
+  $(document).ready(function () {
+  $(document).on("click", "button[id='detailBtn']", function () {
+
+      location.href = "userDetail.html?no=" +$(this).val();
+
+  });
+});
+  
+  
+</script>
+</body>
+</html>
