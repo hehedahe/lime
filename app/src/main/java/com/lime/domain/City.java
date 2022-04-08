@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class city {
+public class City {
     int cityId;
     String cityName;
     float cityLat;

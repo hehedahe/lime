@@ -15,8 +15,10 @@ repositories {
 }
 
 dependencies {
-  // MariaDB JDBC 드라이버
+  // 썸네일 이미지 생성 라이브러리
   implementation 'net.coobird:thumbnailator:0.4.17'
+
+  // MariaDB JDBC 드라이버
   implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
   implementation 'net.coobird:thumbnailator:0.4.17'
   // Mybatis 프레임워크 (직접 구성)

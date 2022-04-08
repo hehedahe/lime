@@ -22,23 +22,23 @@ export function selectCity(e) {
     var target = document.querySelector("#drop-city");
 
      //var xxx = e[e.selectedIndex].text;
-    if (e == "서울") var city = seoul;
-    else if (e == "경기") var city = gyeonggi;
-    else if (e == "인천") var city = incheon;
-    else if (e == "강원") var city = gangwon;
-    else if (e == "대전") var city = daejeon;
-    else if (e == "세종") var city = sejong;
-    else if (e == "부산") var city = busan;
-    else if (e == "대구") var city = daegu;
-    else if (e == "광주") var city = gwangju;
-    else if (e == "울산") var city = ulsan;
-    else if (e == "충청북도") var city = chungbuk;
-    else if (e == "충청남도") var city = chungnam;
-    else if (e == "전라북도") var city = jeonbuk;
-    else if (e == "전라남도") var city = jeonnam;
-    else if (e == "경상북도") var city = gyeongbuk;
-    else if (e == "경상남도") var city = gyeongnam;
-    else if (e == "제주") var city = jeju;
+    if (e == 1) var city = seoul;
+    else if (e == 2) var city = busan;
+    else if (e == 3) var city = daegu;
+    else if (e == 4) var city = incheon;
+    else if (e == 5) var city = gwangju;
+    else if (e == 6) var city = daejeon;
+    else if (e == 7) var city = ulsan;
+    else if (e == 8) var city = sejong;
+    else if (e == 9) var city = gyeonggi;
+    else if (e == 10) var city = gangwon;
+    else if (e == 11) var city = chungbuk;
+    else if (e == 12) var city = chungnam;
+    else if (e == 13) var city = jeonbuk;
+    else if (e == 14) var city = jeonnam;
+    else if (e == 15) var city = gyeongbuk;
+    else if (e == 16) var city = gyeongnam;
+    else if (e == 17) var city = jeju;
 
     target.options.length = 0;
 
