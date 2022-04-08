@@ -5,16 +5,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.lime.domain.Clazz;
-import com.lime.domain.Market;
 
 @Mapper
 public interface ClazzDao {
 
 	List<Clazz> findAll();
 	
-	 int insert(Clazz clazz);
+	int insert(Clazz clazz);
 	 
-	 List<Clazz> findByRegion(String regionName);
+	List<Clazz> findByRegion(String regionName);
 	 
-	 List<Clazz> findByCity(@Param("regionName") String regionName, @Param("cityName") String cityName);
+	List<Clazz> findByCity(@Param("regionName") String regionName, @Param("cityName") String cityName);
 }

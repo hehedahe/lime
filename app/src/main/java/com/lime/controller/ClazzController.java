@@ -25,7 +25,7 @@ public class ClazzController {
 	@Autowired
 	ClazzService clazzService;
 	
-	 @RequestMapping("/class/list")
+	 @RequestMapping("/class/list/1")
 	  public Object list(String regionName, String cityName) {
 		 System.out.println(regionName);
 		 System.out.println(cityName);
@@ -42,6 +42,12 @@ public class ClazzController {
 	      return clazzService.cityList(regionName, cityName);
 
 	 }
+	 
+	 @RequestMapping("/class/list")
+	  public Object list() {
+		 return clazzService.clazzList();
+	 }
+	 
 	
 	
 	
