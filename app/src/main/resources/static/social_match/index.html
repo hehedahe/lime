@@ -45,45 +45,22 @@
       $("#x-footer").load("/footer/footer.html");
     });
   </script>
+
+  <script src="../common/selectCity.js"></script>
+
 </head>
 
 <body>
 
   <div id="x-header" class="d-flex bd-highlight mb-3"></div>
 
-<<<<<<< HEAD
-=======
-  <!-- <nav id="u-nav-bar">
-    <div id="u-header" class="header">
-      <div class="nav-logo"><a href="/header/user/adminHeader.html">lime</a></div>
-      <div class="nav-menu-div">
-        <ul id="u-nav-menu">
-          <li><a href="#">소셜매치</a></li>
-          <li><a href="#">코트예약</a></li>
-          <li><a href="#">클래스</a></li>
-          <li><a href="#">라임마켓</a></li>
-          <li><a href="#">클럽</a></li>
-          <li><a href="#">커뮤니티</a></li>
-        </ul>
-      </div>
-      <div class="nav-links-div">
-        <ul class="u-nav-links">
-          <li><a href="../../login/login.html">로그인</a></li>
-          <li><a href="#">|</a></li>
-          <li><a href="../../signup/signup1.html">회원가입</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
-
->>>>>>> main
   <main class="social-match my-5">
 
     <div class="d-flex justify-content-between mb-3">
       <div class="d-flex w-100">
-        <select class="form-select" aria-label="region" name="" id="">
+        <select class="form-select" aria-label="region" name="" id="drop-region">
           <option selected>지역</option>
-          <option value="1">모든 지역</option>
+          <!-- <option value="1">모든 지역</option>
           <option value="2">서울</option>
           <option value="3">경기/강원</option>
           <option value="4">인천</option>
@@ -91,13 +68,13 @@
           <option value="6">대구/경북</option>
           <option value="7">부산/울산/경남</option>
           <option value="8">광주/전라</option>
-          <option value="9">제주</option>
+          <option value="9">제주</option> -->
         </select>
-        <select class="form-select" aria-label="city" name="" id="">
+        <select class="form-select" aria-label="city" name="" id="drop-city">
           <option selected>도시</option>
-          <option value="1">서귀포시</option>
+          <!-- <option value="1">서귀포시</option> -->
         </select>
-        <select class="form-select" aria-label="level" name="" id="">
+        <select class="form-select" aria-label="level" name="category" id="levelNo">
           <option selected>레벨</option>
           <option value="1">모든 레벨</option>
           <option value="2">BEGINNER</option>
@@ -105,13 +82,13 @@
           <option value="4">ADVANCED</option>
           <option value="5">PRO</option>
         </select>
-        <select class="form-select" aria-label="gender" name="category" id="">
-          <option selected>성별</option>
+        <select class="form-select" aria-label="gender" name="category" id="matchTypeNo">
+          <option value="-1" selected>성별</option>
           <option value="1">남자</option>
           <option value="2">여자</option>
           <option value="3">남녀모두</option>
         </select>
-        <select class="form-select" aria-label="court-type" name="" id="">
+        <select class="form-select" aria-label="court-type" name="category" id="courtTypeNo">
           <option selected>코트</option>
           <option value="1">하드</option>
           <option value="2">클레이</option>
@@ -152,11 +129,13 @@
 
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>c
   <script type="text/javascript">
+    "use strict"
     $(document).ready(function () {
       $.getJSON("http://localhost:8080/match/list", function (arr) {
         console.log(arr)
+        matchArr = [];
         const matchList = $(".match-list")
         let str = ''
         for (let i = 0; i < arr.length; i++) {
@@ -196,6 +175,16 @@
       })
     })
 
+    // import { selectCity } from '../common/selectCity.js'
+
+    // const dropResion = $("#drop-region")
+    // const infoBtn = $('.info-btn')
+    // const dropCity = $('#drop-city')
+
+    // dropResion.on('change', function (e) {
+    //   selectCity(dropResion.val());
+    // })
+
     function checkMatchType(matchTypeNo) {
       switch (matchTypeNo) {
         case 1: return '남자'
@@ -233,13 +222,52 @@
 
     console.log(checkCourtType(4))
 
+    let matchArr;
+
     $("select[name='category']").on("change", function (e) {
+      const category = $(e.target).closest("select").attr("id")
+      console.log(category)
       const idx = e.target.value
       console.log(idx)
 
       if (idx < 0) {
         return
       }
+
+      $.getJSON("http://localhost:8080/match/list", function (arr) {
+        const matchList = $(".match-list")
+        let str = ''
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].matchTypeNo == idx) {
+            matchArr.push(arr[i]);
+            let state = ''
+            let aaa = ''
+            if (arr[i].state === 'A') {
+              state = '신청 가능'
+            } else {
+              state = '마감'
+              aaa = 'closed-btn'
+            }
+            str += `
+            <a href="/social_match/social_match_3.html" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between align-items-center">
+                <div>
+                  <div class="d-flex justify-content-start align-items-center">
+                    <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
+                    <div class="ms-1">
+                      <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
+                      <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn match-btn ${aaa}">${state}</button>
+                </div>
+              </a>`
+          }
+        }
+        $(".match-list").html(str)
+        console.log(matchArr)
+      })
 
       // $(".match-list").html('')
       // storeService.loadJson(idx, makeStores)
