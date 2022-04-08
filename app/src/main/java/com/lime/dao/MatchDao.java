@@ -11,4 +11,6 @@ public interface MatchDao {
 
   List<Match> findAll();
 
+  List<Match> findBy();
+
 }
