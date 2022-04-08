@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'NG';
+    src: url("../asset/font/NanumGothic.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'NGBold';
+    src: url("../asset/font/NanumGothicBold.woff") format("woff");
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,10 +18,6 @@
 /* 헤더 import */
 ul {
     margin: 0;
-}
-
-p {
-
 }
 
 .container {
@@ -54,8 +60,8 @@ p {
 
 /* 좌우 버튼 */
 #left-btn, #right-btn {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     border: 1px solid rgba(0,0,0,0);
@@ -128,7 +134,20 @@ button.card:focus {
     background-color: rgb(249, 248, 113);
 }
 
+.card-cover:hover {
+    box-shadow: 0 0 0 0.25rem rgb(249, 248, 113, 25%);
+}
+
 button.card:focus .info-btn {
     background-color: #fff;
     color: black;
+}
+
+/* 선택된 테니스장 정보 */
+#selected-crt {
+    width: 90%;
+}
+
+#selected-crt > #crt-name {
+    font-weight: bold;
 }
