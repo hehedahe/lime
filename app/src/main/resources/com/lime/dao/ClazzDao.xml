@@ -35,9 +35,9 @@
 	from 
 	cls cl
 	left join city c
-	on cl.city_id=c.region_id
+	on cl.city_id=c.city_id
 	left join region r 
-	on c.region_id=r.region_id; 
+	on c.region_id=r.region_id
   </select>
   
   

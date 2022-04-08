@@ -31,71 +31,28 @@
 <!-- 메인 컨텐츠 -->
 <div class="container"> <!-- 컨텐츠들을 .container div로 감싸주고 .css 파일에서 max-width: 1024; 주기 -->
 
-
-<!--
-    <div id="drop-menu" class="row">
-        <div class="btn-group col-2 p-2 bd-highlight" id="drop-region">
-            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                지역
-            </button>
-            <ul class="dropdown-menu ">
-                <li><a class="dropdown-item" href="#">서울</a></li>
-                <li><a class="dropdown-item" href="#">부산</a></li>
-                <li><a class="dropdown-item" href="#">대구</a></li>
-                <li><a class="dropdown-item" href="#">인천</a></li>
-                <li><a class="dropdown-item" href="#">광주</a></li>
-                <li><a class="dropdown-item" href="#">대전</a></li>
-                <li><a class="dropdown-item" href="#">울산</a></li>
-                <li><a class="dropdown-item" href="#">세종</a></li>
-                <li><a class="dropdown-item" href="#">경기도</a></li>
-                <li><a class="dropdown-item" href="#">강원도</a></li>
-                <li><a class="dropdown-item" href="#">충청도</a></li>
-                <li><a class="dropdown-item" href="#">전라도</a></li>
-                <li><a class="dropdown-item" href="#">경상도</a></li>
-                <li><a class="dropdown-item" href="#">제주도</a></li>
-            </ul>
-        </div>
-
-        <div class="btn-group col-2 p-2 bd-highlight" id="drop-city">
-            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                도시
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-            </ul>
-        </div>
-
-        <div class="btn-group col-2 ms-auto p-2 bd-highlight" id="drop-preference">
-            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                선호지역
-            </button>
-            <ul class="dropdown-menu col-2">
-                <li><a class="dropdown-item" href="#">인천 연수구</a></li>
-            </ul>
-        </div>
-    </div>
--->
+    <!-- 시도, 시군구 select -->
     <div id="drop-menu" class="row w-100">
         <div class="d-flex col-2 p-2 bd-highlight">
             <select class="form-select border col-1 text-center" id="drop-region">
-                <option selected disabled hidden>지역</option>
-                <option>서울</option>
-                <option>경기</option>
-                <option>인천</option>
-                <option>강원</option>
-                <option>대전</option>
-                <option>세종</option>
-                <option>부산</option>
-                <option>대구</option>
-                <option>광주</option>
-                <option>울산</option>
-                <option>충청북도</option>
-                <option>충청남도</option>
-                <option>전라북도</option>
-                <option>전라남도</option>
-                <option>경상북도</option>
-                <option>경상남도</option>
-                <option>제주</option>
+                <option value="0" selected disabled hidden>지역</option>
+                <option value="1" data-id="1">서울</option>
+                <option value="2">부산</option>
+                <option value="3">대구</option>
+                <option value="4">인천</option>
+                <option value="5">광주</option>
+                <option value="6">대전</option>
+                <option value="7">울산</option>
+                <option value="8">세종</option>
+                <option value="9">경기</option>
+                <option value="10">강원</option>
+                <option value="11">충청북도</option>
+                <option value="12">충청남도</option>
+                <option value="13">전라북도</option>
+                <option value="14">전라남도</option>
+                <option value="15">경상북도</option>
+                <option value="16">경상남도</option>
+                <option value="17">제주</option>
             </select>
             <select class="form-select border col-1 text-center" aria-label="year" id="drop-city">
                 <option selected disabled hidden>도시</option>
@@ -160,7 +117,20 @@
             <i class="fa-solid fa-chevron-right fa-3x"></i>
         </div>
     </div>
+
+    <div id="selected-crt" class="row m-3">
+        <h4 id="crt-name">테니스장1</h4>
+        <p class="mb-1">테니스장 주소</p>
+        <div class="d-flex">
+            <span>실내</span>
+            <span class="dot mx-2">·</span>
+            <span>코트타입</span>
+            <span class="dot mx-2">·</span>
+            <span>주차가능</span>
+        </div>
+    </div>
 </div>
+
 
 <div id="x-footer"></div>
 
