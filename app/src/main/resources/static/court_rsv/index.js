@@ -28,18 +28,30 @@ fetch("/field/list").then(function (response) {
     }
 });
 
-var opt = $("option");
+// var opt = $("option");
+//
+// // console.log(opt.data("id"));
+// opt.on('click', function() {
+//     aaa();
+//     console.log(opt.val())
+// })
+//
+// function aaa() {
+//     fetch(`/city/findCity?regionId=${regionId}`).then(function (response) {
+//         return response.json();
+//     }).then(function (result) {
+//         console.log(result.data);
+//     })
+// }
 
-// console.log(opt.data("id"));
-opt.on('click', function() {
-    aaa();
-    console.log(opt.val())
-})
 
-function aaa() {
-    fetch(`/city/findCity?regionId=${regionId}`).then(function (response) {
-        return response.json();
-    }).then(function (result) {
-        console.log(result.data);
-    })
-}
+
+$('.date-wrapper').slick({
+    infinite: false,
+    speed: 300,
+    slidesToShow: 7,
+    slidesToScroll: 7,
+    prevArrow: $("#date-l-btn"),
+    nextArrow: $("#date-r-btn")
+});
+
