@@ -12,6 +12,14 @@
     <!--    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">-->
     <script src="https://kit.fontawesome.com/0b4dd5be7a.js" crossorigin="anonymous"></script>
 
+    <!-- slick -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
 
     <title>코트예약</title>
 
@@ -70,7 +78,7 @@
     <div id="map" class="position-relative"></div>
 
     <div id="crt-info" class="d-flex justify-content-around align-items-center position-absolute bottom-0 start-50 translate-middle-x">
-        <button id="left-btn" class="border rounded-circle justify-content-center" type="button">
+        <button id="card-l-btn" class="border rounded-circle justify-content-center left-btn" type="button">
             <i class="fa-solid fa-chevron-left fa-3x"></i>
         </button>
 
@@ -90,7 +98,7 @@
             <div class="card-cover">
                 <button class="card border-0">
                     <div class="card-body">
-                        <h5 class="card-title">테니스장1</h5>
+                        <h5 class="card-title">테니스장2</h5>
                         <p class="card-text">#하드코트</p>
                         <div class="content3">
                             <p class="card-text">300m</p>
@@ -102,7 +110,43 @@
             <div class="card-cover">
                 <button class="card border-0">
                     <div class="card-body">
-                        <h5 class="card-title">테니스장1</h5>
+                        <h5 class="card-title">테니스장3</h5>
+                        <p class="card-text text1">#하드코트</p>
+                        <div class="content3">
+                            <p class="card-text text2">300m</p>
+                            <a href="#" class="btn btn-sm info-btn">정보</a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="card-cover">
+                <button class="card border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">테니스장4</h5>
+                        <p class="card-text text1">#하드코트</p>
+                        <div class="content3">
+                            <p class="card-text text2">300m</p>
+                            <a href="#" class="btn btn-sm info-btn">정보</a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="card-cover">
+                <button class="card border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">테니스장5</h5>
+                        <p class="card-text text1">#하드코트</p>
+                        <div class="content3">
+                            <p class="card-text text2">300m</p>
+                            <a href="#" class="btn btn-sm info-btn">정보</a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="card-cover">
+                <button class="card border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">테니스장6</h5>
                         <p class="card-text text1">#하드코트</p>
                         <div class="content3">
                             <p class="card-text text2">300m</p>
@@ -113,9 +157,9 @@
             </div>
         </div>
 
-        <div id="right-btn"  class="border rounded-circle text-center justify-content-center" type="button">
+        <button id="card-r-btn" class="border rounded-circle text-center justify-content-center right-btn" type="button">
             <i class="fa-solid fa-chevron-right fa-3x"></i>
-        </div>
+        </button>
     </div>
 
     <!-- 선택된 테니스장 정보 -->
@@ -131,7 +175,73 @@
         </div>
     </div>
 
+    <div class="d-flex justify-content-between align-items-center">
+        <button id="date-l-btn" class="border-0 rounded-circle justify-content-center left-btn" type="button">
+            <i class="fa-solid fa-chevron-left fa-1x"></i>
+        </button>
+        <div class="date-wrapper d-flex w-100">
+            <div class="date-wrap col mx-2 py-1">
+                <p>8일</p>
+                <p>금</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1 sat">
+                <p>9일</p>
+                <p>토</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1 sun">
+                <p>10일</p>
+                <p>일</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>11일</p>
+                <p>월</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>12일</p>
+                <p>화</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>13일</p>
+                <p>수</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>14일</p>
+                <p>목</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>15일</p>
+                <p>금</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1 sat">
+                <p>16일</p>
+                <p>토</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1 sun">
+                <p>17일</p>
+                <p>일</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>18일</p>
+                <p>월</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>19일</p>
+                <p>화</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>20일</p>
+                <p>수</p>
+            </div>
+            <div class="date-wrap col mx-2 py-1">
+                <p>21일</p>
+                <p>목</p>
+            </div>
 
+        </div>
+        <button id="date-r-btn" class="border-0 rounded-circle justify-content-center right-btn" type="button">
+            <i class="fa-solid fa-chevron-right fa-1x"></i>
+        </button>
+    </div>
 
 
 
