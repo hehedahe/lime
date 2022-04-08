@@ -17,13 +17,9 @@
 .container{
 	position: absolute; 
 	width: 1024px;
-  height: 80%;
+  height: 80%;  
 }
 
-#tables {
-  height: 80%;
-  
-}
 .col {
   height: 80%;
 }
@@ -36,3 +32,7 @@
 
 }
 
+.col-1{
+    border: 2px #66C88D;
+    font-size: large;
+}
