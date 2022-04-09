@@ -7,4 +7,6 @@ public interface MatchService {
 
   List<Match> list();
 
+  int getCount();
+
 }

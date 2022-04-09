@@ -24,7 +24,7 @@
       <result column="court_type_id" property="courtTypeNo"/>
       <collection property="field" ofType="Field">
         <id column="field_id" property="fieldId"/>
-        <result column="fName" property="name"/>
+        <result column="field_name" property="name"/>
         <result column="addr" property="addr"/>
       </collection>
     </collection>
@@ -70,7 +70,7 @@
 		  c.court_type_id,
 		  c.field_id,
 		  f.field_id,
-		  f.name as fName,
+		  f.name as field_name,
 		  f.addr
 		from social_mtch m
 		  left outer join court c on m.court_id=c.court_id
@@ -79,5 +79,7 @@
 		  m.st_time asc, f.name asc
   </select>
   
-
+  <select id="countAll" resultType="int">
+    select count(*) from social_mtch
+  </select>
 </mapper>

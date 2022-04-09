@@ -18,5 +18,8 @@ public class DefaultMatchService implements MatchService {
     return matchDao.findAll();
   }
 
-
+  @Override
+  public int getCount() {
+    return matchDao.countAll();
+  }
 }
