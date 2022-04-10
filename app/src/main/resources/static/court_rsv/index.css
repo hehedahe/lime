@@ -48,41 +48,38 @@
     height: 725px;
 }
 
-#crt-info {
+#info-card {
     z-index:9999;
     margin-bottom: 10px;
+    width: 1024px;
 }
 
-/* 좌우 버튼 */
-.left-btn,
-.right-btn {
-    width: 70px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    background-color: rgba(255,255,255,0.5);
-}
+/*!* 좌우 버튼 *!*/
+/*.left-btn,*/
+/*.right-btn {*/
+/*    width: 70px;*/
+/*    height: 70px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    background-color: rgba(255,255,255,0.5);*/
+/*}*/
 
-.left-btn > i,
-.right-btn > i {
-    color: rgb(127, 127, 127);
-}
+/*.left-btn > i,*/
+/*.right-btn > i {*/
+/*    color: rgb(127, 127, 127);*/
+/*}*/
 
-/* 좌우 버튼 호버 */
-.left-btn:hover,
-.right-btn:hover {
-    background-color: #fff;
-}
+/*!* 좌우 버튼 호버 *!*/
+/*.left-btn:hover,*/
+/*.right-btn:hover {*/
+/*    background-color: #fff;*/
+/*}*/
 
-.left-btn:hover > i,
-.right-btn:hover > i {
-    color: #000;
-}
+/*.left-btn:hover > i,*/
+/*.right-btn:hover > i {*/
+/*    color: #000;*/
+/*}*/
 
-/* 정보 카드 margin */
-.card-cover {
-    margin: 0 10px;
-}
 
 /* <p> margin */
 .card-text {

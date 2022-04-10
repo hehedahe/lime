@@ -54,6 +54,22 @@ fetch("/field/list").then(function (response) {
 //     nextArrow: $("#date-r-btn")
 // });
 
+var swiper2 = new Swiper("#info-card", {
+    slidesPerView: 3,
+    slidesPerGroup: 3,
+    simulateTouch: false,
+    direction: getDirection(),
+    navigation: {
+        nextEl: "#c-next",
+        prevEl: "#c-prev"
+    },
+    on: {
+        resize: function () {
+            swiper2.changeDirection(getDirection());
+        }
+    }
+});
+
 var swiper = new Swiper(".date-swiper", {
     slidesPerView: 7,
     slidesPerGroup: 7,
@@ -74,6 +90,7 @@ var swiper = new Swiper(".date-swiper", {
 function getDirection() {
     var windowWidth = window.innerWidth;
     var direction = window.innerWidth <= 720 ? "vertical" : "horizontal";
-
     return direction;
 }
+
+
