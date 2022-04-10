@@ -44,14 +44,34 @@ fetch("/field/list").then(function (response) {
 //     })
 // }
 
+// slick slider
+// $('.date-wrapper').slick({
+//     infinite: false,
+//     speed: 300,
+//     slidesToShow: 7,
+//     slidesToScroll: 7,
+//     prevArrow: $("#date-l-btn"),
+//     nextArrow: $("#date-r-btn")
+// });
 
-
-$('.date-wrapper').slick({
-    infinite: false,
-    speed: 300,
-    slidesToShow: 7,
-    slidesToScroll: 7,
-    prevArrow: $("#date-l-btn"),
-    nextArrow: $("#date-r-btn")
+var swiper = new Swiper(".swiper", {
+    slidesPerView: 7,
+    direction: getDirection(),
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+    },
+    on: {
+        resize: function () {
+            swiper.changeDirection(getDirection());
+        }
+    }
 });
+
+function getDirection() {
+    var windowWidth = window.innerWidth;
+    var direction = window.innerWidth <= 1024 ? "vertical" : "horizontal";
+
+    return direction;
+}
 

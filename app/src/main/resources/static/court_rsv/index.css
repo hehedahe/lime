@@ -15,11 +15,6 @@
     padding: 0;
 }
 
-/* 헤더 import */
-ul {
-    margin: 0;
-}
-
 .container {
     max-width: 1024px; /* 컨텐츠 width 1024로 맞춰주기 */
     height: 100vh;
@@ -135,7 +130,7 @@ button.card:focus {
 }
 
 /* 카드 호버 */
-.card-cover:hover {
+button.card:hover {
     box-shadow: 0 0 0 0.25rem rgb(249, 248, 113, 25%);
 }
 
@@ -159,7 +154,7 @@ button.card:focus .info-btn {
 }
 
 .date-wrap {
-    border-radius: 40px;
+    border-radius: 50px;
 }
 
 /* 날짜 호버 그림자 */
@@ -169,7 +164,7 @@ button.card:focus .info-btn {
 
 /* 날짜 p margin*/
 .date-wrap > p {
-    margin: 0;
+    margin-bottom: 0;
     text-align: center;
 }
 
@@ -183,3 +178,40 @@ button.card:focus .info-btn {
 
 
 
+/**/
+
+html,
+body {
+    position: relative;
+    /*height: 100%;*/
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.swiper {
+    width: 90%;
+    height: 10%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
