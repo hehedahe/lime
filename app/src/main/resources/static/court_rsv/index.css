@@ -59,32 +59,32 @@ ul {
 }
 
 /* 좌우 버튼 */
-#left-btn, #right-btn {
+.left-btn,
+.right-btn {
     width: 70px;
     height: 70px;
     display: flex;
     align-items: center;
-    border: 1px solid rgba(0,0,0,0);
     background-color: rgba(255,255,255,0.5);
 }
 
-#left-btn > i,
-#right-btn > i {
+.left-btn > i,
+.right-btn > i {
     color: rgb(127, 127, 127);
 }
 
-/* 좌우 버튼 클릭 시*/
-#left-btn:hover,
-#right-btn:hover {
+/* 좌우 버튼 호버 */
+.left-btn:hover,
+.right-btn:hover {
     background-color: #fff;
 }
 
-#left-btn:hover > i,
-#right-btn:hover > i {
+.left-btn:hover > i,
+.right-btn:hover > i {
     color: #000;
 }
 
-/* 정보 카드 마진 */
+/* 정보 카드 margin */
 .card-cover {
     margin: 0 10px;
 }
@@ -94,7 +94,7 @@ ul {
     margin: 2px 0;
 }
 
-/* 지도 안 코트 정보 카드*/
+/* 지도 안 코트 카드*/
 button.card {
     border-radius: 25px;
     width: 240px;
@@ -129,11 +129,12 @@ button.card {
     line-height: 15px;
 }
 
-/* 카드 클릭 시 */
+/* 카드 클릭 */
 button.card:focus {
     background-color: rgb(249, 248, 113);
 }
 
+/* 카드 호버 */
 .card-cover:hover {
     box-shadow: 0 0 0 0.25rem rgb(249, 248, 113, 25%);
 }
@@ -151,3 +152,34 @@ button.card:focus .info-btn {
 #selected-crt > #crt-name {
     font-weight: bold;
 }
+
+/* 다음, 이전 날짜가 있을 때 좌우버튼 색*/
+#date-r-btn > i {
+    color: rgb(33, 159, 148);
+}
+
+.date-wrap {
+    border-radius: 40px;
+}
+
+/* 날짜 호버 그림자 */
+.date-wrap:hover {
+    box-shadow: 0 0 0 0.25rem rgb(33, 159, 148, 25%);
+}
+
+/* 날짜 p margin*/
+.date-wrap > p {
+    margin: 0;
+    text-align: center;
+}
+
+/* 토욜 일욜 color */
+.date-wrap.sat {
+    color: rgb(41, 128, 185);
+}
+.date-wrap.sun {
+    color: #ea3e42;
+}
+
+
+

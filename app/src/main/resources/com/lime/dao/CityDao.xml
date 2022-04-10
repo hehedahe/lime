@@ -28,7 +28,7 @@
             r.region_name
         from city c
                  left join region r on c.region_id=r.region_id
-        where c.city_id=#{cityId};
+        where c.city_id=#{cityId}
     </select>
 
     <select id="findRegionLatlng" resultMap="cityMap" parameterType="int">
@@ -38,7 +38,7 @@
             lng,
             region_name
         from region
-        where region_id=#{regionId};
+        where region_id=#{regionId}
     </select>
 
 

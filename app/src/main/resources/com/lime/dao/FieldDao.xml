@@ -26,7 +26,7 @@
     LEFT JOIN court_type ct
         ON c.court_type_id=ct.court_type_id
     WHERE f.field_type='R'
-    GROUP BY f.field_id;
+    GROUP BY f.field_id
 </select>
 
 <select id="findByLatLng" resultMap="fieldMap">
@@ -45,7 +45,7 @@
 from field f
 left outer join court c on f.field_id=c.field_id
 having distance &lt; 2
-order by distance DESC;
+order by distance DESC
 </select>
 
 
