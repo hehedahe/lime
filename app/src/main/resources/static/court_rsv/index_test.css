@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'NG';
+    src: url("../asset/font/NanumGothic.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'NGBold';
+    src: url("../asset/font/NanumGothicBold.woff") format("woff");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1024px; /* 컨텐츠 width 1024로 맞춰주기 */
+    height: 100vh;
+    padding: 0;
+}
+
+/* 드롭다운 메뉴 */
+#drop-menu {
+    width: 1024px;
+    heigth: 10vh;
+    padding: 20px;
+    margin: 0px;
+}
+
+/*!* 드롭다운 메뉴 테두리 *!*/
+/*.dropdown-toggle {*/
+.form-select {
+    border-radius: 50px;
+    /*width: 200px;*/
+    margin-right: 10px;
+}
+
+/*.dropdown-menu {*/
+/*    border: 1px solid rgb(190, 190, 190);*/
+/*    border-radius: 20px;*/
+/*}*/
+
+/* 지도 */
+#map {
+    width: 1024px;
+    height: 725px;
+}
+
+
+/* swiper css */
+html,
+body {
+    position: relative;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.swiper {
+    width: 100%;
+    height: 15vh;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+/*.swiper-slide {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+
+/*}*/

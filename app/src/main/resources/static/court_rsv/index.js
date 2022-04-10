@@ -54,12 +54,15 @@ fetch("/field/list").then(function (response) {
 //     nextArrow: $("#date-r-btn")
 // });
 
-var swiper = new Swiper(".swiper", {
+var swiper = new Swiper(".date-swiper", {
     slidesPerView: 7,
+    slidesPerGroup: 7,
+    spaceBetween: 10, // slidesPerView 여백
+    simulateTouch: false,
     direction: getDirection(),
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
+        nextEl: ".date-next",
+        prevEl: ".date-prev"
     },
     on: {
         resize: function () {
@@ -70,8 +73,7 @@ var swiper = new Swiper(".swiper", {
 
 function getDirection() {
     var windowWidth = window.innerWidth;
-    var direction = window.innerWidth <= 1024 ? "vertical" : "horizontal";
+    var direction = window.innerWidth <= 720 ? "vertical" : "horizontal";
 
     return direction;
 }
-

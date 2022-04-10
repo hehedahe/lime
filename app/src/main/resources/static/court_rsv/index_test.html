@@ -6,7 +6,7 @@
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index_test.css">
 
     <!-- fontawesome -->
     <!--    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">-->
@@ -74,92 +74,27 @@
     </div>
 
 
-
     <div id="map" class="position-relative"></div>
 
-    <div id="crt-info" class="d-flex justify-content-around align-items-center position-absolute bottom-0 start-50 translate-middle-x">
-        <button id="card-l-btn" class="border rounded-circle justify-content-center left-btn" type="button">
-            <i class="fa-solid fa-chevron-left fa-3x"></i>
-        </button>
 
-        <div class="d-flex" id="crt-card">
-            <div class="card-cover">
-                <button class="card border-0">
-                    <div class="card-body">
-                        <h5 class="card-title">테니스장1</h5>
-                        <p class="card-text">#하드코트</p>
-                        <div class="content3">
-                            <p class="card-text">300m</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div class="card-cover">
-                <button class="card border-0">
-                    <div class="card-body">
-                        <h5 class="card-title">테니스장2</h5>
-                        <p class="card-text">#하드코트</p>
-                        <div class="content3">
-                            <p class="card-text">300m</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div class="card-cover">
-                <button class="card border-0">
-                    <div class="card-body">
-                        <h5 class="card-title">테니스장3</h5>
-                        <p class="card-text text1">#하드코트</p>
-                        <div class="content3">
-                            <p class="card-text text2">300m</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div class="card-cover">
-                <button class="card border-0">
-                    <div class="card-body">
-                        <h5 class="card-title">테니스장4</h5>
-                        <p class="card-text text1">#하드코트</p>
-                        <div class="content3">
-                            <p class="card-text text2">300m</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div class="card-cover">
-                <button class="card border-0">
-                    <div class="card-body">
-                        <h5 class="card-title">테니스장5</h5>
-                        <p class="card-text text1">#하드코트</p>
-                        <div class="content3">
-                            <p class="card-text text2">300m</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div class="card-cover">
-                <button class="card border-0">
-                    <div class="card-body">
-                        <h5 class="card-title">테니스장6</h5>
-                        <p class="card-text text1">#하드코트</p>
-                        <div class="content3">
-                            <p class="card-text text2">300m</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
-                        </div>
-                    </div>
-                </button>
-            </div>
+    <!-- Swiper -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <button class="swiper-slide">
+                    <span>테니스장1</span>
+                    <span>#하드코트</span>
+                    <span>300m</span>
+                    <a>정보</a>
+            </button>
+            <div class="swiper-slide">Resize me2</div>
+            <div class="swiper-slide">Resize me3</div>
+            <div class="swiper-slide">Resize me4</div>
+            <div class="swiper-slide">Resize me5</div>
+            <div class="swiper-slide">Resize me5</div>
+            <div class="swiper-slide">Resize me6</div>
         </div>
-
-        <button id="card-r-btn" class="border rounded-circle text-center justify-content-center right-btn" type="button">
-            <i class="fa-solid fa-chevron-right fa-3x"></i>
-        </button>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 
     <!-- 선택된 테니스장 정보 -->
@@ -173,74 +108,6 @@
             <span class="dot mx-2">·</span>
             <span>주차가능</span>
         </div>
-    </div>
-
-    <div class="swiper d-flex justify-content-between align-items-center">
-        <button id="date-l-btn" class="swiper-button-prev border-0 rounded-circle justify-content-center left-btn" type="button">
-            <i class="fa-solid fa-chevron-left fa-1x"></i>
-        </button>
-        <div class="date-wrapper swiper-wrapper d-flex align-items-center w-100">
-            <div class="date-wrap swiper-slide col mx-2 py-0">
-                <p>8일</p>
-                <p>금</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1 sat">
-                <p>9일</p>
-                <p>토</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1 sun">
-                <p>10일</p>
-                <p>일</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>11일</p>
-                <p>월</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>12일</p>
-                <p>화</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>13일</p>
-                <p>수</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>14일</p>
-                <p>목</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>15일</p>
-                <p>금</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1 sat">
-                <p>16일</p>
-                <p>토</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1 sun">
-                <p>17일</p>
-                <p>일</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>18일</p>
-                <p>월</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>19일</p>
-                <p>화</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>20일</p>
-                <p>수</p>
-            </div>
-            <div class="date-wrap swiper-slide col mx-2 py-1">
-                <p>21일</p>
-                <p>목</p>
-            </div>
-
-        </div>
-        <button id="date-r-btn" class="swiper-button-next border-0 rounded-circle justify-content-center right-btn" type="button">
-            <i class="fa-solid fa-chevron-right fa-1x"></i>
-        </button>
     </div>
 
 
