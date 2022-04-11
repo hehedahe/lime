@@ -15,11 +15,6 @@
     padding: 0;
 }
 
-/* 헤더 import */
-ul {
-    margin: 0;
-}
-
 .container {
     max-width: 1024px; /* 컨텐츠 width 1024로 맞춰주기 */
     height: 100vh;
@@ -53,41 +48,38 @@ ul {
     height: 725px;
 }
 
-#crt-info {
+#info-card {
     z-index:9999;
     margin-bottom: 10px;
+    width: 1024px;
 }
 
-/* 좌우 버튼 */
-.left-btn,
-.right-btn {
-    width: 70px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    background-color: rgba(255,255,255,0.5);
-}
+/*!* 좌우 버튼 *!*/
+/*.left-btn,*/
+/*.right-btn {*/
+/*    width: 70px;*/
+/*    height: 70px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    background-color: rgba(255,255,255,0.5);*/
+/*}*/
 
-.left-btn > i,
-.right-btn > i {
-    color: rgb(127, 127, 127);
-}
+/*.left-btn > i,*/
+/*.right-btn > i {*/
+/*    color: rgb(127, 127, 127);*/
+/*}*/
 
-/* 좌우 버튼 호버 */
-.left-btn:hover,
-.right-btn:hover {
-    background-color: #fff;
-}
+/*!* 좌우 버튼 호버 *!*/
+/*.left-btn:hover,*/
+/*.right-btn:hover {*/
+/*    background-color: #fff;*/
+/*}*/
 
-.left-btn:hover > i,
-.right-btn:hover > i {
-    color: #000;
-}
+/*.left-btn:hover > i,*/
+/*.right-btn:hover > i {*/
+/*    color: #000;*/
+/*}*/
 
-/* 정보 카드 margin */
-.card-cover {
-    margin: 0 10px;
-}
 
 /* <p> margin */
 .card-text {
@@ -135,11 +127,11 @@ button.card:focus {
 }
 
 /* 카드 호버 */
-.card-cover:hover {
+button.card:hover {
     box-shadow: 0 0 0 0.25rem rgb(249, 248, 113, 25%);
 }
 
-button.card:focus .info-btn {
+button.card:focus > .info-btn {
     background-color: #fff;
     color: black;
 }
@@ -159,19 +151,13 @@ button.card:focus .info-btn {
 }
 
 .date-wrap {
-    border-radius: 40px;
+    border-radius: 50px;
 }
 
 /* 날짜 호버 그림자 */
-.date-wrap:hover {
-    box-shadow: 0 0 0 0.25rem rgb(33, 159, 148, 25%);
-}
-
-/* 날짜 p margin*/
-.date-wrap > p {
-    margin: 0;
-    text-align: center;
-}
+/*.date-wrap:hover {*/
+/*    box-shadow: 0 0 0 0.25rem rgb(33, 159, 148, 25%);*/
+/*}*/
 
 /* 토욜 일욜 color */
 .date-wrap.sat {
@@ -183,3 +169,56 @@ button.card:focus .info-btn {
 
 
 
+/* swiper css */
+html,
+body {
+    position: relative;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#swiper-temp {
+    position: relative;
+    width: 1024px;
+}
+
+.date-swiper {
+    height: 70px;
+    position: static;
+    width: 45vw;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.date-wrap {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 0;
+}
+
+button.date-wrap:focus {
+    background-color: rgb(102, 200, 141);
+    color: #fff;
+}

@@ -3,6 +3,7 @@ package com.lime.dao;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import com.lime.domain.Match;
+import com.lime.domain.SearchCondition;
 
 @Mapper
 public interface MatchDao {
@@ -11,6 +12,8 @@ public interface MatchDao {
 
   List<Match> findAll();
 
-  List<Match> findBy();
+  Match findByNo(int no);
+
+  List<Match> searchSelectMatch(SearchCondition sc);
 
 }
