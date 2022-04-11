@@ -44,14 +44,53 @@ fetch("/field/list").then(function (response) {
 //     })
 // }
 
+// slick slider
+// $('.date-wrapper').slick({
+//     infinite: false,
+//     speed: 300,
+//     slidesToShow: 7,
+//     slidesToScroll: 7,
+//     prevArrow: $("#date-l-btn"),
+//     nextArrow: $("#date-r-btn")
+// });
 
-
-$('.date-wrapper').slick({
-    infinite: false,
-    speed: 300,
-    slidesToShow: 7,
-    slidesToScroll: 7,
-    prevArrow: $("#date-l-btn"),
-    nextArrow: $("#date-r-btn")
+var swiper2 = new Swiper("#info-card", {
+    slidesPerView: 3,
+    slidesPerGroup: 3,
+    simulateTouch: false,
+    direction: getDirection(),
+    navigation: {
+        nextEl: "#c-next",
+        prevEl: "#c-prev"
+    },
+    on: {
+        resize: function () {
+            swiper2.changeDirection(getDirection());
+        }
+    }
 });
+
+var swiper = new Swiper(".date-swiper", {
+    slidesPerView: 7,
+    slidesPerGroup: 7,
+    spaceBetween: 10, // slidesPerView 여백
+    simulateTouch: false,
+    direction: getDirection(),
+    navigation: {
+        nextEl: ".date-next",
+        prevEl: ".date-prev"
+    },
+    on: {
+        resize: function () {
+            swiper.changeDirection(getDirection());
+        }
+    }
+});
+
+function getDirection() {
+    var windowWidth = window.innerWidth;
+    var direction = window.innerWidth <= 720 ? "vertical" : "horizontal";
+    return direction;
+}
+
 

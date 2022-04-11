@@ -133,7 +133,7 @@
     list-style: none;
 }
 
-#u-nav-links li a {
+#u-nav-links > li > a {
     display: flex;
     flex-basis: 100%;
     justify-content: center;
@@ -155,7 +155,6 @@
     color: #92DB82;
     font-family: 'NGBold';
     text-decoration: none;
-    color: #000;
 }
 
 #u-nav-links > div {
