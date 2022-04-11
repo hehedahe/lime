@@ -77,8 +77,8 @@ var swiper = new Swiper(".date-swiper", {
     simulateTouch: false,
     direction: getDirection(),
     navigation: {
-        nextEl: ".date-next",
-        prevEl: ".date-prev"
+        nextEl: "#date-next",
+        prevEl: "#date-prev"
     },
     on: {
         resize: function () {

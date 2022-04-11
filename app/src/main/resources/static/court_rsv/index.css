@@ -33,7 +33,6 @@
 /*.dropdown-toggle {*/
 .form-select {
     border-radius: 50px;
-    /*width: 200px;*/
     margin-right: 10px;
 }
 
@@ -48,10 +47,19 @@
     height: 725px;
 }
 
+/* card swiper css */
+#swiper-temp2 {
+    position: relative;
+    width: 100%;
+    /*left: 20px;*/
+}
+
+/* 코트 카드 */
 #info-card {
+    position: static;
     z-index:9999;
     margin-bottom: 10px;
-    width: 1024px;
+    width: 45vw;
 }
 
 /*!* 좌우 버튼 *!*/
@@ -90,6 +98,12 @@
 button.card {
     border-radius: 25px;
     width: 240px;
+}
+
+/* 카드 좌우버튼 색*/
+#c-next, #c-prev {
+    color: rgb(127, 127, 127);
+    top: -70px;
 }
 
 /* 카드 안 컨텐트 정렬 */
@@ -146,9 +160,9 @@ button.card:focus > .info-btn {
 }
 
 /* 다음, 이전 날짜가 있을 때 좌우버튼 색*/
-#date-r-btn > i {
-    color: rgb(33, 159, 148);
-}
+/*#date-r-btn > i {*/
+/*    color: rgb(33, 159, 148);*/
+/*}*/
 
 .date-wrap {
     border-radius: 50px;
@@ -222,3 +236,11 @@ button.date-wrap:focus {
     background-color: rgb(102, 200, 141);
     color: #fff;
 }
+
+#date-next, #date-prev {
+    color: rgb(33, 159, 148);
+}
+
+
+
+/* 스케쥴 */

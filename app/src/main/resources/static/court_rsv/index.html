@@ -74,17 +74,17 @@
     </div>
 
 
-
+    <!--  지도  -->
     <div id="map" class="position-relative"></div>
 
-
+    <!--  카드 swiper  -->
+    <div id="swiper-temp2">
+        <div id="c-next" class="swiper-button-next"></div>
+        <div id="c-prev" class="swiper-button-prev"></div>
         <div id="info-card" class="swiper d-flex justify-content-around align-items-center position-absolute bottom-0 start-50 translate-middle-x">
 <!--            <button id="card-l-btn" class="border swiper-button-prev rounded-circle justify-content-center left-btn" type="button">-->
 <!--                <i class="fa-solid fa-chevron-left fa-3x"></i>-->
 <!--            </button>-->
-            <div id="c-next" class="swiper-button-next"></div>
-            <div id="c-prev" class="swiper-button-prev"></div>
-
             <div id="crt-card" class="swiper-wrapper">
                 <div class="card-cover swiper-slide">
                     <button id="card-btn" class="card border-0">
@@ -163,7 +163,7 @@
 <!--                <i class="fa-solid fa-chevron-right fa-3x"></i>-->
 <!--            </button>-->
         </div>
-
+    </div>
     <!-- 선택된 테니스장 정보 -->
     <div id="selected-crt" class="row m-3">
         <h4 id="crt-name">테니스장1</h4>
@@ -177,7 +177,7 @@
         </div>
     </div>
 
-
+    <!--  날짜 swiper  -->
     <div id="swiper-temp">
         <div class="swiper date-swiper">
             <div class="date-wrapper swiper-wrapper">
@@ -197,12 +197,25 @@
                 <button class="date-wrap swiper-slide sun">24일<br>일</button>
             </div>
         </div>
-        <div class="swiper-button-next date-next"></div>
-        <div class="swiper-button-prev date-prev"></div>
+        <div id="date-next" class="swiper-button-next"></div>
+        <div id="date-prev" class="swiper-button-prev"></div>
     </div>
 
-
-
+    <div id="schedule" class="w-100">
+        <div class="w-75 d-flex flex-column align-items-center">
+            <div>코트1</div>
+            <div id="schedule-wrapper" class="d-flex justify-content-between">
+                <div class="schedule-wrap border">06:00~08:00</div>
+                <div class="schedule-wrap border">08:00~10:00</div>
+                <div class="schedule-wrap border">10:00~12:00</div>
+                <div class="schedule-wrap border">12:00~14:00</div>
+                <div class="schedule-wrap border">14:00~16:00</div>
+                <div class="schedule-wrap border">16:00~18:00</div>
+                <div class="schedule-wrap border">18:00~20:00</div>
+                <div class="schedule-wrap border">20:00~22:00</div>
+            </div>
+        </div>
+    </div>
 
 
 
