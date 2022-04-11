@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lime header</title>
+    <link rel="stylesheet" href="../header.css">
+    <link rel="stylesheet" href="../sidebar/sidebar.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+
+
+
+<nav>
+    <div class="header">
+        <ul class="nav-logo">
+            <li>lime</li>
+            <li>manager</li>
+        </ul>
+        <div class="nav-links">
+            <a href="#">로그아웃</a>
+        </div>
+    </div>
+</nav>
+
+<!-- <div id="sidebar-wrapper">
+</div> -->
+
+
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- header, footer 삽입 제이쿼리-->
+<script type="text/javascript">
+    $(document).ready( function() {
+            $("#sidebar-wrapper").load("../sidebar/sidebar.html");  //헤더 인클루드
+        }
+    ); 
+</script>
+
+
+</body>
+</html>
