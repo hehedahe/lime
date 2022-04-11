@@ -60,7 +60,7 @@
     <div class="d-flex justify-content-between mb-3">
       <div class="d-flex w-100">
         <select class="form-select" aria-label="region" name="region" id="drop-region">
-          <option selected>지역</option>
+          <option value="0" selected>지역</option>
           <option value="1">서울</option>
           <option value="2">부산</option>
           <option value="3">대구</option>
@@ -93,21 +93,21 @@
           <!-- <option value="1">서귀포시</option> -->
         </select>
         <select class="form-select" aria-label="level" name="level" id="levelNo">
-          <option selected>레벨</option>
+          <option value="0" selected>레벨</option>
           <option value="1">모든 레벨</option>
           <option value="2">BEGINNER</option>
           <option value="3">INTERMEDIATE</option>
           <option value="4">ADVANCED</option>
           <option value="5">PRO</option>
         </select>
-        <select class="form-select" aria-label="gender" name="match-type" id="matchTypeNo">
-          <option value="-1" selected>성별</option>
+        <select class="form-select" aria-label="gender" name="matchType" id="matchType">
+          <option value="0" selected>성별</option>
           <option value="1">남자</option>
           <option value="2">여자</option>
           <option value="3">남녀모두</option>
         </select>
-        <select class="form-select" aria-label="court-type" name="court-type" id="courtTypeNo">
-          <option selected>코트</option>
+        <select class="form-select" aria-label="court-type" name="courtType" id="courtType">
+          <option value="0" selected>코트</option>
           <option value="1">하드</option>
           <option value="2">클레이</option>
           <option value="3">잔디</option>
@@ -133,18 +133,6 @@
 
   <div id="x-footer"></div>
 
-  <!-- <script id="tr-template" type="text/x-handlebars-template">
-  {{#each this}}
-    <tr>
-      <td>{{no}}</td>
-      <td><a href="view.html?no={{no}}">{{name}}</a></td>
-      <td>{{email}}</td>
-      <td>{{tels.[0].tel}}</td>
-      <td>{{company}}</td>
-    </tr>
-  {{/each}}
-  </script> -->
-
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -153,7 +141,6 @@
     $(document).ready(function () {
       $.getJSON("http://localhost:8080/match/list", function (arr) {
         console.log(arr)
-        matchArr = [];
         const matchList = $(".match-list")
         let str = ''
         for (let i = 0; i < arr.length; i++) {
@@ -165,14 +152,6 @@
             state = '마감'
             aaa = 'closed-btn'
           }
-          /*let matchType = ''
-          if (arr[i].matchTypeNo === 1) {
-            matchType = '남자'
-          } else if (arr[i].matchTypeNo === 2) {
-            matchType = '여자'
-          } else {
-            matchType = '혼성'
-          }*/
           str += `
           <a href="/social_match/index.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between align-items-center">
@@ -192,16 +171,6 @@
         $(".match-list").html(str)
       })
     })
-
-    // import { selectCity } from '../common/selectCity.js'
-
-    // const dropResion = $("#drop-region")
-    // const infoBtn = $('.info-btn')
-    // const dropCity = $('#drop-city')
-
-    // dropResion.on('change', function (e) {
-    //   selectCity(dropResion.val());
-    // })
 
     function checkMatchType(matchTypeNo) {
       switch (matchTypeNo) {
@@ -240,53 +209,55 @@
 
     console.log(checkCourtType(4))
 
-    let matchArr;
+    var URLSearchParams = new URLSearchParams();
+    console.log("URLSearchParams : " + URLSearchParams);
 
-    $("select").on("change", function (e) {
-      // const category = $(e.target).closest("select").attr("id")
-      // console.log(category)
-      const idx = e.target.value
-      console.log(idx)
 
-      if (idx < 0) {
-        return
+    $(".form-select").on("change", function (e) {
+      const name = $(e.target).attr("name")
+      console.log(name)
+      const value = e.target.value
+      console.log(value)
+
+      if (value == 0) {
+        URLSearchParams.delete(name)
+      } else {
+        URLSearchParams.set(name, value)
       }
 
-      // $.getJSON("http://localhost:8080/match/list", function (arr) {
-      //   const matchList = $(".match-list")
-      //   let str = ''
-      //   for (let i = 0; i < arr.length; i++) {
-      //     if (arr[i].matchTypeNo == idx) {
-      //       matchArr.push(arr[i]);
-      //       let state = ''
-      //       let aaa = ''
-      //       if (arr[i].state === 'A') {
-      //         state = '신청 가능'
-      //       } else {
-      //         state = '마감'
-      //         aaa = 'closed-btn'
-      //       }
-      //       str += `
-      //       <a href="/social_match/index.html" class="list-group-item list-group-item-action">
-      //         <div class="d-flex w-100 justify-content-between align-items-center">
-      //           <div>
-      //             <div class="d-flex justify-content-start align-items-center">
-      //               <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
-      //               <div class="ms-1">
-      //                 <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
-      //                 <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
-      //               </div>
-      //             </div>
-      //           </div>
-      //           <button class="btn match-btn ${aaa}">${state}</button>
-      //           </div>
-      //         </a>`
-      //     }
-      //   }
-      //   $(".match-list").html(str)
-      //   console.log(matchArr)
-      // })
+      console.log("URLSearchParams : " + URLSearchParams);
 
+      $.getJSON(`http://localhost:8080/match/list?${URLSearchParams}`, function (arr) {
+        console.log(arr)
+        const matchList = $(".match-list")
+        let str = ''
+        for (let i = 0; i < arr.length; i++) {
+          let state = ''
+          let aaa = ''
+          if (arr[i].state === 'A') {
+            state = '신청 가능'
+          } else {
+            state = '마감'
+            aaa = 'closed-btn'
+          }
+          str += `
+          <a href="/social_match/index.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+              <div>
+                <div class="d-flex justify-content-start align-items-center">
+                  <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
+                  <div class="ms-1">
+                    <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
+                    <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
+                  </div>
+                </div>
+              </div>
+              <button class="btn match-btn ${aaa}">${state}</button>
+              </div>
+            </a>`
+        }
+        $(".match-list").html(str)
+      })
     })
 
 
