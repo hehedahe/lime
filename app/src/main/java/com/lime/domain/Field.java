@@ -19,4 +19,7 @@ public class Field {
   int courtTypeId;
   float distance;
   String cTypeName;
+  int regionId;
+  int cityId;
+  String cityName;
 }

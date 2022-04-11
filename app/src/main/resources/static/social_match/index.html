@@ -46,7 +46,8 @@
     });
   </script>
 
-  <script src="../common/selectCity.js" type="module"></script>
+  <script src="import.js" type="module"></script>
+
 
 </head>
 
@@ -58,8 +59,25 @@
 
     <div class="d-flex justify-content-between mb-3">
       <div class="d-flex w-100">
-        <select class="form-select" aria-label="region" name="" id="drop-region">
+        <select class="form-select" aria-label="region" name="region" id="drop-region">
           <option selected>지역</option>
+          <option value="1">서울</option>
+          <option value="2">부산</option>
+          <option value="3">대구</option>
+          <option value="4">인천</option>
+          <option value="5">광주</option>
+          <option value="6">대전</option>
+          <option value="7">울산</option>
+          <option value="8">세종</option>
+          <option value="9">경기</option>
+          <option value="10">강원</option>
+          <option value="11">충청북도</option>
+          <option value="12">충청남도</option>
+          <option value="13">전라북도</option>
+          <option value="14">전라남도</option>
+          <option value="15">경상북도</option>
+          <option value="16">경상남도</option>
+          <option value="17">제주</option>
           <!-- <option value="1">모든 지역</option>
           <option value="2">서울</option>
           <option value="3">경기/강원</option>
@@ -70,11 +88,11 @@
           <option value="8">광주/전라</option>
           <option value="9">제주</option> -->
         </select>
-        <select class="form-select" aria-label="city" name="" id="drop-city">
+        <select class="form-select" aria-label="city" name="city" id="drop-city">
           <option selected>도시</option>
           <!-- <option value="1">서귀포시</option> -->
         </select>
-        <select class="form-select" aria-label="level" name="category" id="levelNo">
+        <select class="form-select" aria-label="level" name="level" id="levelNo">
           <option selected>레벨</option>
           <option value="1">모든 레벨</option>
           <option value="2">BEGINNER</option>
@@ -82,13 +100,13 @@
           <option value="4">ADVANCED</option>
           <option value="5">PRO</option>
         </select>
-        <select class="form-select" aria-label="gender" name="category" id="matchTypeNo">
+        <select class="form-select" aria-label="gender" name="match-type" id="matchTypeNo">
           <option value="-1" selected>성별</option>
           <option value="1">남자</option>
           <option value="2">여자</option>
           <option value="3">남녀모두</option>
         </select>
-        <select class="form-select" aria-label="court-type" name="category" id="courtTypeNo">
+        <select class="form-select" aria-label="court-type" name="court-type" id="courtTypeNo">
           <option selected>코트</option>
           <option value="1">하드</option>
           <option value="2">클레이</option>
@@ -97,7 +115,7 @@
         </select>
       </div>
       <div id="my-preferred">
-        <input type="checkbox" value="" id="my-preferred-checkbox" class="form-check-input">
+        <input type="checkbox" value="" name="my-preferred" id="my-preferred-checkbox" class="form-check-input">
         <!-- &nbsp;&nbsp;내 선호 -->
         <span>&nbsp;&nbsp;내 선호</span>
       </div>
@@ -156,7 +174,7 @@
             matchType = '혼성'
           }*/
           str += `
-          <a href="/social_match/social_match_3.html" class="list-group-item list-group-item-action">
+          <a href="/social_match/index.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between align-items-center">
               <div>
                 <div class="d-flex justify-content-start align-items-center">
@@ -224,9 +242,9 @@
 
     let matchArr;
 
-    $("select[name='category']").on("change", function (e) {
-      const category = $(e.target).closest("select").attr("id")
-      console.log(category)
+    $("select").on("change", function (e) {
+      // const category = $(e.target).closest("select").attr("id")
+      // console.log(category)
       const idx = e.target.value
       console.log(idx)
 
@@ -234,43 +252,41 @@
         return
       }
 
-      $.getJSON("http://localhost:8080/match/list", function (arr) {
-        const matchList = $(".match-list")
-        let str = ''
-        for (let i = 0; i < arr.length; i++) {
-          if (arr[i].matchTypeNo == idx) {
-            matchArr.push(arr[i]);
-            let state = ''
-            let aaa = ''
-            if (arr[i].state === 'A') {
-              state = '신청 가능'
-            } else {
-              state = '마감'
-              aaa = 'closed-btn'
-            }
-            str += `
-            <a href="/social_match/social_match_3.html" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between align-items-center">
-                <div>
-                  <div class="d-flex justify-content-start align-items-center">
-                    <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
-                    <div class="ms-1">
-                      <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
-                      <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
-                    </div>
-                  </div>
-                </div>
-                <button class="btn match-btn ${aaa}">${state}</button>
-                </div>
-              </a>`
-          }
-        }
-        $(".match-list").html(str)
-        console.log(matchArr)
-      })
+      // $.getJSON("http://localhost:8080/match/list", function (arr) {
+      //   const matchList = $(".match-list")
+      //   let str = ''
+      //   for (let i = 0; i < arr.length; i++) {
+      //     if (arr[i].matchTypeNo == idx) {
+      //       matchArr.push(arr[i]);
+      //       let state = ''
+      //       let aaa = ''
+      //       if (arr[i].state === 'A') {
+      //         state = '신청 가능'
+      //       } else {
+      //         state = '마감'
+      //         aaa = 'closed-btn'
+      //       }
+      //       str += `
+      //       <a href="/social_match/index.html" class="list-group-item list-group-item-action">
+      //         <div class="d-flex w-100 justify-content-between align-items-center">
+      //           <div>
+      //             <div class="d-flex justify-content-start align-items-center">
+      //               <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
+      //               <div class="ms-1">
+      //                 <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
+      //                 <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
+      //               </div>
+      //             </div>
+      //           </div>
+      //           <button class="btn match-btn ${aaa}">${state}</button>
+      //           </div>
+      //         </a>`
+      //     }
+      //   }
+      //   $(".match-list").html(str)
+      //   console.log(matchArr)
+      // })
 
-      // $(".match-list").html('')
-      // storeService.loadJson(idx, makeStores)
     })
 
 

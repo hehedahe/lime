@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lime.dao.MatchDao;
 import com.lime.domain.Match;
+import com.lime.domain.SearchCondition;
 import com.lime.service.MatchService;
 
 @Service
@@ -21,5 +22,15 @@ public class DefaultMatchService implements MatchService {
   @Override
   public int getCount() {
     return matchDao.countAll();
+  }
+
+  @Override
+  public Match get(int no) {
+    return matchDao.findByNo(no);
+  }
+
+  @Override
+  public List<Match> getsearchSelectMatch(SearchCondition sc) {
+    return matchDao.searchSelectMatch(sc);
   }
 }
