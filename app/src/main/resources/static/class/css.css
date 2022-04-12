@@ -6,6 +6,14 @@ body {
     margin: 0 auto;
 }
 
+.container {
+    max-width: 1024px; /* 컨텐츠 width 1024로 맞춰주기 */
+    height: 100vh;
+    padding: 0;
+}
+
+
+
 .search {
     margin-top: 30px;
     margin-left: 150px;
@@ -26,10 +34,10 @@ input::placeholder {
 .fa-search {
     margin-left: 10px;
 }
-.div-container {
+/* .div-container {
     margin-right: 150px;
     margin-left: 150px;
-}
+} */
 .card {
     margin-right: 5px;
     margin-left: 5px;
@@ -84,3 +92,12 @@ input::placeholder {
     color: rgb(102,200,141);
     outline: 1px solid rgb(102,200,141);
 }
+
+#u-nav-menu {
+    margin: 0;
+}
+
+#u-nav-links {
+    margin: 0;
+}
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 
+  namespace => 인터페이스의 패키지 및 이름과 namespace의 이름이 일치해야 한다.
+ -->
+<mapper namespace="com.lime.dao.UserLoginDao">
+
+  <resultMap type="userLogin" id="userloginMap">
+    <id column="no" property="no"/>
+    <result column="email" property="email"/>
+    <result column="pwd" property="password"/>
+    <result column="name" property="name"/>
+    <result column="phone_no" property="phoneNo"/>
+    <result column="evnt_yn" property="eventYn"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="userlogin">
+    insert into user(email, password, name, phoneNo) 
+    values(#{email},password(#{password}),#{name},#{phoneNo})
+    insert into member(eventYn) 
+    values(#{eventYn})
+    where member.event_yn = user.event_yn
+    
+  </insert>
+
+  <select id="findByEmailAndPassword" resultMap="userloginMap">
+    select 
+      no,
+      name,
+      email
+    from 
+      ml_member
+    where
+      email=#{email} and password=password(#{password})
+  </select>
+  
+  <select id="findByEmail" resultMap="userloginMap" parameterType="string">
+    select 
+      no,
+      name,
+      email
+    from 
+      ml_member
+    where
+      email=#{email}
+  </select>
+</mapper>
+
+
+
+
+
+
+
+

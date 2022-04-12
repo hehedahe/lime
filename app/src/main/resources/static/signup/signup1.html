@@ -65,7 +65,7 @@
   </nav>
 
   <main class="form-lime mt-5">
-    <form>
+    <form name="form1">
       <h1 class="h3 mb-4 h-lime">회원가입</h1>
       <div class="text-center">
         SNS계정으로 간편 로그인/회원가입
@@ -144,22 +144,22 @@
         <label for="inputName" class="form-label">약관동의</label>
         <div class="checkbox mb-3">
           <div>
-            <input type="checkbox" value="remember-me" class="form-check-input">
-            <span id="checkAll">전체동의</span>
+            <input id="checkAll" type="checkbox" value="remember-me" class="form-check-input">
+            <span id="chkAll">전체동의</span>
           </div>
           <div class="section-border" style="margin: 0.4rem 0;"></div>
           <div>
-            <input type="checkbox" value="remember-me" class="form-check-input">
+            <input type="checkbox" value="remember-me" class="form-check-input" name="chk">
             <span>이용약관</span>
             <span class="require">(필수)</span>
           </div>
           <div>
-            <input type="checkbox" value="remember-me" class="form-check-input">
+            <input type="checkbox" value="remember-me" class="form-check-input" name="chk">
             <span>개인정보수집 및 이용동의</span>
             <span class="require">(필수)</span>
           </div>
           <div>
-            <input type="checkbox" value="remember-me" class="form-check-input">
+            <input type="checkbox" value="remember-me" class="form-check-input" name="chk">
             <span>이벤트 및 프로모션 알림 받기</span>
             <span class="option">(선택)</span>
           </div>
@@ -178,6 +178,62 @@
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+var xName = document.querySelector("input[name=name]");
+var xEmail = document.querySelector("input[name=email]");
+var xPassword = document.querySelector("input[name=password]");
+  
+document.querySelector("form[name=form1]").onsubmit = function() {
+  if (xName.value == "" || 
+  		xEmail.value == "" ||
+  		xPassword.value == "") {
+    window.alert("Required entry is empty.");
+    return false;
+  }
+  
+  var fd = new FormData(document.forms.namedItem("form1"));
+  
+  fetch("/login/signup", { 
+      method: "POST",
+      body: new URLSearchParams(fd)
+    }) 
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      if (text == "success") {
+    	  location.href = "?content=/login/signin.html";
+      } else {
+    	  window.alert("Registration failed!");
+      }
+    });
+  return false;
+};
+
+// document.querySelector("#x-cancel-btn").onclick = function() {
+//   window.location.href = "/index.html";
+// };
+
+$(document).ready(function() {
+    $("#checkAll").click(function() {
+      if($("#checkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
+      else $("input[name=chk]").prop("checked", false);
+    });
+    
+    $("input[name=chk]").click(function() {
+      var total = $("input[name=chk]").length;
+      var checked = $("input[name=chk]:checked").length;
+      
+      if(total != checked) $("#checkAll").prop("checked", false);
+      else $("#checkAll").prop("checked", true); 
+    });
+  });
+
+</script>
+
+
+
 
 </body>
 
