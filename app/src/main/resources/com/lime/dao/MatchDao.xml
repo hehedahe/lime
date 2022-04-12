@@ -33,6 +33,7 @@
     </collection>
   </resultMap>
   
+  <!--  
   <resultMap type="Court" id="courtMap">
     <id column="court_id" property="no"/>
     <result column="name" property="name"/>
@@ -44,22 +45,21 @@
       <result column="addr" property="addr"/>
     </association>
   </resultMap>
+  -->
   
+  <!--  
   <resultMap type="Field" id="fieldMap">
     <id column="field_id" property="fieldId"/>
     <result column="name" property="name"/>
     <result column="addr" property="addr"/>
     <result column="region_id" property="regionId"/>
-    <!--  
     <result column="city_name" property="cityName"/>
-    -->
-    <!--
     <association column="city_id" property="cityId" javaType="City" resultMap="cityMap">
 	    <id column="city_id" property="cityId"/>
 	    <result column="city_name" property="cityName"/>
     </association>
-    -->
   </resultMap>
+  -->
 
   <!--  
   <resultMap type="City" id="cityMap">
@@ -99,7 +99,7 @@
 		  m.st_time asc, f.name asc
   </select>
   
-    <select id="findByNo" resultMap="matchMap" parameterType="int">
+  <select id="findByNo" resultMap="matchMap" parameterType="int">
     select
       m.mtch_id,
       m.court_id,
@@ -125,8 +125,8 @@
     where
       m.mtch_id=#{no}
   </select>
-  
-    <select id="searchSelectMatch" parameterType="SearchCondition" resultMap="matchMap">
+
+  <select id="searchSelectMatch" parameterType="SearchCondition" resultMap="matchMap">
     select
       m.mtch_id,
       m.court_id,
@@ -154,6 +154,9 @@
       left outer join field f on c.field_id=f.field_id
       left outer join city on f.city_id=city.city_id
     where true
+    <if test="matchDate != null">
+      AND m.mtch_date = #{matchDate}
+    </if>
     <if test="region != null">
       AND f.region_id = #{region}
     </if>
@@ -172,5 +175,7 @@
     order by
       m.st_time asc, f.name asc
   </select>
+  
+
   
 </mapper>

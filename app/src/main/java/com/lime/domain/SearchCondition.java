@@ -6,21 +6,24 @@ public class SearchCondition {
   Integer level;
   Integer matchType;
   Integer courtType;
+  String matchDate;
 
   public SearchCondition() {}
 
-  public SearchCondition(Integer region, String city, Integer level, Integer matchType, Integer courtType) {
+  public SearchCondition(Integer region, String city, Integer level, Integer matchType, Integer courtType, String matchDate) {
     this.region = region;
     this.city = city;
     this.level = level;
     this.matchType = matchType;
     this.courtType = courtType;
+    this.matchDate = matchDate;
   }
 
   @Override
   public String toString() {
     return "SearchCondition [region=" + region + ", city=" + city + ", level=" + level
-        + ", matchType=" + matchType + ", courtType=" + courtType + "]";
+        + ", matchType=" + matchType + ", courtType=" + courtType + ", matchDate=" + matchDate
+        + "]";
   }
 
   public Integer getRegion() {
@@ -62,5 +65,15 @@ public class SearchCondition {
   public void setCourtType(Integer courtType) {
     this.courtType = courtType;
   }
+
+  public String getMatchDate() {
+    return matchDate;
+  }
+
+  public void setMatchDate(String matchDate) {
+    this.matchDate = matchDate;
+  }
+
+
 
 }

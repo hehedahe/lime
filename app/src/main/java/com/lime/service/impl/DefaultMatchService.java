@@ -30,7 +30,8 @@ public class DefaultMatchService implements MatchService {
   }
 
   @Override
-  public List<Match> getsearchSelectMatch(SearchCondition sc) {
+  public List<Match> getSearchSelectMatch(SearchCondition sc) {
     return matchDao.searchSelectMatch(sc);
   }
+
 }
