@@ -17,8 +17,9 @@
 
 .container {
     max-width: 1024px; /* 컨텐츠 width 1024로 맞춰주기 */
-    height: 100vh;
     padding: 0;
+    height: 1600px;
+
 }
 
 /* 드롭다운 메뉴 */
@@ -136,7 +137,7 @@ button.card {
 }
 
 /* 카드 클릭 */
-button.card:focus {
+button.card.selected-card {
     background-color: rgb(249, 248, 113);
 }
 
@@ -232,7 +233,7 @@ body {
     border: 0;
 }
 
-button.date-wrap:focus {
+button.date-wrap.selected-date {
     background-color: rgb(102, 200, 141);
     color: #fff;
 }
@@ -244,3 +245,26 @@ button.date-wrap:focus {
 
 
 /* 스케쥴 */
+.crt-no {
+    width: 5vw;
+    text-align: center;
+    line-height: 40px;
+    font-size: 15px;
+}
+
+.sche-btn {
+    border-radius: 10px;
+}
+.sche-btn:hover {
+    background-color: rgb(102, 200, 141);
+}
+.sche-btn {
+    background-color: rgba(102, 200, 141, 0.3);
+}
+
+.closed {
+    background-color: rgb(240, 240, 240);
+}
+.closed:hover {
+    background-color: rgb(240, 240, 240);
+}

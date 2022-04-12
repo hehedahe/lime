@@ -93,4 +93,20 @@ function getDirection() {
     return direction;
 }
 
+// 카드 클릭시 scroll 이동
+$(".card-btn").on('click', function () {
+    var offset = $('#selected-crt').offset();
+    $('html').animate({scrollTop : offset.top}, 400);
+});
+
+
+$('card-btn').on('click', function () {
+    $('card').removeClass('selected-card');
+    $(this).addClass('selected-card');
+})
+$('.date-wrap').on('click', function () {
+    $('button').removeClass('selected-date');
+    $(this).addClass('selected-date');
+})
+
 
