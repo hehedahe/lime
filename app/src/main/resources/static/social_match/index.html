@@ -37,7 +37,11 @@
   <!-- <link rel="stylesheet" href="../header/user/u-adminHeader.css"> -->
   <link href="social_match.css" rel="stylesheet">
 
+
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
   <script type="text/javascript">
     $(document).ready(function () {
@@ -55,7 +59,35 @@
 
   <div id="x-header" class="d-flex bd-highlight mb-3"></div>
 
-  <main class="social-match my-5">
+  <main class="social-match mb-5">
+
+    <div id="position-div" class="sticky-top">
+      <div id="dateNav" class="mb-3">
+        <div id="navWrap">
+          <ul class="list-group date-ul">
+            <button class="btn btn-primary disabled" id="prev-btn"><img src="arrow.png" alt=""></button>
+            <div class="date-div" id="date-div-1">
+              <li class="list-group-item date-li active"><a id="date-0"></a></li>
+              <li class="list-group-item date-li"><a id="date-1"></a></li>
+              <li class="list-group-item date-li"><a id="date-2"></a></li>
+              <li class="list-group-item date-li"><a id="date-3"></a></li>
+              <li class="list-group-item date-li"><a id="date-4"></a></li>
+              <li class="list-group-item date-li"><a id="date-5"></a></li>
+              <li class="list-group-item date-li"><a id="date-6"></a></li>
+              <li class="list-group-item date-li"><a></a></li>
+              <li class="list-group-item date-li"><a id="date-7"></a></li>
+              <li class="list-group-item date-li"><a id="date-8"></a></li>
+              <li class="list-group-item date-li"><a id="date-9"></a></li>
+              <li class="list-group-item date-li"><a id="date-10"></a></li>
+              <li class="list-group-item date-li"><a id="date-11"></a></li>
+              <li class="list-group-item date-li"><a id="date-12"></a></li>
+              <li class="list-group-item date-li"><a id="date-13"></a></li>
+            </div>
+            <button class="btn btn-primary" id="next-btn"><img src="arrow.png" alt=""></button>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div class="d-flex justify-content-between mb-3">
       <div class="d-flex w-100">
@@ -136,10 +168,37 @@
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/social_match/index.js"></script>
   <script type="text/javascript">
     "use strict"
+
     $(document).ready(function () {
-      $.getJSON("http://localhost:8080/match/list", function (arr) {
+
+      var today = new Date();
+      var date = today.getDate();
+
+      // console.log(today);
+
+      for (let i = 0; i < 14; i++) {
+        // console.log(date + i)
+        $(`#date-${i}`).html(`${date + i}`)
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        var dateString = year + '-' + month + '-' + day;
+        // console.log(dateString)
+        $(`#date-${i}`).attr("date", `${dateString}`)
+        // $(`#date-${i}`).attr("href", `http://localhost:8080/match/list?matchDate=${dateString}`)
+        today.setDate(today.getDate() + 1)
+      }
+
+      let matchDate = $("#date-0").attr("date")
+      makeMatchList(`http://localhost:8080/match/list?matchDate=${matchDate}`)
+
+    })
+
+    function makeMatchList(url) {
+      $.getJSON(url, function (arr) {
         console.log(arr)
         const matchList = $(".match-list")
         let str = ''
@@ -169,8 +228,8 @@
             </a>`
         }
         $(".match-list").html(str)
-      })
-    })
+      });
+    }
 
     function checkMatchType(matchTypeNo) {
       switch (matchTypeNo) {
@@ -207,13 +266,11 @@
       }
     }
 
-    console.log(checkCourtType(4))
-
     var URLSearchParams = new URLSearchParams();
     console.log("URLSearchParams : " + URLSearchParams);
 
-
     $(".form-select").on("change", function (e) {
+
       const name = $(e.target).attr("name")
       console.log(name)
       const value = e.target.value
@@ -224,6 +281,11 @@
       } else {
         URLSearchParams.set(name, value)
       }
+
+      let matchDate = $(".active a").attr("date")
+      console.log(matchDate)
+
+      URLSearchParams.set("matchDate", matchDate);
 
       console.log("URLSearchParams : " + URLSearchParams);
 
@@ -260,6 +322,25 @@
       })
     })
 
+    $("#next-btn").on("click", (e) => {
+      $(".date-div").css("transform", "translateX(-53.1%)");
+      $("#next-btn").addClass("disabled");
+      $("#prev-btn").removeClass("disabled");
+    })
+
+    $("#prev-btn").on("click", (e) => {
+      $(".date-div").css("transform", "translateX(0%)");
+      $("#prev-btn").addClass("disabled");
+      $("#next-btn").removeClass("disabled");
+    })
+
+    $(".date-li a").on("click", (e) => {
+      // console.log(e.target.getAttribute("date"))
+      $(".date-li.active").removeClass("active")
+      $(e.target).closest("li").addClass("active")
+      let matchDate = e.target.getAttribute("date")
+      makeMatchList(`http://localhost:8080/match/list?matchDate=${matchDate}`)
+    })
 
   </script>
 

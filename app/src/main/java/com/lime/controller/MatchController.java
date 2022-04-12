@@ -24,7 +24,7 @@ public class MatchController {
   @GetMapping("/list")
   public Object list(SearchCondition sc) {
     log.debug(sc);
-    return matchService.getsearchSelectMatch(sc);
+    return matchService.getSearchSelectMatch(sc);
   }
 
   @GetMapping("/get")

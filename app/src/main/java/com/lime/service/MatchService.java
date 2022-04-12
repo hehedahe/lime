@@ -12,6 +12,6 @@ public interface MatchService {
 
   Match get(int no);
 
-  List<Match> getsearchSelectMatch(SearchCondition sc);
+  List<Match> getSearchSelectMatch(SearchCondition sc);
 
 }
