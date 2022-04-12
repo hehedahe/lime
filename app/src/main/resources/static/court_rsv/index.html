@@ -10,7 +10,7 @@
 
     <!-- fontawesome -->
     <!--    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">-->
-    <script src="https://kit.fontawesome.com/0b4dd5be7a.js" crossorigin="anonymous"></script>
+    <!--    <script src="https://kit.fontawesome.com/0b4dd5be7a.js" crossorigin="anonymous"></script>-->
 
     <!-- slick -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -20,14 +20,13 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
-
-    <title>코트예약</title>
+    <title>LIME - 코트 예약</title>
 
     <!-- header, footer 삽입 제이쿼리 -->
     <script type="text/javascript">
         $(document).ready(function() {
-          $("#x-header").load("/header/user/header.html");  //헤더 인클루드-->
-          $("#x-footer").load("/footer/footer.html");  //헤더 인클루드-->
+          $("#x-header").load("/header/user/header.html");  //헤더 인클루드
+          $("#x-footer").load("/footer/footer.html");  // 푸터 인클루드
         });
     </script>
  </head>
@@ -37,7 +36,7 @@
 <div id="x-header" class="d-flex bd-highlight mb-3"></div>
 
 <!-- 메인 컨텐츠 -->
-<div class="container"> <!-- 컨텐츠들을 .container div로 감싸주고 .css 파일에서 max-width: 1024; 주기 -->
+<div class="container">
 
     <!-- 시도, 시군구 select -->
     <div id="drop-menu" class="row w-100">
@@ -166,15 +165,17 @@
     </div>
 
     <!-- 선택된 테니스장 정보 -->
-    <div id="selected-crt" class="row m-3">
-        <h4 id="crt-name">테니스장1</h4>
-        <p class="mb-1">테니스장 주소</p>
-        <div class="d-flex">
-            <span>실내</span>
-            <span class="dot mx-2">·</span>
-            <span>코트타입</span>
-            <span class="dot mx-2">·</span>
-            <span>주차가능</span>
+    <div id="selected-crt-wrap" class="my-3">
+        <div id="selected-crt" class="row m-3">
+            <h4 id="crt-name">테니스장1</h4>
+            <p class="mb-1">테니스장 주소</p>
+            <div class="d-flex">
+                <span>실내</span>
+                <span class="dot mx-2">·</span>
+                <span>코트타입</span>
+                <span class="dot mx-2">·</span>
+                <span>주차가능</span>
+            </div>
         </div>
     </div>
 
@@ -206,79 +207,79 @@
         <div class="w-100 d-flex justify-content-around my-3">
             <div class="crt-no">코트1</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
-                <button class="sche-btn border-0 p-2">06:00~08:00</button>
-                <button class="sche-btn border-0 p-2">08:00~10:00</button>
-                <button class="sche-btn border-0 p-2">10:00~12:00</button>
-                <button class="sche-btn border-0 p-2 closed">12:00~14:00</button>
-                <button class="sche-btn border-0 p-2">14:00~16:00</button>
-                <button class="sche-btn border-0 p-2">16:00~18:00</button>
-                <button class="sche-btn border-0 p-2">18:00~20:00</button>
-                <button class="sche-btn border-0 p-2">20:00~22:00</button>
+                <button class="sche-btn border-0 p-3">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3 closed">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
             </div>
         </div>
         <div class="w-100 d-flex justify-content-around my-3">
             <div class="crt-no">코트2</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
-                <button class="sche-btn border-0 p-2 closed">06:00~08:00</button>
-                <button class="sche-btn border-0 p-2">08:00~10:00</button>
-                <button class="sche-btn border-0 p-2">10:00~12:00</button>
-                <button class="sche-btn border-0 p-2">12:00~14:00</button>
-                <button class="sche-btn border-0 p-2">14:00~16:00</button>
-                <button class="sche-btn border-0 p-2">16:00~18:00</button>
-                <button class="sche-btn border-0 p-2">18:00~20:00</button>
-                <button class="sche-btn border-0 p-2">20:00~22:00</button>
+                <button class="sche-btn border-0 p-3 closed">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
             </div>
         </div>
         <div class="w-100 d-flex justify-content-around my-3">
             <div class="crt-no">코트3</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
-                <button class="sche-btn border-0 p-2">06:00~08:00</button>
-                <button class="sche-btn border-0 p-2">08:00~10:00</button>
-                <button class="sche-btn border-0 p-2">10:00~12:00</button>
-                <button class="sche-btn border-0 p-2">12:00~14:00</button>
-                <button class="sche-btn border-0 p-2">14:00~16:00</button>
-                <button class="sche-btn border-0 p-2">16:00~18:00</button>
-                <button class="sche-btn border-0 p-2 closed">18:00~20:00</button>
-                <button class="sche-btn border-0 p-2">20:00~22:00</button>
+                <button class="sche-btn border-0 p-3">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3 closed">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
             </div>
         </div>
         <div class="w-100 d-flex justify-content-around my-3">
             <div class="crt-no">코트4</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
-                <button class="sche-btn border-0 p-2">06:00~08:00</button>
-                <button class="sche-btn border-0 p-2 closed">08:00~10:00</button>
-                <button class="sche-btn border-0 p-2 closed">10:00~12:00</button>
-                <button class="sche-btn border-0 p-2 closed">12:00~14:00</button>
-                <button class="sche-btn border-0 p-2">14:00~16:00</button>
-                <button class="sche-btn border-0 p-2">16:00~18:00</button>
-                <button class="sche-btn border-0 p-2">18:00~20:00</button>
-                <button class="sche-btn border-0 p-2">20:00~22:00</button>
+                <button class="sche-btn border-0 p-3">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3 closed">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3 closed">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3 closed">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
             </div>
         </div>
         <div class="w-100 d-flex justify-content-around my-3">
             <div class="crt-no">코트5</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
-                <button class="sche-btn border-0 p-2 closed">06:00~08:00</button>
-                <button class="sche-btn border-0 p-2">08:00~10:00</button>
-                <button class="sche-btn border-0 p-2">10:00~12:00</button>
-                <button class="sche-btn border-0 p-2">12:00~14:00</button>
-                <button class="sche-btn border-0 p-2 closed">14:00~16:00</button>
-                <button class="sche-btn border-0 p-2">16:00~18:00</button>
-                <button class="sche-btn border-0 p-2 closed">18:00~20:00</button>
-                <button class="sche-btn border-0 p-2">20:00~22:00</button>
+                <button class="sche-btn border-0 p-3 closed">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3 closed">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3 closed">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
             </div>
         </div>
         <div class="w-100 d-flex justify-content-around my-3">
             <div class="crt-no">코트6</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
-                <button class="sche-btn border-0 p-2">06:00~08:00</button>
-                <button class="sche-btn border-0 p-2">08:00~10:00</button>
-                <button class="sche-btn border-0 p-2">10:00~12:00</button>
-                <button class="sche-btn border-0 p-2 closed">12:00~14:00</button>
-                <button class="sche-btn border-0 p-2">14:00~16:00</button>
-                <button class="sche-btn border-0 p-2">16:00~18:00</button>
-                <button class="sche-btn border-0 p-2">18:00~20:00</button>
-                <button class="sche-btn border-0 p-2">20:00~22:00</button>
+                <button class="sche-btn border-0 p-3">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3 closed">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
             </div>
         </div>
     </div>

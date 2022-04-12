@@ -18,14 +18,13 @@
 .container {
     max-width: 1024px; /* 컨텐츠 width 1024로 맞춰주기 */
     padding: 0;
-    height: 1600px;
-
+    height: 1800px;
 }
 
 /* 드롭다운 메뉴 */
 #drop-menu {
     width: 1024px;
-    heigth: 10vh;
+    height: 10vh;
     padding: 20px;
     margin: 0px;
 }
@@ -36,7 +35,6 @@
     border-radius: 50px;
     margin-right: 10px;
 }
-
 /*.dropdown-menu {*/
 /*    border: 1px solid rgb(190, 190, 190);*/
 /*    border-radius: 20px;*/
@@ -137,7 +135,7 @@ button.card {
 }
 
 /* 카드 클릭 */
-button.card.selected-card {
+button.selected-card {
     background-color: rgb(249, 248, 113);
 }
 
@@ -146,12 +144,17 @@ button.card:hover {
     box-shadow: 0 0 0 0.25rem rgb(249, 248, 113, 25%);
 }
 
-button.card:focus > .info-btn {
-    background-color: #fff;
+/* 정보 버튼 색 변경 */
+.changed-color {
+    background-color: #fffee8;
     color: black;
 }
 
 /* 선택된 테니스장 정보 */
+#selected-crt-wrap {
+    border: 1px solid rgb(102, 200, 141);
+    border-radius: 5px;
+}
 #selected-crt {
     width: 90%;
 }
@@ -168,11 +171,6 @@ button.card:focus > .info-btn {
 .date-wrap {
     border-radius: 50px;
 }
-
-/* 날짜 호버 그림자 */
-/*.date-wrap:hover {*/
-/*    box-shadow: 0 0 0 0.25rem rgb(33, 159, 148, 25%);*/
-/*}*/
 
 /* 토욜 일욜 color */
 .date-wrap.sat {
@@ -234,7 +232,7 @@ body {
 }
 
 button.date-wrap.selected-date {
-    background-color: rgb(102, 200, 141);
+    background-color: #66C88D;
     color: #fff;
 }
 
@@ -253,13 +251,12 @@ button.date-wrap.selected-date {
 }
 
 .sche-btn {
-    border-radius: 10px;
+    border-radius: 20px;
+    background-color: rgba(102, 200, 141, 0.2);
 }
 .sche-btn:hover {
     background-color: rgb(102, 200, 141);
-}
-.sche-btn {
-    background-color: rgba(102, 200, 141, 0.3);
+    color: #fff;
 }
 
 .closed {
