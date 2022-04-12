@@ -28,7 +28,7 @@
 }
 
 #map {
-    top: 10.1vh;
+    top: 94px;
     position: absolute;
 }
 .swiper {
@@ -39,24 +39,13 @@
     z-index: 1000;
 }
 
-/* 코트사진 버튼*/
+/* 코트사진 */
 #crt-name > span,
 #crt-name > p {
     color:rgb(102, 200, 141);
 }
 #crt-name > h4 {
     font-weight: bolder;
-}
-
-#to-index {
-    text-decoration: none;
-    color: #fff;
-    background-color: rgb(102, 200, 141);
-    font-size: 18px;
-    border-radius: 15px;
-}
-#to-index:hover {
-    box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 30%);
 }
 
 /* 코트 시설 정보 */

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="payment.css">
+    <title>LIME - 결제</title>
+
+    <!-- header, footer 삽입 제이쿼리 -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#x-header").load("/header/user/header.html");
+            $("#x-footer").load("/footer/footer.html");
+        });
+    </script>
+</head>
+<body>
+<!-- 헤더 -->
+<div id="x-header" class="d-flex bd-highlight mb-3"></div>
+
+<!-- 메인 컨텐츠 -->
+<div class="container"></div>
+
+<!-- 푸터 -->
+<footer id="x-footer"></footer>
+
+<script type="text/javascript" src="payment.js"></script>
+</body>
+</html>
