@@ -35,6 +35,16 @@ public class ManageController {
     }
     return manage;
   }
+  
+  
+  @RequestMapping("/manage/user/userCount")
+  public User userCount() { 
+    
+    User userCount = new User();
+    userCount.setUserCount(manageService.userCount());
+    
+    return userCount;
+  }
 
 //=========================================================  
   //구장관리- 리스트 조회

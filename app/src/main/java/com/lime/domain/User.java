@@ -16,6 +16,8 @@ public class User {
   String acntNo;
   String acntHolder;
   String blockDate;
+  
+  int userCount;
 
 
 

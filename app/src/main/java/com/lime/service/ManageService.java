@@ -8,6 +8,8 @@ public interface ManageService {
 
   List<User> userList();
 
+  int userCount();
+  
   User userGet(int no);
 
   
