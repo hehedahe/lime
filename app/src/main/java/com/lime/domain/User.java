@@ -15,6 +15,7 @@ public class User {
   String userType;
   String rgtDate;
   int sum;
+<<<<<<< HEAD
   String gender; //gender
   String bankName; // 은행명
   String acntNo; // 계좌번호
@@ -29,4 +30,17 @@ public class User {
   String UserImg;
   String UserType;
   
+=======
+  String gender;
+  String bankName;
+  String acntNo;
+  String acntHolder;
+  String blockDate;
+  
+  int userCount;
+
+
+
+ 
+>>>>>>> omh1004
 }

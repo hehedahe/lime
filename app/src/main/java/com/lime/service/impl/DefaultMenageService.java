@@ -34,6 +34,13 @@ public class DefaultMenageService implements ManageService {
   public Field fieldGet(int no) {
     return manageDao.findFieldByNo(no);
   }
+  @Override
+  public int userCount() {
+    
+    int userNo = manageDao.countUserAll();
+    
+    return userNo;
+  }
 }
 
 
