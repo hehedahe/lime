@@ -1,66 +1,9 @@
 "use strict"
 
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-    center: new kakao.maps.LatLng(37.499, 127.029), //지도의 중심좌표.
-    level: 6 //지도의 레벨(확대, 축소 정도)
-};
 
-var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-var markerImage = new kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
-                                             new kakao.maps.Size(44, 49), // 마커이미지의 크기입니다
-                                             {offset: new kakao.maps.Point(27, 69)}); // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-fetch("/field/list")
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (result) {
-    for (const court of result) {
-        // 마커가 표시될 위치입니다
-        var markerPosition = new kakao.maps.LatLng(court.lat, court.lng);
-        //console.log("positon:::", markerPosition)
-
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            position: markerPosition,
-            image: markerImage // 마커이미지 설정
-        });
-
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-    }
-});
-
-// var opt = $("option");
-//
-// // console.log(opt.data("id"));
-// opt.on('click', function() {
-//     aaa();
-//     console.log(opt.val())
-// })
-//
-// function aaa() {
-//     fetch(`/city/findCity?regionId=${regionId}`).then(function (response) {
-//         return response.json();
-//     }).then(function (result) {
-//         console.log(result.data);
-//     })
-// }
-
-// slick slider
-// $('.date-wrapper').slick({
-//     infinite: false,
-//     speed: 300,
-//     slidesToShow: 7,
-//     slidesToScroll: 7,
-//     prevArrow: $("#date-l-btn"),
-//     nextArrow: $("#date-r-btn")
-// });
-
+// =================
 // 코트 카드 swiper
+// =================
 var swiper2 = new Swiper("#info-card", {
     slidesPerView: 3,
     slidesPerGroup: 3,
@@ -77,7 +20,9 @@ var swiper2 = new Swiper("#info-card", {
     }
 });
 
+// =================
 // 날짜 swiper
+// =================
 var swiper = new Swiper(".date-swiper", {
     slidesPerView: 7,
     slidesPerGroup: 7,
@@ -101,7 +46,9 @@ function getDirection() {
     return direction;
 }
 
+// =================
 // 카드 선택 후 css 유지
+// =================
 $('.card-btn').on('click', function () {
     $('.card').removeClass('selected-card');
     $(this).addClass('selected-card');
@@ -114,8 +61,9 @@ $('.card-btn').on('click', function () {
     // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
 })
 
-
+// =================
 // 날짜 선택 후 css 유지
+// =================
 $('.date-wrap').on('click', function () {
     $('.date-wrap').removeClass('selected-date');
     $(this).addClass('selected-date');
