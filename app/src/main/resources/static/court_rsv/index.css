@@ -97,6 +97,7 @@
 button.card {
     border-radius: 25px;
     width: 240px;
+    height: 150px;
 }
 
 /* 카드 좌우버튼 색*/

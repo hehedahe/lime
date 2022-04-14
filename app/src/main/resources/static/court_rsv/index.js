@@ -49,7 +49,7 @@ function getDirection() {
 // =================
 // 카드 선택 후 css 유지
 // =================
-$('.card-btn').on('click', function () {
+function selectedCard() {
     $('.card').removeClass('selected-card');
     $(this).addClass('selected-card');
     // $(this).find('a').removeClass('changed-color');
@@ -59,7 +59,7 @@ $('.card-btn').on('click', function () {
     var offset = $('#swiper-temp2').offset();
     $('html').animate({scrollTop : offset.top}, 400);
     // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
-})
+};
 
 // =================
 // 날짜 선택 후 css 유지
