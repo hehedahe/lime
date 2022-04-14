@@ -52,8 +52,8 @@ function getDirection() {
 $('.card-btn').on('click', function () {
     $('.card').removeClass('selected-card');
     $(this).addClass('selected-card');
-    $(this).find('a').removeClass('changed-color');
-    $(this).find('a').addClass('changed-color');
+    // $(this).find('a').removeClass('changed-color');
+    // $(this).find('a').addClass('changed-color');
 
     // scroll 이동
     var offset = $('#swiper-temp2').offset();

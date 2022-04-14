@@ -15,12 +15,13 @@ public class DefaultCityService implements CityService {
     CityDao cityDao;
 
     @Override
-    public List<City> findCityLatlng(int cityId) {
-        return cityDao.findCityLatlng(cityId);
+    public City findRegion(int regionId) {
+        return cityDao.findRegion(regionId);
     }
 
     @Override
-    public List<City> findRegionLatlng(int regionId) {
-        return cityDao.findRegionLatlng(regionId);
+    public City findCity(String cityName, int regionId) {
+        return cityDao.findCity(cityName, regionId);
     }
+
 }

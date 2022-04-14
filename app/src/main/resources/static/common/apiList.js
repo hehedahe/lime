@@ -27,3 +27,12 @@ export async function findRegion(regionId) {
         console.log(e);
     }
 }
+
+export async function findCity(cityName, regionId) {
+    try {
+        const response = await axios(`${PATH.city.findCity}?cityName=${cityName}&regionId=${regionId}`);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+};

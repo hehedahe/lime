@@ -1,29 +1,7 @@
 "use strict"
 
 import {selectCity} from '../common/selectCity.js'
-import {fieldList, findRegion} from '../common/apiList.js'
-
-
-// =================
-// 도시 선택하여 시군구 sorting
-// =================
-const dropRegion = $('#drop-region');
-
-dropRegion.on('change', async function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    selectCity(dropRegion.val());
-    $('#drop-city option:selected').html('전체');
-
-    // const latLng = await findRegion(Number($('#drop-region option:selected').val()));
-    // console.log(latLng);
-    // let regionLat1 = latLng.region.regionLat;
-    // let regionLng1 = latLng.region.regionLng
-    //
-    // panTo(regionLat1, regionLng1);
-});
-
+import {fieldList, findRegion, findCity} from '../common/apiList.js'
 
 // =================
 // 카카오 지도 API
@@ -41,16 +19,16 @@ var markerImage = new kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/lo
     new kakao.maps.Size(44, 49), // 마커이미지의 크기입니다
     {offset: new kakao.maps.Point(27, 69)}); // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-// async function panTo(lat, lng) {
-//     let lati = await lat
-//     let longi = await lng
-//     // 이동할 위도 경도 위치를 생성합니다
-//     var moveLatLon = new kakao.maps.LatLng(lati, longi);
-//
-//     // 지도 중심을 부드럽게 이동시킵니다
-//     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-//     map.panTo(moveLatLon);
-// }
+// 중심좌표 부드럽게 이동하기
+function panTo(lat, lng) {
+    // 이동할 위도 경도 위치를 생성합니다
+    var moveLatLon = new kakao.maps.LatLng(lat, lng);
+
+    // 지도 중심을 부드럽게 이동시킵니다
+    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    map.panTo(moveLatLon);
+}
+
 
 
 // =================
@@ -75,6 +53,45 @@ var markerImage = new kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/lo
 })();
 
 
+
 // =================
-//  시도 중심좌표 뿌리기
+// 시도/시군구 sorting & 중심좌표 뿌리기
 // =================
+const dropRegion = $('#drop-region');
+const dropCity = $('#drop-city');
+
+// 시도
+dropRegion.on('change', async function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    selectCity(dropRegion.val());
+
+    const coordinateRegion = await findRegion(Number($('#drop-region option:selected').val()));
+
+    let regionLat = coordinateRegion.region?.regionLat;
+    let regionLng = coordinateRegion.region?.regionLng;
+
+    panTo(regionLat, regionLng);
+});
+
+// 시군구
+dropCity.on('change', async function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let city = $('#drop-city option:checked').text();
+    let regionNo = $('#drop-region option:selected').val();
+
+    const coordiCity = await findCity(city, regionNo);
+    console.log(coordiCity)
+
+    panTo(coordiCity.cityLat, coordiCity.cityLng);
+});
+
+
+
+
+
+
+
