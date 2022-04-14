@@ -41,11 +41,11 @@ export function selectCity(e) {
     else if (e == 16) var cities = gyeongnam;
     else if (e == 17) var cities = jeju;
 
-    // target.options.length = 0;
-    $('#drop-city option').length = 0;
+    var target = document.querySelector('#drop-city');
+    target.options.length = 0;
 
     cities?.map((city, index) => {
-        var opt = `<option value=${index}>${city}</option>`;
+        var opt = `<option value="${index}">${city}</option>`;
         $('#drop-city').append(opt);
     });
 

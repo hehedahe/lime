@@ -19,19 +19,7 @@
         </association>
     </resultMap>
 
-    <select id="findCityLatlng" resultMap="cityMap" parameterType="int">
-        SELECT
-            c.city_id,
-            c.lat,
-            c.lng,
-            c.city_name,
-            r.region_name
-        from city c
-                 left join region r on c.region_id=r.region_id
-        where c.city_id=#{cityId}
-    </select>
-
-    <select id="findRegionLatlng" resultMap="cityMap" parameterType="int">
+    <select id="findRegion" resultMap="cityMap" parameterType="int">
         SELECT
             region_id,
             lat,
@@ -40,6 +28,21 @@
         from region
         where region_id=#{regionId}
     </select>
+
+    <select id="findCity" resultMap="cityMap">
+        SELECT
+            c.city_id,
+            c.lat,
+            c.lng,
+            c.city_name,
+            r.region_name,
+            r.region_id
+        from city c
+                 left join region r on c.region_id=r.region_id
+        where c.city_name=#{cityName} and r.region_id=#{regionId};
+    </select>
+
+
 
 
 
