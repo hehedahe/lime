@@ -1,4 +1,4 @@
-import {aaa,bbb} from './index.js'
+import {aaa,bbb} from './test1.js'
 
 document.querySelector('.ttt').onclick=function (){
     aaa();

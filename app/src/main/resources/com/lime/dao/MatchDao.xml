@@ -23,30 +23,50 @@
       <result column="field_id" property="fieldNo"/>
       <result column="court_type_id" property="courtTypeNo"/>
       <collection property="field" ofType="Field">
-        <id column="field_id" property="no"/>
-        <result column="fName" property="fName"/>
+        <id column="field_id" property="fieldId"/>
+        <result column="field_name" property="name"/>
         <result column="addr" property="addr"/>
+        <result column="region_id" property="regionId"/>
+        <result column="city_id" property="cityId"/>
+        <result column="city_name" property="cityName"/>
       </collection>
     </collection>
   </resultMap>
   
+  <!--  
   <resultMap type="Court" id="courtMap">
     <id column="court_id" property="no"/>
     <result column="name" property="name"/>
     <result column="court_type_id" property="courtTypeNo"/>
     <result column="field_id" property="fieldNo"/>
     <association property="field" javaType="Field">
-      <id column="field_id" property="no"/>
-      <result column="name" property="fName"/>
+      <id column="field_id" property="fieldId"/>
+      <result column="name" property="name"/>
       <result column="addr" property="addr"/>
     </association>
   </resultMap>
+  -->
   
+  <!--  
   <resultMap type="Field" id="fieldMap">
-    <id column="field_id" property="no"/>
-    <result column="name" property="fName"/>
+    <id column="field_id" property="fieldId"/>
+    <result column="name" property="name"/>
     <result column="addr" property="addr"/>
+    <result column="region_id" property="regionId"/>
+    <result column="city_name" property="cityName"/>
+    <association column="city_id" property="cityId" javaType="City" resultMap="cityMap">
+	    <id column="city_id" property="cityId"/>
+	    <result column="city_name" property="cityName"/>
+    </association>
   </resultMap>
+  -->
+
+  <!--  
+  <resultMap type="City" id="cityMap">
+    <id column="city_id" property="cityId"/>
+    <result column="city_name" property="cityName"/>
+  </resultMap>
+  -->
 
   <select id="countAll" resultType="int">
     select count(*) from social_mtch
@@ -70,7 +90,7 @@
 		  c.court_type_id,
 		  c.field_id,
 		  f.field_id,
-		  f.name as fName,
+		  f.name as field_name,
 		  f.addr
 		from social_mtch m
 		  left outer join court c on m.court_id=c.court_id
@@ -78,4 +98,84 @@
 		order by
 		  m.st_time asc, f.name asc
   </select>
+  
+  <select id="findByNo" resultMap="matchMap" parameterType="int">
+    select
+      m.mtch_id,
+      m.court_id,
+      m.user_id,
+      m.mtch_type_id,
+      m.mtch_date,
+      m.st_time,
+      m.end_time,
+      m.fee,
+      m.state,
+      m.num_of_people,
+      m.lv_id,
+      c.court_id,
+      c.name,
+      c.court_type_id,
+      c.field_id,
+      f.field_id,
+      f.name as field_name,
+      f.addr
+    from social_mtch m
+      left outer join court c on m.court_id=c.court_id
+      left outer join field f on c.field_id=f.field_id
+    where
+      m.mtch_id=#{no}
+  </select>
+
+  <select id="searchSelectMatch" parameterType="SearchCondition" resultMap="matchMap">
+    select
+      m.mtch_id,
+      m.court_id,
+      m.user_id,
+      m.mtch_type_id,
+      m.mtch_date,
+      m.st_time,
+      m.end_time,
+      m.fee,
+      m.state,
+      m.num_of_people,
+      m.lv_id,
+      c.court_id,
+      c.name,
+      c.court_type_id,
+      c.field_id,
+      f.field_id,
+      f.name as field_name,
+		  f.addr,
+		  f.region_id,
+		  f.city_id,
+		  city.city_name
+    from social_mtch m
+      left outer join court c on m.court_id=c.court_id
+      left outer join field f on c.field_id=f.field_id
+      left outer join city on f.city_id=city.city_id
+    where true
+    <if test="matchDate != null">
+      AND m.mtch_date = #{matchDate}
+    </if>
+    <if test="region != null">
+      AND f.region_id = #{region}
+    </if>
+    <if test="city != null">
+      AND city.city_name = #{city}
+    </if>
+    <if test="level != null">
+      AND m.lv_id = #{level}
+    </if>
+    <if test="matchType != null">
+      AND m.mtch_type_id = #{matchType}
+    </if>
+    <if test="courtType != null">
+      AND c.court_type_id = #{courtType}
+    </if>
+    order by
+      m.st_time asc, f.name asc
+  </select>
+  
+
+  
 </mapper>

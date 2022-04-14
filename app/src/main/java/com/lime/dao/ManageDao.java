@@ -14,7 +14,7 @@ import com.lime.domain.User;
 //
 public interface ManageDao {
 
-  int countAll();
+  int countUserAll();
 
   List<User> findAll();
 
@@ -23,6 +23,8 @@ public interface ManageDao {
   List<Field> findFieldAll();
   
   Field findFieldByNo(int no);
+  
+  
 }
 
 

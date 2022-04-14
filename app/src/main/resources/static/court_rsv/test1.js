@@ -1,4 +1,4 @@
-import {ccc} from "./test1";
+import {ccc} from "./test2";
 
 export function aaa() {
     console.log("adddd")

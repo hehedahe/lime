@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>클래스 상세</title>
+    <link href="cC_CSS/createClass.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+<body>
+
+시작일 <input type="text" name="from" id="from" autocomplete="off">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="../../node_modules/jquery/dist/jquery.min.js"></script> -->
+<script>
+var dateFormat = "yy/mm/dd",
+from = $( "#from" )
+  .datepicker({
+    showMonthAfterYear: true, //연도,달 순서로 지정
+    changeMonth: true,//달 변경 지정
+    dateFormat:"yy/mm/dd",//날짜 포맷
+    dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],//요일 이름 지정
+    monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],//월 이름 지정
+    minDate:0 //오늘 이전 날짜를 선택할 수 없음
+  })
+  .on( "change", function() {
+    to.datepicker( "option", "minDate", getDate(this) );//종료일의 minDate 지정
+  }),
+to = $( "#to" ).datepicker({
+showMonthAfterYear: true,  
+  changeMonth: true,
+  dateFormat:"yy/mm/dd",
+  dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],
+  monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+  minDate:'+1D' //내일부터 선택가능, 지정형식 예(+1D +1M +1Y)
+})
+.on( "change", function() {
+  from.datepicker( "option", "maxDate", getDate(this) );//시작일의 maxDate 지정
+});
+
+function getDate(element) {
+var date;
+try {
+  date = $.datepicker.parseDate( dateFormat, element.value );
+  if(element.id == 'from'){
+  date.setDate(date.getDate()+30);//종료일은 시작보다 하루 이후부터 지정할 수 있도록 설정
+  }else{
+   date.setDate(date.getDate()-1);//시작일은 종료일보다 하루 전부터 지정할 수 있도록 설정
+  }
+} catch( error ) {
+  date = null;
+}
+return date;
+}
+</script>
+</body>
+</html>

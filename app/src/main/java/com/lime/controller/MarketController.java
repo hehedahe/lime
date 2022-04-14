@@ -1,69 +1,82 @@
 package com.lime.controller;
 
+import static com.lime.controller.ResultMap.FAIL;
+import static com.lime.controller.ResultMap.SUCCESS;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.lime.domain.Market;
 import com.lime.service.MarketService;
 
 @RestController 
 public class MarketController {
 
+  private static final Logger log = LogManager.getLogger(MarketController.class);
+
   @Autowired
   MarketService marketService; // 클래스 대신 인터페이스를 지정한다.
-
-  //  @RequestMapping("/market/list")
-  //  public Object list() {
-  //    return marketService.list();
-  //  }
-
-  //  @RequestMapping("/market/list/region")
-  //  public Object listRegion(String regionName) {
-  //    System.out.println(regionName);
-  //    return marketService.listRegion(regionName);
-  //  }
-  //
-  //  @RequestMapping("/market/list/city")
-  //  public Object listCity(String regionName, String cityName) {
-  //    System.out.println(regionName);
-  //    System.out.println(cityName);
-  //    return marketService.listCity(regionName, cityName);
-  //  }
 
   @RequestMapping("/market/list")
   public Object list(String regionName, String cityName, boolean checked, String keyword) {
 
+    log.info("게시물 목록 조회!");
+
     if (checked == false) {
-      System.out.println(keyword);
-      System.out.println(regionName);
-      System.out.println(cityName);
-      System.out.println(checked);
+      log.debug("키워드: " + keyword);
+      log.debug("지역: " + regionName);
+      log.debug("도시: " + cityName);
+      log.debug("거래가능만 보기: " + checked);
       if (regionName.equals("지역") || regionName.equals("전체")) {
-        System.out.println(regionName);
-        return marketService.list(keyword);
+        return new ResultMap()
+            .setStatus(SUCCESS)
+            .setData(marketService.list(keyword));
       }
 
       if (cityName.equals("도시")) {
-        System.out.println(regionName);
-        return marketService.listRegion(regionName, keyword);
+        return new ResultMap()
+            .setStatus(SUCCESS)
+            .setData(marketService.listRegion(regionName, keyword));
       }
 
-      return marketService.listCity(regionName, cityName, keyword);
+      return new ResultMap()
+          .setStatus(SUCCESS)
+          .setData(marketService.listCity(regionName, cityName, keyword));
 
     } else {
-      System.out.println(keyword);
+      log.debug("키워드: " + keyword);
+      log.debug("지역: " + regionName);
+      log.debug("도시: " + cityName);
+      log.debug("거래가능만 보기: " + checked);
       if (regionName.equals("지역") || regionName.equals("전체")) {
-        System.out.println(regionName);
-        return marketService.listChecked(keyword);
+        return new ResultMap()
+            .setStatus(SUCCESS)
+            .setData(marketService.listChecked(keyword));
       }
 
       if (cityName.equals("도시")) {
-        System.out.println(regionName);
-        return marketService.listRegionChecked(regionName, keyword);
+        return new ResultMap()
+            .setStatus(SUCCESS)
+            .setData(marketService.listRegionChecked(regionName, keyword));
       }
 
-      return marketService.listCityChecked(regionName, cityName, keyword);
+      return new ResultMap()
+          .setStatus(SUCCESS)
+          .setData(marketService.listCityChecked(regionName, cityName, keyword));
     }
   }
+
+  @RequestMapping("/market/get")
+  public Object get(int no) {
+    log.debug(no);
+    Market market = marketService.get(no);
+    if (market == null) {
+      return new ResultMap().setStatus(FAIL).setData("해당 번호의 게시글이 없습니다."); // 컨트롤러는 서비스 객체의 리턴 값에 따라 응답 데이터를 적절히 가공하여 리턴한다.
+    }
+    return new ResultMap().setStatus(SUCCESS).setData(market);
+  }
+
 
   //  @RequestMapping("/contact/add")
   //  public Object add(Market contact, String[] tel) throws Exception {
@@ -108,15 +121,7 @@ public class MarketController {
   //    return transactionTemplate.execute(new ContactAddTransaction());
   //  }
   //   */
-  //  @RequestMapping("/contact/get")
-  //  public Object get(int no) {
-  //    Market contact = contactService.get(no);
-  //    if (contact == null) {
-  //      return ""; // 컨트롤러는 서비스 객체의 리턴 값에 따라 응답 데이터를 적절히 가공하여 리턴한다.
-  //    }
-  //    return contact;
-  //  }
-  //
+
   //  @RequestMapping("/contact/update")
   //  public Object update(Market contact, String[] tel) throws Exception {
   //    // 요청 파라미터 분석 및 가공

@@ -13,19 +13,18 @@
 
 }
 
-body {
-  height: 80%;
-}
 
-.container{
+.container{ 
 	width: 1024px;
-  height: 80%;
+
+	
 }
 
 #tables {
-  height: 80%;
-  
+  margin-top: 200px;
 }
+
+
 .col {
   height: 80%;
 }
@@ -38,3 +37,7 @@ body {
 
 }
 
+.col-1{
+    border: 2px #66C88D;
+    font-size: large;
+}

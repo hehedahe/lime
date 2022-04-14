@@ -7,6 +7,7 @@ import com.lime.domain.Classes;
 import com.lime.domain.Club;
 import com.lime.domain.Community;
 import com.lime.domain.Field;
+import com.lime.domain.Market;
 import com.lime.domain.User;
 import com.lime.service.ManageReportService;
 import com.lime.service.ManageService;
@@ -16,9 +17,10 @@ public class ManageController {
 
   @Autowired
   ManageService manageService;//회원관리,구장관리
-  @Autowired
-  ManageReportService manageReportService;//게시물관리
-  
+   @Autowired 
+   ManageReportService manageReportService;//게시물관리 
+   
+   
   //회원관리-회원리스트
   @RequestMapping("/manage/user/list")
   public Object userList() {
@@ -33,6 +35,15 @@ public class ManageController {
     }
     return manage;
   }
+  
+  
+  /*
+   * @RequestMapping("/manage/user/userCount") public User userCount() {
+   * 
+   * User userCount = new User(); userCount.setUserCount(manageService.userCount());
+   * 
+   * return userCount; }
+   */
 
 //=========================================================  
   //구장관리- 리스트 조회
@@ -102,6 +113,16 @@ public class ManageController {
     return club;
   }
   
+  //마켓 조회
+  @RequestMapping("/manage/market/list")
+  public Object marketList() {
+    return manageReportService.marketList();
+  }
+  @RequestMapping("/manage/marketCmt/list")
+  public Object marketCmtList() {
+    return manageReportService.marketCmtList();
+  }
+
 }
 
 

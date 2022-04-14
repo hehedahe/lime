@@ -12,6 +12,8 @@
   	<id column="cls_id" property="no"/>
   	<result column="user_id" property="userId"/>
     <result column="city_id" property="cityId"/>
+    <result column="city_name" property="cityName"/>
+    <result column="region_name" property="regionName"/>
     <result column="title" property="title"/>
     <result column="intr" property="intro"/>
     <result column="img" property="img"/>
@@ -33,10 +35,50 @@
 	from 
 	cls cl
 	left join city c
-	on cl.city_id=c.region_id
+	on cl.city_id=c.city_id
 	left join region r 
-	on c.region_id=r.region_id; 
+	on c.region_id=r.region_id
   </select>
+  
+  
+   <insert id="insert" parameterType="clazz">
+    insert into ml_book(title,img) 
+    values(#{title},#{img})
+  </insert>
+  
+  
+  <select id="findByRegion" resultMap="clsMap" parameterType="string">
+  
+  		select 
+		      cl.title as title,
+		      cl.level as level
+		      rg.region_name,
+		      c.city_name,
+		      cl.rgt_date as rgt_date		    
+		from cls cl
+		  left join city c
+		   ON cl.city_id = c.city_id
+		  left join region rg 
+		   on c.region_id = rg.region_id
+		where region_name=#{regionName}
+		   order by rgt_date desc
+    </select>
+  
+      <select id="findByCity" resultMap="clsMap" resultType="string">
+    select 
+          cl.title as title,
+          cl.level as level,
+          rg.region_name,
+          c.city_name
+    from cls cl
+      left join city c
+       on cl.city_id = c.city_id
+      left join region rg 
+       on c.region_id = rg.region_id
+    where region_name=#{regionName} and city_name=#{cityName}
+
+    </select>
+  
   
   
   

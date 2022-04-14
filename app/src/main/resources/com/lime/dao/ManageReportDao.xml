@@ -26,15 +26,27 @@
 	<resultMap type="club" id="clubMap">
 		<id column="no" property="no" />
 		<result column="postId" property="postId" />
+		<result column="commnetId" property="commnetId" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="cName" property="cName" />
+		<result column="rgtDate" property="rgtDate" />
 	</resultMap>
+	
+	 <resultMap type="market" id="itemMap">
+    <id column="no" property="no" />
+    <result column="itemId" property="itemId" />
+    <result column="transRpyId" property="transRpyId" />
+    <result column="itemName" property="itemName" />
+    <result column="content" property="content" />
+    <result column="rgtDate" property="rgtDate" />
+  </resultMap>
+  
 	
 	<!-- 클래스게시글 -->
   <select id="findClassAll" resultMap="classMap">
 			SELECT 
-			  c.cls_id NO,  
+			  c.cls_id no,  
 			  c.title title,
 			  c.intr intr,
 			  date_format(c.rgt_date, '%Y-%m-%d') rgtDate,
@@ -77,6 +89,23 @@
 		FROM
 		cmnty_post cp
 	</select>
+	
+	 <select id="findCommunityCmtAll" resultMap="communityMap">
+    SELECT
+      post_id postId,
+      title title,
+        (SELECT
+         u.name
+        FROM
+        member m
+        INNER JOIN user u
+        ON m.user_id = u.user_id
+        WHERE u.user_id = cp.user_id) NAME,
+      date_format(cp.rgt_date,'%Y-%m-%d') rgtDate
+    FROM
+    cmnty_post cp
+  </select>
+	
 	<select id="findCommunityByNo" resultMap="communityMap"
 		parameterType="int">
 		SELECT
@@ -111,8 +140,8 @@
 		INNER JOIN user u
 		ON cp.user_id = u.user_id
 	</select>
-	<select id="findClubByNo" resultMap="clubMap"
-		parameterType="int">
+	
+	<select id="findClubByNo" resultMap="clubMap" parameterType="int">
 		SELECT
 			post_id no,
 				(select
@@ -128,4 +157,32 @@
 		WHERE 1=1
 		AND post_id = #{no}
 	</select>
+	
+	  <!-- 마켓게시글 -->
+  <select id="findItemAll" resultMap="itemMap"> 
+		SELECT 
+		 i.item_id itemId,
+		 i.item_name itemName,
+		 i.content content,
+		 i.rgt_date rgtDate,
+		 u.name name
+		FROM 
+		item i
+		INNER JOIN user u
+		ON i.user_id = u.user_id
+  </select>
+  
+  <select id="findItemCmtAll" resultMap="itemMap"> 
+    SELECT 
+     i.item_id itemId,
+     i.item_name itemName,
+     i.content content,
+     i.rgt_date rgtDate,
+     u.name name
+    FROM 
+    item i
+    INNER JOIN user u
+    ON i.user_id = u.user_id
+  </select>
+  
 </mapper>

@@ -1,91 +1,3 @@
-
-@font-face {
-    font-family: 'NG';
-    src: url("../../asset/font/NanumGothic.woff") format("woff");
-}
-
-@font-face {
-    font-family: 'NGBold';
-    src: url("../../asset/font/NanumGothicBold.woff") format("woff");
-}
-
-@font-face {
-    font-family: 'CooperBlack';
-    src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
-}
-
-html {
-    overflow: hidden;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'NG';
-}
-
-/* header 전체*/
-#h-nav {
-    width: 100vw;
-}
-
-.header {
-    font-family: 'NG';
-    width: 100vw;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgb(191, 186, 178);
-}
-
-/* 로고 */
-.nav-logo {
-    height: 10vh;
-    width: 15vw;
-    display: flex;
-    align-items: center;
-    padding: 2vh 0 0 4vw;
-    list-style: none;
-}
-
-.nav-logo > li {
-    font-family: 'CooperBlack';
-}
-
-.nav-logo li:first-child {
-    font-size: xxx-large;
-    color: rgb(70, 70, 70);
-}
-.nav-logo > li:last-child {
-    height: 4vh;
-    align-self: flex-end;
-    color: rgb(127, 127, 127);
-    margin-left: 10px;
-}
-
-/* 마이페이지 */
-.nav-links {
-    display: flex;
-    width: 8vw;
-    height: 10vh;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-links {
-    text-decoration: none;
-    color: #000;
-}
-
-.nav-links > a:hover {
-    font-family: 'NGBold';
-    color: rgb(70, 70, 70);
-}
-
-/**/
-/**/
-/**/
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Simple Sidebar v6.0.5 (https://startbootstrap.com/template/simple-sidebar)
@@ -144,7 +56,7 @@ html {
     --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-    /*--bs-body-font-family: var(--bs-font-sans-serif);*/
+    --bs-body-font-family: var(--bs-font-sans-serif);
     --bs-body-font-size: 1rem;
     --bs-body-font-weight: 400;
     --bs-body-line-height: 1.5;
@@ -154,7 +66,7 @@ html {
 
 @font-face {
     font-family: 'NG';
-    src: url("../asset/font/NanumGothic.woff") format("woff");
+    src: url("../../asset/font/NanumGothic.woff") format("woff");
 }
 
 *,
@@ -171,7 +83,7 @@ html {
 
 body {
     margin: 0;
-    font-family: 'NG';
+    font-family: NG;
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
     line-height: var(--bs-body-line-height);
@@ -345,7 +257,7 @@ pre,
 code,
 kbd,
 samp {
-    /*font-family: var(--bs-font-monospace);*/
+    font-family: var(--bs-font-monospace);
     font-size: 1em;
     direction: ltr /* rtl:ignore */;
     unicode-bidi: bidi-override;
@@ -5855,7 +5767,7 @@ textarea.form-control-lg {
     z-index: 1080;
     display: block;
     margin: 0;
-    /*font-family: var(--bs-font-sans-serif);*/
+    font-family: var(--bs-font-sans-serif);
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -5957,7 +5869,7 @@ textarea.form-control-lg {
     z-index: 1070;
     display: block;
     max-width: 276px;
-    /*font-family: var(--bs-font-sans-serif);*/
+    font-family: var(--bs-font-sans-serif);
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -7686,7 +7598,7 @@ textarea.form-control-lg {
 }
 
 .font-monospace {
-    /*font-family: var(--bs-font-monospace) !important;*/
+    font-family: var(--bs-font-monospace) !important;
 }
 
 .fs-1 {

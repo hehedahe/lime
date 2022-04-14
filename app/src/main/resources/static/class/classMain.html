@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="import" href="../static/header/user/header.html">
-    <link rel="import" href="static/footer/footer.html">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <!-- header, footer 삽입 제이쿼리-->
 <script type="text/javascript">
 
     $(document).ready(function(){
         $('.footer').load('../footer/footer.html');
-        // $(".header").load("../header/user/loggedheader.html");
+        $(".header").load("../header/user/header.html");
     })
 </script>
 </head>
@@ -23,6 +20,10 @@
 
 
 <body>
+<div class="container">
+
+
+
 <div class="header"></div>
 <div class="search">
     <select class="re-search">
@@ -35,75 +36,88 @@
     </select>
     <i class="fas fa-search"></i>
     <input type="text" placeholder="검색어를 입력해주세요." style="width:300px;">
-    <button id="open-btn">클래스 개설하기</button>
+    <a href="createClass-1.html"><button id="open-btn" type="button">클래스 개설하기</button></a>
 </div>
 <div class="div-container">
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card">
-            <img src="img/example.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Class title</h5>
-            </div>
-        </div>
-        <div class="tag-btn">
-        <button id="re-btn">서울시</button>
-        <button id="lv-btn">Beginner</button>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="img/example.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Class title</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="img/example.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Class title</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="img/example.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Class title</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="img/example.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Class title</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="img/example.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Class title</h5>
-            </div>
-        </div>
-    </div>
+<div id="div-body" class="row row-cols-1 row-cols-md-3 g-4">
 </div>
 </div>
+
 <div class="footer"></div>
 
-<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="./js/main.js"></script>
+
+</div>
+
+
+
+
 <!-- header, footer 삽입 제이쿼리-->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
     $(document).ready(function(){
         $('.footer').load('../footer/footer.html');
         $("#footer-wrapper").load("/footer/footer.html");
     })
+</script> -->
+
+
+<script>
+function loadData(data) {
+    fetch(data)
+      .then((response) => {
+            return response.json()
+      }).then((classList) => {
+       console.log(classList)
+
+       for (const classInfo of classList) {
+           
+            let level = classInfo.level;
+            if (level === "B") {
+                level = "Beginner"
+            } else if (level === "D") {
+                level = "Development"
+            } else if (level === "I") {
+                level = "Development"
+            } else if (level === "") {
+                level = "Development"
+            } else if (level === "D") {
+                level = "Development"
+            }
+
+           const divBody = document.querySelector("#div-body")
+           const divTag = document.createElement("div")
+           divTag.innerHTML =`<div class="col">
+                            <div class="card">
+                                <img src="img/img.png" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h5 class="card-title">${classInfo.title}</h5>
+                                </div>
+                                </div>
+                            <div class="tag-btn">
+                            <button id="re-btn">${classInfo.cityName}</button>
+                            <button id="lv-btn">${level}</button>
+                            </div>
+                        </div>`
+
+                 divBody.appendChild(divTag)
+       }
+    })
+}
+
+    
+loadData("/class/list")
+
+
+$(document).on('click', '#re-btn', (e) => {
+    const btnInfo = e.target.innerText
+    
+    if (btnInfo === "강서구") {
+        console.log("테스트 완료")
+    }
+    
+})
+
+
 </script>
 
 </body>

@@ -20,6 +20,9 @@
     <result column="view_cnt" property="viewCount"/>
     <result column="region_name" property="regionName"/>
     <result column="city_name" property="cityName"/>
+    <result column="name" property="userName"/>
+    <result column="manner_score" property="mannerScore"/>
+    <result column="lv_name" property="lvName"/>
   </resultMap>
   
 
@@ -28,9 +31,12 @@
    -->
   <select id="findAll" resultMap="marketMap">
 SELECT 
+      i.user_id as user_id,
+      i.item_id as item_id,
       i.item_name as item_name,
       i.item_cost as item_cost,
       rg.region_name as region_name,
+      ct.city_id as city_id,
       ct.city_name as city_name,
       i.view_cnt as view_cnt,
       i.rgt_date as rgt_date,
@@ -47,6 +53,7 @@ SELECT
    
    <select id="findByRegion" resultMap="marketMap">
 		SELECT 
+		      i.item_id as item_id,
 		      i.item_name as item_name,
 		      i.item_cost as item_cost,
 		      replace(rg.region_name, '\r', '') as region_name,
@@ -66,6 +73,7 @@ SELECT
     
     <select id="findByCity" resultMap="marketMap" resultType="string">
     SELECT 
+          i.item_id as item_id,
           i.item_name as item_name,
           i.item_cost as item_cost,
           replace(rg.region_name, '\r', '') as region_name,
@@ -85,6 +93,7 @@ SELECT
     
     <select id="findAllChecked" resultMap="marketMap">
 SELECT 
+      i.item_id as item_id,
       i.item_name as item_name,
       i.item_cost as item_cost,
       rg.region_name as region_name,
@@ -104,6 +113,7 @@ SELECT
     
     <select id="findByRegionChecked" resultMap="marketMap">
     SELECT 
+          i.item_id as item_id,
           i.item_name as item_name,
           i.item_cost as item_cost,
           replace(rg.region_name, '\r', '') as region_name,
@@ -123,6 +133,7 @@ SELECT
     
     <select id="findByCityChecked" resultMap="marketMap" resultType="string">
     SELECT 
+          i.item_id as item_id,
           i.item_name as item_name,
           i.item_cost as item_cost,
           replace(rg.region_name, '\r', '') as region_name,
@@ -140,25 +151,32 @@ SELECT
 
     </select>
     
-    
-    
-    
-    
-    
-    
-    
-  
     <select id="findByNo" resultMap="marketMap" parameterType="int">
 	  select
-	    board_no,
-	    title,
-	    content,
-	    created_date,
-	    view_count
-	  from
-	    ml_board
-	  where
-	    board_no=#{no}
+	   i.item_id,
+	   i.item_name,
+	   i.item_cost,
+	   rg.region_name,
+	   ct.city_name,
+	   i.view_cnt,
+	   i.rgt_date,
+	   i.content,
+	   u.user_id,
+	   u.name,
+	   m.manner_score,
+     lv.lv_name
+	  from item i
+	   left join city ct
+	     on i.city_id = ct.city_id
+	   left join region rg
+	     on ct.region_id = rg.region_id
+	   left join user u
+	     on i.user_id = u.user_id
+	   left join member m
+       on i.user_id = m.user_id 
+     left join lv
+       on m.lv_id  = lv.lv_id
+	  where item_id=#{no}
   </select>
   
   <insert id="insert" parameterType="Market">

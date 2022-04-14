@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'NG';
+    src: url("../asset/font/NanumGothic.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'NGBold';
+    src: url("../asset/font/NanumGothicBold.woff") format("woff");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1024px;
+    padding: 0;
+    height: 1100px;
+}
+
+#map,
+.swiper {
+    width: 1024px;
+    height: 425px;
+}
+
+#map {
+    top: 10.1vh;
+    position: absolute;
+}
+.swiper {
+    position: relative;
+}
+
+.isShow {
+    z-index: 1000;
+}
+
+/* 코트사진 버튼*/
+#crt-name > span,
+#crt-name > p {
+    color:rgb(102, 200, 141);
+}
+#crt-name > h4 {
+    font-weight: bolder;
+}
+
+#to-index {
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(102, 200, 141);
+    font-size: 18px;
+    border-radius: 15px;
+}
+#to-index:hover {
+    box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 30%);
+}
+
+/* 코트 시설 정보 */
+#x-title2 {
+    font-weight: bold;
+    font-size: 20px;
+}
+.brief-info {
+    width: 140px;
+    height: 100px;
+    background-color: rgb(250, 250, 250);
+}
+
+#precaution {
+    font-weight: bold;
+}
+
+
+/* swiper css */
+html,
+body {
+    /*position: relative;*/
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-pagination {
+    color: #fff;
+    background-color: rgba(131, 131, 131, 0.3);
+    margin-left: 480px;
+}
+

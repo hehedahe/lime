@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+
+    <!-- fontawesome -->
+    <!--    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">-->
+    <!--    <script src="https://kit.fontawesome.com/0b4dd5be7a.js" crossorigin="anonymous"></script>-->
+
+    <!-- slick -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+    <script src="../node_modules/axios/dist/axios.js"></script>
+
+    <title>LIME - 코트 예약</title>
+
+    <!-- header, footer 삽입 제이쿼리 -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $("#x-header").load("/header/user/header.html");  //헤더 인클루드
+          $("#x-footer").load("/footer/footer.html");  // 푸터 인클루드
+        });
+    </script>
+ </head>
+
+<body>
+<!-- 헤더 -->
+<div id="x-header" class="d-flex bd-highlight mb-3"></div>
+
+<!-- 메인 컨텐츠 -->
+<div class="container">
+
+    <!-- 시도, 시군구 select -->
+    <div id="drop-menu" class="row w-100">
+        <div class="d-flex col-2 p-2 bd-highlight">
+            <select class="form-select border col-1 text-center" id="drop-region">
+                <option value="0" selected disabled hidden>지역</option>
+                <option value="1" data-id="1">서울</option>
+                <option value="2">부산</option>
+                <option value="3">대구</option>
+                <option value="4">인천</option>
+                <option value="5">광주</option>
+                <option value="6">대전</option>
+                <option value="7">울산</option>
+                <option value="8">세종</option>
+                <option value="9">경기</option>
+                <option value="10">강원</option>
+                <option value="11">충청북도</option>
+                <option value="12">충청남도</option>
+                <option value="13">전라북도</option>
+                <option value="14">전라남도</option>
+                <option value="15">경상북도</option>
+                <option value="16">경상남도</option>
+                <option value="17">제주</option>
+            </select>
+            <select class="form-select border col-1 text-center" aria-label="year" id="drop-city">
+                <option selected disabled hidden>도시</option>
+            </select>
+        </div>
+        <div class="col-2 ms-auto p-2 bd-highlight">
+            <select class="form-select border text-center" aria-label="year" id="preferred">
+                <option selected disabled hidden>선호 지역</option>
+            </select>
+        </div>
+    </div>
+
+
+    <!--  지도  -->
+    <div id="map" class="position-relative"></div>
+
+    <!--  카드 swiper  -->
+    <div id="swiper-temp2">
+        <div id="c-next" class="swiper-button-next"></div>
+        <div id="c-prev" class="swiper-button-prev"></div>
+        <div id="info-card"
+             class="swiper d-flex justify-content-around align-items-center position-absolute bottom-0 start-50 translate-middle-x">
+<!--            <button id="card-l-btn" class="border swiper-button-prev rounded-circle justify-content-center left-btn" type="button">-->
+<!--                <i class="fa-solid fa-chevron-left fa-3x"></i>-->
+<!--            </button>-->
+            <div id="crt-card" class="swiper-wrapper">
+                <div class="card-cover swiper-slide">
+                    <button class="card-btn card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">테니스장1</h5>
+                            <p class="card-text">#하드코트</p>
+                            <div class="content3">
+                                <p class="card-text">300m</p>
+                                <a href="#" class="btn btn-sm info-btn">정보</a>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="card-cover swiper-slide">
+                    <button class="card-btn card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">테니스장2</h5>
+                            <p class="card-text">#하드코트</p>
+                            <div class="content3">
+                                <p class="card-text">300m</p>
+                                <a href="#" class="btn btn-sm info-btn">정보</a>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="card-cover swiper-slide">
+                    <button class="card-btn card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">테니스장3</h5>
+                            <p class="card-text text1">#하드코트</p>
+                            <div class="content3">
+                                <p class="card-text text2">300m</p>
+                                <a href="#" class="btn btn-sm info-btn">정보</a>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="card-cover swiper-slide">
+                    <button class="card-btn card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">테니스장4</h5>
+                            <p class="card-text text1">#하드코트</p>
+                            <div class="content3">
+                                <p class="card-text text2">300m</p>
+                                <a href="#" class="btn btn-sm info-btn">정보</a>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="card-cover swiper-slide">
+                    <button class="card-btn card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">테니스장5</h5>
+                            <p class="card-text text1">#하드코트</p>
+                            <div class="content3">
+                                <p class="card-text text2">300m</p>
+                                <a href="#" class="btn btn-sm info-btn">정보</a>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="card-cover swiper-slide">
+                    <button class="card-btn card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                테니스장6
+                            </h5>
+                            <p class="card-text text1">
+                                #하드코트
+                            </p>
+                            <div class="content3">
+                                <p class="card-text text2">
+                                    300m
+                                </p>
+                                <a href="#" class="btn btn-sm info-btn">
+                                    정보
+                                </a>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+<!--            <button id="card-r-btn" class="border swiper-button-next rounded-circle text-center justify-content-center right-btn" type="button">-->
+<!--                <i class="fa-solid fa-chevron-right fa-3x"></i>-->
+<!--            </button>-->
+        </div>
+    </div>
+
+    <!-- 선택된 테니스장 정보 -->
+    <div id="selected-crt-wrap" class="my-3">
+        <div id="selected-crt" class="row m-3">
+            <h4 id="crt-name">테니스장1</h4>
+            <p class="mb-1">테니스장 주소</p>
+            <div class="d-flex">
+                <span>실내</span>
+                <span class="dot mx-2">·</span>
+                <span>코트타입</span>
+                <span class="dot mx-2">·</span>
+                <span>주차가능</span>
+            </div>
+        </div>
+    </div>
+
+    <!--  날짜 swiper  -->
+    <div id="swiper-temp" class="my-4">
+        <div class="swiper date-swiper">
+            <div class="date-wrapper swiper-wrapper">
+                <button class="date-wrap swiper-slide">11일<br>월</button>
+                <button class="date-wrap swiper-slide">12일<br>화</button>
+                <button class="date-wrap swiper-slide">13일<br>수</button>
+                <button class="date-wrap swiper-slide">14일<br>목</button>
+                <button class="date-wrap swiper-slide">15일<br>금</button>
+                <button class="date-wrap swiper-slide sat">16일<br>토</button>
+                <button class="date-wrap swiper-slide sun">17일<br>일</button>
+                <button class="date-wrap swiper-slide">18일<br>월</button>
+                <button class="date-wrap swiper-slide">19일<br>화</button>
+                <button class="date-wrap swiper-slide">20일<br>수</button>
+                <button class="date-wrap swiper-slide">21일<br>목</button>
+                <button class="date-wrap swiper-slide">22일<br>금</button>
+                <button class="date-wrap swiper-slide sat">23일<br>토</button>
+                <button class="date-wrap swiper-slide sun">24일<br>일</button>
+            </div>
+        </div>
+        <div id="date-next" class="swiper-button-next"></div>
+        <div id="date-prev" class="swiper-button-prev"></div>
+    </div>
+
+    <div id="schedule"
+         class="w-100 d-flex flex-column align-items-center my-4">
+        <div class="w-100 d-flex justify-content-around my-3">
+            <div class="crt-no">코트1</div>
+            <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
+                <button class="sche-btn border-0 p-3">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3 closed">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-around my-3">
+            <div class="crt-no">코트2</div>
+            <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
+                <button class="sche-btn border-0 p-3 closed">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-around my-3">
+            <div class="crt-no">코트3</div>
+            <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
+                <button class="sche-btn border-0 p-3">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3 closed">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-around my-3">
+            <div class="crt-no">코트4</div>
+            <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
+                <button class="sche-btn border-0 p-3">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3 closed">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3 closed">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3 closed">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-around my-3">
+            <div class="crt-no">코트5</div>
+            <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
+                <button class="sche-btn border-0 p-3 closed">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3 closed">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3 closed">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
+            </div>
+        </div>
+        <div class="w-100 d-flex justify-content-around my-3">
+            <div class="crt-no">코트6</div>
+            <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
+                <button class="sche-btn border-0 p-3">06:00<br>~08:00</button>
+                <button class="sche-btn border-0 p-3">08:00<br>~10:00</button>
+                <button class="sche-btn border-0 p-3">10:00<br>~12:00</button>
+                <button class="sche-btn border-0 p-3 closed">12:00<br>~14:00</button>
+                <button class="sche-btn border-0 p-3">14:00<br>~16:00</button>
+                <button class="sche-btn border-0 p-3">16:00<br>~18:00</button>
+                <button class="sche-btn border-0 p-3">18:00<br>~20:00</button>
+                <button class="sche-btn border-0 p-3">20:00<br>~22:00</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer id="x-footer"></footer>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c77b7df52ca018e8760dea5bc1e3c519"></script>
+<script type="text/javascript" src="index.js"></script>
+<script src="import.js" type="module"></script>
+</body>
+</html>

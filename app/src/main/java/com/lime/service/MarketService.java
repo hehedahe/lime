@@ -19,7 +19,7 @@ public interface MarketService {
 
   List<Market> listCityChecked(String regionName, String cityName, String keyword);
 
-  //Market get(int no);
+  Market get(int no);
 
   //int update(Market contact);
 

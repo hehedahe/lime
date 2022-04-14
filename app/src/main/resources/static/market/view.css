@@ -1,0 +1,138 @@
+html, body {
+    font-family: 'NanumGothic';
+}
+
+#body-wrapper {
+    min-height: 100%;
+    position: relative;
+    margin: 0px auto;
+}
+
+#content-body {
+    min-height: 1000px;
+    margin-top: 5em;
+    margin-bottom: 50px;
+}
+
+#item-box {
+    width: 1000px;
+    margin: 0 auto;
+    /* border: 1px solid black; */
+}
+
+#item-region > p {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#item-title > p {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#item-price > p {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+#user-info {
+    min-height: 100px;
+}
+
+#user-img-wrap {
+    width: 60px;
+}
+
+#user-name {
+    font-weight: bold;
+}
+
+#manner {
+    font-weight: bold;
+    padding: 1px 8px 1px 8px;
+    color: white;
+    background-color: #92DB82;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+#ask {
+    padding: 0 10px;
+    height: 42.5px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    background-color: rgb(102, 200, 141);
+    border: none;
+    border-radius: 5px;
+    float: right;
+}
+
+#item-content > p {
+    width: inherit;
+}
+
+#item-img-wrap {
+    /* border: 1px solid red; */
+}
+
+#heart-wrap {
+    margin: 20px 0;
+}
+
+.heart-click:hover {
+    cursor: pointer;
+}
+
+#reply-box {
+    border-top: 1px solid rgb(234, 235, 239);
+    margin: 0 auto;
+    width: 1024px;
+}
+
+#reply-wrap {
+    /* border: 1px solid green; */
+    margin: 20px auto;
+    width: 1000px;
+}
+
+#reply-wrap > p {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+#reply-view {
+    margin: 10px 0;
+}
+
+#reply-form {
+    position: relative;
+    border: 1px solid rgb(234, 235, 239);
+    border-radius: 5px;
+    padding-top: 10px;
+    min-height: 50px;
+}
+
+textarea.autosize {
+    height: 30px;
+    width: 850px;
+    border: none;
+    vertical-align: middle;
+    outline: none;
+    resize: none;
+}
+
+
+
+textarea.autosize::placeholder {
+    color: rgb(190, 190, 190);
+}
+
+#reply-btn {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    color: rgb(102, 200, 141);
+    background-color: white;
+    bottom: 15px;
+}
