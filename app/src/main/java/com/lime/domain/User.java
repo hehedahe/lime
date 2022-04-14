@@ -29,7 +29,8 @@ public class User {
   String UserImg;
   String UserType;
 
-
-  int userCount;
+  
+  int num;//페이징처리(row_number index)
+  int userCount;//총 회원수
 }
 
