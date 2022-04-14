@@ -1,13 +1,50 @@
+Skip to content
+Product 
+Team
+Enterprise
+Explore 
+Marketplace
+Pricing 
+Search
+Sign in
+Sign up
+hehedahe
+/
+lime
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+lime/app/src/main/resources/static/manage/user/manageUser_1.html
+@omh1004
+omh1004 ''
+Latest commit 906e6de 6 hours ago
+ History
+ 1 contributor
+234 lines (188 sloc)  6.27 KB
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="manageUser.css">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+    <!--<link rel="import" href="static/footer/footer.html">-->
+
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="../header/header.css">
+
+</head>
     <link rel="stylesheet" href="/header/header.css">
     <link rel="stylesheet" href="../header/header.css">
 </head>
@@ -18,17 +55,11 @@
   }
 
 
-  #pagingul {
-
-    border: 1px solid #ccc;
-    background-color: #ccc;
-    border-right: 0;
-  }
-  #pagingul div {
+  #pagingul button {
     text-align: center;
     float: left;
-    background-color: red;
-    border: 1px solid #ccc;
+    background-color: rgb(255, 217, 0);
+    border: 1px solid rgb(255, 255, 255);
     width: 10%;
   }
 
@@ -69,7 +100,7 @@ let totalData; //총 데이터 수
 let dataPerPage = 10; //한 페이지에 나타낼 글 수
 let pageCount = 10; //페이징에 나타낼 페이지 수
 let globalCurrentPage=1; //현재 페이지 
-
+/*
 fetch(`/manage/user/list`)
 .then(function(response){
   return response.json();
@@ -79,7 +110,6 @@ fetch(`/manage/user/list`)
   var content= '';
   for(var manage of manages){
     console.log(manage)
-
       content+= `
         <tr id = "xTr">
           <th scope="row">
@@ -93,32 +123,30 @@ fetch(`/manage/user/list`)
           <td>${manage.sum}</td>
           <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${manage.no}">상세</td>
         </tr>`
-
     }
     xTbody.innerHTML =content
   });
+  */
  
 
   $(document).ready(function () {
+
        // $("#x-header").load("/header/admin/header.html");  //헤더 인클루드&ndash;&gt;
        // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
        // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
 
-       fetch(`/manage/user/userCount`)
-       .then(function(response){
-         return response.json();
-       }).then(function(userCount){
-        totalData = userCount.userCount;
+      fetch("/manage/user/list",{
+          method:"post",
+      })
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(manages){
+        totalData = manages.length;
+        displayData(1, manages);
+        paging(1,manages)
+      });
 
-        console.log(totalData);
-        console.log(dataPerPage);
-        console.log(pageCount);
-
-      //displayData(1, dataPerPage);
- 
-      //페이징 표시 호출
-        paging(totalData, dataPerPage, pageCount, 1);
-        });
 
 
       $(document).on("click", "button[id='detailBtn']", function () {
@@ -129,16 +157,52 @@ fetch(`/manage/user/list`)
     });
 
 
-    function paging(totalData, dataPerPage, pageCount, currentPage) {
-        console.log("currentPage : " + currentPage);
+function displayData(currentPage, manages) {
 
-  totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수
+let chartHtml = "";
+
+//Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
+currentPage = Number(currentPage);
+dataPerPage = Number(10);
+
+
+const startNum =(currentPage - 1) * 10;
+const endNum = (currentPage - 1) * 10 + 10;
+
+
+
+for (
+  var i = startNum;
+  i < endNum;
+  i++
+) {
+  chartHtml +=`
+  <tr id = "xTr">
+          <th scope="row">
+            <input type="checkbox">
+          </th>
+          <td id="x-no">${manages[i].no}</td>
+          <td>${manages[i].name}</td>
+          <td>${manages[i].email}</td>
+          <td>${manages[i].userType}</td>
+          <td>${manages[i].rgtDate}</td>
+          <td>${manages[i].sum}</td>
+          <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${manages[i].no}">상세</td>
+        </tr>`
+}
+$("#x-tbody").html(chartHtml);
+}
+
+  function paging(no,manages) {
+        console.log("no : " + no);
+
+  totalPage = Math.ceil(totalData / 10); //총 페이지 수
   
-  if(totalPage<pageCount){
+  if(totalPage < pageCount){
     pageCount=totalPage;
   }
   
-  let pageGroup = Math.ceil(currentPage / pageCount); // 페이지 그룹
+  let pageGroup = Math.ceil(no / pageCount); // 페이지 그룹
   let last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
   
   if (last > totalPage) {
@@ -157,10 +221,10 @@ fetch(`/manage/user/list`)
 
  //페이징 번호 표시 
   for (var i = first; i <= last; i++) {
-    if (currentPage == i) {
-      pageHtml +="<button type=`button` class=`col` id=`"+ i +"`>" + i + "</button>";
+    if (no == i) {
+      pageHtml +=`<button type="button" class="col" id="${i}">${i}</button>`;
     } else {
-      pageHtml += "<button type=`button` class=`col` ><a href='#' id='" + i + "'>" + i + "</a></button>";
+      pageHtml += `<button type="button" class="col" id="${i}">${i}</button>`;
     }
   }
 
@@ -186,16 +250,24 @@ fetch(`/manage/user/list`)
     //전역변수에 선택한 페이지 번호를 담는다...
     globalCurrentPage = selectedPage;
     //페이징 표시 재호출
-    paging(totalData, dataPerPage, pageCount, selectedPage);
+    paging(selectedPage,manages);
     //글 목록 표시 재호출
-    //displayData(selectedPage, dataPerPage);
+    displayData(selectedPage, manages);
   });
 }
-
-
-
-
-
 </script>
 </body>
 </html>
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
