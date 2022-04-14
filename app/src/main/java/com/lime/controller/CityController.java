@@ -16,12 +16,12 @@ public class CityController {
     @Autowired
     CityService cityService;
 
-    @GetMapping("findCity")
+    @GetMapping("/findCity")
     public List<City> findCityLatlng(int cityId) {
         return cityService.findCityLatlng(cityId);
     }
 
-    @GetMapping("findRegion")
+    @GetMapping("/findRegion")
     public List<City> findRegionLatlng(int regionId) {
         return cityService.findRegionLatlng(regionId);
     }

@@ -16,15 +16,18 @@
            f.parking_area,
            f.lat,
            f.lng,
+           f.field_type,
+           f.region_id,
+           f.city_id,
            c.court_id,
            c.name courtName,
            c.court_type_id,
            ct.name cTypeName
     FROM field f
-    LEFT OUTER JOIN court c
-        ON f.field_id=c.field_id
-    LEFT JOIN court_type ct
-        ON c.court_type_id=ct.court_type_id
+             LEFT OUTER JOIN court c
+                             ON f.field_id=c.field_id
+             LEFT JOIN court_type ct
+                       ON c.court_type_id=ct.court_type_id
     WHERE f.field_type='R'
     GROUP BY f.field_id
 </select>
