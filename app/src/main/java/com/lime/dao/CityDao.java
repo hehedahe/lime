@@ -4,8 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.lime.domain.City;
 
-import java.util.HashMap;
-
 @Mapper
 public interface CityDao {
 

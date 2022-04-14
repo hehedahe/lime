@@ -2,7 +2,8 @@
 
 const PATH = {
     field: {
-        list: '/field/list'
+        list: '/field/list',
+        courtList: '/field/courtList',
     },
     city: {
         findRegion: '/city/findRegion',
@@ -10,6 +11,11 @@ const PATH = {
     },
 };
 
+// *********************
+// field
+// *********************
+
+// 테니스장 전체 리스트
 export async function fieldList() {
     try {
         const response = await axios(PATH.field.list);
@@ -17,8 +23,28 @@ export async function fieldList() {
     } catch (e) {
         console.log(e);
     }
-}
+};
 
+// 테니스장 리스트 by 좌표
+export async function courtList(lat, lng) {
+    try {
+        const response = await axios(`${PATH.field.courtList}?lat=${lat}&lng=${lng}`);
+        console.log("r:::::::::::::", response);
+        console.log("data::::::::::", response.data);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+
+
+
+// *********************
+// city
+// *********************
+
+// 시도 좌표
 export async function findRegion(regionId) {
     try {
         const response = await axios(`${PATH.city.findRegion}?regionId=${regionId}`);
@@ -26,8 +52,9 @@ export async function findRegion(regionId) {
     } catch (e) {
         console.log(e);
     }
-}
+};
 
+// 시군구 좌표
 export async function findCity(cityName, regionId) {
     try {
         const response = await axios(`${PATH.city.findCity}?cityName=${cityName}&regionId=${regionId}`);
@@ -36,3 +63,4 @@ export async function findCity(cityName, regionId) {
         console.log(e);
     }
 };
+

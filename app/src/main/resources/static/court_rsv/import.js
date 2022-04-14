@@ -1,7 +1,10 @@
 "use strict"
 
 import {selectCity} from '../common/selectCity.js'
-import {fieldList, findRegion, findCity} from '../common/apiList.js'
+import {fieldList, courtList, findRegion, findCity} from '../common/apiList.js'
+
+
+
 
 // =================
 // 카카오 지도 API
@@ -65,6 +68,12 @@ dropRegion.on('change', async function (e) {
     e.preventDefault();
     e.stopPropagation();
 
+    let card = $('#crt-card');
+    console.log("befor::::::::::::::", $('#crt-card div'));
+    if ($('#crt-card div') != null) {
+        card.empty();
+    };
+
     selectCity(dropRegion.val());
 
     const coordinateRegion = await findRegion(Number($('#drop-region option:selected').val()));
@@ -73,6 +82,29 @@ dropRegion.on('change', async function (e) {
     let regionLng = coordinateRegion.region?.regionLng;
 
     panTo(regionLat, regionLng);
+
+    const crtByRegion = await courtList(regionLat, regionLng);
+
+    crtByRegion?.map((courts) => {
+        $('#crt-card')
+            .append(`<div class="card-cover swiper-slide">
+                            <button class="card-btn card border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="height: 48px">${courts.name}</h5>
+                                    <p class="card-text">#${checkCourtType(courts.courtTypeId)}</p>
+                                    <div class="content3">
+                                        <p class="card-text">${courts.distance}KM</p>
+                                        <a href="#" class="btn btn-sm info-btn">정보</a>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>`);
+    });
+
+
+    console.log("after::::::::::::::", $('#crt-card div'));
+
+
 });
 
 // 시군구
@@ -80,18 +112,50 @@ dropCity.on('change', async function (e) {
     e.preventDefault();
     e.stopPropagation();
 
+    let card = $('#crt-card');
+    if ($('#crt-card div') != null) {
+        card.empty();
+    };
+
     let city = $('#drop-city option:checked').text();
     let regionNo = $('#drop-region option:selected').val();
 
     const coordiCity = await findCity(city, regionNo);
-    console.log(coordiCity)
 
-    panTo(coordiCity.cityLat, coordiCity.cityLng);
+    let cityLat = coordiCity.cityLat;
+    let cityLng = coordiCity.cityLng;
+
+    panTo(cityLat, cityLng);
+
+    const crtByCity = await courtList(cityLat, cityLng);
+
+    crtByCity?.map((courts) => {
+        card.append(`<div class="card-cover swiper-slide">
+                        <button class="card-btn card border-0" onclick="selectedCard()">
+                            <div class="card-body">
+                                <h5 class="card-title" style="height: 48px">${courts.name}</h5>
+                                <p class="card-text">#${checkCourtType(courts.courtTypeId)}</p>
+                                <div class="content3">
+                                    <p class="card-text">${courts.distance}KM</p>
+                                    <a href="#" class="btn btn-sm info-btn">정보</a>
+                                </div>
+                            </div>
+                        </button>
+                    </div>`);
+    });
 });
 
 
-
-
-
+// =================
+// 코트 타입
+// =================
+function checkCourtType(courtTypeNo) {
+    switch (courtTypeNo) {
+        case 1: return '하드 코트'
+        case 2: return '클레이 코트'
+        case 3: return '잔디 코트'
+        case 4: return '앙투카 코트'
+    }
+};
 
 
