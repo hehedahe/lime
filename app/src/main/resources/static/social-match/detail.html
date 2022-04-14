@@ -40,8 +40,7 @@
 
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=46fd5aaec535347327e5edba1ba828a7"></script>
 
   <script type="text/javascript">
     $(document).ready(function () {
@@ -62,7 +61,7 @@
   <main class="social-match mb-5">
 
 
-    <div id="dateNav" class="mb-3">
+    <div id="dateNav">
       <div id="navWrap">
         <ul class="list-group date-ul">
           <button class="btn btn-primary disabled" id="prev-btn"><img src="arrow.png" alt=""></button>
@@ -82,10 +81,10 @@
     <div class="row">
       <div class="col-8">
         <div id="match-navbar" class="sticky-top">
-          <nav class="navbar navbar-light px-3">
+          <nav id="navbar-example2" class="navbar navbar-light">
             <ul class="nav nav-pills">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#scrollspyHeading1">진행 방식</a>
+                <a class="nav-link active" href="#scrollspyHeading1">진행 방식</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#scrollspyHeading2">구장 시설</a>
@@ -97,101 +96,112 @@
           </nav>
         </div>
 
-        <div class="mx-3 mt-3">
-          <div id="scrollspyHeading1" class="my-h mb-4">진행 방식</div>
-          <div class="match-rule-1">
-            <ul class="list-group">
-              <li class="list-group-item me-5">
-                <img src="one.png" alt="...">
-                <p>1 vs 1</p>
-              </li>
-              <li class="list-group-item me-5">
-                <img src="one.png" alt="...">
-                <p>여성 매치</p>
-              </li>
-              <li class="list-group-item">
-                <img src="one.png" alt="...">
-                <p>모든 레벨</p>
-              </li>
-            </ul>
-          </div>
-
-          <div class="match-rule-2 mt-4 mb-4">
-            <ul>
-              <li>매치 중에는 꼭 테니스화를 신어주세요.</li>
-              <li>2vs2 매치는 현장에서 매니저가 팀을 나눠요.</li>
-              <li>친구끼리 와도 다른 팀이 될 수 있어요.</li>
-            </ul>
-          </div>
-
-          <div class="section-border mb-3"></div>
-
-          <div class="my-h mt-4 mb-4">매치 평균 레벨은 매치 하루 전 공개 됩니다!</div>
-
-          <div class="average-level py-4 mb-4">
-            <h2>06:00:00</h2>
-          </div>
-
-          <div class="section-border mb-4"></div>
-
-          <div id="scrollspyHeading2" class="my-h mt-4 mb-4">구장 시설</div>
-          <div class="field-info mb-4">
-            <ul class="list-group">
-              <li class="list-group-item">
-                <img src="one.png" alt="...">
-                <p>실내외</p>
-              </li>
-              <li class="list-group-item">
-                <img src="one.png" alt="...">
-                <p>코트 타입</p>
-              </li>
-              <li class="list-group-item">
-                <img src="one.png" alt="...">
-                <p>라이트 유무</p>
-              </li>
-              <li class="list-group-item">
-                <img src="one.png" alt="...">
-                <p>주차공간 유무</p>
-              </li>
-            </ul>
-          </div>
-
-          <div class="fw-bold">시설 이용 주의 사항</div>
-          <div class="match-rule-2 mt-2 mb-4">
-            <ul>
-              <li>라임에서 진행하는 모든 매치 중, 코트 이동 시 마스크 필수 착용 입니다.</li>
-              <li>현장 상황에 따라 주차장 이용이 어려울 수 있습니다.<br>
-                (테니스 구장 직원을 통해 주차권을 받으실 수 있습니다.)</li>
-              <li>흡연 부스 외에는 모두 금연 시설입니다.<br>
-                (흡연구역 외에서 흡연 적발 시 서비스 이용에 제한이 있을 수 있습니다.)</li>
-              <li>테니스 물품 및 테니스화 대여 여부는 테니스 구장마다 다르므로 구장 안내데스크 직원에게 문의해 주세요!</li>
-            </ul>
-          </div>
-          <div class="section-border mb-3"></div>
-
-          <div id="scrollspyHeading3" class="my-h mt-4 mb-4">매치 안내</div>
-          <div class="match-guidance mb-4">
-            <div class="me-2">
-              <img src="manager.png" alt="">
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example"
+          tabindex="0">
+          <div class="mx-3 mt-3">
+            <h6 id="scrollspyHeading1" class="my-h mb-4">진행 방식</h6>
+            <div class="match-rule-1">
+              <ul class="list-group">
+                <li class="list-group-item me-5">
+                  <img src="one.png" alt="...">
+                  <p>1 vs 1</p>
+                </li>
+                <li class="list-group-item me-5">
+                  <img src="one.png" alt="...">
+                  <p>여성 매치</p>
+                </li>
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p>모든 레벨</p>
+                </li>
+              </ul>
             </div>
-            <div class="ms-1">
-              <span>매니저</span>
-              <p>김라임</p>
-            </div>
-          </div>
-          <div class="fw-bold pt-1">매치 안내 사항</div>
-          <div class="match-rule-2 mt-2 mb-4">
-            <ul>
-              <li>사전 연락 없이 매치에 참여하지 않으셔도 환불은 불가합니다. 또한, 향후 라임 서비스 이용에 제한이 있을 수도 있습니다.</li>
-              <li>음주 및 흡연과 코트에 오물을 투척하는 행위를 금지합니다.</li>
-              <li>테니스 외의 행위를 금지합니다. (족구, 퀵보드, 반려동물 동반 입장 등)</li>
-              <li>매치가 확정되었지만 진행에 변동 사항이 있을 경우, 매치 시작 1시간 전까지 안내드립니다.</li>
-              <li>실외 매치 시 기상악화로 인한 경기가 취소될 경우, 현장 매니저의 판단하에 경기가 종료될 수 있으며, 진행되지 않은 시간은 라임캐시로 환불해 드릴 예정입니다.</li>
-            </ul>
-          </div>
 
+            <div class="match-rule-2 mt-4 mb-4">
+              <ul>
+                <li>매치 중에는 꼭 테니스화를 신어주세요.</li>
+                <li>2vs2 매치는 현장에서 매니저가 팀을 나눠요.</li>
+                <li>친구끼리 와도 다른 팀이 될 수 있어요.</li>
+              </ul>
+            </div>
+
+            <div class="section-border mb-3"></div>
+
+            <div class="my-h mt-4 mb-4">매치 평균 레벨은 매치 하루 전 공개 됩니다!</div>
+
+            <div class="average-level py-4 mb-4">
+              <h2>06:00:00</h2>
+            </div>
+
+            <div class="section-border mb-4"></div>
+
+            <h6 id="scrollspyHeading2" class="my-h mt-4 mb-4">구장 시설</h6>
+
+            <!-- 지도를 담을 영역 -->
+            <div id="map-container" class="mb-4">
+              <div id="map" style="width:500px;height:500px;"></div>
+            </div>
+
+            <div class="field-info mb-4">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p>실내외</p>
+                </li>
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p>코트 타입</p>
+                </li>
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p>라이트 유무</p>
+                </li>
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p>주차공간 유무</p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="fw-bold">시설 이용 주의 사항</div>
+            <div class="match-rule-2 mt-2 mb-4">
+              <ul>
+                <li>라임에서 진행하는 모든 매치 중, 코트 이동 시 마스크 필수 착용 입니다.</li>
+                <li>현장 상황에 따라 주차장 이용이 어려울 수 있습니다.<br>
+                  (테니스 구장 직원을 통해 주차권을 받으실 수 있습니다.)</li>
+                <li>흡연 부스 외에는 모두 금연 시설입니다.<br>
+                  (흡연구역 외에서 흡연 적발 시 서비스 이용에 제한이 있을 수 있습니다.)</li>
+                <li>테니스 물품 및 테니스화 대여 여부는 테니스 구장마다 다르므로 구장 안내데스크 직원에게 문의해 주세요!</li>
+              </ul>
+            </div>
+            <div class="section-border mb-3"></div>
+
+            <h6 id="scrollspyHeading3" class="my-h mt-4 mb-4">매치 안내</h6>
+            <div class="match-guidance mb-4">
+              <div class="me-2">
+                <img src="manager.png" alt="">
+              </div>
+              <div class="ms-1">
+                <span>매니저</span>
+                <p>김라임</p>
+              </div>
+            </div>
+            <div class="fw-bold pt-1">매치 안내 사항</div>
+            <div class="match-rule-2 mt-2 mb-4">
+              <ul>
+                <li>사전 연락 없이 매치에 참여하지 않으셔도 환불은 불가합니다. 또한, 향후 라임 서비스 이용에 제한이 있을 수도 있습니다.</li>
+                <li>음주 및 흡연과 코트에 오물을 투척하는 행위를 금지합니다.</li>
+                <li>테니스 외의 행위를 금지합니다. (족구, 퀵보드, 반려동물 동반 입장 등)</li>
+                <li>매치가 확정되었지만 진행에 변동 사항이 있을 경우, 매치 시작 1시간 전까지 안내드립니다.</li>
+                <li>실외 매치 시 기상악화로 인한 경기가 취소될 경우, 현장 매니저의 판단하에 경기가 종료될 수 있으며, 진행되지 않은 시간은 라임캐시로 환불해 드릴 예정입니다.</li>
+              </ul>
+            </div>
+
+          </div>
         </div>
       </div>
+
+
       <div class="col-4">
         <div id="position-div" class="sticky-top">
           <div class="card">
@@ -227,13 +237,31 @@
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../node_modules/swiper/swiper-bundle.min.js"></script>
 
+  <script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+      };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다 
+    var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+  </script>
   <script type="text/javascript">
     "use strict"
 
     $(document).ready(function () {
-
 
 
     })
@@ -373,6 +401,16 @@
       $(".date-div").css("transform", "translateX(0%)");
       $("#prev-btn").addClass("disabled");
       $("#next-btn").removeClass("disabled");
+    })
+
+    // $(".nav-link").on("click", (e) => {
+    //   console.log(e.target)
+    //   $(".nav-link").removeClass("active");
+    //   $(e.target).addClass("active");
+    // })
+
+    var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+      target: '#navbar-example'
     })
 
 

@@ -4,6 +4,10 @@ body {
   font-family: "NanumGothic";
 }
 
+body {
+  position: relative;
+}
+
 /* body {
   display: flex;
   align-items: center;
@@ -109,8 +113,13 @@ a {
   padding: 0;
 }
 
+.nav {
+  align-items: center;
+}
+
 .nav-links {
   padding: 0;
+  margin: 0.5rem;
 }
 
 .nav-menu-div {
@@ -389,4 +398,34 @@ ul {
 .match-guidance p {
   font-size: x-large;
   margin: 0;
+}
+
+#match-navbar {
+  background-color: #fff;
+  border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.nav-link {
+  color: #212529;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  /* padding: 1rem; */
+}
+
+#match-navbar .nav-link.active {
+  background-color: #fff;
+  color: #212529;
+  border-radius: 0;
+  border-bottom: 0.3rem solid rgb(146, 219, 130);
+}
+
+.navbar {
+  padding: 0;
+}
+
+#map-container {
+  display: flex;
+  justify-content: center;
 }
