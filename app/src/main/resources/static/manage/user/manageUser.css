@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 #detailBtn {
+  border: none;
   background-color: rgb(127, 127, 127) ;
   color:white;
 }
@@ -17,17 +18,10 @@
 .container{ 
 	width: 1024px;
 
-	
-}
-
-#tables {
-  margin-top: 200px;
 }
 
 
-.col {
-  height: 80%;
-}
+
 
 .row {
   font-family: 'NanumGothic';
