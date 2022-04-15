@@ -6,7 +6,7 @@
 <mapper namespace="com.lime.dao.MatchDao">
 
   <resultMap type="match" id="matchMap">
-    <id column="mtch_id" property="no"/>
+    <id column="mtch_id" property="matchId"/>
     <result column="court_id" property="courtNo"/>
     <result column="user_id" property="managerNo"/>
     <result column="mtch_type_id" property="matchTypeNo"/>
@@ -17,6 +17,7 @@
     <result column="fee" property="fee"/>
     <result column="state" property="state"/>
     <result column="num_of_people" property="numOfPeople"/>
+    <result column="manager_name" property="managerName"/>
     <collection property="court" ofType="court">
       <id column="court_id" property="no"/>
       <result column="name" property="name"/>
@@ -26,6 +27,10 @@
         <id column="field_id" property="fieldId"/>
         <result column="field_name" property="name"/>
         <result column="addr" property="addr"/>
+        <result column="ind_yn" property="indYn"/>
+        <result column="parking_area" property="parkingArea"/>
+        <result column="lat" property="lat"/>
+        <result column="lng" property="lng"/>
         <result column="region_id" property="regionId"/>
         <result column="city_id" property="cityId"/>
         <result column="city_name" property="cityName"/>
@@ -91,7 +96,11 @@
 		  c.field_id,
 		  f.field_id,
 		  f.name as field_name,
-		  f.addr
+		  f.addr,
+		  f.ind_yn,
+		  f.parking_area,
+		  f.lat,
+		  f.lng
 		from social_mtch m
 		  left outer join court c on m.court_id=c.court_id
 		  left outer join field f on c.field_id=f.field_id
@@ -118,12 +127,16 @@
       c.field_id,
       f.field_id,
       f.name as field_name,
-      f.addr
+      f.addr,
+      f.lat,
+      f.lng,
+      u.name as manager_name
     from social_mtch m
       left outer join court c on m.court_id=c.court_id
       left outer join field f on c.field_id=f.field_id
+      left outer join user u on m.user_id=u.user_id
     where
-      m.mtch_id=#{no}
+      m.mtch_id=#{matchId}
   </select>
 
   <select id="searchSelectMatch" parameterType="SearchCondition" resultMap="matchMap">

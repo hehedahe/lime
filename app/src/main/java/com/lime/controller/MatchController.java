@@ -28,8 +28,8 @@ public class MatchController {
   }
 
   @GetMapping("/get")
-  public Object get(int no) {
-    Match match = matchService.get(no);
+  public Object get(int matchId) {
+    Match match = matchService.get(matchId);
     if (match == null) {
       return new ResultMap().setStatus(FAIL).setData("해당 번호의 매치가 없습니다.");
     }

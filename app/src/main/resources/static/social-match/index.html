@@ -180,11 +180,11 @@
 
       for (let i = 0; i < 14; i++) {
         // console.log(date + i)
-        $(`#date-${i}`).html(`${date + i}`)
         var year = today.getFullYear();
         var month = ('0' + (today.getMonth() + 1)).slice(-2);
         var day = ('0' + today.getDate()).slice(-2);
         var dateString = year + '-' + month + '-' + day;
+        $(`#date-${i}`).html(`${date + i}<p id="day">${getDay(dateString)}</p>`)
         // console.log(dateString)
         $(`#date-${i}`).attr("date", `${dateString}`)
         // $(`#date-${i}`).attr("href", `http://localhost:8080/match/list?matchDate=${dateString}`)
@@ -195,6 +195,13 @@
       makeMatchList(`http://localhost:8080/match/list?matchDate=${matchDate}`)
 
     })
+
+    function getDay(date) {
+      let today = new Date(date);
+      const week = ['일', '월', '화', '수', '목', '금', '토'];
+      let day = week[today.getDay()];
+      return day;
+    }
 
     function makeMatchList(url) {
       $.getJSON(url, function (arr) {
@@ -211,7 +218,7 @@
             aaa = 'closed-btn'
           }
           str += `
-          <a href="/social_match/index.html" class="list-group-item list-group-item-action">
+          <a href="/social-match/detail.html?matchId=${arr[i].matchId}" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between align-items-center">
               <div>
                 <div class="d-flex justify-content-start align-items-center">

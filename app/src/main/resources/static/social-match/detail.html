@@ -104,15 +104,18 @@
               <ul class="list-group">
                 <li class="list-group-item me-5">
                   <img src="one.png" alt="...">
-                  <p>1 vs 1</p>
+                  <!-- <p id="numOfPeople">1 vs 1</p> -->
+                  <p id="numOfPeople"></p>
                 </li>
                 <li class="list-group-item me-5">
                   <img src="one.png" alt="...">
-                  <p>여성 매치</p>
+                  <!-- <p id="matchType">여성 매치</p> -->
+                  <p id="matchType"></p>
                 </li>
                 <li class="list-group-item">
                   <img src="one.png" alt="...">
-                  <p>모든 레벨</p>
+                  <!-- <p id="level">모든 레벨</p> -->
+                  <p id="level"></p>
                 </li>
               </ul>
             </div>
@@ -146,19 +149,19 @@
               <ul class="list-group">
                 <li class="list-group-item">
                   <img src="one.png" alt="...">
-                  <p>실내외</p>
+                  <p id="indYn">실내외</p>
                 </li>
                 <li class="list-group-item">
                   <img src="one.png" alt="...">
-                  <p>코트 타입</p>
+                  <p id="courtType">코트 타입</p>
                 </li>
                 <li class="list-group-item">
                   <img src="one.png" alt="...">
-                  <p>라이트 유무</p>
+                  <p id="">라이트 유무</p>
                 </li>
                 <li class="list-group-item">
                   <img src="one.png" alt="...">
-                  <p>주차공간 유무</p>
+                  <p id="parkingArea">주차공간 유무</p>
                 </li>
               </ul>
             </div>
@@ -183,7 +186,8 @@
               </div>
               <div class="ms-1">
                 <span>매니저</span>
-                <p>김라임</p>
+                <!-- <p id="managerName">김라임</p> -->
+                <p id="managerName"></p>
               </div>
             </div>
             <div class="fw-bold pt-1">매치 안내 사항</div>
@@ -206,17 +210,17 @@
         <div id="position-div" class="sticky-top">
           <div class="card">
             <div class="card-body">
-              <div>
-                2022년 4월 13일 수요일 18:00
+              <div id="match-date">
+                <!-- 2022년 4월 13일 수요일 18:00 -->
               </div>
               <div id="field-name" class="mt-4 my-h">
-                인천 시립 테니스장
+                <!-- 인천 시립 테니스장 -->
               </div>
               <div id="court-no" class="my-h">
-                코트1
+                <!-- 코트1 -->
               </div>
               <div id="field-addr" class="mt-1 mb-3">
-                인천광역시 서구 가좌동 606
+                <!-- 인천광역시 서구 가좌동 606 -->
               </div>
               <div class="section-border mb-3"></div>
               <div class="mb-3">20,000원<span id="hour" class="ms-1"> / 2 시간</span>
@@ -238,26 +242,6 @@
   <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
-  <script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-      mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-      };
-
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-    // 마커가 표시될 위치입니다 
-    var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
-
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-      position: markerPosition
-    });
-
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
-  </script>
   <script type="text/javascript">
     "use strict"
 
@@ -266,55 +250,108 @@
 
     })
 
-    function makeMatchList(url) {
-      $.getJSON(url, function (arr) {
-        console.log(arr)
-        const matchList = $(".match-list")
-        let str = ''
-        for (let i = 0; i < arr.length; i++) {
-          let state = ''
-          let aaa = ''
-          if (arr[i].state === 'A') {
-            state = '신청 가능'
-          } else {
-            state = '마감'
-            aaa = 'closed-btn'
-          }
-          str += `
-          <a href="/social_match/index.html" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between align-items-center">
-              <div>
-                <div class="d-flex justify-content-start align-items-center">
-                  <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
-                  <div class="ms-1">
-                    <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
-                    <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
-                  </div>
-                </div>
-              </div>
-              <button class="btn match-btn ${aaa}">${state}</button>
-              </div>
-            </a>`
-        }
-        $(".match-list").html(str)
+    // 1) URL에서 쿼리스트링(query string)을 추출한다.
+    var arr = location.href.split("?");
+    console.log(arr);
+
+    if (arr.length == 1) {
+      alert("요청 형식이 올바르지 않습니다.")
+      throw "URL 형식 오류!";
+    }
+
+    var qs = arr[1];
+    console.log(qs);
+
+    var params = new URLSearchParams(qs);
+    var matchId = params.get("matchId");
+
+    if (matchId == null) {
+      alert("매치 번호가 없습니다.");
+      throw "파라미터 오류!";
+    }
+    console.log(matchId);
+
+    const xNumOfPeople = $("#numOfPeople");
+    const xMatchType = $("#matchType");
+    const xLevel = $("#level")
+    const xIndYn = $("#indYn")
+    const xCourtType = $("#courtType")
+    const xParkingArea = $("#parkingArea")
+    const xManagerName = $("#managerName")
+    const xMatchDate = $("#match-date")
+    const xFieldName = $("#field-name")
+    const xCourtNo = $("#court-no")
+    const xFieldAddr = $("#field-addr")
+
+    $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
+      console.log(result);
+      if (result.status == "fail") {
+        window.alert("서버 요청 오류!");
+        console.log(result.data);
+        return;
+      }
+      var match = result.data;
+
+      xNumOfPeople.text(checkNumOfPeople(match.numOfPeople))
+      xMatchType.text(checkMatchType(match.matchTypeNo))
+      xLevel.text(checkLevel(match.levelNo))
+      xManagerName.text(match.managerName)
+      xMatchDate.text(`${getFullYmdStr(match.matchDate)} ${match.startTime.slice(0, 5)}`)
+      xFieldName.text(match.court.field.name)
+      xCourtNo.text(match.court.name)
+      xFieldAddr.text(match.court.field.addr)
+
+      showFieldMap(match.court.field.lat, match.court.field.lng)
+
+    });
+
+    function getDay(date) {
+      let today = new Date(date);
+      const week = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+      let day = week[today.getDay()];
+      return day;
+    }
+
+    function getFullYmdStr(date) {
+      let d = new Date(date);
+      return d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일 " + '일월화수목금토'.charAt(d.getUTCDay()) + '요일';
+    }
+
+    function showFieldMap(lat, lng) {
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+          center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+          level: 3 // 지도의 확대 레벨
+        };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+      // 마커가 표시될 위치입니다 
+      var markerPosition = new kakao.maps.LatLng(lat, lng);
+
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+        position: markerPosition
       });
+
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
     }
 
     function checkMatchType(matchTypeNo) {
       switch (matchTypeNo) {
-        case 1: return '남자'
-        case 2: return '여자'
-        case 3: return '혼성'
+        case 1: return '남성 매치'
+        case 2: return '여성 매치'
+        case 3: return '혼성 매치'
       }
     }
 
     function checkNumOfPeople(numOfPeople) {
       switch (numOfPeople) {
-        case 'S': return '1vs1'
-        case 'D': return '2vs2'
+        case 'S': return '1 vs 1'
+        case 'D': return '2 vs 2'
       }
     }
-
 
     function checkLevel(level) {
       switch (level) {
@@ -402,12 +439,6 @@
       $("#prev-btn").addClass("disabled");
       $("#next-btn").removeClass("disabled");
     })
-
-    // $(".nav-link").on("click", (e) => {
-    //   console.log(e.target)
-    //   $(".nav-link").removeClass("active");
-    //   $(e.target).addClass("active");
-    // })
 
     var scrollSpy = new bootstrap.ScrollSpy(document.body, {
       target: '#navbar-example'

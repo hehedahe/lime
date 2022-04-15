@@ -256,7 +256,7 @@ a {
   text-align: center;
   font-weight: bolder;
   border: none;
-  padding: 1.2rem;
+  padding: 0.9rem;
   width: 120px;
   margin: 0.1rem;
 }
@@ -307,4 +307,17 @@ a {
 
 #match-navbar {
   background-color: #fff;
+}
+
+.date-li p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.sat {
+  color: #1e88e5;
+}
+
+.sun {
+  color: #ef5350;
 }
