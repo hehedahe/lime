@@ -15,8 +15,31 @@
     <result column="name" property="name"/>
     <result column="phone_no" property="phoneNo"/>
     <result column="evnt_yn" property="eventYn"/>
+    <result column="brth_date" property="brthDay"/>
+    <result column="gender" property="gender"/>
   </resultMap>
   
+  
+  <insert id="insert" parameterType="userlogin">
+    insert into user(email, pwd, name, phone_no) <!-- user 테이블에 insert해줌 -->
+    values(#{email},password(#{password}),#{name},#{phoneNo})
+  </insert>
+  
+   <insert id="insert1" parameterType="userlogin">
+    INSERT INTO member (user_id, evnt_yn) 
+  	VALUES(LAST_INSERT_ID(), #{eventYn})    <!-- 마지막 insert_id()를 찾아서 member table 에 evnt_yn 값 삽입 -->
+  </insert>
+  
+  <!-- 아직 실행안되는 코드
+  <update id="update" parameterType="userlogin">
+  insert into member(brth_date)
+  VALUES("2010-01-12")
+  where id=LAST_INSERT_ID()
+  
+  </update>
+   -->
+  
+  <!-- 
   <insert id="insert" parameterType="userlogin">
     insert into user(email, password, name, phoneNo) 
     values(#{email},password(#{password}),#{name},#{phoneNo})
@@ -25,7 +48,7 @@
     where member.event_yn = user.event_yn
     
   </insert>
-
+ -->
   <select id="findByEmailAndPassword" resultMap="userloginMap">
     select 
       no,
@@ -48,11 +71,5 @@
       email=#{email}
   </select>
 </mapper>
-
-
-
-
-
-
 
 

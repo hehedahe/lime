@@ -7,22 +7,11 @@ import com.lime.domain.UserLogin;
 @Mapper  
 public interface UserLoginDao {
 
-  int insert(UserLogin userLogin);
+  int insert(UserLogin userLogin); // user에 insert
   
-  int insert2();
-
+  int insert1(UserLogin userLogin); // member에 insert
+  
   UserLogin findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
   UserLogin findByEmail(String email);
 }
-
-
-
-
-
-
-
-
-
-
-

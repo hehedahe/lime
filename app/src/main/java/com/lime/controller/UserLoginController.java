@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import com.lime.domain.UserLogin;
 import com.lime.service.UserLoginService;
+import static com.lime.controller.ResultMap.FAIL;
+import static com.lime.controller.ResultMap.SUCCESS;
 
 @RestController
 public class UserLoginController {
@@ -19,12 +21,20 @@ public class UserLoginController {
 
   @RequestMapping("/login/signup")
   public Object signUp(UserLogin userLogin) {
-    if (userLoginService.add(userLogin) == 1) {
+    if (userLoginService.add(userLogin) == 1) { //첫번째로 user에 add() 
+    	userLoginService.memberAdd(userLogin); // 두번째로 memeber에 add()
       return "success";
     } else {
       return "fail";
     }
   }
+  
+  @RequestMapping("login/signup1") 
+	public Object signUp1 (UserLogin userLogin) {
+		userLoginService.memberAdd(userLogin);
+		return "success";
+	}
+  
 
 //  @RequestMapping("/login/signin")
 //  public Object signin(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
@@ -71,13 +81,3 @@ public class UserLoginController {
 //  }
 
 }
-
-
-
-
-
-
-
-
-
-
