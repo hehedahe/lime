@@ -20,26 +20,23 @@
     </resultMap>
 
     <select id="findRegion" resultMap="cityMap" parameterType="int">
-        SELECT
-            region_id,
-            lat,
-            lng,
-            region_name
-        from region
-        where region_id=#{regionId}
+        SELECT region_id, lat, lng, region_name
+        FROM   region
+        WHERE  region_id=#{regionId}
     </select>
 
     <select id="findCity" resultMap="cityMap">
-        SELECT
-            c.city_id,
-            c.lat,
-            c.lng,
-            c.city_name,
-            r.region_name,
-            r.region_id
-        from city c
-                 left join region r on c.region_id=r.region_id
-        where c.city_name=#{cityName} and r.region_id=#{regionId};
+        SELECT    c.city_id,
+                  c.lat,
+                  c.lng,
+                  c.city_name,
+                  r.region_name,
+                  r.region_id
+        FROM      city c
+        LEFT JOIN region r
+        ON        c.region_id=r.region_id
+        WHERE     c.city_name=#{cityName}
+        AND       r.region_id=#{regionId};
     </select>
 
 

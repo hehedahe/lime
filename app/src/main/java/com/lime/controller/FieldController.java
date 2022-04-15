@@ -27,9 +27,9 @@ public class FieldController {
     return fieldService.findAll();
   }
 
-  @GetMapping("/distanceList")
+  @GetMapping("/courtList")
   public List<Field> findByLatLng(float lat, float lng) {
-    log.debug("테니스장 리스트 불러오기");
+    log.debug("테니스장 일부 리스트 불러오기");
     return fieldService.findByLatLng(lat, lng);
   }
 
