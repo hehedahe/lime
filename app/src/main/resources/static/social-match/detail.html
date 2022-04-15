@@ -226,7 +226,7 @@
               <div class="mb-3">20,000원<span id="hour" class="ms-1"> / 2 시간</span>
               </div>
               <div>
-                <button id="match-btn" class="btn btn-primary">신청하기</button>
+                <button id="match-btn" class="btn btn-primary" onclick="">신청하기</button>
               </div>
             </div>
           </div>
@@ -443,6 +443,11 @@
     var scrollSpy = new bootstrap.ScrollSpy(document.body, {
       target: '#navbar-example'
     })
+
+    $("#match-btn").on("click", (e) =>
+      location.href = "/court_rsv/payment.html"
+    )
+
 
 
   </script>
