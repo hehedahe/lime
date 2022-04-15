@@ -136,7 +136,7 @@ button.card {
 }
 
 /* 카드 클릭 */
-button.selected-card {
+.selected-card {
     background-color: rgb(249, 248, 113);
 }
 
