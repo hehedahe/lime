@@ -46,20 +46,7 @@ function getDirection() {
     return direction;
 }
 
-// =================
-// 카드 선택 후 css 유지
-// =================
-function selectedCard() {
-    $('.card').removeClass('selected-card');
-    $(this).addClass('selected-card');
-    // $(this).find('a').removeClass('changed-color');
-    // $(this).find('a').addClass('changed-color');
 
-    // scroll 이동
-    var offset = $('#swiper-temp2').offset();
-    $('html').animate({scrollTop : offset.top}, 400);
-    // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
-};
 
 // =================
 // 날짜 선택 후 css 유지
