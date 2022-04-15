@@ -8,7 +8,7 @@ html,body {
 }
 
 #input-box {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 1024px;
     margin: 0 auto;
 }
@@ -98,5 +98,10 @@ textarea.autosize {
     vertical-align: middle;
     outline: none;
     resize: none;
+    font-weight: bold;
+}
+
+#img-add-box p {
+    font-size: 1.5em;
     font-weight: bold;
 }
