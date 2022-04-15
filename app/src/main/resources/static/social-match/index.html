@@ -184,7 +184,12 @@
         var month = ('0' + (today.getMonth() + 1)).slice(-2);
         var day = ('0' + today.getDate()).slice(-2);
         var dateString = year + '-' + month + '-' + day;
-        $(`#date-${i}`).html(`${date + i}<p id="day">${getDay(dateString)}</p>`)
+        $(`#date-${i}`).html(`${date + i}<p id="${day-i}">${getDay(dateString)}</p>`)
+        if (getDay(dateString) === '토') {
+          $(`#date-${i}`).closest("li").addClass("sat")
+        } else if (getDay(dateString) === '일') {
+          $(`#date-${i}`).closest("li").addClass("sun")
+        }
         // console.log(dateString)
         $(`#date-${i}`).attr("date", `${dateString}`)
         // $(`#date-${i}`).attr("href", `http://localhost:8080/match/list?matchDate=${dateString}`)
@@ -229,7 +234,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn match-btn ${aaa}">${state}</button>
+              <button class="btn match-btn ${aaa}" onclick="location.href='/social-match/detail.html?matchId=${arr[i].matchId}'">${state}</button>
               </div>
             </a>`
         }
