@@ -14,13 +14,8 @@
 }
 
 
-.container{ 
-	width: 1024px;
-  height: 80%;  
-}
-
 .col {
-  height: 80%;
+  height: 50%;
 }
 
 .row {
