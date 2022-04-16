@@ -4,6 +4,7 @@
   border: none;
   background-color: rgb(127, 127, 127) ;
   color:white;
+  border: none;
 }
 #x-thead {
   background-color: rgb(191, 186, 178) ;
@@ -14,19 +15,8 @@
 
 }
 
-
-
-
-
 .row {
   font-family: 'NanumGothic';
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 
-}
-
-.col-1{
-    border: 2px #66C88D;
-    font-size: large;
 }
