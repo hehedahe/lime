@@ -33,12 +33,12 @@ fetch(`/manage/field/list`)
           <th scope="row">
             <input type="checkbox">
           </th>
-          <td id="x-no">${field.no}</td>
-          <td>${field.fName}</td>
+          <td id="x-no">${field.fieldId}</td>
+          <td>${field.name}</td>
           <td>${field.addr}</td>
-          <td>${field.courtType}</td>
+          <td>${field.courtName}</td>
           <td>${field.courtCnt}</td>
-          <td>${field.parkingAvt}</td>
+          <td>${field.parkingArea}</td>
           <td>${field.indYn}</td>
           <td>${field.lightYn}</td>
           <td><button id="modifyBtn"  class="btn btn-outline-success" type="button" value= "${field.no}" margin-bottom ="10px">상세</td>

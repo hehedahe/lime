@@ -21,15 +21,16 @@
 	</resultMap>
 	
  	 <resultMap type="field" id="fieldMap">
-    <id column="fieldId" property="no" />
+    <id column="fieldId" property="fieldId" />
     <result column="fieldId" property="fieldId" />
-    <result column="fName" property="fName" />
+    <result column="name" property="name" />
     <result column="addr" property="addr" />
-    <result column="courtType" property="courtType" />
-    <result column="parkingAvt" property="parkingAvt" />
-    <result column="indYn" property="indYn" />
+    <result column="courtName" property="courtName" />
+    <result column="parkingYn" property="parkingYn" />
+    <result column="indYnName" property="indYnName" />
     <result column="courtCnt" property="courtCnt" />
     <result column="lightYn" property="lightYn" />
+    
   </resultMap>
 
 	
@@ -235,7 +236,7 @@
 	<select id="findFieldAll" resultMap="fieldMap">
 		SELECT  
 					  f.field_id fieldId,
-					  f.name fName,
+					  f.name name,
 					  f.addr addr,
 					  (case
 					    when ct.name = 'H'
@@ -246,17 +247,17 @@
 					      then '잔디코트'
 					      
 					      else '앙투라코트'
-					  end) courtType,
+					  end) courtName,
 					  (case
 					    when f.parking_area = 0 
 					      then '불가'
 					    ELSE '가능'
-					  END) parkingAvt,
+					  END) parkingYn,
 					  (CASE
 					    when ind_yn = 0
 					      then '실외'
 					    ELSE '실내'
-					  END) indYn,
+					  END) indYnName,
 					  (CASE
 					    WHEN light_yn =0
 					      then '무'
@@ -290,10 +291,10 @@
 					  c.fee fee,-- 이용요금,
 					  f.court_cnt, 
 					  (case
-					    when f.parking_area = 0 
+					    when f.parkingAvt = 0 
 					      then '불가'
 					    ELSE '가능'
-					  END) parkingAvt,  -- 주차가능여부,
+					  END) parkingArea,  -- 주차가능여부,
 					  (CASE
 					    when ind_yn = 0
 					      then '실외'

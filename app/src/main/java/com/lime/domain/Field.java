@@ -23,4 +23,8 @@ public class Field {
   String regionName;
   int cityId;
   String cityName;
+  int courtCnt;
+  String lightYn;
+  String parkingYn;
+  String indYnName;
 }
