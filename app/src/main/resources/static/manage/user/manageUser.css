@@ -29,3 +29,17 @@
   float: none; 
   margin: 0 auto;
 }
+
+.admin-user {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  max-height: 100vh;
+  margin: auto;
+}
+
+#user-table {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
