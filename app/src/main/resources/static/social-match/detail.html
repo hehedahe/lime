@@ -130,10 +130,11 @@
 
             <div class="section-border mb-3"></div>
 
-            <div class="my-h mt-4 mb-4">매치 평균 레벨은 매치 하루 전 공개 됩니다!</div>
+            <div class="my-h mt-4 mb-4">매치 평균 레벨은 경기 30분 전에 공개됩니다!</div>
 
             <div class="average-level py-4 mb-4">
-              <h2>06:00:00</h2>
+              <!-- <h2>06:00:00</h2> -->
+              <h2 id="countdown"></h2>
             </div>
 
             <div class="section-border mb-4"></div>
@@ -226,7 +227,7 @@
               <div class="mb-3">20,000원<span id="hour" class="ms-1"> / 2 시간</span>
               </div>
               <div>
-                <button id="match-btn" class="btn btn-primary" onclick="">신청하기</button>
+                <button id="apply-btn" class="btn btn-primary match-apply-btn" onclick="">신청하기</button>
               </div>
             </div>
           </div>
@@ -241,6 +242,59 @@
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+  <script>
+    const countDownTimer = function (id, date) {
+      var _vDate = new Date(date);
+      var _second = 1000;
+      var _minute = _second * 60;
+      var _hour = _minute * 60;
+      var _day = _hour * 24;
+      var timer;
+
+      function showRemaining() {
+        var now = new Date();
+        var distDt = _vDate - now;
+
+        if (distDt < 0) {
+          clearInterval(timer);
+          document.getElementById(id).textContent = '해당 매치는 종료 되었습니다!';
+          return;
+        }
+
+        var days = Math.floor(distDt / _day);
+        var hours = Math.floor((distDt % _day) / _hour);
+        var minutes = Math.floor((distDt % _hour) / _minute);
+        var seconds = Math.floor((distDt % _minute) / _second);
+
+        document.getElementById(id).textContent = days + '일 ';
+
+        if (days == 0) {
+          document.getElementById(id).textContent = '';
+        }
+
+        if (hours < 10) {
+          document.getElementById(id).textContent += '0';
+        }
+        document.getElementById(id).textContent += hours + ':';
+        
+        if (minutes < 10) {
+          document.getElementById(id).textContent += '0';
+        }
+        document.getElementById(id).textContent += minutes + ':';
+        
+        if (seconds < 10) {
+          document.getElementById(id).textContent += '0';
+        }
+        document.getElementById(id).textContent += seconds;
+
+        }
+
+        timer = setInterval(showRemaining, 1000);
+
+      }
+
+  </script>
 
   <script type="text/javascript">
     "use strict"
@@ -291,7 +345,7 @@
         return;
       }
       var match = result.data;
-
+      
       xNumOfPeople.text(checkNumOfPeople(match.numOfPeople))
       xMatchType.text(checkMatchType(match.matchTypeNo))
       xLevel.text(checkLevel(match.levelNo))
@@ -301,7 +355,13 @@
       xCourtNo.text(match.court.name)
       xFieldAddr.text(match.court.field.addr)
 
+      countDownTimer('countdown', `${match.matchDate} ${match.startTime}`);
+
       showFieldMap(match.court.field.lat, match.court.field.lng)
+
+      if (match.state === 'C') {
+        $("#apply-btn").addClass("closed-btn").text("마감")
+      }
 
     });
 
@@ -429,13 +489,13 @@
     })
 
     $("#next-btn").on("click", (e) => {
-      $(".date-div").css("transform", "translateX(-36%)");
+      $(".date-div").css("transform", "translateX(-36%)").css("transition", "all .5s");
       $("#next-btn").addClass("disabled");
       $("#prev-btn").removeClass("disabled");
     })
 
     $("#prev-btn").on("click", (e) => {
-      $(".date-div").css("transform", "translateX(0%)");
+      $(".date-div").css("transform", "translateX(0%)").css("transition", "all .5s");
       $("#prev-btn").addClass("disabled");
       $("#next-btn").removeClass("disabled");
     })
@@ -444,7 +504,7 @@
       target: '#navbar-example'
     })
 
-    $("#match-btn").on("click", (e) =>
+    $("#apply-btn").on("click", (e) =>
       location.href = "/court_rsv/payment.html"
     )
 
