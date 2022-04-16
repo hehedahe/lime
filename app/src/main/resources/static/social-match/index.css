@@ -19,6 +19,12 @@ body {
   margin: auto;
 }
 
+#match-wrapper {
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 412.31px;
+}
+
 .match-btn {
   background-color: #66c88d;
   border: none;
@@ -320,4 +326,10 @@ a {
 
 .sun {
   color: #ef5350;
+}
+
+#x-footer {
+    /* height: (footer높이); */
+    position : relative;
+    transform : translateY(-100%);
 }

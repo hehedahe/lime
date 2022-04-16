@@ -59,7 +59,7 @@
 
   <div id="x-header" class="d-flex bd-highlight"></div>
 
-  <main class="social-match mb-5">
+  <main class="social-match mb-5" id='match-wrapper'>
 
     <div id="position-div" class="sticky-top">
       <div id="dateNav" class="mb-3">
@@ -74,7 +74,7 @@
               <li class="list-group-item date-li"><a id="date-4"></a></li>
               <li class="list-group-item date-li"><a id="date-5"></a></li>
               <li class="list-group-item date-li"><a id="date-6"></a></li>
-              <li class="list-group-item date-li"><a></a></li>
+              <li class="list-group-item"><a></a></li>
               <li class="list-group-item date-li"><a id="date-7"></a></li>
               <li class="list-group-item date-li"><a id="date-8"></a></li>
               <li class="list-group-item date-li"><a id="date-9"></a></li>
@@ -211,8 +211,12 @@
     function makeMatchList(url) {
       $.getJSON(url, function (arr) {
         console.log(arr)
-        const matchList = $(".match-list")
         let str = ''
+        if (arr.length == 0) {
+          str += `<div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">오늘 매치는 마감되었습니다.</div>`
+          $(".match-list").html(str)
+          return;
+        } 
         for (let i = 0; i < arr.length; i++) {
           let state = ''
           let aaa = ''
@@ -349,7 +353,8 @@
       // console.log(e.target.getAttribute("date"))
       $(".date-li.active").removeClass("active")
       $(e.target).closest("li").addClass("active")
-      let matchDate = e.target.getAttribute("date")
+      // let matchDate = e.target.getAttribute("date")
+      let matchDate = $(e.target).closest("a").attr("date")
       makeMatchList(`http://localhost:8080/match/list?matchDate=${matchDate}`)
     })
 
