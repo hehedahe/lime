@@ -52,7 +52,6 @@
     GROUP BY        f.field_id
     HAVING          distance &lt; 3.31
     ORDER BY        distance DESC
-
 </select>
 
 

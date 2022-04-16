@@ -23,8 +23,6 @@ var markerImage = new kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/lo
 // // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
 // map.setZoomable(false);
 
-
-
 // 중심좌표 부드럽게 이동하기
 function panTo(lat, lng) {
     // 이동할 위도 경도 위치를 생성합니다
@@ -51,8 +49,8 @@ var marker, markerPosition;
         // 마커를 생성합니다
         marker = new kakao.maps.Marker({
             position: markerPosition,
-            image: markerImage, // 마커이미지 설정
-            clickable: true  // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+            image: markerImage,      // 마커이미지 설정
+            clickable: true          // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
         });
 
         // 마커가 지도 위에 표시되도록 설정합니다
@@ -66,100 +64,98 @@ var marker, markerPosition;
 // =================
 const dropRegion = $('#drop-region');
 const dropCity = $('#drop-city');
-var courtAddr, courtName, indYn, courtType, parkingYn;
 
 // 시도
 dropRegion.on('change', async function (e) {
     e.preventDefault();
     e.stopPropagation();
 
-    let card = $('#crt-card');
-    if ($('#crt-card div') != null) {
-        card.empty();
-    };
+    cardEffect();
 
+    // 시,도 선택
     selectCity(dropRegion.val());
 
+    // 시,도 좌표 찾기
     const coordinateRegion = await findRegion(Number($('#drop-region option:selected').val()));
 
     let regionLat = coordinateRegion.region?.regionLat;
     let regionLng = coordinateRegion.region?.regionLng;
 
+    // 중심좌표 이동
     panTo(regionLat, regionLng);
 
+    // 시,도 코트 리스트 카드로 뿌리기
     const crtByRegion = await courtList(regionLat, regionLng);
+    console.log("crtByRegion:::::::::::::::", crtByRegion);
 
-
-    crtByRegion?.map((courts, index) => {
+    crtByRegion?.map((courts) => {
         $('#crt-card').append(
            `<div class="card-cover swiper-slide">
                 <button class="card-btn card border-0">
                     <div class="card-body">
-                        <h5 class="card-title" style="height: 48px" id="${index}">${courts.name}</h5>
+                        <h5 class="card-title" style="height: 48px" data-id="${courts.fieldId}">${courts.name}</h5>
                         <p class="card-text">#${checkCourtType(courts.courtTypeId)}</p>
                         <div class="content3">
                             <p class="card-text">${courts.distance}KM</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
+                            <a href="court_rsv/view.html" class="btn btn-sm info-btn">정보</a>
                         </div>
                     </div>
                 </button>
             </div>`
         );
-        courtAddr = courts.addr;
-        courtName = courts.name;
-        indYn = courts.indYn;
-        courtType = courts.courtTypeId;
-        parkingYn = courts.parkingArea;
     });
+});
 
-    // 카드 선택 후 css 유지
-    $('.card').on('click', function () {
+function cardEffect() {
+    // 카드 리셋
+    let card = $('#crt-card');
+    if ($('#crt-card div') != null) {
+        card.empty();
+    };
+
+    $('.card').on('click', function () { // 지도에 있는 카드 리스트 중 하나를 클릭하면
+        // 카드의 배경색이 바뀌고, 이전에 선택된 카드는 다시 원래대로 돌아간다.
         $('.card').removeClass('selected-card');
         $(this).addClass('selected-card');
-        $(this).find('a').removeClass('changed-color');
+        // 정보 버튼
+        $('.info-btn').removeClass('changed-color');
+        console.log($('.info-btn'))
         $(this).find('a').addClass('changed-color');
 
         // scroll 이동
         var offset = $('#swiper-temp2').offset();
         $('html').animate({scrollTop: offset.top}, 400);
-        // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
-
-
-        // 코트 상세 정보
-        $('#selected-crt').html(
-            `<h4 id="crt-name">${courtName}</h4>
-             <p class="mb-1">${courtAddr}</p>
-             <div class="d-flex">
-                 <span>${checkIndoor(indYn)}</span>
-                 <span class="dot mx-2">·</span>
-                 <span>${checkCourtType(courtType)}</span>
-                 <span class="dot mx-2">·</span>
-                 <span>${checkParking(parkingYn)}</span>
-             </div>`
-        )
     });
+};
 
-    // 마커에 클릭이벤트를 등록합니다
-    // kakao.maps.event.addListener(marker, 'click', function() {
-    //     console.log("marker:::::::::::::::::::");
-    //     $('.card').removeClass('selected-card');
-    //     $(this).addClass('selected-card');
-    //     $(this).find('a').removeClass('changed-color');
-    //     $(this).find('a').addClass('changed-color');
-    // });
 
-});
+// 코트 상세 리셋
+let info = $('#selected-crt');
+if ($('#selected-crt h4') != null) {
+    info.empty();
+}
+
+// 코트 상세 정보
+// $('#selected-crt').html(
+//     `<h4 id="crt-name">${regionCourt.name}</h4>
+//      <p class="mb-1">${regionCourt.address}</p>
+//      <div class="d-flex">
+//          <span>${checkIndoor(regionCourt.indYn)}</span>
+//          <span class="dot mx-2">·</span>
+//          <span>${checkCourtType(regionCourt.courtType)}</span>
+//          <span class="dot mx-2">·</span>
+//          <span>${checkParking(regionCourt.parking)}</span>
+//      </div>`
+// );
+
+
 
 // 시군구
 dropCity.on('change', async function (e) {
     e.preventDefault();
     e.stopPropagation();
 
-    let card = $('#crt-card');
-    if ($('#crt-card div') != null) {
-        card.empty();
-    }
-    ;
+    cardEffect();
 
     let city = $('#drop-city option:checked').text();
     let regionNo = $('#drop-region option:selected').val();
@@ -174,45 +170,36 @@ dropCity.on('change', async function (e) {
     const crtByCity = await courtList(cityLat, cityLng);
 
     crtByCity?.map((courts) => {
-        card.append(`<div class="card-cover swiper-slide">
-                        <button class="card-btn card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title" style="height: 48px">${courts.name}</h5>
-                                <p class="card-text">#${checkCourtType(courts.courtTypeId)}</p>
-                                <div class="content3">
-                                    <p class="card-text">${courts.distance}KM</p>
-                                    <a href="#" class="btn btn-sm info-btn">정보</a>
-                                </div>
-                            </div>
-                        </button>
-                    </div>`);
+        $('#crt-card').append(
+            `<div class="card-cover swiper-slide">
+                <button class="card-btn card border-0">
+                    <div class="card-body">
+                        <h5 class="card-title" style="height: 48px">${courts.name}</h5>
+                        <p class="card-text">#${checkCourtType(courts.courtTypeId)}</p>
+                        <div class="content3">
+                            <p class="card-text">${courts.distance}KM</p>
+                            <a href="localhost:8080/court_rsv/view.html" class="btn btn-sm info-btn">정보</a>
+                        </div>
+                    </div>
+                </button>
+            </div>`
+        );
     });
 
-    // 카드 선택 후 css 유지
-    $('.card').on('click', function () {
-        $('.card').removeClass('selected-card');
-        $(this).addClass('selected-card');
-        $(this).find('a').removeClass('changed-color');
-        $(this).find('a').addClass('changed-color');
 
-        // scroll 이동
-        var offset = $('#swiper-temp2').offset();
-        $('html').animate({scrollTop: offset.top}, 400);
-        // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
-    });
-
-    // 코트 상세 정보
-    $('#selected-crt').html(
-        `<h4 id="crt-name">${courtName}</h4>
-         <p class="mb-1">${courtAddr}</p>
-         <div class="d-flex">
-             <span>${checkIndoor(indYn)}</span>
-             <span class="dot mx-2">·</span>
-             <span>${checkCourtType(courtType)}</span>
-             <span class="dot mx-2">·</span>
-             <span>${checkParking(parkingYn)}</span>
-         </div>`
-    )
+        //
+        // // 코트 상세 정보
+        // $('#selected-crt').html(
+        //     `<h4 id="crt-name">${cityCourt.name}</h4>
+        //      <p class="mb-1">${cityCourt.address}</p>
+        //      <div class="d-flex">
+        //          <span>${checkIndoor(cityCourt.indYn)}</span>
+        //          <span class="dot mx-2">·</span>
+        //          <span>${checkCourtType(cityCourt.courtType)}</span>
+        //          <span class="dot mx-2">·</span>
+        //          <span>${checkParking(cityCourt.parking)}</span>
+        //      </div>`
+        // )
 });
 
 
@@ -232,6 +219,9 @@ function checkCourtType(courtTypeNo) {
     }
 };
 
+// =================
+// 실내/외 타입
+// =================
 function checkIndoor(indYn) {
     if (indYn) {
         return '실내';
@@ -240,6 +230,9 @@ function checkIndoor(indYn) {
     }
 };
 
+// =================
+// 주차 유무
+// =================
 function checkParking(parkingArea) {
     if (parkingArea) {
         return '주차 가능';
@@ -247,4 +240,3 @@ function checkParking(parkingArea) {
         return '주차장 없음'
     }
 };
-

@@ -28,6 +28,9 @@
     padding: 20px;
     margin: 0px;
 }
+#drop-region, #drop-city {
+    height: 38px;
+}
 
 /*!* 드롭다운 메뉴 테두리 *!*/
 /*.dropdown-toggle {*/
