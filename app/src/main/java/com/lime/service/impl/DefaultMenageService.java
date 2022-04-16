@@ -10,7 +10,7 @@ import com.lime.domain.User;
 import com.lime.service.ManageService;
 
 @Service
-public class DefaultMenageService implements ManageService {
+public class  DefaultMenageService implements ManageService {
 
   @Autowired
   ManageDao manageDao;
