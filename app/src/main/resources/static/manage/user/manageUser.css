@@ -35,7 +35,8 @@
   height: 100vh;
   display: flex;
   max-height: 100vh;
-  margin: auto;
+  margin: 0;
+  max-width: 1024px;
 }
 
 #user-table {
