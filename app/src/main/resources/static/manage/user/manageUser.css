@@ -18,5 +18,14 @@
 .row {
   font-family: 'NanumGothic';
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  float: none;
+  margin: 0 auto;
 
+}
+.col {
+  justify-content: center;
+  float: none; 
+  margin: 0 auto;
 }
