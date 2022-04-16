@@ -41,21 +41,18 @@
     <!--  결제 상세  -->
     <div id="pay-detail" class="border border-0 p-5">
         <span>코트예약</span>
-        <div class="my-3 py-3 border-bottom d-flex justify-content-between">
+        <div class="my-3 py-3 border-bottom d-flex justify-content-between align-items-center">
             <span>결제금액</span>
             <span class="border-1 p-2">20,000원</span>
         </div>
         <div class="pt-3 d-flex justify-content-between align-items-center">
-            <span>사용 가능 캐시</span>
-            <div class="input-group mb-3 w-25">
-                <input type="text"
-                       class="form-control"
-                       placeholder="100,000원"
-                       aria-label="cash"
-                       aria-describedby="button-addon">
-                <button class="btn"
-                        type="button"
-                        id="button-addon">충전</button>
+            <span>라임 캐시</span>
+            <div class="">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="0" aria-label="cash" aria-describedby="button-addon" id="charge-amount">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon">충전</button>
+                </div>
+                <p id="balance" class="pe-1">잔액 0원</p>
             </div>
         </div>
     </div>

@@ -41,6 +41,10 @@ body {
     font-size: 18px;
 }
 
+#charge-amount {
+    text-align: end;
+}
+
 /***********
  라임캐시 충전 버튼
  ***********/
@@ -56,6 +60,17 @@ input[aria-label="cash"]:hover,
 input[aria-label="cash"]:focus {
     box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
     border: 1px solid #dee2e6;
+}
+
+.btn-outline-secondary {
+    border: none;
+}
+
+#balance {
+    margin: 0;
+    font-size: small;
+    text-align: end;
+    font-weight: normal;
 }
 
 /****************

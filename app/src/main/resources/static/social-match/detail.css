@@ -300,6 +300,10 @@ a {
   border: none;
 }
 
+.match-apply-btn:hover {
+  background-color: #52b479;
+}
+
 .card-body {
   padding: 1.5rem;
 }
