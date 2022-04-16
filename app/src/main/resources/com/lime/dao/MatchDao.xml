@@ -185,6 +185,7 @@
     <if test="courtType != null">
       AND c.court_type_id = #{courtType}
     </if>
+      AND CONCAT(m.mtch_date, ' ' , m.st_time) &gt; NOW()
     order by
       m.st_time asc, f.name asc
   </select>

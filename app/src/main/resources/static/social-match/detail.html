@@ -66,11 +66,11 @@
         <ul class="list-group date-ul">
           <button class="btn btn-primary disabled" id="prev-btn"><img src="arrow.png" alt=""></button>
           <div class="date-div" id="date-div-1">
-            <li class="list-group-item date-li me-2"><img src="image_9.jpg" alt=""></li>
-            <li class="list-group-item date-li me-2"><img src="image_22.jpg" alt=""></li>
-            <li class="list-group-item date-li me-2"><img src="image_1.jpg" alt=""></li>
-            <li class="list-group-item date-li me-2"><img src="image_32.jpg" alt=""></li>
-            <li class="list-group-item date-li"><img src="image_28.jpg" alt=""></li>
+            <li class="list-group-item date-li me-2"><img src="image/image_9.jpg" alt=""></li>
+            <li class="list-group-item date-li me-2"><img src="image/image_22.jpg" alt=""></li>
+            <li class="list-group-item date-li me-2"><img src="image/image_1.jpg" alt=""></li>
+            <li class="list-group-item date-li me-2"><img src="image/image_32.jpg" alt=""></li>
+            <li class="list-group-item date-li"><img src="image/image_28.jpg" alt=""></li>
             <!-- <li class="list-group-item date-li"><img src="image_31.jpg" alt=""></li> -->
           </div>
           <button class="btn btn-primary" id="next-btn"><img src="arrow.png" alt=""></button>
@@ -258,7 +258,8 @@
 
         if (distDt < 0) {
           clearInterval(timer);
-          document.getElementById(id).textContent = '해당 매치는 종료 되었습니다!';
+          document.getElementById(id).textContent = '해당 매치는 마감되었습니다!';
+          $("#apply-btn").addClass("closed-btn").text("마감");
           return;
         }
 
