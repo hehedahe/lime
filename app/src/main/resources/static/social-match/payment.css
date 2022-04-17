@@ -41,6 +41,11 @@ body {
     font-size: 18px;
 }
 
+#pay-detail div:nth-child(2) {
+    font-size: medium;
+    font-weight: normal;
+}
+
 #charge-amount {
     text-align: end;
 }

@@ -258,7 +258,7 @@
 
         if (distDt < 0) {
           clearInterval(timer);
-          document.getElementById(id).textContent = '해당 매치는 마감되었습니다!';
+          document.getElementById(id).textContent = '해당 매치는 마감되었습니다.';
           $("#apply-btn").addClass("closed-btn").text("마감");
           return;
         }
@@ -356,7 +356,15 @@
       xCourtNo.text(match.court.name)
       xFieldAddr.text(match.court.field.addr)
 
-      countDownTimer('countdown', `${match.matchDate} ${match.startTime}`);
+      let date = new Date(`${match.matchDate} ${match.startTime}`);
+      
+      console.log(date)
+
+      date.setMinutes(date.getMinutes() - 30)
+
+      console.log(date)
+
+      countDownTimer('countdown', date);
 
       showFieldMap(match.court.field.lat, match.court.field.lng)
 
