@@ -41,12 +41,17 @@ nav {
 
 .header {
     font-family: 'NG';
-    width: 100vw;
+    width: 70vw;
     height: 10vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: rgb(191, 186, 178);
+    max-width: 1024px; 
+}
+
+body{
+    max-width: 1024px; 
 }
 
 /* 로고 */

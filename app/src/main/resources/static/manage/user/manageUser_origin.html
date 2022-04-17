@@ -1,33 +1,73 @@
-<style>
-  #x-table {
-    margin-top: 15%;
-    margin-bottom: 10%;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="manageUser.css">
+    <!-- <link rel="stylesheet" href="adminHeader.css"> -->
+    <link rel="stylesheet" href="my-adminHeader.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+    <!--<link rel="import" href="static/footer/footer.html">-->
+
+    <link rel="stylesheet" href="header.css">
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    
+    <style>
+
+    
+      .pagination{
+        text-align: center;
+      }
+
+    #x-table {
+    margin-top: 10%;
     align-items: center;
     height: 50%;
-  }
-  #pagingul button {
-    text-align: center;
-    float: left;
-    border: 1px solid rgb(255, 255, 255);
-    width: 10%;
-  }
-  body {
-    width : 1024px;
-    height: 800px;
+    text-justify: auto;
   }
 
+    
+    </style>
+</head>
 
-</style>
-<body> 
-  <div class="container">
-    <div class="row justify-content-center align-content-center align-content-lg-center">
-      <div class ="col-2" id="x-header"></div>
-      <div class="col-8">
-        <div id="tables" class="table-responsive">
-            <table id="x-table" class="table table-striped table-hover table-bordered border-primary text-center">
+<body>
+  <nav id="h-nav">
+    <div class="header">
+      <ul class="nav-logo">
+        <li>lime</li>
+        <li>administrator</li>
+      </ul>
+      <div class="nav-links">
+        <a href="#">로그아웃</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="admin-user">
+    <div id="sidebar" class="d-flex flex-column flex-shrink-0 border-end">
+        <ul class="list-group nav nav-pills flex-column mb-auto">
+          <li class="list-group-item nav-item">
+            <a href="#!">회원관리</a>
+          </li>
+          <li class="list-group-item nav-item">
+            <a href="#!">구장관리</a>
+          </li>
+          <li class="list-group-item nav-item">
+            <a href="#!">게시글관리</a>
+          </li>
+        </ul>
+    </div>
+    
+    <div id="user-table" class="mt-5 justify-content-end">
+      <div class="table-responsive">
+            <table id="x-table" class="table table-striped table-hover table-bordered border-primary text-center align-middle">
               <thead>
                 <tr id="x-thead">
-                  <th scope="col"><input type="checkbox"></th>
                   <th scope="col">번호</th>
                   <th scope="col">이름</th>
                   <th scope="col">이메일</th>
@@ -40,26 +80,27 @@
             <tbody id ="x-tbody">
             </tbody>
           </table>
-        </div>
-        <div class="row justify-content-center" id="pagingul">
-        </div>
+          <tfoot aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+            </ul>
+          </tfoot>
       </div>
     </div>
-  </div>
-</body>
+  </main>
+  
 
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 
 var xTbody = document.querySelector("#x-tbody");
 let totalData; //총 데이터 수
-let dataPerPage = 10; //한 페이지에 나타낼 글 수
-let pageCount = 10; //페이징에 나타낼 페이지 수
+let dataPerPage = 5; //한 페이지에 나타낼 글 수
+let pageCount = 5; //페이징에 나타낼 페이지 수
 let globalCurrentPage=1; //현재 페이지 
 
   $(document).ready(function () {
 
-        $("#x-header").load("adminHeader.html");  //헤더 인클루드&ndash;&gt;
+        // $("#x-header").load("my-adminHeader.html");  //헤더 인클루드&ndash;&gt;
        // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
        // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
 
@@ -94,8 +135,8 @@ currentPage = Number(currentPage);
 dataPerPage = Number(10);
 
 
-const startNum =(currentPage - 1) * 10;
-const endNum = (currentPage - 1) * 10 + 10;
+const startNum =(currentPage - 1) * 5;
+const endNum = (currentPage - 1) * 5 + 5;
 
 
 
@@ -106,9 +147,6 @@ for (
 ) {
   chartHtml +=`
   <tr id = "xTr">
-          <th scope="row">
-            <input type="checkbox">
-          </th>
           <td id="x-no">${manages[i].no}</td>
           <td>${manages[i].name}</td>
           <td>${manages[i].email}</td>
@@ -121,7 +159,7 @@ for (
 $("#x-tbody").html(chartHtml);
 }
 
-  function paging(no,manages) {
+function paging(no,manages) {
         console.log("no : " + no);
 
   totalPage = Math.ceil(totalData / 10); //총 페이지 수
@@ -144,36 +182,36 @@ $("#x-tbody").html(chartHtml);
   let pageHtml = "";
 
   if (prev > 0) {
-    pageHtml += "<li><a href='#' id='prev'> 이전 </a></li>";
+    pageHtml += `<li class="page-item"><a class="page-link" href='#' id="${i}">이전</a></li>`;
   }
 
  //페이징 번호 표시 
-  for (var i = first; i <= last; i++) {
+ for (var i = first; i <= last; i++) {
     if (no == i) {
-      pageHtml +=`<button type="button" class="col" id="${i}">${i}</button>`;
+      pageHtml +=`<li class="page-item"><a class="page-link" href="#" id="${i}">${i}</a></li>`;
     } else {
-      pageHtml += `<button type="button" class="col" id="${i}">${i}</button>`;
+      pageHtml += `<li class="page-item"><a class="page-link" href="#" id="${i}">${i}</a></li>`;
     }
   }
 
   if (last < totalPage) {
-    pageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
+    pageHtml += `<li class="page-item"><a class="page-link" href='#' id="${i}">다음</a></li>`;
   }
 
-  $("#pagingul").html(pageHtml);
+  $(".pagination").html(pageHtml);
   let displayCount = "";
   displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
   $("#displayCount").text(displayCount);
 
 
   //페이징 번호 클릭 이벤트 
-  $("#pagingul button").click(function () {
+  $(".pagination a").click(function () {
     
     let $id = $(this).attr("id");
-    selectedPage = $(this).text();
+    selectedPage = $(this).attr("id");
 
-    if ($id == "next") selectedPage = next;
-    if ($id == "prev") selectedPage = prev;
+    if ($(this).text() == "다음") selectedPage = next;
+    if ($(this).text() == "이전") selectedPage = prev;
     
     //전역변수에 선택한 페이지 번호를 담는다...
     globalCurrentPage = selectedPage;
