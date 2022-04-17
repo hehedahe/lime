@@ -33,6 +33,15 @@ public class FieldController {
     return fieldService.findByLatLng(lat, lng);
   }
 
+  @GetMapping("/get")
+  public Object getCourt(int fieldId) {
+    List<Field> court = fieldService.getCourt(fieldId);
+    if (court == null) {
+      return new ResultMap().setStatus(FAIL).setData("해당 번호의 테니스장이 없습니다.");
+    }
+    return new ResultMap().setStatus(SUCCESS).setData(court);
+  }
+
 
 
 }

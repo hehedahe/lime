@@ -1,7 +1,7 @@
 "use strict"
 
 import {selectCity} from '../common/selectCity.js'
-import {fieldList, courtList, getCourt, findRegion, findCity} from '../common/apiList.js'
+import {fieldList, courtList, findRegion, findCity} from '../common/apiList.js'
 
 
 // =================
@@ -88,53 +88,46 @@ dropRegion.on('change', async function (e) {
     // 시,도 코트 리스트 카드로 뿌리기
     const crtByRegion = await courtList(regionLat, regionLng);
 
-    crtByRegion?.map((fields) => {
+
+    crtByRegion?.map((courts) => {
         $('#crt-card').append(
             `<div class="card-cover swiper-slide">
-                <button class="card-btn card border-0" type="button" onclick="window.cardEffect()" ">
+                <button class="card-btn card border-0" type="button" onclick="window.cardEffect()">
                     <div class="card-body">
-                        <h5 class="card-title" style="height: 48px" data-id="${fields.fieldId}">${fields.name}</h5>
-                        <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
+                        <h5 class="card-title" style="height: 48px" data-id="${courts.fieldId}">${courts.name}</h5>
+                        <p class="card-text">#${checkCourtType(courts.courtTypeId)}</p>
                         <div class="content3">
-                            <p class="card-text">${fields.distance}KM</p>
-                            <a href="view.html" class="btn btn-sm info-btn">정보</a>
+                            <p class="card-text">${courts.distance}KM</p>
+                            <a href="court_rsv/view.html" class="btn btn-sm info-btn">정보</a>
                         </div>
                     </div>
                 </button>
             </div>`
         );
     });
-
-    // $('.card').on('click', async function (e) {
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    //     cardEffect();
-    //
-    //     // 코트 상세 리셋
-    //     let info = $('#selected-crt');
-    //     if ($('#selected-crt h4') != null) {
-    //         info.empty();
-    //     }
-    //
-    //     const courts = await getCourt($('h5[data-id]'));
-    //     console.log("고기::::::::::::::::::;",courts)
-
-        // courts?.map((courts) => {
-        //     // 코트 상세 정보
-        //     $('#selected-crt').html(
-        //         `<h4 id="crt-name">${courts.name}</h4>
-        //      <p class="mb-1">${regionCourt.address}</p>
-        //      <div class="d-flex">
-        //          <span>${checkIndoor(regionCourt.indYn)}</span>
-        //          <span class="dot mx-2">·</span>
-        //          <span>${checkCourtType(regionCourt.courtType)}</span>
-        //          <span class="dot mx-2">·</span>
-        //          <span>${checkParking(regionCourt.parking)}</span>
-        //      </div>`
-        //     );
-        // });
-    // })
 });
+
+
+// // 코트 상세 리셋
+// let info = $('#selected-crt');
+// if ($('#selected-crt h4') != null) {
+//     info.empty();
+// }
+//
+// // 코트 상세 정보
+// $('#selected-crt').html(
+//     `<h4 id="crt-name">${}</h4>
+//      <p class="mb-1">${regionCourt.address}</p>
+//      <div class="d-flex">
+//          <span>${checkIndoor(regionCourt.indYn)}</span>
+//          <span class="dot mx-2">·</span>
+//          <span>${checkCourtType(regionCourt.courtType)}</span>
+//          <span class="dot mx-2">·</span>
+//          <span>${checkParking(regionCourt.parking)}</span>
+//      </div>`
+// );
+
+
 
 
 
@@ -159,15 +152,15 @@ dropCity.on('change', async function (e) {
 
     const crtByCity = await courtList(cityLat, cityLng);
 
-    crtByCity?.map((fields) => {
+    crtByCity?.map((courts) => {
         $('#crt-card').append(
             `<div class="card-cover swiper-slide">
-                <button class="card-btn card border-0" type="button" onclick="window.cardEffect()">
+                <button class="card-btn card border-0" onclick="window.cardEffect()">
                     <div class="card-body">
-                        <h5 class="card-title" style="height: 48px">${fields.name}</h5>
-                        <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
+                        <h5 class="card-title" style="height: 48px">${courts.name}</h5>
+                        <p class="card-text">#${checkCourtType(courts.courtTypeId)}</p>
                         <div class="content3">
-                            <p class="card-text">${fields.distance}KM</p>
+                            <p class="card-text">${courts.distance}KM</p>
                             <a href="localhost:8080/court_rsv/view.html" class="btn btn-sm info-btn">정보</a>
                         </div>
                     </div>
@@ -183,6 +176,7 @@ dropCity.on('change', async function (e) {
 // 코트 카드 리셋
 // =================
 function cardReset() {
+
     let card = $('#crt-card');
     if ($('#crt-card div') != null) {
         card.empty();
@@ -193,7 +187,7 @@ function cardReset() {
 // 카드 onclick css
 // =================
 window.cardEffect = function () {
-    // $('.card').on('click', function () { // 지도에 있는 카드 리스트 중 하나를 클릭하면
+    $('.card').on('click', function () { // 지도에 있는 카드 리스트 중 하나를 클릭하면
         // 카드의 배경색이 바뀌고, 이전에 선택된 카드는 다시 원래대로 돌아간다.
         $('.card').removeClass('selected-card');
         $(this).addClass('selected-card');
@@ -204,7 +198,7 @@ window.cardEffect = function () {
         // scroll 이동
         var offset = $('#swiper-temp2').offset();
         $('html').animate({scrollTop: offset.top}, 200);
-    // });
+    });
 };
 
 // =================
