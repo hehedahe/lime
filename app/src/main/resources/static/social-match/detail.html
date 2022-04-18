@@ -514,7 +514,11 @@
     })
 
     $("#apply-btn").on("click", (e) =>
-      location.href = `/social-match/payment.html?matchId=${matchId}`
+      // location.href = `/social-match/payment.html?matchId=${matchId}`
+      $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
+      // fetch("/match/order").then(function (response) {
+      //   $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
+      // })
     )
 
 

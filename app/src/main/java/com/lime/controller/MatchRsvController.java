@@ -9,31 +9,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.lime.domain.Match;
+import com.lime.domain.MatchRsv;
 import com.lime.domain.SearchCondition;
 import com.lime.domain.User;
-import com.lime.service.MatchService;
+import com.lime.service.MatchRsvService;
 
 @RestController
-@RequestMapping("/match")
-public class MatchController {
+@RequestMapping("/match-rsv")
+public class MatchRsvController {
 
-  private static final Logger log = LogManager.getLogger(MatchController.class);
+  private static final Logger log = LogManager.getLogger(MatchRsvController.class);
 
   @Autowired
-  MatchService matchService;
+  MatchRsvService matchRsvService;
 
   @GetMapping("/list")
-  public Object list(SearchCondition sc) {
-    log.debug(sc);
-    return matchService.getSearchSelectMatch(sc);
+  public Object list() {
+    return matchRsvService.list();
   }
 
   @GetMapping("/get")
-  public Object get(int matchId) {
-    Match match = matchService.get(matchId);
+  public Object get(int matchId, int userId) {
+    MatchRsv match = matchRsvService.get(matchId, userId);
     if (match == null) {
-      return new ResultMap().setStatus(FAIL).setData("해당 번호의 매치가 없습니다.");
+      return new ResultMap().setStatus(FAIL).setData("해당 번호의 예약 내역이 없습니다.");
     }
     return new ResultMap().setStatus(SUCCESS).setData(match);
   }
