@@ -13,6 +13,28 @@ const PATH = {
 };
 
 // *********************
+// dateFormat
+// *********************
+export async function dateFormat(colon, date) {
+    let oldDate = new Date(await date);
+
+    let year = oldDate.getFullYear().toString();
+    let month;
+    if (oldDate.getMonth() + 1 < 10) {
+        month = '0' + (oldDate.getMonth() + 1).toString();
+    }
+    let day;
+    if (oldDate.getDate() < 10) {
+        day = '0' + oldDate.getDate().toString();
+    }
+    let time = oldDate.getTime();
+
+    let formatDate = year + colon + month + colon + day;
+
+    return formatDate;
+}
+
+// *********************
 // field
 // *********************
 
