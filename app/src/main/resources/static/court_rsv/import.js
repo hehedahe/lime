@@ -1,7 +1,7 @@
 "use strict"
 
 import {selectCity} from '../common/selectCity.js'
-import {fieldList, getCourt, courtList, findRegion, findCity} from '../common/apiList.js'
+import {fieldList, getCourt, courtList, findRegion, findCity, dateFormat} from '../common/apiList.js'
 
 
 // =================
@@ -73,12 +73,6 @@ dropRegion.on('change', async function (e) {
         card.empty();
     };
 
-    // 코트 상세정보 리셋
-    // let info = $('#selected-crt');
-    // if ($('#selected-crt h4') != null) {
-    //     info.empty();
-    // }
-
     selectCity(dropRegion.val());
 
     const coordinateRegion = await findRegion(Number($('#drop-region option:selected').val()));
@@ -91,7 +85,7 @@ dropRegion.on('change', async function (e) {
     const crtByRegion = await courtList(regionLat, regionLng);
 
     crtByRegion?.map((fields) => {
-        $('#crt-card').append(
+        card.append(
             `<div class="card-cover swiper-slide">
                 <button class="card-btn card border-0">
                     <div class="card-body">
@@ -109,16 +103,8 @@ dropRegion.on('change', async function (e) {
 
     // 카드 선택 후 css 유지
     $('.card-btn').on('click', async function(e) {
-        e.preventDefault();
-        e.stopPropagation();
 
         let fieldId = e.target.getAttribute('data-value');
-
-        // // 코트 상세정보 리셋
-        // let info = $('#selected-crt');
-        // if ($('#selected-crt h4') != null) {
-        //     info.empty();
-        // }
 
         $('.card').removeClass('selected-card');
         $(this).addClass('selected-card');
@@ -130,6 +116,7 @@ dropRegion.on('change', async function (e) {
         $('html').animate({scrollTop: offset.top}, 400);
         // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
 
+        // 선택된 테니스장 정보 한개 가져오기
         let response = await getCourt(fieldId);
         let court = response.data[0];
 
@@ -139,9 +126,6 @@ dropRegion.on('change', async function (e) {
         $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
         $('#crt-parking').text(checkParking(court.parkingArea));
 
-
-
-
     });
 });
 
@@ -150,6 +134,7 @@ dropCity.on('change', async function (e) {
     e.preventDefault();
     e.stopPropagation();
 
+    // 코트 카드 리셋
     let card = $('#crt-card');
     if ($('#crt-card div') != null) {
         card.empty();
@@ -172,11 +157,11 @@ dropCity.on('change', async function (e) {
             `<div class="card-cover swiper-slide">
                 <button class="card-btn card border-0">
                     <div class="card-body">
-                        <h5 class="card-title" style="height: 48px" data-id="${fields.fieldId}">${fields.name}</h5>
+                        <h5 class="card-title" style="height: 48px" data-value="${fields.fieldId}">${fields.name}</h5>
                         <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
                         <div class="content3">
                             <p class="card-text">${fields.distance} km</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
+                            <a href="view.html?" class="btn btn-sm info-btn">정보</a>
                         </div>
                     </div>
                 </button>
@@ -184,38 +169,67 @@ dropCity.on('change', async function (e) {
     });
 
     // 카드 선택 후 css 유지
-    $('.card').on('click', function () {
+    $('.card-btn').on('click', async function(e) {
+
+        let fieldId = e.target.getAttribute('data-value');
+
         $('.card').removeClass('selected-card');
         $(this).addClass('selected-card');
-        $(this).find('a').removeClass('changed-color');
-        $(this).find('a').addClass('changed-color');
+        $('.info-btn').removeClass('changed-color');
+        $(this).find('.info-btn').addClass('changed-color');
 
         // scroll 이동
         var offset = $('#swiper-temp2').offset();
         $('html').animate({scrollTop: offset.top}, 400);
-        // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
-    });
 
-    // 코트 상세 정보
-    $('#selected-crt').html(
-        `<h4 id="crt-name">${courtName}</h4>
-         <p class="mb-1">${courtAddr}</p>
-         <div class="d-flex">
-             <span>${checkIndoor(indYn)}</span>
-             <span class="dot mx-2">·</span>
-             <span>${checkCourtType(courtType)}</span>
-             <span class="dot mx-2">·</span>
-             <span>${checkParking(parkingYn)}</span>
-         </div>`
-    )
+        // 선택된 테니스장 정보 한개 가져오기
+        let response = await getCourt(fieldId);
+        let court = response.data[0];
+
+        $('#crt-name').text(court.name);
+        $('#crt-addr').text(court.addr);
+        $('#crt-indYn').text(checkIndoor(court.indYn) + '  ·');
+        $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
+        $('#crt-parking').text(checkParking(court.parkingArea));
+
+    });
 });
+
+let dateWrapper = $('.date-wrapper');
+let today = new Date();
+const WEEKDAY = ['일','월','화','수','목','금','토'];
+let lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+
+for (let i = 0; i < 14 ; i++) {
+    let no = today.getDay() + i > 6 ? today.getDay() + i - 7 : today.getDay() + i
+    let week = WEEKDAY[no];
+    let date = today.getDate() + i;
+
+    if (date <= lastDate) {
+        if (week == '토') {
+            dateWrapper.append(`<button class="date-wrap swiper-slide sat">${date}일<br>${week}</button>`);
+        } else if (week == '일') {
+            dateWrapper.append(`<button class="date-wrap swiper-slide sun">${date}일<br>${week}</button>`);
+        } else {
+            dateWrapper.append(`<button class="date-wrap swiper-slide">${date}일<br>${week}</button>`);
+        }
+    } else {
+        if (week == '토') {
+            dateWrapper.append(`<button class="date-wrap swiper-slide sat">${lastDate-lastDate+1}일<br>${week}</button>`);
+        } else if (week == '일') {
+            dateWrapper.append(`<button class="date-wrap swiper-slide sun">${lastDate-lastDate+1}일<br>${week}</button>`);
+        } else {
+            dateWrapper.append(`<button class="date-wrap swiper-slide">${lastDate-lastDate+1}일<br>${week}</button>`);
+        }
+    };
+}
 
 
 // =================
 // 코트 타입
 // =================
-function checkCourtType(courtTypeNo) {
-    switch (courtTypeNo) {
+function checkCourtType(courtTypeId) {
+    switch (courtTypeId) {
         case 1:
             return '하드 코트'
         case 2:
