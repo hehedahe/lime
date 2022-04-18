@@ -195,38 +195,31 @@ dropCity.on('change', async function (e) {
     });
 });
 
-let dateWrapper = $('.date-wrapper');
-let today = new Date();
-const WEEKDAY = ['일','월','화','수','목','금','토'];
-let lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
 
-for (let i = 0; i < 14 ; i++) {
-    let no = today.getDay() + i > 6 ? today.getDay() + i - 7 : today.getDay() + i
-    let week = WEEKDAY[no];
-    let date = today.getDate() + i;
+// =================
+// 날짜 swiper
+// =================
+var swiper = new Swiper(".date-swiper", {
+    slidesPerView: 7,
+    slidesPerGroup: 7,
+    spaceBetween: 10, // slidesPerView 여백
+    simulateTouch: false,
+    direction: getDirection(),
+    navigation: {
+        nextEl: "#date-next",
+        prevEl: "#date-prev"
+    },
+    on: {
+        resize: function () {
+            swiper.changeDirection(getDirection());
+        }
+    }
+});
 
-    if (date <= lastDate) {
-        if (week == '토') {
-            dateWrapper.append(`<button class="date-wrap swiper-slide sat">${date}일<br>${week}</button>`);
-        } else if (week == '일') {
-            dateWrapper.append(`<button class="date-wrap swiper-slide sun">${date}일<br>${week}</button>`);
-        } else {
-            dateWrapper.append(`<button class="date-wrap swiper-slide">${date}일<br>${week}</button>`);
-        }
-    } else {
-        if (week == '토') {
-            dateWrapper.append(`<button class="date-wrap swiper-slide sat">${lastDate-lastDate+1}일<br>${week}</button>`);
-        } else if (week == '일') {
-            dateWrapper.append(`<button class="date-wrap swiper-slide sun">${lastDate-lastDate+1}일<br>${week}</button>`);
-        } else {
-            dateWrapper.append(`<button class="date-wrap swiper-slide">${lastDate-lastDate+1}일<br>${week}</button>`);
-        }
-    };
-}
 
 
 // =================
-// 코트 타입
+// 코트 타입 / 실내외 / 주차여부
 // =================
 function checkCourtType(courtTypeId) {
     switch (courtTypeId) {
