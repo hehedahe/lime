@@ -19,6 +19,8 @@ public class UserLoginController {
   @Autowired
   UserLoginService userLoginService;
 
+  
+  
   @RequestMapping("/login/signup")
   public Object signUp(UserLogin userLogin) {
     if (userLoginService.add(userLogin) == 1) { //첫번째로 user에 add() 
@@ -27,13 +29,31 @@ public class UserLoginController {
     } else {
       return "fail";
     }
-  }
+  } 
   
-  @RequestMapping("login/signup1") 
-	public Object signUp1 (UserLogin userLogin) {
-		userLoginService.memberAdd(userLogin);
-		return "success";
-	}
+  
+  
+  /*
+  @RequestMapping("/login/signup")
+  public Object signUp(UserLogin userLogin) {
+	  UserLogin user = new UserLogin();
+	  //int id = ((Integer) sqlMap.insert("user.insertUserAndGetId")).intValue();
+	  System.out.println("user>>>>>>>>>>" + user.getUserId());
+    if (userLoginService.add(userLogin) == 1) { //첫번째로 user에 add() 
+    	
+    	//userLoginService.memberAdd(userLogin); // 두번째로 memeber에 add()
+      return "success";
+    } else {
+      return "fail";
+    }
+  }
+  */
+  
+//  @RequestMapping("login/signup1") 
+//	public Object signUp1 (UserLogin userLogin) {
+//		userLoginService.memberAdd(userLogin);
+//		return "success";
+//	}
   
 
 //  @RequestMapping("/login/signin")

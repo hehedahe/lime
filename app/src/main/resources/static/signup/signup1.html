@@ -59,13 +59,13 @@
       <div class="nav-links-div">
         <a href="../../login/login.html">로그인</a>
         <span>|</span>
-        <a href="../../signup/signup1.html">회원가입</a>
+        <a href="../../signup/signup1.html">회원가입1</a>
       </div>
     </div>
   </nav>
 
   <main class="form-lime mt-5">
-    <form name="form1">
+    
       <h1 class="h3 mb-4 h-lime">회원가입</h1>
       <div class="text-center">
         SNS계정으로 간편 로그인/회원가입
@@ -112,31 +112,33 @@
       <div class="section-border"></div>
       <br>
 
+
+      <form name="form1">
       <div class="form-signup">
         <label for="inputEmail" class="form-label">이메일</label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="이메일">
+        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="이메일">
       </div>
       <div class="form-signup">
         <label for="inputPassword" class="form-label">비밀번호</label>
         <div class="form-text mb-2 signup-help">영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</div>
-        <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호">
+        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="비밀번호">
       </div>
       <div class="form-signup">
         <label for="inputPassword2" class="form-label">비밀번호 확인</label>
-        <input type="password" class="form-control" id="inputPassword2" placeholder="비밀번호 확인">
+        <input type="password" name="password" class="form-control" id="inputPassword2" placeholder="비밀번호 확인">
       </div>
       <div class="form-signup">
         <label for="inputName" class="form-label">이름</label>
-        <input class="form-control" id="inputName" placeholder="이름(실명)">
+        <input class="form-control" name="name" type="text" id="inputName" placeholder="이름(실명)">
       </div>
       <div class="form-signup">
         <label for="inputPhone" class="form-label">휴대폰 번호</label>
         <div class="row">
           <div class="col-8 input-phone">
-            <input class="form-control" id="inputPhone" placeholder="휴대폰번호(-없이 입력)">
+            <input class="form-control" type="tel" name="phoneNo" id="inputPhone" placeholder="휴대폰번호(-없이 입력)">
           </div>
           <div class="col input-phone">
-            <button class="btn col" id="phoneCheck">인증요청</button>
+            <!-- <button class="btn col" id="phoneCheck">인증요청</button> -->
           </div>
         </div>
       </div>
@@ -144,50 +146,32 @@
         <label for="inputName" class="form-label">약관동의</label>
         <div class="checkbox mb-3">
           <div>
-            <input type="checkbox" value="" class="form-check-input">
-            <span id="checkAll">전체동의</span>
-          </div>
-          <div class="section-border" style="margin: 0.4rem 0;"></div>
-          <div>
-            <input type="checkbox" value="" class="form-check-input">
             <input id="checkAll" type="checkbox" value="remember-me" class="form-check-input">
             <span id="chkAll">전체동의</span>
           </div>
           <div class="section-border" style="margin: 0.4rem 0;"></div>
           <div>
-            <input type="checkbox" value="remember-me" class="form-check-input" name="chk">
-
+            <input type="checkbox" value="remember-me" class="form-check-input">
             <span>이용약관</span>
             <span class="require">(필수)</span>
           </div>
           <div>
-
-            <input type="checkbox" value="" class="form-check-input">
-
-            <input type="checkbox" value="remember-me" class="form-check-input" name="chk">
-
+            <input type="checkbox" value="remember-me" class="form-check-input">
             <span>개인정보수집 및 이용동의</span>
             <span class="require">(필수)</span>
           </div>
           <div>
-
-            <input type="checkbox" value="" class="form-check-input">
-
-            <input type="checkbox" value="remember-me" class="form-check-input" name="chk">
-
-            <span>이벤트 및 프로모션 알림 받기</span>
+            <input type="checkbox" id="event-chk" class="form-check-input" name="eventYn">
+            <span>이벤트 및 프로모션 알림 받기2</span>
             <span class="option">(선택)</span>
           </div>
         </div>
       </div>
-
-      <button class="w-100 btn btn-primary mb-4" type="button" id="btn-signup"
-        onclick="location.href='signup2.html'">가입하기</button>
-
+      <button class="w-100 btn btn-primary mb-4" id="btn-signup">가입하기</button>
+      </form>
       <div class="row mb-5" id="footer-login">
         <div class="col text-center">이미 아이디가 있으신가요?<a href="../login/login.html">로그인</a></div>
       </div>
-    </form>
   </main>
 
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -195,55 +179,76 @@
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
 <script type="text/javascript">
-var xName = document.querySelector("input[name=name]");
-var xEmail = document.querySelector("input[name=email]");
-var xPassword = document.querySelector("input[name=password]");
+
+
+
+const email = document.querySelector("input[name=email]");
+const pwd = document.querySelector("input[name=password]");
+const name = document.querySelector("input[name=name]");
+const phoneNo = document.querySelector("input[name=phoneNo]");
+
+
+
   
 document.querySelector("form[name=form1]").onsubmit = function() {
-  if (xName.value == "" || 
-  		xEmail.value == "" ||
-  		xPassword.value == "") {
-    window.alert("Required entry is empty.");
+  pwdCheck()
+  if (email.value === "" || 
+      pwd.value === "" ||
+  		name.value === "" ||
+      phoneNo.value === "") {
+    window.alert("필수입력사항이 비어있습니다.");
     return false;
   }
   
   var fd = new FormData(document.forms.namedItem("form1"));
-  
+
   fetch("/login/signup", { 
       method: "POST",
       body: new URLSearchParams(fd)
+      
     }) 
     .then(function(response) {
       return response.text();
     })
     .then(function(text) {
       if (text == "success") {
-    	  location.href = "?content=/login/signin.html";
+    	  location.href = "signup2.html";
       } else {
-    	  window.alert("Registration failed!");
+    	  window.alert("중복된 이메일입니다");
       }
     });
   return false;
 };
 
-// document.querySelector("#x-cancel-btn").onclick = function() {
-//   window.location.href = "/index.html";
-// };
 
 $(document).ready(function() {
     $("#checkAll").click(function() {
-      if($("#checkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
-      else $("input[name=chk]").prop("checked", false);
+      if($("#checkAll").is(":checked")) $("input[class=form-check-input]").prop("checked", true);
+      else $("input[class=form-check-input]").prop("checked", false);
     });
     
-    $("input[name=chk]").click(function() {
-      var total = $("input[name=chk]").length;
-      var checked = $("input[name=chk]:checked").length;
+    $("input[class=form-check-input]").click(function() {
+      var total = $("input[class=form-check-input]").length;
+      var checked = $("input[class=form-check-input]:checked").length;
       
       if(total != checked) $("#checkAll").prop("checked", false);
       else $("#checkAll").prop("checked", true); 
     });
   });
+
+
+
+
+
+  function pwdCheck() {
+      var p1 = document.getElementById('inputPassword').value;
+      var p2 = document.getElementById('inputPassword2').value;
+      if( p1 != p2 ) {
+        alert("비밀번호가 일치 하지 않습니다");
+        return false;
+      } 
+    }
+
 
 </script>
 
