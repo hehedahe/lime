@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>라임</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <!-- <link rel="stylesheet" href="../header/user/u-adminHeader.css"> -->
+  <link href="detail.css" rel="stylesheet">
+
+
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=46fd5aaec535347327e5edba1ba828a7"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#x-header").load("/header/user/header.html");  //헤더 인클루드
+      $("#x-footer").load("/footer/footer.html");
+    });
+  </script>
+
+  <script src="import.js" type="module"></script>
+
+
+</head>
+
+<body>
+
+  <div id="x-header" class="d-flex bd-highlight"></div>
+
+  <main class="social-match mb-5">
+
+
+    <div id="dateNav">
+      <div id="navWrap">
+        <ul class="list-group date-ul">
+          <button class="btn btn-primary disabled" id="prev-btn"><img src="arrow.png" alt=""></button>
+          <div class="date-div" id="date-div-1">
+            <li class="list-group-item date-li me-2"><img src="image/image_9.jpg" alt=""></li>
+            <li class="list-group-item date-li me-2"><img src="image/image_22.jpg" alt=""></li>
+            <li class="list-group-item date-li me-2"><img src="image/image_1.jpg" alt=""></li>
+            <li class="list-group-item date-li me-2"><img src="image/image_32.jpg" alt=""></li>
+            <li class="list-group-item date-li"><img src="image/image_28.jpg" alt=""></li>
+            <!-- <li class="list-group-item date-li"><img src="image_31.jpg" alt=""></li> -->
+          </div>
+          <button class="btn btn-primary" id="next-btn"><img src="arrow.png" alt=""></button>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        <div id="match-navbar" class="sticky-top">
+          <nav id="navbar-example2" class="navbar navbar-light">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a class="nav-link active" href="#scrollspyHeading1">진행 방식</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#scrollspyHeading2">구장 시설</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#scrollspyHeading3">매치 안내</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example"
+          tabindex="0">
+          <div class="mx-3 mt-3">
+            <h6 id="scrollspyHeading1" class="my-h mb-4">진행 방식</h6>
+            <div class="match-rule-1">
+              <ul class="list-group">
+                <li class="list-group-item me-5">
+                  <img src="one.png" alt="...">
+                  <!-- <p id="numOfPeople">1 vs 1</p> -->
+                  <p id="numOfPeople"></p>
+                </li>
+                <li class="list-group-item me-5">
+                  <img src="one.png" alt="...">
+                  <!-- <p id="matchType">여성 매치</p> -->
+                  <p id="matchType"></p>
+                </li>
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <!-- <p id="level">모든 레벨</p> -->
+                  <p id="level"></p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="match-rule-2 mt-4 mb-4">
+              <ul>
+                <li>매치 중에는 꼭 테니스화를 신어주세요.</li>
+                <li>2vs2 매치는 현장에서 매니저가 팀을 나눠요.</li>
+                <li>친구끼리 와도 다른 팀이 될 수 있어요.</li>
+              </ul>
+            </div>
+
+            <div class="section-border mb-3"></div>
+
+            <div class="my-h mt-4 mb-4">매치 평균 레벨은 경기 30분 전에 공개됩니다!</div>
+
+            <div class="average-level py-4 mb-4">
+              <!-- <h2>06:00:00</h2> -->
+              <h2 id="countdown"></h2>
+            </div>
+
+            <div class="section-border mb-4"></div>
+
+            <h6 id="scrollspyHeading2" class="my-h mt-4 mb-4">구장 시설</h6>
+
+            <!-- 지도를 담을 영역 -->
+            <div id="map-container" class="mb-4">
+              <div id="map" style="width:500px;height:500px;"></div>
+            </div>
+
+            <div class="field-info mb-4">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p id="indYn">실내외</p>
+                </li>
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p id="courtType">코트 타입</p>
+                </li>
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p id="">라이트 유무</p>
+                </li>
+                <li class="list-group-item">
+                  <img src="one.png" alt="...">
+                  <p id="parkingArea">주차공간 유무</p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="fw-bold">시설 이용 주의 사항</div>
+            <div class="match-rule-2 mt-2 mb-4">
+              <ul>
+                <li>라임에서 진행하는 모든 매치 중, 코트 이동 시 마스크 필수 착용 입니다.</li>
+                <li>현장 상황에 따라 주차장 이용이 어려울 수 있습니다.<br>
+                  (테니스 구장 직원을 통해 주차권을 받으실 수 있습니다.)</li>
+                <li>흡연 부스 외에는 모두 금연 시설입니다.<br>
+                  (흡연구역 외에서 흡연 적발 시 서비스 이용에 제한이 있을 수 있습니다.)</li>
+                <li>테니스 물품 및 테니스화 대여 여부는 테니스 구장마다 다르므로 구장 안내데스크 직원에게 문의해 주세요!</li>
+              </ul>
+            </div>
+            <div class="section-border mb-3"></div>
+
+            <h6 id="scrollspyHeading3" class="my-h mt-4 mb-4">매치 안내</h6>
+            <div class="match-guidance mb-4">
+              <div class="me-2">
+                <img src="manager.png" alt="">
+              </div>
+              <div class="ms-1">
+                <span>매니저</span>
+                <!-- <p id="managerName">김라임</p> -->
+                <p id="managerName"></p>
+              </div>
+            </div>
+            <div class="fw-bold pt-1">매치 안내 사항</div>
+            <div class="match-rule-2 mt-2 mb-4">
+              <ul>
+                <li>사전 연락 없이 매치에 참여하지 않으셔도 환불은 불가합니다. 또한, 향후 라임 서비스 이용에 제한이 있을 수도 있습니다.</li>
+                <li>음주 및 흡연과 코트에 오물을 투척하는 행위를 금지합니다.</li>
+                <li>테니스 외의 행위를 금지합니다. (족구, 퀵보드, 반려동물 동반 입장 등)</li>
+                <li>매치가 확정되었지만 진행에 변동 사항이 있을 경우, 매치 시작 1시간 전까지 안내드립니다.</li>
+                <li>실외 매치 시 기상악화로 인한 경기가 취소될 경우, 현장 매니저의 판단하에 경기가 종료될 수 있으며, 진행되지 않은 시간은 라임캐시로 환불해 드릴 예정입니다.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-4">
+        <div id="position-div" class="sticky-top">
+          <div class="card">
+            <div class="card-body">
+              <div id="match-date">
+                <!-- 2022년 4월 13일 수요일 18:00 -->
+              </div>
+              <div id="field-name" class="mt-4 my-h">
+                <!-- 인천 시립 테니스장 -->
+              </div>
+              <div id="court-no" class="my-h">
+                <!-- 코트1 -->
+              </div>
+              <div id="field-addr" class="mt-1 mb-3">
+                <!-- 인천광역시 서구 가좌동 606 -->
+              </div>
+              <div class="section-border mb-3"></div>
+              <div class="mb-3">20,000원<span id="hour" class="ms-1"> / 2 시간</span>
+              </div>
+              <div>
+                <button id="apply-btn" class="btn btn-primary match-apply-btn" onclick="">신청하기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="x-footer"></div>
+
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+  <script>
+    const countDownTimer = function (id, date) {
+      var _vDate = new Date(date);
+      var _second = 1000;
+      var _minute = _second * 60;
+      var _hour = _minute * 60;
+      var _day = _hour * 24;
+      var timer;
+
+      function showRemaining() {
+        var now = new Date();
+        var distDt = _vDate - now;
+
+        if (distDt < 0) {
+          clearInterval(timer);
+          document.getElementById(id).textContent = '해당 매치는 마감되었습니다.';
+          $("#apply-btn").addClass("closed-btn").text("마감");
+          return;
+        }
+
+        var days = Math.floor(distDt / _day);
+        var hours = Math.floor((distDt % _day) / _hour);
+        var minutes = Math.floor((distDt % _hour) / _minute);
+        var seconds = Math.floor((distDt % _minute) / _second);
+
+        document.getElementById(id).textContent = days + '일 ';
+
+        if (days == 0) {
+          document.getElementById(id).textContent = '';
+        }
+
+        if (hours < 10) {
+          document.getElementById(id).textContent += '0';
+        }
+        document.getElementById(id).textContent += hours + ':';
+        
+        if (minutes < 10) {
+          document.getElementById(id).textContent += '0';
+        }
+        document.getElementById(id).textContent += minutes + ':';
+        
+        if (seconds < 10) {
+          document.getElementById(id).textContent += '0';
+        }
+        document.getElementById(id).textContent += seconds;
+
+        }
+
+        timer = setInterval(showRemaining, 1000);
+
+      }
+
+  </script>
+
+  <script type="text/javascript">
+    "use strict"
+
+    $(document).ready(function () {
+
+
+    })
+
+    // 1) URL에서 쿼리스트링(query string)을 추출한다.
+    var arr = location.href.split("?");
+    console.log(arr);
+
+    if (arr.length == 1) {
+      alert("요청 형식이 올바르지 않습니다.")
+      throw "URL 형식 오류!";
+    }
+
+    var qs = arr[1];
+    console.log(qs);
+
+    var params = new URLSearchParams(qs);
+    var matchId = params.get("matchId");
+
+    if (matchId == null) {
+      alert("매치 번호가 없습니다.");
+      throw "파라미터 오류!";
+    }
+    console.log(matchId);
+
+    const xNumOfPeople = $("#numOfPeople");
+    const xMatchType = $("#matchType");
+    const xLevel = $("#level")
+    const xIndYn = $("#indYn")
+    const xCourtType = $("#courtType")
+    const xParkingArea = $("#parkingArea")
+    const xManagerName = $("#managerName")
+    const xMatchDate = $("#match-date")
+    const xFieldName = $("#field-name")
+    const xCourtNo = $("#court-no")
+    const xFieldAddr = $("#field-addr")
+
+    $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
+      console.log(result);
+      if (result.status == "fail") {
+        window.alert("서버 요청 오류!");
+        console.log(result.data);
+        return;
+      }
+      var match = result.data;
+      
+      xNumOfPeople.text(checkNumOfPeople(match.numOfPeople))
+      xMatchType.text(checkMatchType(match.matchTypeNo))
+      xLevel.text(checkLevel(match.levelNo))
+      xManagerName.text(match.managerName)
+      xMatchDate.text(`${getFullYmdStr(match.matchDate)} ${match.startTime.slice(0, 5)}`)
+      xFieldName.text(match.court.field.name)
+      xCourtNo.text(match.court.name)
+      xFieldAddr.text(match.court.field.addr)
+
+      let date = new Date(`${match.matchDate} ${match.startTime}`);
+      
+      console.log(date)
+
+      date.setMinutes(date.getMinutes() - 30)
+
+      console.log(date)
+
+      countDownTimer('countdown', date);
+
+      showFieldMap(match.court.field.lat, match.court.field.lng)
+
+      if (match.state === 'C') {
+        $("#apply-btn").addClass("closed-btn").text("마감")
+      }
+
+    });
+
+    function getDay(date) {
+      let today = new Date(date);
+      const week = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+      let day = week[today.getDay()];
+      return day;
+    }
+
+    function getFullYmdStr(date) {
+      let d = new Date(date);
+      return d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일 " + '일월화수목금토'.charAt(d.getUTCDay()) + '요일';
+    }
+
+    function showFieldMap(lat, lng) {
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+          center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+          level: 3 // 지도의 확대 레벨
+        };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+      // 마커가 표시될 위치입니다 
+      var markerPosition = new kakao.maps.LatLng(lat, lng);
+
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+        position: markerPosition
+      });
+
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
+    }
+
+    function checkMatchType(matchTypeNo) {
+      switch (matchTypeNo) {
+        case 1: return '남성 매치'
+        case 2: return '여성 매치'
+        case 3: return '혼성 매치'
+      }
+    }
+
+    function checkNumOfPeople(numOfPeople) {
+      switch (numOfPeople) {
+        case 'S': return '1 vs 1'
+        case 'D': return '2 vs 2'
+      }
+    }
+
+    function checkLevel(level) {
+      switch (level) {
+        case 1: return '모든 레벨'
+        case 2: return 'BEGINNER'
+        case 3: return 'INTERMEDIATE'
+        case 4: return 'ADVANCED'
+        case 5: return 'PRO'
+      }
+    }
+
+    function checkCourtType(courtTypeNo) {
+      switch (courtTypeNo) {
+        case 1: return '하드'
+        case 2: return '클레이'
+        case 3: return '잔디'
+        case 4: return '앙투카'
+      }
+    }
+
+    var URLSearchParams = new URLSearchParams();
+    console.log("URLSearchParams : " + URLSearchParams);
+
+    $(".form-select").on("change", function (e) {
+
+      const name = $(e.target).attr("name")
+      console.log(name)
+      const value = e.target.value
+      console.log(value)
+
+      if (value == 0) {
+        URLSearchParams.delete(name)
+      } else {
+        URLSearchParams.set(name, value)
+      }
+
+      let matchDate = $(".active a").attr("date")
+      console.log(matchDate)
+
+      URLSearchParams.set("matchDate", matchDate);
+
+      console.log("URLSearchParams : " + URLSearchParams);
+
+      $.getJSON(`http://localhost:8080/match/list?${URLSearchParams}`, function (arr) {
+        console.log(arr)
+        const matchList = $(".match-list")
+        let str = ''
+        for (let i = 0; i < arr.length; i++) {
+          let state = ''
+          let aaa = ''
+          if (arr[i].state === 'A') {
+            state = '신청 가능'
+          } else {
+            state = '마감'
+            aaa = 'closed-btn'
+          }
+          str += `
+          <a href="/social_match/index.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+              <div>
+                <div class="d-flex justify-content-start align-items-center">
+                  <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
+                  <div class="ms-1">
+                    <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
+                    <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
+                  </div>
+                </div>
+              </div>
+              <button class="btn match-btn ${aaa}">${state}</button>
+              </div>
+            </a>`
+        }
+        $(".match-list").html(str)
+      })
+    })
+
+    $("#next-btn").on("click", (e) => {
+      $(".date-div").css("transform", "translateX(-36%)").css("transition", "all .5s");
+      $("#next-btn").addClass("disabled");
+      $("#prev-btn").removeClass("disabled");
+    })
+
+    $("#prev-btn").on("click", (e) => {
+      $(".date-div").css("transform", "translateX(0%)").css("transition", "all .5s");
+      $("#prev-btn").addClass("disabled");
+      $("#next-btn").removeClass("disabled");
+    })
+
+    var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+      target: '#navbar-example'
+    })
+
+    $("#apply-btn").on("click", (e) =>
+      // location.href = `/social-match/payment.html?matchId=${matchId}`
+      $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
+      // fetch("/match/order").then(function (response) {
+      //   $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
+      // })
+    )
+
+
+
+  </script>
+
+</body>
+
+</html>

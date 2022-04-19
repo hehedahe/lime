@@ -10,7 +10,7 @@ public interface MatchService {
 
   int getCount();
 
-  Match get(int no);
+  Match get(int matchId);
 
   List<Match> getSearchSelectMatch(SearchCondition sc);
 

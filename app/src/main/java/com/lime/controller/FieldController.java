@@ -27,10 +27,19 @@ public class FieldController {
     return fieldService.findAll();
   }
 
-  @GetMapping("/distanceList")
+  @GetMapping("/courtList")
   public List<Field> findByLatLng(float lat, float lng) {
-    log.debug("테니스장 리스트 불러오기");
+    log.debug("테니스장 일부 리스트 불러오기");
     return fieldService.findByLatLng(lat, lng);
+  }
+
+  @GetMapping("/get")
+  public Object getCourt(int fieldId) {
+    List<Field> court = fieldService.getCourt(fieldId);
+    if (court == null) {
+      return new ResultMap().setStatus(FAIL).setData("해당 번호의 테니스장이 없습니다.");
+    }
+    return new ResultMap().setStatus(SUCCESS).setData(court);
   }
 
 

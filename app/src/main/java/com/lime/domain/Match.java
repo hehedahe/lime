@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class Match {
-  int no;
+  int matchId;
   int courtNo;
   int managerNo;
   int matchTypeNo;
@@ -18,4 +18,5 @@ public class Match {
   String state;
   String numOfPeople;
   Court court;
+  String managerName;
 }

@@ -47,7 +47,7 @@
 
 var xTbody = document.querySelector("#x-tbody"); 
 
-fetch(`/manage/field/list`)
+fetch(`/manage/field/get?no=${no}`)
 .then(function(response){
   return response.json();
 })

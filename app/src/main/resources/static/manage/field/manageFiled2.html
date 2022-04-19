@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Columns & Gutter</title>
+
+  <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="manageFiled.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+</head>
+<style>
+  #x-table {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    align-items: center;
+    height: 50%;
+    display: table;
+  }
+
+
+</style>
+<body>
+  <div class="container">
+    <div id="tables" class="table-responsive">
+      <div class="row justify-content-center align-content-center align-content-lg-center">
+        <div id ="x-header" class="col-2"></div>
+        <div class="col-10">
+            <div>
+              <button id = "addBtn">등록</button>
+              <input type="text" id = "searchTxt"> 
+            </div>
+            <table id="x-table" class="table table-striped table-hover table-bordered border-primary text-center">
+              <thead>
+                <tr id="x-thead">
+                  <th class="col">No.</th>
+                  <th class="col-2">구장명</th>
+                  <th class="col-3">구장주소</th>
+                  <th class="col">코트타입</th>
+                  <th class="col">코트갯수</th>
+                  <th class="col">주차장</th>
+                  <th class="col">실내외여부</th>
+                  <th class="col">야간라이트</th>
+                  <th class="col">정보</th>
+                </tr>
+              </thead>
+              <tbody id ="x-tbody">
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+var xTbody = document.querySelector("#x-tbody"); 
+
+fetch(`/manage/field/list`)
+.then(function(response){
+  return response.json();
+})
+.then(function(fields){
+  console.log(fields);
+  var content= '';
+  for(var field of fields){
+    console.log(field)
+
+      content+= `
+        <tr id = "xTr">
+          <td id="x-no">${field.no}</td>
+          <td>${field.fname}</td>
+          <td>${field.addr}</td>
+          <td>${field.courtType}</td>
+          <td>${field.courtCnt}</td>
+          <td>${field.parkingAvt}</td>
+          <td>${field.indYn}</td>
+          <td>${field.lightYn}</td>
+          <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${field.no}" margin-bottom ="10px">상세</td>
+        </tr>`
+    }
+    xTbody.innerHTML =content
+  });
+ 
+
+  $(document).ready(function () {
+
+    
+    $("#x-header").load("../header/adminHeader.html");
+
+    $(document).on("click", "button[id='detailBtn']", function () {
+        console.log("click!!!!");
+        location.href = "manageFiledDetail.html?no=" +$(this).val();
+
+    });
+});
+  
+  
+</script>
+</body>
+</html>

@@ -12,7 +12,7 @@ public interface MatchDao {
 
   List<Match> findAll();
 
-  Match findByNo(int no);
+  Match findByNo(int matchId);
 
   List<Match> searchSelectMatch(SearchCondition sc);
 

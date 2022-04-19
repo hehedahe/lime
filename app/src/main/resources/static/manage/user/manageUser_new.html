@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="manageUser.css">
+    <!-- <link rel="stylesheet" href="adminHeader.css"> -->
+    <link rel="stylesheet" href="my-adminHeader.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+    <!--<link rel="import" href="static/footer/footer.html">-->
+
+    <link rel="stylesheet" href="header.css">
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    
+    <style>
+
+    
+    .pagination{
+        text-align: center;
+      }
+
+    #x-table {
+    margin-top: 20%;
+    align-items: center;
+    height: 50%;
+    text-justify: auto;
+    max-width: 1024px; 
+  }
+
+    
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="tables" class="table-responsive">
+      <div class="row justify-content-center align-content-center align-content-lg-center">
+        <div id ="x-header" class="col-2"></div>
+        <div class="col-9">
+          <table id="x-table" class="table table-striped table-hover table-bordered border-primary text-center">
+            <thead>
+                <tr id="x-thead">
+                  <th scope="col">번호</th>
+                  <th scope="col">이름</th>
+                  <th scope="col">이메일</th>
+                  <th scope="col">회원유형</th>
+                  <th scope="col">가입일자</th>
+                  <th scope="col">라임캐시</th>
+                  <th scope="col">상세</th>
+                </tr>
+              </thead>
+              <tbody id ="x-tbody">
+              </tbody>
+          </table>
+          <tfoot aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+            </ul>
+          </tfoot>
+      </div>
+    </div>
+  </div>
+  
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+var xTbody = document.querySelector("#x-tbody");
+let totalData; //총 데이터 수
+let dataPerPage = 5; //한 페이지에 나타낼 글 수
+let pageCount = 5; //페이징에 나타낼 페이지 수
+let globalCurrentPage=1; //현재 페이지 
+
+  $(document).ready(function () {
+
+    $("#x-header").load("../header/adminHeader.html");
+
+      fetch("/manage/user/list",{
+          method:"post",
+      })
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(manages){
+        totalData = manages.length;
+        displayData(1, manages);
+        paging(1,manages)
+      });
+
+
+
+      $(document).on("click", "button[id='detailBtn']", function () {
+
+          location.href = "userDetail.html?no=" +$(this).val();
+
+      }); 
+    });
+
+
+function displayData(currentPage, manages) {
+
+let chartHtml = "";
+
+//Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
+currentPage = Number(currentPage);
+dataPerPage = Number(10);
+
+
+const startNum =(currentPage - 1) * 5;
+const endNum = (currentPage - 1) * 5 + 5;
+
+
+
+for (
+  var i = startNum;
+  i < endNum;
+  i++
+) {
+  chartHtml +=`
+  <tr id = "xTr">
+          <td id="x-no">${manages[i].no}</td>
+          <td>${manages[i].name}</td>
+          <td>${manages[i].email}</td>
+          <td>${manages[i].userType}</td>
+          <td>${manages[i].rgtDate}</td>
+          <td>${manages[i].sum}</td>
+          <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${manages[i].no}">상세</td>
+        </tr>`
+}
+$("#x-tbody").html(chartHtml);
+}
+
+function paging(no,manages) {
+        console.log("no : " + no);
+
+  totalPage = Math.ceil(totalData / 10); //총 페이지 수
+  
+  if(totalPage < pageCount){
+    pageCount=totalPage;
+  }
+  
+  let pageGroup = Math.ceil(no / pageCount); // 페이지 그룹
+  let last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+  
+  if (last > totalPage) {
+    last = totalPage;
+  }
+
+  let first = last - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
+  let next = last + 1;
+  let prev = first - 1;
+
+  let pageHtml = "";
+
+  if (prev > 0) {
+    pageHtml += `<li class="page-item"><a class="page-link" href='#' id="${i}">이전</a></li>`;
+  }
+
+ //페이징 번호 표시 
+ for (var i = first; i <= last; i++) {
+    if (no == i) {
+      pageHtml +=`<li class="page-item"><a class="page-link" href="#" id="${i}">${i}</a></li>`;
+    } else {
+      pageHtml += `<li class="page-item"><a class="page-link" href="#" id="${i}">${i}</a></li>`;
+    }
+  }
+
+  if (last < totalPage) {
+    pageHtml += `<li class="page-item"><a class="page-link" href='#' id="${i}">다음</a></li>`;
+  }
+
+  $(".pagination").html(pageHtml);
+  let displayCount = "";
+  displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
+  $("#displayCount").text(displayCount);
+
+
+  //페이징 번호 클릭 이벤트 
+  $(".pagination a").click(function () {
+    
+    let $id = $(this).attr("id");
+    selectedPage = $(this).attr("id");
+
+    if ($(this).text() == "다음") selectedPage = next;
+    if ($(this).text() == "이전") selectedPage = prev;
+    
+    //전역변수에 선택한 페이지 번호를 담는다...
+    globalCurrentPage = selectedPage;
+    //페이징 표시 재호출
+    paging(selectedPage,manages);
+    //글 목록 표시 재호출
+    displayData(selectedPage, manages);
+  });
+}
+</script>
+</body>
+</html>

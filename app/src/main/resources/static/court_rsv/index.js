@@ -20,9 +20,40 @@ var swiper2 = new Swiper("#info-card", {
     }
 });
 
+
 // =================
+// 날짜 슬라이더
+// =================
+let dateWrapper = $('.date-wrapper');
+let today = new Date();
+const WEEKDAY = ['일','월','화','수','목','금','토'];
+let lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate(); // 이번 달 마지막 날짜
+
+for (let i = 0; i < 14 ; i++) {
+    let no = today.getDay() + i > 6 ? today.getDay() + i - 7 : today.getDay() + i
+    let week = WEEKDAY[no];
+    let date = today.getDate() + i;
+
+    if (date <= lastDate) {
+        if (week == '토') {
+            dateWrapper.append(`<button class="date-wrap swiper-slide sat">${date}일<br>${week}</button>`);
+        } else if (week == '일') {
+            dateWrapper.append(`<button class="date-wrap swiper-slide sun">${date}일<br>${week}</button>`);
+        } else {
+            dateWrapper.append(`<button class="date-wrap swiper-slide">${date}일<br>${week}</button>`);
+        }
+    } else {
+        if (week == '토') {
+            dateWrapper.append(`<button class="date-wrap swiper-slide sat">${date-lastDate}일<br>${week}</button>`);
+        } else if (week == '일') {
+            dateWrapper.append(`<button class="date-wrap swiper-slide sun">${date-lastDate}일<br>${week}</button>`);
+        } else {
+            dateWrapper.append(`<button class="date-wrap swiper-slide">${date-lastDate}일<br>${week}</button>`);
+        }
+    };
+};
+
 // 날짜 swiper
-// =================
 var swiper = new Swiper(".date-swiper", {
     slidesPerView: 7,
     slidesPerGroup: 7,
@@ -46,20 +77,7 @@ function getDirection() {
     return direction;
 }
 
-// =================
-// 카드 선택 후 css 유지
-// =================
-$('.card-btn').on('click', function () {
-    $('.card').removeClass('selected-card');
-    $(this).addClass('selected-card');
-    $(this).find('a').removeClass('changed-color');
-    $(this).find('a').addClass('changed-color');
 
-    // scroll 이동
-    var offset = $('#swiper-temp2').offset();
-    $('html').animate({scrollTop : offset.top}, 400);
-    // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
-})
 
 // =================
 // 날짜 선택 후 css 유지

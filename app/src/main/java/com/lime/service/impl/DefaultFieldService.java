@@ -22,4 +22,9 @@ public class DefaultFieldService implements FieldService {
   public List<Field> findAll() {
     return fieldDao.findAll();
   }
+
+  @Override
+  public List<Field> getCourt(int fieldId) {
+    return fieldDao.getCourt(fieldId);
+  }
 }

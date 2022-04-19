@@ -31,7 +31,7 @@
           $("#x-footer").load("/footer/footer.html");  // 푸터 인클루드
         });
     </script>
- </head>
+</head>
 
 <body>
 <!-- 헤더 -->
@@ -43,7 +43,7 @@
     <!-- 시도, 시군구 select -->
     <div id="drop-menu" class="row w-100">
         <div class="d-flex col-2 p-2 bd-highlight">
-            <select class="form-select border col-1 text-center" id="drop-region">
+            <select class="form-select border col-1 text-start" id="drop-region">
                 <option value="0" selected disabled hidden>지역</option>
                 <option value="1" data-id="1">서울</option>
                 <option value="2">부산</option>
@@ -63,12 +63,12 @@
                 <option value="16">경상남도</option>
                 <option value="17">제주</option>
             </select>
-            <select class="form-select border col-1 text-center" aria-label="year" id="drop-city">
+            <select class="form-select border col-1 text-start" id="drop-city">
                 <option selected disabled hidden>도시</option>
             </select>
         </div>
         <div class="col-2 ms-auto p-2 bd-highlight">
-            <select class="form-select border text-center" aria-label="year" id="preferred">
+            <select class="form-select border text-start" id="preferred">
                 <option selected disabled hidden>선호 지역</option>
             </select>
         </div>
@@ -83,109 +83,24 @@
         <div id="c-next" class="swiper-button-next"></div>
         <div id="c-prev" class="swiper-button-prev"></div>
         <div id="info-card"
-             class="swiper d-flex justify-content-around align-items-center position-absolute bottom-0 start-50 translate-middle-x">
-<!--            <button id="card-l-btn" class="border swiper-button-prev rounded-circle justify-content-center left-btn" type="button">-->
-<!--                <i class="fa-solid fa-chevron-left fa-3x"></i>-->
-<!--            </button>-->
+             class="swiper d-flex justify-content-around align-items-center
+                    position-absolute bottom-0 start-50 translate-middle-x">
             <div id="crt-card" class="swiper-wrapper">
-                <div class="card-cover swiper-slide">
-                    <button class="card-btn card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">테니스장1</h5>
-                            <p class="card-text">#하드코트</p>
-                            <div class="content3">
-                                <p class="card-text">300m</p>
-                                <a href="#" class="btn btn-sm info-btn">정보</a>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="card-cover swiper-slide">
-                    <button class="card-btn card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">테니스장2</h5>
-                            <p class="card-text">#하드코트</p>
-                            <div class="content3">
-                                <p class="card-text">300m</p>
-                                <a href="#" class="btn btn-sm info-btn">정보</a>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="card-cover swiper-slide">
-                    <button class="card-btn card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">테니스장3</h5>
-                            <p class="card-text text1">#하드코트</p>
-                            <div class="content3">
-                                <p class="card-text text2">300m</p>
-                                <a href="#" class="btn btn-sm info-btn">정보</a>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="card-cover swiper-slide">
-                    <button class="card-btn card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">테니스장4</h5>
-                            <p class="card-text text1">#하드코트</p>
-                            <div class="content3">
-                                <p class="card-text text2">300m</p>
-                                <a href="#" class="btn btn-sm info-btn">정보</a>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="card-cover swiper-slide">
-                    <button class="card-btn card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">테니스장5</h5>
-                            <p class="card-text text1">#하드코트</p>
-                            <div class="content3">
-                                <p class="card-text text2">300m</p>
-                                <a href="#" class="btn btn-sm info-btn">정보</a>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="card-cover swiper-slide">
-                    <button class="card-btn card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                테니스장6
-                            </h5>
-                            <p class="card-text text1">
-                                #하드코트
-                            </p>
-                            <div class="content3">
-                                <p class="card-text text2">
-                                    300m
-                                </p>
-                                <a href="#" class="btn btn-sm info-btn">
-                                    정보
-                                </a>
-                            </div>
-                        </div>
-                    </button>
-                </div>
+            <!--        코트 정보 카드        -->
             </div>
-<!--            <button id="card-r-btn" class="border swiper-button-next rounded-circle text-center justify-content-center right-btn" type="button">-->
-<!--                <i class="fa-solid fa-chevron-right fa-3x"></i>-->
-<!--            </button>-->
         </div>
     </div>
 
     <!-- 선택된 테니스장 정보 -->
     <div id="selected-crt-wrap" class="my-3">
         <div id="selected-crt" class="row m-3">
-            <h4 id="crt-name">테니스장1</h4>
-            <p class="mb-1">테니스장 주소</p>
+<!--        <h4 id="crt-name">테니스장1</h4>-->
+            <h4 id="crt-name">테니스장을 선택해주세요 🥎</h4>
+            <p class="mb-1" id="crt-addr"></p>
             <div class="d-flex">
-                <span>실내</span>
-                <span class="dot mx-2">·</span>
-                <span>코트타입</span>
-                <span class="dot mx-2">·</span>
-                <span>주차가능</span>
+                <span id="crt-indYn" class="me-2"></span>
+                <span id="crt-type" class="mx-1"></span>
+                <span id="crt-parking" class="ms-2"></span>
             </div>
         </div>
     </div>
@@ -194,20 +109,20 @@
     <div id="swiper-temp" class="my-4">
         <div class="swiper date-swiper">
             <div class="date-wrapper swiper-wrapper">
-                <button class="date-wrap swiper-slide">11일<br>월</button>
-                <button class="date-wrap swiper-slide">12일<br>화</button>
-                <button class="date-wrap swiper-slide">13일<br>수</button>
-                <button class="date-wrap swiper-slide">14일<br>목</button>
-                <button class="date-wrap swiper-slide">15일<br>금</button>
-                <button class="date-wrap swiper-slide sat">16일<br>토</button>
-                <button class="date-wrap swiper-slide sun">17일<br>일</button>
-                <button class="date-wrap swiper-slide">18일<br>월</button>
-                <button class="date-wrap swiper-slide">19일<br>화</button>
-                <button class="date-wrap swiper-slide">20일<br>수</button>
-                <button class="date-wrap swiper-slide">21일<br>목</button>
-                <button class="date-wrap swiper-slide">22일<br>금</button>
-                <button class="date-wrap swiper-slide sat">23일<br>토</button>
-                <button class="date-wrap swiper-slide sun">24일<br>일</button>
+<!--                <button class="date-wrap swiper-slide">15일<br>금</button>-->
+<!--                <button class="date-wrap swiper-slide sat">16일<br>토</button>-->
+<!--                <button class="date-wrap swiper-slide sun">17일<br>일</button>-->
+<!--                <button class="date-wrap swiper-slide">18일<br>월</button>-->
+<!--                <button class="date-wrap swiper-slide">19일<br>화</button>-->
+<!--                <button class="date-wrap swiper-slide">20일<br>수</button>-->
+<!--                <button class="date-wrap swiper-slide">21일<br>목</button>-->
+<!--                <button class="date-wrap swiper-slide">23일<br>금</button>-->
+<!--                <button class="date-wrap swiper-slide sat">24일<br>토</button>-->
+<!--                <button class="date-wrap swiper-slide sun">25일<br>일</button>-->
+<!--                <button class="date-wrap swiper-slide">26일<br>월</button>-->
+<!--                <button class="date-wrap swiper-slide">27일<br>화</button>-->
+<!--                <button class="date-wrap swiper-slide">28일<br>수</button>-->
+<!--                <button class="date-wrap swiper-slide">29일<br>목</button>-->
             </div>
         </div>
         <div id="date-next" class="swiper-button-next"></div>
@@ -302,6 +217,6 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c77b7df52ca018e8760dea5bc1e3c519"></script>
 <script type="text/javascript" src="index.js"></script>
-<script src="import.js" type="module"></script>
+<script type="module" src="import.js"></script>
 </body>
 </html>

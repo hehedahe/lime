@@ -9,46 +9,69 @@
 <resultMap type="Field" id="fieldMap"></resultMap>
 
 <select id="findAll" resultMap="fieldMap">
-    SELECT f.field_id,
-           f.name,
-           f.addr,
-           f.ind_yn,
-           f.parking_area,
-           f.lat,
-           f.lng,
-           f.field_type,
-           f.region_id,
-           f.city_id,
-           c.court_id,
-           c.name courtName,
-           c.court_type_id,
-           ct.name cTypeName
-    FROM field f
-             LEFT OUTER JOIN court c
-                             ON f.field_id=c.field_id
-             LEFT JOIN court_type ct
-                       ON c.court_type_id=ct.court_type_id
-    WHERE f.field_type='R'
-    GROUP BY f.field_id
+    SELECT          f.field_id,
+                    f.name,
+                    f.addr,
+                    f.ind_yn,
+                    f.parking_area,
+                    f.lat,
+                    f.lng,
+                    f.field_type,
+                    f.region_id,
+                    f.city_id,
+                    c.court_id,
+                    c.name courtName,
+                    c.court_type_id,
+                    ct.name cTypeName
+    FROM            field f
+    LEFT OUTER JOIN court c
+    ON              f.field_id=c.field_id
+    LEFT JOIN       court_type ct
+    ON              c.court_type_id=ct.court_type_id
+    WHERE           f.field_type='R'
+    GROUP BY        f.field_id
 </select>
 
 <select id="findByLatLng" resultMap="fieldMap">
- select  f.field_id,
-    f.name,
-    f.addr,
-    f.ind_yn,
-    f.parking_area,
-    f.lat,
-    f.lng,
-    c.court_id,
-    c.name courtName,
-    c.court_type_id,
-    (6371*acos(cos(radians(#{preferLat}))*cos(radians(lat))*cos(radians(lng)-radians(#{preferLng})) 
-+sin(radians(#{preferLat}))*sin(radians(lat)))) AS distance
-from field f
-left outer join court c on f.field_id=c.field_id
-having distance &lt; 2
-order by distance DESC
+    SELECT          f.field_id,
+                    f.name,
+                    f.addr,
+                    f.ind_yn,
+                    f.parking_area,
+                    f.lat,
+                    f.lng,
+                    c.court_id,
+                    c.name courtName,
+                    c.court_type_id,
+                    TRUNCATE ((6371*acos(cos(radians(#{preferLat}))*cos(radians(lat))*cos(radians(lng)-radians(#{preferLng}))
+                    +sin(radians(#{preferLat}))*sin(radians(lat)))), 2) AS distance
+    FROM            field f
+    LEFT OUTER JOIN court c
+    ON              f.field_id=c.field_id
+    WHERE 			f.field_type = 'R'
+    GROUP BY        f.field_id
+    HAVING          distance &lt; 3.31
+    ORDER BY        distance DESC
+</select>
+
+<select id="getCourt" resultMap="fieldMap" parameterType="int">
+    SELECT f.field_id,
+           f.name,
+           f.addr,
+           f.number,
+           f.ind_yn,
+           f.parking_area,
+           f.light_yn,
+           f.lat,
+           f.lng,
+           c.court_id,
+           c.name courtName,
+           c.court_type_id,
+           c.fee
+    FROM field f
+    LEFT JOIN court c
+    ON f.field_id = c.field_id
+    WHERE f.field_type='R' AND f.field_id=#{fieldId}
 </select>
 
 

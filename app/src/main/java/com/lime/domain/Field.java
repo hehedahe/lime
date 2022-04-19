@@ -14,12 +14,17 @@ public class Field {
   float lat;
   float lng;
   String fieldType;
-  String courtName;
   int courtId;
+  String courtName;
   int courtTypeId;
-  float distance;
   String cTypeName;
+  float distance;
   int regionId;
+  String regionName;
   int cityId;
   String cityName;
+  int courtCnt;
+  String lightYn;
+  String parkingYn;
+  String indYnName;
 }

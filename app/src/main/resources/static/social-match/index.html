@@ -35,7 +35,7 @@
 
   <!-- Custom styles for this template -->
   <!-- <link rel="stylesheet" href="../header/user/u-adminHeader.css"> -->
-  <link href="social_match.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
 
 
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -59,7 +59,7 @@
 
   <div id="x-header" class="d-flex bd-highlight"></div>
 
-  <main class="social-match mb-5">
+  <main class="social-match mb-5" id='match-wrapper'>
 
     <div id="position-div" class="sticky-top">
       <div id="dateNav" class="mb-3">
@@ -74,7 +74,7 @@
               <li class="list-group-item date-li"><a id="date-4"></a></li>
               <li class="list-group-item date-li"><a id="date-5"></a></li>
               <li class="list-group-item date-li"><a id="date-6"></a></li>
-              <li class="list-group-item date-li"><a></a></li>
+              <li class="list-group-item"><a></a></li>
               <li class="list-group-item date-li"><a id="date-7"></a></li>
               <li class="list-group-item date-li"><a id="date-8"></a></li>
               <li class="list-group-item date-li"><a id="date-9"></a></li>
@@ -180,11 +180,16 @@
 
       for (let i = 0; i < 14; i++) {
         // console.log(date + i)
-        $(`#date-${i}`).html(`${date + i}`)
         var year = today.getFullYear();
         var month = ('0' + (today.getMonth() + 1)).slice(-2);
         var day = ('0' + today.getDate()).slice(-2);
         var dateString = year + '-' + month + '-' + day;
+        $(`#date-${i}`).html(`${date + i}<p id="${day-i}">${getDay(dateString)}</p>`)
+        if (getDay(dateString) === '토') {
+          $(`#date-${i}`).closest("li").addClass("sat")
+        } else if (getDay(dateString) === '일') {
+          $(`#date-${i}`).closest("li").addClass("sun")
+        }
         // console.log(dateString)
         $(`#date-${i}`).attr("date", `${dateString}`)
         // $(`#date-${i}`).attr("href", `http://localhost:8080/match/list?matchDate=${dateString}`)
@@ -196,11 +201,22 @@
 
     })
 
+    function getDay(date) {
+      let today = new Date(date);
+      const week = ['일', '월', '화', '수', '목', '금', '토'];
+      let day = week[today.getDay()];
+      return day;
+    }
+
     function makeMatchList(url) {
       $.getJSON(url, function (arr) {
         console.log(arr)
-        const matchList = $(".match-list")
         let str = ''
+        if (arr.length == 0) {
+          str += `<div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">오늘 매치는 마감되었습니다.</div>`
+          $(".match-list").html(str)
+          return;
+        } 
         for (let i = 0; i < arr.length; i++) {
           let state = ''
           let aaa = ''
@@ -211,7 +227,7 @@
             aaa = 'closed-btn'
           }
           str += `
-          <a href="/social_match/index.html" class="list-group-item list-group-item-action">
+          <a href="/social-match/detail.html?matchId=${arr[i].matchId}" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between align-items-center">
               <div>
                 <div class="d-flex justify-content-start align-items-center">
@@ -222,7 +238,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn match-btn ${aaa}">${state}</button>
+              <button class="btn match-btn ${aaa}" onclick="location.href='/social-match/detail.html?matchId=${arr[i].matchId}'">${state}</button>
               </div>
             </a>`
         }
@@ -322,13 +338,13 @@
     })
 
     $("#next-btn").on("click", (e) => {
-      $(".date-div").css("transform", "translateX(-53.1%)");
+      $(".date-div").css("transform", "translateX(-53.1%)").css("transition", "all .5s");
       $("#next-btn").addClass("disabled");
       $("#prev-btn").removeClass("disabled");
     })
 
     $("#prev-btn").on("click", (e) => {
-      $(".date-div").css("transform", "translateX(0%)");
+      $(".date-div").css("transform", "translateX(0%)").css("transition", "all .5s");
       $("#prev-btn").addClass("disabled");
       $("#next-btn").removeClass("disabled");
     })
@@ -337,7 +353,8 @@
       // console.log(e.target.getAttribute("date"))
       $(".date-li.active").removeClass("active")
       $(e.target).closest("li").addClass("active")
-      let matchDate = e.target.getAttribute("date")
+      // let matchDate = e.target.getAttribute("date")
+      let matchDate = $(e.target).closest("a").attr("date")
       makeMatchList(`http://localhost:8080/match/list?matchDate=${matchDate}`)
     })
 

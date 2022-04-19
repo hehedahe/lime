@@ -25,8 +25,8 @@ public class DefaultMatchService implements MatchService {
   }
 
   @Override
-  public Match get(int no) {
-    return matchDao.findByNo(no);
+  public Match get(int matchId) {
+    return matchDao.findByNo(matchId);
   }
 
   @Override

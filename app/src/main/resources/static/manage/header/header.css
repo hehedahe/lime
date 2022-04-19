@@ -14,6 +14,10 @@
     src: url("../../asset/font/Cooper-Black-BT.woff") format("woff");
 }
 
+html {
+    overflow: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -32,18 +36,19 @@ a {
 /* header 전체*/
 nav {
     width: 100vw;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    overflow: hidden;
 }
 
-/* .header {
+.header {
     font-family: 'NG';
     width: 100vw;
     height: 10vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: rgb(191, 186, 178);
 }
- */
+
 /* 로고 */
 .nav-logo {
     height: 10vh;
@@ -59,13 +64,12 @@ nav {
 
 .nav-logo li:first-child {
     font-size: xxx-large;
-    color: #92DB82;
+    color: rgb(70, 70, 70);
 }
-
 .nav-logo > li:last-child {
     height: 4vh;
     align-self: flex-end;
-    color: rgb(190, 190, 190);
+    color: rgb(127, 127, 127);
     margin-left: 10px;
 }
 
@@ -80,5 +84,6 @@ nav {
 
 .nav-links > a:hover {
     font-family: NGBold;
-    color: #92DB82;
+    color: rgb(70, 70, 70);
 }
+
