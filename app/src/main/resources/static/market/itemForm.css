@@ -101,7 +101,33 @@ textarea.autosize {
     font-weight: bold;
 }
 
+#img-add-box {
+    margin-top: 10px;
+}
+
 #img-add-box p {
     font-size: 1.5em;
     font-weight: bold;
 }
+
+#img-file {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
+
+#att_zone{
+	width: 660px;
+	min-height:150px;
+	padding:10px;
+	/* border:1px dotted #00f; */
+    /* display: inline-block; */
+    float: right;
+    margin-right: 250px;
+    
+}
+/* #att_zone:empty:before{
+	content : attr(data-placeholder);
+	color : #999;
+	font-size:.9em;
+} */

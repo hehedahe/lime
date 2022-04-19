@@ -5,6 +5,12 @@ import { textAreaAutoSizing } from '../common/textAreaAutoSizing.js';
 
 var region = document.querySelector("#region");
 
+var regionValue = document.querySelector("input[name=region-value]");
+var cityValue = document.querySelector("input[name=city-value]");
+var priceValue = document.querySelector("input[name=price-value]");
+var titleValue = document.querySelector("input[name=title-value]");
+var contentValue = document.querySelector("textarea");
+
 $(document).ready(function(e) {
   textAreaAutoSizing();
 });
@@ -59,3 +65,105 @@ region.addEventListener('change', (event) => {
       }
     
 });
+
+( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
+  function imageView(att_zone, btn){
+
+    var attZone = document.getElementById(att_zone);
+    var btnAtt = document.getElementById(btn)
+    var sel_files = [];
+    
+    // 이미지와 체크 박스를 감싸고 있는 div 속성
+    var div_style = 'display:inline-block;position:relative;'
+                  + 'width:150px;height:120px;margin:5px;';
+    // 미리보기 이미지 속성
+    var img_style = 'width:100%;height:100%;z-index:none';
+    // 이미지안에 표시되는 체크박스의 속성
+    var chk_style = 'width:20px;height:20px;position:absolute;border:none;font-weight:bold;'
+                  + 'right:0px;z-index:999;background-color:rgba(255,255,255,0.1);color:#f00';
+  
+    btnAtt.onchange = function(e){
+      console.log("dddddd");
+      $("div[name=img-div]").remove();
+      var files = e.target.files;
+      var fileArr = Array.prototype.slice.call(files)
+      for(let f of fileArr){
+        imageLoader(f);
+      }
+    }
+
+    
+    /*첨부된 이미리즐을 배열에 넣고 미리보기 */
+    var imageLoader = function(file){
+      sel_files.push(file);
+      var reader = new FileReader();
+      reader.onload = function(ee){
+        let img = document.createElement('img')
+        img.setAttribute('style', img_style)
+        img.src = ee.target.result;
+        attZone.appendChild(makeDiv(img, file));
+      }
+      
+      reader.readAsDataURL(file);
+    }
+    
+    /*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
+    var makeDiv = function(img, file){
+      var div = document.createElement('div')
+      div.setAttribute('style', div_style)
+      div.setAttribute('name', 'img-div')
+      
+      var btn = document.createElement('input')
+      btn.setAttribute('type', 'button')
+      btn.setAttribute('value', 'x')
+      btn.setAttribute('delFile', file.name);
+      btn.setAttribute('style', chk_style);
+      btn.onclick = function(ev){
+        var ele = ev.target;
+        var delFile = ele.getAttribute('delFile');
+        for(var i=0 ;i<sel_files.length; i++){
+          if(delFile== sel_files[i].name){
+            sel_files.splice(i, 1);      
+          }
+        }
+        
+        let dt = new DataTransfer();
+        for(let f in sel_files) {
+          var file = sel_files[f];
+          dt.items.add(file);
+        }
+        btnAtt.files = dt.files;
+        var p = ele.parentNode;
+        attZone.removeChild(p)
+      }
+      div.appendChild(img)
+      div.appendChild(btn)
+      return div
+    }
+  }
+)('att_zone', 'btnAtt')
+
+document.querySelector("#complete-btn").onclick = function() {
+  // if (regionValue.value == "" || 
+  //     cityValue.value == "" ||
+  //     priceValue.value == "" ||
+  //     titleValue.value == "" ||
+  //     contentValue.value == "") {
+  //   window.alert("필수 입력 항목이 비어 있습니다.");
+  //   return;
+  // }
+  
+  var fd = new FormData(document.forms.namedItem("form1"));
+  
+  fetch("/market/add", { 
+      method: "POST",
+      body: fd
+    }) 
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      console.log(text);
+      //location.href = "?content=/book/index.html";
+    });
+};
