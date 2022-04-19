@@ -8,4 +8,5 @@ public class MatchRsv {
   int userId;
   int limeId;
   String state;
+  Match match;
 }

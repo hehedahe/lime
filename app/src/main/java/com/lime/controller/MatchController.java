@@ -2,7 +2,6 @@ package com.lime.controller;
 
 import static com.lime.controller.ResultMap.FAIL;
 import static com.lime.controller.ResultMap.SUCCESS;
-import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.lime.domain.Match;
 import com.lime.domain.SearchCondition;
-import com.lime.domain.User;
 import com.lime.service.MatchService;
 
 @RestController
@@ -38,19 +36,4 @@ public class MatchController {
     return new ResultMap().setStatus(SUCCESS).setData(match);
   }
 
-  @RequestMapping("/test")
-  public Object test2(HttpSession session) {
-    System.out.printf("test() => %s\n", session.getId());
-    return "test() 실행!";
-  }
-
-  @GetMapping("/order")
-  public Object getOrderPage(SearchCondition sc, HttpSession session) {
-    User user = (User) session.getAttribute("loginUser");
-    if (user == null) {
-      return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
-    } else {
-      return new ResultMap().setStatus(SUCCESS);
-    }
-  }
 }

@@ -1,5 +1,9 @@
 "use strict";
 
+$.getJSON("/match-rsv/order", (result) => {
+  console.log(result);
+})
+
 // 1) URL에서 쿼리스트링(query string)을 추출한다.
 var arr = location.href.split("?");
 console.log(arr);
