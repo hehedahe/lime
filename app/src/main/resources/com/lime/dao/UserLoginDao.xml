@@ -30,10 +30,6 @@
   
     INSERT INTO member (user_id, evnt_yn) 
   	VALUES(LAST_INSERT_ID(), #{eventYn})    <!-- 마지막 insert_id()를 찾아서 member table 에 evnt_yn 값 삽입 -->
-  	
-  	<selectKey resultType="String" keyProperty="userId" order="AFTER">
-  	SELECT LAST_INSERT_ID()
-    </selectKey>
   </insert>
   
   
