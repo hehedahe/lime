@@ -270,7 +270,6 @@
 					left JOIN court_type ct
 					ON c.court_type_id = ct.court_type_id
 					GROUP BY f.field_id
-					limit 5
 	</select>
 	
 	<select id="findFieldByNo" parameterType="int" resultMap="fieldMap">	 
