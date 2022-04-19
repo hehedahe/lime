@@ -20,5 +20,6 @@ public class Market {
   String userName;
   int mannerScore;
   String lvName;
+  String photo;
   // List<ContactTel> tels;
 }
