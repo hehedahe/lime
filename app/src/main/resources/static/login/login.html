@@ -52,15 +52,15 @@
 <body class="text-center">
 
   <main class="form-signin">
-    <form>
+    <form name="form1">
       <!-- <h1 class="h2 mb-4" id="login-h">로그인</h1> -->
       <h1 class="h1 mb-3" id="login-h">lime</h1>
 
       <div class="form-login">
-        <input type="email" class="form-control" id="floatingInput" placeholder="이메일">
+        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="이메일">
       </div>
       <div class="form-login">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
       </div>
 
       <div class="checkbox mb-3">
@@ -68,8 +68,9 @@
           <input type="checkbox" value="remember-me" class="form-check-input"> <span>이메일 저장하기</span>
         </label>
       </div>
-      <button class="w-100 btn btn-primary mb-4" type="button"
-        onclick="location.href='/social_match/social_match.html'">로그인</button>
+      <button class="w-100 btn btn-primary mb-4"
+        >로그인</button>
+       <!--   onclick="location.href='/social_match/social_match.html'">로그인</button> -->
       <div class="row mb-4" id="password-join">
         <div class="col"><a href="">비밀번호 찾기</a></div>
         <div class="col"><a href="../signup/signup1.html">회원가입</a></div>
@@ -122,7 +123,34 @@
   </main>
 
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+	var xEmail = document.querySelector("input[name=email]");
+	var xPassword = document.querySelector("input[name=password]");
+  
+	document.querySelector("form[name=form1]").onsubmit = function() {
+ 	 
+  
+  	var fd = new FormData(document.forms.namedItem("form1"));
+  
+ 	 fetch("/member/signin", { 
+      method: "POST",
+      body: new URLSearchParams(fd)
+    }) 
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      if (text == "success") {
+        window.alert("로그인 성공!")
+    	  //location.href = "/index.html";
+      } else {
+    	  window.alert("로그인 실패!")
+      }
+    });
+  return false;
+};
 
+</script>
 </body>
 
 </html>
