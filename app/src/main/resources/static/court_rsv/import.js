@@ -20,6 +20,9 @@ var markerImage = new kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/lo
     new kakao.maps.Size(44, 49), // 마커이미지의 크기입니다
     {offset: new kakao.maps.Point(27, 69)}); // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
+// 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+map.setZoomable(false);
+
 // 중심좌표 부드럽게 이동하기
 function panTo(lat, lng) {
     // 이동할 위도 경도 위치를 생성합니다
@@ -55,7 +58,6 @@ var marker, markerPosition;
     })
 })();
 
-
 // =================
 // 시도/시군구 sorting & 중심좌표 뿌리기
 // =================
@@ -87,7 +89,7 @@ dropRegion.on('change', async function (e) {
     crtByRegion?.map((fields) => {
         card.append(
             `<div class="card-cover swiper-slide">
-                <button class="card-btn card border-0">
+                <button class="card-btn card border-0" >
                     <div class="card-body">
                         <h5 class="card-title" style="height: 48px" data-value="${fields.fieldId}">${fields.name}</h5>
                         <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
@@ -101,32 +103,9 @@ dropRegion.on('change', async function (e) {
         );
     });
 
-    // 카드 선택 후 css 유지
-    $('.card-btn').on('click', async function(e) {
 
-        let fieldId = e.target.getAttribute('data-value');
 
-        $('.card').removeClass('selected-card');
-        $(this).addClass('selected-card');
-        $('.info-btn').removeClass('changed-color');
-        $(this).find('.info-btn').addClass('changed-color');
 
-        // scroll 이동
-        var offset = $('#swiper-temp2').offset();
-        $('html').animate({scrollTop: offset.top}, 400);
-        // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
-
-        // 선택된 테니스장 정보 한개 가져오기
-        let response = await getCourt(fieldId);
-        let court = response.data[0];
-
-        $('#crt-name').text(court.name);
-        $('#crt-addr').text(court.addr);
-        $('#crt-indYn').text(checkIndoor(court.indYn) + '  ·');
-        $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
-        $('#crt-parking').text(checkParking(court.parkingArea));
-
-    });
 });
 
 // 시군구
@@ -167,32 +146,6 @@ dropCity.on('change', async function (e) {
                 </button>
             </div>`);
     });
-
-    // 카드 선택 후 css 유지
-    $('.card-btn').on('click', async function(e) {
-
-        let fieldId = e.target.getAttribute('data-value');
-
-        $('.card').removeClass('selected-card');
-        $(this).addClass('selected-card');
-        $('.info-btn').removeClass('changed-color');
-        $(this).find('.info-btn').addClass('changed-color');
-
-        // scroll 이동
-        var offset = $('#swiper-temp2').offset();
-        $('html').animate({scrollTop: offset.top}, 400);
-
-        // 선택된 테니스장 정보 한개 가져오기
-        let response = await getCourt(fieldId);
-        let court = response.data[0];
-
-        $('#crt-name').text(court.name);
-        $('#crt-addr').text(court.addr);
-        $('#crt-indYn').text(checkIndoor(court.indYn) + '  ·');
-        $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
-        $('#crt-parking').text(checkParking(court.parkingArea));
-
-    });
 });
 
 
@@ -216,11 +169,42 @@ var swiper = new Swiper(".date-swiper", {
     }
 });
 
+// =================
+// 카드 클릭 시 효과
+// =================
+$(document).on('click', '.card-btn', async function(e) {
+    // 카드 css 효과 유지
+    $('.card').removeClass('selected-card');
+    $(this).addClass('selected-card');
+    $('.info-btn').removeClass('changed-color');
+    $(this).find('.info-btn').addClass('changed-color');
+
+    // scroll 이동
+    var offset = $('#swiper-temp2').offset();
+    $('html').animate({scrollTop: offset.top}, 400);
+    // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
+    
+    // 선택된 카드(테니스장) field_id 값 찾기
+    let fieldId = e.target.getAttribute('data-value');
+
+    // 선택된 카드 정보 한개 가져오기
+    let response = await getCourt(fieldId);
+    let court = response.data[0];
+
+    // 카드 상세정보 뿌려주기
+    $('#crt-name').text(court.name);
+    $('#crt-addr').text(court.addr);
+    $('#crt-indYn').text(checkIndoor(court.indYn) + '  ·');
+    $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
+    $('#crt-parking').text(checkParking(court.parkingArea));
+});
 
 
 // =================
 // 코트 타입 / 실내외 / 주차여부
 // =================
+
+// 코트타입 체크
 function checkCourtType(courtTypeId) {
     switch (courtTypeId) {
         case 1:
@@ -234,6 +218,7 @@ function checkCourtType(courtTypeId) {
     }
 };
 
+// 실내/외 체크
 function checkIndoor(indYn) {
     if (indYn) {
         return '실내';
@@ -242,6 +227,7 @@ function checkIndoor(indYn) {
     }
 };
 
+// 주차 가능 여부 체크
 function checkParking(parkingArea) {
     if (parkingArea) {
         return '주차 가능';

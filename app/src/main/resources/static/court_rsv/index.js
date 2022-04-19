@@ -24,34 +24,24 @@ var swiper2 = new Swiper("#info-card", {
 // =================
 // 날짜 슬라이더
 // =================
-let dateWrapper = $('.date-wrapper');
 let today = new Date();
+let date, day;
 const WEEKDAY = ['일','월','화','수','목','금','토'];
-let lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate(); // 이번 달 마지막 날짜
+today.setDate(today.getDate() - 1);
 
-for (let i = 0; i < 14 ; i++) {
-    let no = today.getDay() + i > 6 ? today.getDay() + i - 7 : today.getDay() + i
-    let week = WEEKDAY[no];
-    let date = today.getDate() + i;
+for (let i = 0; i < 14; i++) {
+    today.setDate(today.getDate() + 1)
+    date = today.getDate();
+    day = WEEKDAY[today.getDay()];
 
-    if (date <= lastDate) {
-        if (week == '토') {
-            dateWrapper.append(`<button class="date-wrap swiper-slide sat">${date}일<br>${week}</button>`);
-        } else if (week == '일') {
-            dateWrapper.append(`<button class="date-wrap swiper-slide sun">${date}일<br>${week}</button>`);
-        } else {
-            dateWrapper.append(`<button class="date-wrap swiper-slide">${date}일<br>${week}</button>`);
-        }
+    if (day == '토') {
+        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`).addClass('sat')
+    } else if (day == '일') {
+        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`).addClass('sun')
     } else {
-        if (week == '토') {
-            dateWrapper.append(`<button class="date-wrap swiper-slide sat">${date-lastDate}일<br>${week}</button>`);
-        } else if (week == '일') {
-            dateWrapper.append(`<button class="date-wrap swiper-slide sun">${date-lastDate}일<br>${week}</button>`);
-        } else {
-            dateWrapper.append(`<button class="date-wrap swiper-slide">${date-lastDate}일<br>${week}</button>`);
-        }
-    };
-};
+        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`)
+    }
+}
 
 // 날짜 swiper
 var swiper = new Swiper(".date-swiper", {
@@ -76,8 +66,6 @@ function getDirection() {
     var direction = window.innerWidth <= 720 ? "vertical" : "horizontal";
     return direction;
 }
-
-
 
 // =================
 // 날짜 선택 후 css 유지
