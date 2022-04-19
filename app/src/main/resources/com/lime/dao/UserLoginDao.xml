@@ -20,16 +20,54 @@
   </resultMap>
   
   
-  <insert id="insert" parameterType="userlogin">
+  <insert id="insert" parameterType="userlogin" keyProperty="userId" keyColumn="user_id" useGeneratedKeys="true">
     insert into user(email, pwd, name, phone_no) <!-- user 테이블에 insert해줌 -->
     values(#{email},password(#{password}),#{name},#{phoneNo})
   </insert>
   
-   <insert id="insert1" parameterType="userlogin">
+  
+  <insert id="insert1" parameterType="userlogin" keyProperty="userId" keyColumn="user_id" useGeneratedKeys="true">
+  
     INSERT INTO member (user_id, evnt_yn) 
   	VALUES(LAST_INSERT_ID(), #{eventYn})    <!-- 마지막 insert_id()를 찾아서 member table 에 evnt_yn 값 삽입 -->
   </insert>
   
+  
+  
+  
+  
+  
+  <!-- 
+  <insert id="insert" parameterType="userlogin">
+    insert into user(email, pwd, name, phone_no) user 테이블에 insert해줌 
+    values(#{email},password(#{password}),#{name},#{phoneNo})
+    <selectKey resultType="int" keyProperty="user_id" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  -->
+  <!-- 
+  <insert id="insert1" parameterType="userlogin">
+    INSERT INTO MEMBER(name, age)
+     VALUES(#{name}, #{age})
+    <selectKey resultType="int" keyProperty="no" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  
+   -->
+  
+  <!-- 
+  <insert id="insert1" parameterType="userlogin">
+    INSERT INTO member (user_id, evnt_yn) 
+  	VALUES(LAST_INSERT_ID(), #{eventYn})   마지막 insert_id()를 찾아서 member table 에 evnt_yn 값 삽입 
+  </insert> 
+  -->
+   
+  
+  
+  
+
   <!-- 아직 실행안되는 코드
   <update id="update" parameterType="userlogin">
   insert into member(brth_date)
