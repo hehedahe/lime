@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+  namespace = "인터페이스의 패키지 및 이름"과 일치해야 한다.
+ -->
+<mapper namespace="com.lime.dao.ItemImageDao">
+
+  <!--  테이블의 컬럼과 객체 필드를 연결한다. -->
+  <resultMap type="ItemImage" id="imageMap">
+    <id column="item_img_id" property="imgId"/>
+    <result column="item_id" property="itemId"/>
+    <result column="file_path" property="filePath"/>
+  </resultMap>
+  
+
+  <!-- 
+    id => 인터페이스의 메서드 이름과 일치해야 한다.
+   -->
+  
+  <insert id="insert" parameterType="ItemImage">
+    insert into item_img(item_id,file_path)
+      values(#{itemId}, #{filePath})
+  </insert>
+  
+  <update id="update" parameterType="Market">
+    update ml_board set 
+      title=#{title},
+      content=#{content} 
+    where 
+      board_no=#{no}
+  </update>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from ml_board
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from ml_board
+    where board_no=#{no}
+  </delete>
+  
+  <update id="increaseViewCount" parameterType="int">
+    update ml_board set
+      view_count=view_count + 1 
+    where board_no=#{no}
+  </update>
+  
+</mapper>

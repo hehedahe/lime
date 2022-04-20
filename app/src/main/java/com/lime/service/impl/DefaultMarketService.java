@@ -1,10 +1,13 @@
 package com.lime.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.lime.dao.ItemImageDao;
 import com.lime.dao.MarketDao;
+import com.lime.domain.ItemImage;
 import com.lime.domain.Market;
 import com.lime.service.MarketService;
 
@@ -13,6 +16,9 @@ public class DefaultMarketService implements MarketService {
 
   @Autowired
   MarketDao marketDao;
+
+  @Autowired
+  ItemImageDao itemImageDao;
 
   //  @Override
   //  @Transactional // 다음 메서드는 트랜잭션 안에서 실행하도록 설정한다.
@@ -60,8 +66,21 @@ public class DefaultMarketService implements MarketService {
 
   @Override
   @Transactional
-  public int add(Market market) {
-    return marketDao.insert(market);
+  public int add(Market market, Object fileList) {
+    System.out.println(fileList);
+    System.out.println(market);
+    marketDao.insert(market);
+    @SuppressWarnings("rawtypes")
+    ArrayList fileNames = (ArrayList) fileList;
+    ItemImage itemImage = new ItemImage();
+    for (int i = 0; i < fileNames.size(); i++) {
+      System.out.println(fileNames.get(i));
+      String fileName = (String) fileNames.get(i);
+      itemImage.setItemId(market.getItemId()).setFilePath(fileName);
+
+      itemImageDao.insert(itemImage);
+    }
+    return 100;
   }
 
   //  @Override

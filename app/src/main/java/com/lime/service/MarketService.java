@@ -5,7 +5,7 @@ import com.lime.domain.Market;
 
 public interface MarketService {
 
-  int add(Market market);
+  int add(Market market, Object fileList);
 
   List<Market> list(String keyword);
 

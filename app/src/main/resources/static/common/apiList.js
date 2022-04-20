@@ -10,6 +10,9 @@ const PATH = {
         findRegion: '/city/findRegion',
         findCity: '/city/findCity',
     },
+    member: {
+        getLoginUser: '/member/getLoginUser'
+    }
 };
 
 // *********************
@@ -71,8 +74,6 @@ export async function getCourt(fieldId) {
 }
 
 
-
-
 // *********************
 // city
 // *********************
@@ -97,3 +98,7 @@ export async function findCity(cityName, regionId) {
     }
 };
 
+
+// *********************
+// member
+// *********************

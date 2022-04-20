@@ -14,7 +14,7 @@ import java.sql.Date;
 @Builder
 public class CourtRsv {
     int fieldId;
-    String courtId;
+    int courtId;
     String dateTime;
     int limeId;
     Date rgtDate;

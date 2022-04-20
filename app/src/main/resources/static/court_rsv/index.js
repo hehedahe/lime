@@ -1,6 +1,5 @@
 "use strict"
 
-
 // =================
 // 코트 카드 swiper
 // =================
@@ -35,11 +34,11 @@ for (let i = 0; i < 14; i++) {
     day = WEEKDAY[today.getDay()];
 
     if (day == '토') {
-        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`).addClass('sat')
+        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`).addClass('sat').attr('data-date',date)
     } else if (day == '일') {
-        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`).addClass('sun')
+        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`).addClass('sun').attr('data-date',date)
     } else {
-        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`)
+        $(`.date${i}`).html(`${date}<span class="day${i}">${day}</span>`).attr('data-date',date)
     }
 }
 
@@ -74,6 +73,8 @@ $('.date-wrap').on('click', function () {
     $('.date-wrap').removeClass('selected-date');
     $(this).addClass('selected-date');
 })
+
+
 
 
 

@@ -111,14 +111,19 @@ input[type=search]::placeholder {
     margin: 0 auto;
 }
 
-.row[name=c-body] {
+#item-photo {
+    width: 300px;
+    height: 250px;
+}
+
+/* .row[name=c-body] {
     font-family: 'NanumGothic';
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-left: 200px;
     margin-right: 200px;
-}
+} */
 
 .heart-click {
     position: absolute;

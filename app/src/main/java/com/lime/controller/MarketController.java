@@ -4,7 +4,11 @@ import static com.lime.controller.ResultMap.FAIL;
 import static com.lime.controller.ResultMap.SUCCESS;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.UUID;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.lime.domain.Market;
+import com.lime.domain.UserLogin;
 import com.lime.service.MarketService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -89,29 +94,30 @@ public class MarketController {
   }
 
   @RequestMapping("/market/add")
-  public Object add(Market market, MultipartFile file) {
-    //    try {
-    //      market.setPhoto(saveFile(file));
-    //      System.out.println(market);
-    //      return marketService.add(market);
-    //
-    //    } catch (Exception e) {
-    //      StringWriter out = new StringWriter();
-    //      e.printStackTrace(new PrintWriter(out));
-    //      log.error(out.toString());
-    //      return "error!";
-    //    }
-    System.out.println(market);
-    return 1;
+  public Object add(Market market, MultipartFile[] files, HttpSession session) {
+    UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
+    System.out.println(userLogin);
+    System.out.println(files);
+    market.setWriter(userLogin);
+    try {
+      Object fileList = saveFile(files);
+      return marketService.add(market, fileList);
+
+    } catch (Exception e) {
+      StringWriter out = new StringWriter();
+      e.printStackTrace(new PrintWriter(out));
+      log.error(out.toString());
+      return "error!";
+    }
   }
 
 
-  @RequestMapping("/book/photo")
+  @RequestMapping("/market/photo")
   public ResponseEntity<Resource> photo(String filename) {
 
     try {
       // 다운로드할 파일의 입력 스트림 자원을 준비한다.
-      File downloadFile = new File("./upload/book/" + filename); // 다운로드 상대 경로 준비
+      File downloadFile = new File("./upload/item/" + filename); // 다운로드 상대 경로 준비
       FileInputStream fileIn = new FileInputStream(downloadFile.getCanonicalPath()); // 다운로드 파일의 실제
       // 경로를 지정하여 입력
       // 스트림 준비
@@ -153,26 +159,35 @@ public class MarketController {
   }
 
 
-  private String saveFile(MultipartFile file) throws Exception {
-    if (file != null && file.getSize() > 0) {
-      // 파일을 저장할 때 사용할 파일명을 준비한다.
-      String filename = UUID.randomUUID().toString();
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  private Object saveFile(MultipartFile[] files) throws Exception {
+    if (files != null && files.length > 0) {
+      ArrayList fileNames = new ArrayList();
 
-      // 파일명의 확장자를 알아낸다.
-      int dotIndex = file.getOriginalFilename().lastIndexOf(".");
-      if (dotIndex != -1) {
-        filename += file.getOriginalFilename().substring(dotIndex);
+
+      for (MultipartFile file : files) {
+        // 파일을 저장할 때 사용할 파일명을 준비한다.
+        String filename = UUID.randomUUID().toString();
+
+        // 파일명의 확장자를 알아낸다.
+        int dotIndex = file.getOriginalFilename().lastIndexOf(".");
+        if (dotIndex != -1) {
+          filename += file.getOriginalFilename().substring(dotIndex);
+        }
+
+        // 파일을 지정된 폴더에 저장한다.
+        File photoFile = new File("./upload/item/" + filename); // App 클래스를 실행하는 프로젝트 폴더
+        file.transferTo(photoFile.getCanonicalFile()); // 프로젝트 폴더의 전체 경로를 전달한다.
+
+        // 썸네일 이미지 파일 생성
+        Thumbnails.of(photoFile).size(50, 50).crop(Positions.CENTER).outputFormat("jpg")
+        .toFile(new File("./upload/item/" + "50x50_" + filename));
+
+        System.out.println("filename>>" + filename);
+        fileNames.add(filename);
       }
 
-      // 파일을 지정된 폴더에 저장한다.
-      File photoFile = new File("./upload/book/" + filename); // App 클래스를 실행하는 프로젝트 폴더
-      file.transferTo(photoFile.getCanonicalFile()); // 프로젝트 폴더의 전체 경로를 전달한다.
-
-      // 썸네일 이미지 파일 생성
-      Thumbnails.of(photoFile).size(50, 50).crop(Positions.CENTER).outputFormat("jpg")
-      .toFile(new File("./upload/book/" + "50x50_" + filename));
-
-      return filename;
+      return fileNames;
 
     } else {
       return null;
