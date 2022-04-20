@@ -1,10 +1,13 @@
 package com.lime.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+
 import com.lime.domain.Classes;
 import com.lime.domain.Club;
 import com.lime.domain.Community;
+import com.lime.domain.ManageMaket;
 import com.lime.domain.Market;
 
 
@@ -26,7 +29,7 @@ public interface ManageReportDao {
   Club findClubByNo(int no);
   
   //마켓관리
-  List<Market> findItemAll();
+  List<ManageMaket> findMaketReportAll();
   /* Market findItemByNo(int no); */
   List<Market> findItemCmtAll();
   

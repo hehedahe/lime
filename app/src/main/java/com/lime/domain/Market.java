@@ -20,5 +20,10 @@ public class Market {
   String userName;
   int mannerScore;
   String lvName;
+  String photo;
+  
+  ///중고물품게시판 
+  String name; //판매자
+  
   // List<ContactTel> tels;
 }

@@ -23,7 +23,8 @@ public interface MarketDao {
   List<Market> findByCityChecked(@Param("regionName") String regionName, @Param("cityName") String cityName, @Param("keyword") String keyword);
 
   Market findByNo(int no);
-  //  int insert(Market contact);
+
+  int insert(Market market);
   //
   //
   //  Market findByEmail(String email);

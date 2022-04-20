@@ -174,6 +174,11 @@ button.card:hover {
 
 .date-wrap {
     border-radius: 50px;
+    font-weight: bolder;
+}
+
+.date-wrap > span {
+    font-size: 1rem;
 }
 
 /* 토욜 일욜 color */

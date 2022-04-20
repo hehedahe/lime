@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 
+  namespace => 인터페이스의 패키지 및 이름과 namespace의 이름이 일치해야 한다.
+ -->
+<mapper namespace="com.lime.dao.MemberDao">
+
+  <resultMap type="member" id="memberMap">
+    <id column="user_id" property="no"/>
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+ <!--    <result column="regist_date" property="registDate"/> -->
+  </resultMap>
+  
+  <insert id="insert" parameterType="member">
+    insert into user(name,email,password) 
+    values(#{name},#{email},#{password})
+  </insert>
+
+
+  <select id="findByEmailAndPassword" resultMap="memberMap">
+    select 
+      user_id,
+      name,
+      email
+    from 
+      user
+    where
+      email=#{email} and pwd=#{password}
+  </select>
+  
+  <select id="findByEmail" resultMap="memberMap" parameterType="string">
+    select 
+      user_id,
+      name,
+      email
+    from 
+      user
+    where
+      email=#{email}
+  </select>
+
+</mapper>
+
+
+
+
+
+
+
+

@@ -11,6 +11,7 @@
   <!--  테이블의 컬럼과 객체 필드를 연결한다. -->
   <resultMap type="market" id="marketMap">
     <id column="item_id" property="itemId"/>
+    <result column="user_id" property="userId"/>
     <result column="item_name" property="itemName"/>
     <result column="item_cost" property="itemCost"/>
     <result column="content" property="content"/>
@@ -180,8 +181,10 @@ SELECT
   </select>
   
   <insert id="insert" parameterType="Market">
-    insert into ml_board(title,content)
-    values(#{title},#{content})
+    insert into item(user_id,city_id,item_name,item_cost,content)
+      values(#{userId},(select city_id from city
+        WHERE region_id  = (select region_id from region where region_name=#{regionName}) 
+        AND city_name =#{cityName}),#{itemName},#{iteCost},#{content})
   </insert>
   
   <update id="update" parameterType="Market">

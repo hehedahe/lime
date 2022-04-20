@@ -116,7 +116,7 @@ public class ManageController {
   //마켓 조회
   @RequestMapping("/manage/market/list")
   public Object marketList() {
-    return manageReportService.marketList();
+    return manageReportService.marketReportList();
   }
   @RequestMapping("/manage/marketCmt/list")
   public Object marketCmtList() {

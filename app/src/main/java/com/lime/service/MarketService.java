@@ -5,7 +5,7 @@ import com.lime.domain.Market;
 
 public interface MarketService {
 
-  //int add(Market contact);
+  int add(Market market);
 
   List<Market> list(String keyword);
 
@@ -20,6 +20,8 @@ public interface MarketService {
   List<Market> listCityChecked(String regionName, String cityName, String keyword);
 
   Market get(int no);
+
+
 
   //int update(Market contact);
 

@@ -24,62 +24,63 @@
 <div id="body-wrapper">
     <div id="content-body">
         <div id="input-box">
-            <div class="container g-0" id="top-content">
-                <div class="row">
-                    <div class="col-2">
-                        <select id="region" class="form-select border col-1 text-center">
-                            <option selected disabled hidden>지역</option>
-                            <option value="서울특별시">서울특별시</option>
-                            <option value="부산광역시">부산광역시</option>
-                            <option value="대구광역시">대구광역시</option>
-                            <option value="인천광역시">인천광역시</option>
-                            <option value="광주광역시">광주광역시</option>
-                            <option value="대전광역시">대전광역시</option>
-                            <option value="울산광역시">울산광역시</option>
-                            <option value="세종특별자치시">세종특별자치시</option>
-                            <option value="경기도">경기도</option>
-                            <option value="강원도">강원도</option>
-                            <option value="충청북도">충청북도</option>
-                            <option value="충청남도">충청남도</option>
-                            <option value="전라북도">전라북도</option>
-                            <option value="전라남도">전라남도</option>
-                            <option value="경상북도">경상북도</option>
-                            <option value="경상남도">경상남도</option>
-                            <option value="제주특별자치도">제주특별자치도</option>
-                        </select>
-                    </div>
-                    <div class="col-2">
-                        <select id="city" class="form-select border col-1 text-center">
-                            <option selected hidden>도시</option>
-                        </select>
-                    </div>
-                    <div class="col-2">
-                        <input class="form-control border col-1" type="number" placeholder="₩ 판매가격">
-                    </div>
-                    <div class="col">
-                        <button id="complete-btn" type="button">완료</button>
-                        <button id="cancel-btn" type="button">취소</button>
-                    </div>
-                </div>
-            </div>
-            <div id="content-box">
-                <div id="title-wrap">
-                    <div class="input-group input-group-lg" id="titleInput-wrap">
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="상품명을 입력하세요">
+            <form name="form1">
+                <div class="container g-0" id="top-content">
+                    <div class="row">
+                        <div class="col-2">
+                            <select name="regionName" id="region" class="form-select border col-1 text-center">
+                                <option selected disabled hidden>지역</option>
+                                <option value="서울특별시">서울특별시</option>
+                                <option value="부산광역시">부산광역시</option>
+                                <option value="대구광역시">대구광역시</option>
+                                <option value="인천광역시">인천광역시</option>
+                                <option value="광주광역시">광주광역시</option>
+                                <option value="대전광역시">대전광역시</option>
+                                <option value="울산광역시">울산광역시</option>
+                                <option value="세종특별자치시">세종특별자치시</option>
+                                <option value="경기도">경기도</option>
+                                <option value="강원도">강원도</option>
+                                <option value="충청북도">충청북도</option>
+                                <option value="충청남도">충청남도</option>
+                                <option value="전라북도">전라북도</option>
+                                <option value="전라남도">전라남도</option>
+                                <option value="경상북도">경상북도</option>
+                                <option value="경상남도">경상남도</option>
+                                <option value="제주특별자치도">제주특별자치도</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <select name="cityName" id="city" class="form-select border col-1 text-center">
+                                <option selected hidden>도시</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <input name="itemCost" class="form-control border col-1" type="number" placeholder="₩ 판매가격">
+                        </div>
+                        <div class="col">
+                            <button id="complete-btn" type="button">완료</button>
+                            <button id="cancel-btn" type="button">취소</button>
+                        </div>
                     </div>
                 </div>
-                <div id="textarea-wrap">
-                    <textarea class="autosize" placeholder="내용을 입력해주세요" style="overflow: hidden;"></textarea>
+                <div id="content-box">
+                    <div id="title-wrap">
+                        <div class="input-group input-group-lg" id="titleInput-wrap">
+                            <input name="itemName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="상품명을 입력하세요">
+                        </div>
+                    </div>
+                    <div id="textarea-wrap">
+                        <textarea name="content" class="autosize" placeholder="내용을 입력해주세요" style="overflow: hidden;"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div id="img-add-box">
-                <div>
+                <div id="img-add-box">
                     <p>사진 첨부</p>
+                    <input name="file" type='file' id='btnAtt' style="display: none;">
+                    <span><label for="btnAtt"><img id="img-file" src="img-select.PNG"></label></span>
+                    <div id='att_zone' 
+                    data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
                 </div>
-                <div>
-                    
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     

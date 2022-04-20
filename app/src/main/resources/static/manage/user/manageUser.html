@@ -58,8 +58,14 @@
           <li class="list-group-item nav-item">
             <a href="../field/manageFiled.html"">구장관리</a>
           </li>
-          <li class="list-group-item nav-item">
-            <a href="../report/manageReport.html"">게시글관리</a>
+          <li class="list-group-item nav-item" id="rptLi">
+            <a href="#">게시글관리</a>
+            	<ul id="sliding_menu">
+            		<li><a href="#">클래스</a></li>
+            		<li><a href="#">중고마켓</a></li>
+            		<li><a href="#">클럽</a></li>
+            		<li><a href="#">커뮤니티</a></li>
+            	</ul>
           </li>
           <li class="list-group-item nav-item">
             <a href="../report/manageReport.html">고객센터</a>
@@ -102,6 +108,8 @@ let dataPerPage = 5; //한 페이지에 나타낼 글 수
 let pageCount = 5; //페이징에 나타낼 페이지 수
 let globalCurrentPage=1; //현재 페이지 
 
+
+
   $(document).ready(function () {
 
         // $("#x-header").load("my-adminHeader.html");  //헤더 인클루드&ndash;&gt;
@@ -120,6 +128,13 @@ let globalCurrentPage=1; //현재 페이지
         paging(1,manages)
       });
 
+	  $(document).on("click", "li[id='rptLi']" , function(){
+			if( $("#sliding_menu").css("display") ==="block"){
+				$("#sliding_menu").css("display","none");
+			}else {
+				$("#sliding_menu").css("display","block");
+			};
+		  });
 
 
       $(document).on("click", "button[id='detailBtn']", function () {

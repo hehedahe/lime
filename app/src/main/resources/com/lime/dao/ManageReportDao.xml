@@ -40,6 +40,7 @@
     <result column="itemName" property="itemName" />
     <result column="content" property="content" />
     <result column="rgtDate" property="rgtDate" />
+    <result column="itemName" property="itemName" />
   </resultMap>
   
 	
@@ -84,7 +85,7 @@
 				member m
 				INNER JOIN user u
 				ON m.user_id = u.user_id
-				WHERE u.user_id = cp.user_id) NAME,
+				WHERE u.user_id = cp.user_id) name,
 			date_format(cp.rgt_date,'%Y-%m-%d') rgtDate
 		FROM
 		cmnty_post cp
@@ -159,12 +160,12 @@
 	</select>
 	
 	  <!-- 마켓게시글 -->
-  <select id="findItemAll" resultMap="itemMap"> 
+  <select id="findMaketReportAll" resultMap="itemMap"> 
 		SELECT 
 		 i.item_id itemId,
 		 i.item_name itemName,
 		 i.content content,
-		 i.rgt_date rgtDate,
+		 DATE_FORMAT( i.rgt_date,'%Y-%m-%d') rgtDate,
 		 u.name name
 		FROM 
 		item i

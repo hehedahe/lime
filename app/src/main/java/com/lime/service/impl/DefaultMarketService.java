@@ -3,6 +3,7 @@ package com.lime.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.lime.dao.MarketDao;
 import com.lime.domain.Market;
 import com.lime.service.MarketService;
@@ -55,6 +56,12 @@ public class DefaultMarketService implements MarketService {
   @Override
   public Market get(int no) {
     return marketDao.findByNo(no);
+  }
+
+  @Override
+  @Transactional
+  public int add(Market market) {
+    return marketDao.insert(market);
   }
 
   //  @Override
