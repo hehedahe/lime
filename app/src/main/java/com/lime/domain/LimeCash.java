@@ -1,11 +1,11 @@
 package com.lime.domain;
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import java.sql.Date;
 
 @Data
 @Accessors(chain = true)
@@ -13,10 +13,11 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 public class LimeCash {
-    int limeId;
-    int userId;
-    int amt;
-    Date date;
-    String typeUse;
-    CourtRsv courtRsv;
+  int limeId;
+  int userId;
+  int amt;
+  Date date;
+  String typeUse;
+  CourtRsv courtRsv;
+  MatchRsv matchRsv;
 }

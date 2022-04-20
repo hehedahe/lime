@@ -38,19 +38,9 @@
       mtch_id asc
   </select>
   
-
-
-  <!--  
-  <insert id="insert" parameterType="matchRsv">
+  <insert id="insert" parameterType="MatchRsv">
     insert into social_mtch_rsv(mtch_id,user_id,lime_id,state)
     values(#{matchId},#{userId},#{limeId},#{state})
-    insert into lime_cash(user_id,amt,type_use)
-    values(#{matchId},#{userId},#{limeId},#{state})
   </insert>
-  -->
-
-
-
-
   
 </mapper>

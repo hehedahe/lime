@@ -14,4 +14,10 @@
 </insert>
 
 
+<insert id="checkout" parameterType="LimeCash" keyProperty="limeId" keyColumn="lime_id" useGeneratedKeys="true">
+    INSERT INTO lime_cash(user_id, amt, type_use)
+    VALUE       (#{userId},#{amt},#{typeUse})
+</insert>
+
+
 </mapper>

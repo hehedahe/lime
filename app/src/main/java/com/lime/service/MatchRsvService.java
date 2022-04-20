@@ -5,7 +5,7 @@ import com.lime.domain.MatchRsv;
 
 public interface MatchRsvService {
 
-  int add(MatchRsv matchRsv);
+  //  int add(int limeId, MatchRsv matchRsv);
 
   List<MatchRsv> list();
 

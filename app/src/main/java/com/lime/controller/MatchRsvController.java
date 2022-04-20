@@ -12,16 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lime.domain.MatchRsv;
 import com.lime.domain.SearchCondition;
 import com.lime.domain.UserLogin;
+import com.lime.service.LimeCashService;
 import com.lime.service.MatchRsvService;
 
 @RestController
-@RequestMapping("/match-rsv")
+@RequestMapping("/rsv/match")
 public class MatchRsvController {
 
   private static final Logger log = LogManager.getLogger(MatchRsvController.class);
 
   @Autowired
   MatchRsvService matchRsvService;
+
+  @Autowired
+  LimeCashService limeCashService;
 
   @GetMapping("/list")
   public Object list() {
@@ -40,6 +44,7 @@ public class MatchRsvController {
   @GetMapping("/logincheck")
   public Object getOrderPage(SearchCondition sc, HttpSession session) {
     UserLogin user = (UserLogin) session.getAttribute("loginUser");
+    //    log.info(Integer.parseInt(user.getUserId()));
     if (user == null) {
       return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
     } else {
@@ -47,14 +52,16 @@ public class MatchRsvController {
     }
   }
 
-  @RequestMapping("/order")
-  public Object add(MatchRsv matchRsv, HttpSession session) {
-    log.info("소셜매치 결제!"); // 운영자가 확인하기를 원하는 정보
-    log.debug(matchRsv.toString()); // 개발자가 확인하기를 원하는 정보
-
-    UserLogin member = (UserLogin) session.getAttribute("loginUser");
-    matchRsv.setUserId(Integer.parseInt(member.getUserId()));
-    matchRsvService.add(matchRsv);
-    return new ResultMap().setStatus(SUCCESS);
-  }
+  //  @RequestMapping("/order")
+  //  public Object add(LimeCash limeCash, MatchRsv matchRsv, HttpSession session) {
+  //    log.info("소셜매치 결제!"); // 운영자가 확인하기를 원하는 정보
+  //    log.debug(matchRsv.toString()); // 개발자가 확인하기를 원하는 정보
+  //
+  //    UserLogin member = (UserLogin) session.getAttribute("loginUser");
+  //    matchRsv.setUserId(Integer.parseInt(member.getUserId()));
+  //
+  //    matchRsvService.add(matchRsv.getUserId(), matchRsv, limeCash);
+  //
+  //    return new ResultMap().setStatus(SUCCESS);
+  //  }
 }

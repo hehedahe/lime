@@ -12,7 +12,7 @@ public interface MatchRsvDao {
 
   List<MatchRsv> findAll();
 
-  int insert(MatchRsv matchRsv);
+  int insert(@Param("limeId") int limeId, @Param("matchRsv") MatchRsv matchRsv);
 
   MatchRsv findByMatchIdAndUserId(@Param("matchId") int matchId, @Param("userId") int userId);
 

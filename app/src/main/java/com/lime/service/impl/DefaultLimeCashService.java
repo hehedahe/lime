@@ -2,12 +2,13 @@ package com.lime.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.lime.dao.CourtRsvDao;
 import com.lime.dao.LimeCashDao;
+import com.lime.dao.MatchRsvDao;
 import com.lime.domain.CourtRsv;
 import com.lime.domain.LimeCash;
 import com.lime.service.LimeCashService;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DefaultLimeCashService implements LimeCashService {
@@ -17,6 +18,9 @@ public class DefaultLimeCashService implements LimeCashService {
 
   @Autowired
   CourtRsvDao crDao;
+
+  @Autowired
+  MatchRsvDao matchRsvDao;
 
   @Override
   @Transactional
@@ -34,6 +38,22 @@ public class DefaultLimeCashService implements LimeCashService {
         .build();
     System.out.println(cr);
     crDao.insert(cr);
+    return 1;
+  }
+
+  @Override
+  @Transactional
+  public int checkout(LimeCash limeCash) {
+    lcDao.checkout(limeCash);
+    matchRsvDao.insert(limeCash.getLimeId(), limeCash.getMatchRsv());
+    //    MatchRsv mr = MatchRsv.builder()
+    //        .limeId(limeCash.getLimeId())
+    //        .userId(limeCash.getUserId())
+    //        .matchId(limeCash.getMatchRsv().getMatchId())
+    //        .state(limeCash.getMatchRsv().getState())
+    //        .build();
+    //    System.out.println(mr);
+    //    matchRsvDao.insert(limeCash.getLimeId(), mr);
     return 1;
   }
 }
