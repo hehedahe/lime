@@ -1,8 +1,7 @@
 "use strict"
 
 import {selectCity} from '../common/selectCity.js'
-import {fieldList, getCourt, courtList, findRegion, findCity, dateFormat} from '../common/apiList.js'
-
+import {fieldList, getCourt, courtList, findRegion, findCity} from '../common/apiList.js'
 
 // =================
 // 카카오 지도 API

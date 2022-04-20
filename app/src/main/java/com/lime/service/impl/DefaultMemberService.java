@@ -7,7 +7,6 @@ import com.lime.dao.MemberDao;
 import com.lime.domain.Member;
 import com.lime.service.MemberService;
 
-
 @Service
 public class DefaultMemberService implements MemberService {
 
@@ -20,12 +19,12 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
-  public Member get(String email, String password) {
+  public Member getLoginUser(String email, String password) {
     return memberDao.findByEmailAndPassword(email, password);
   }
 
   @Override
-  public Member get(String email) {
+  public Member getUser(String email) {
     return memberDao.findByEmail(email);
   }
 
