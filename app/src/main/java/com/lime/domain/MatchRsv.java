@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class MatchRsv {
-  int mtchId;
+  int matchId;
   int userId;
   int limeId;
   String state;

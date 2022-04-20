@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.lime.domain.MatchRsv;
 import com.lime.domain.SearchCondition;
-import com.lime.domain.User;
+import com.lime.domain.UserLogin;
 import com.lime.service.MatchRsvService;
 
 @RestController
@@ -37,19 +37,24 @@ public class MatchRsvController {
     return new ResultMap().setStatus(SUCCESS).setData(match);
   }
 
-  @RequestMapping("/test")
-  public Object test2(HttpSession session) {
-    System.out.printf("test() => %s\n", session.getId());
-    return "test() 실행!";
-  }
-
-  @GetMapping("/order")
+  @GetMapping("/logincheck")
   public Object getOrderPage(SearchCondition sc, HttpSession session) {
-    User user = (User) session.getAttribute("loginUser");
+    UserLogin user = (UserLogin) session.getAttribute("loginUser");
     if (user == null) {
       return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
     } else {
       return new ResultMap().setStatus(SUCCESS);
     }
+  }
+
+  @RequestMapping("/order")
+  public Object add(MatchRsv matchRsv, HttpSession session) {
+    log.info("소셜매치 결제!"); // 운영자가 확인하기를 원하는 정보
+    log.debug(matchRsv.toString()); // 개발자가 확인하기를 원하는 정보
+
+    UserLogin member = (UserLogin) session.getAttribute("loginUser");
+    matchRsv.setUserId(Integer.parseInt(member.getUserId()));
+    matchRsvService.add(matchRsv);
+    return new ResultMap().setStatus(SUCCESS);
   }
 }

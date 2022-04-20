@@ -6,47 +6,21 @@
 <mapper namespace="com.lime.dao.MatchRsvDao">
 
   <resultMap type="matchRsv" id="matchRsvMap">
-  
-    <id column="{mtchId=mtch_id,userId=user_id}"/>
+    <id column="mtch_id" property="matchId"/>
+    <id column="user_id" property="userId"/>
+    <!-- <id column="{mtchId=mtch_id,userId=user_id}"/> -->
     <result column="lime_id" property="limeId"/>
     <result column="state" property="state"/>
+    <!--  
+    <association property="match" javaType="Match">
+      <id column="mtch_id" property="matchId"/>
+      <result column="mtch_date" property="matchDate"/>
+      <result column="st_time" property="startTime"/>
+      <result column="state" property="state"/>
+    </association>
+    -->
     
   </resultMap>
-
-  <!--  
-  <resultMap type="Court" id="courtMap">
-    <id column="court_id" property="no"/>
-    <result column="name" property="name"/>
-    <result column="court_type_id" property="courtTypeNo"/>
-    <result column="field_id" property="fieldNo"/>
-    <association property="field" javaType="Field">
-      <id column="field_id" property="fieldId"/>
-      <result column="name" property="name"/>
-      <result column="addr" property="addr"/>
-    </association>
-  </resultMap>
-  -->
-  
-  <!--  
-  <resultMap type="Field" id="fieldMap">
-    <id column="field_id" property="fieldId"/>
-    <result column="name" property="name"/>
-    <result column="addr" property="addr"/>
-    <result column="region_id" property="regionId"/>
-    <result column="city_name" property="cityName"/>
-    <association column="city_id" property="cityId" javaType="City" resultMap="cityMap">
-	    <id column="city_id" property="cityId"/>
-	    <result column="city_name" property="cityName"/>
-    </association>
-  </resultMap>
-  -->
-
-  <!--  
-  <resultMap type="City" id="cityMap">
-    <id column="city_id" property="cityId"/>
-    <result column="city_name" property="cityName"/>
-  </resultMap>
-  -->
 
   <select id="countAll" resultType="int">
     select count(*) from social_mtch_rsv
@@ -64,12 +38,14 @@
       mtch_id asc
   </select>
   
-    <!-- 
-  <insert id="insert" parameterType="matchRsvMap">
+
+
+  <insert id="insert" parameterType="matchRsv">
     insert into social_mtch_rsv(mtch_id,user_id,lime_id,state)
     values(#{matchId},#{userId},#{limeId},#{state})
   </insert>
-    -->
+
+
 
 
   

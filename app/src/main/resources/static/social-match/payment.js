@@ -1,7 +1,22 @@
 "use strict";
 
-$.getJSON("/match-rsv/order", (result) => {
-  console.log(result);
+// fetch("/match-rsv/order")
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (result) {
+//     if (result.status == "fail") {
+//       window.alert("서버 요청 오류!");
+//       console.log(result.data);
+//       return;
+//     }
+//   });
+
+$.getJSON("/match-rsv/logincheck", (result) => {
+  if (result.status == "fail") {
+    location.href = `/login/login.html`
+  }
+  // console.log(result.status);
 })
 
 // 1) URL에서 쿼리스트링(query string)을 추출한다.
