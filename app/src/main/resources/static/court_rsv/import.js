@@ -101,10 +101,6 @@ dropRegion.on('change', async function (e) {
             </div>`
         );
     });
-
-
-
-
 });
 
 // 시군구

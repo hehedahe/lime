@@ -6,12 +6,18 @@
   
 <mapper namespace="com.lime.dao.CourtRsvDao">
 
-<resultMap type="CourtRsv" id="courtMap"></resultMap>
-<!--<resultMap id="lcMap" type="LimeCash"></resultMap>-->
+<resultMap type="CourtRsv" id="courtRsvMap"></resultMap>
 
 <insert id="insert" parameterType="CourtRsv">
     INSERT INTO court_rsv2(field_id, court_id, date_time, lime_id)
     VALUE       (#{fieldId},#{courtId},#{dateTime},#{limeId})
 </insert>
+
+<select id="findByDate" parameterType="String" resultMap="courtRsvMap">
+    SELECT field_id, court_id, date_time
+    FROM   court_rsv2
+    WHERE  date_format(#{date}, '%y%m%d') &lt;= date_time
+    AND    date_time &lt; date_format(#{date} + 1, '%y%m%d')
+</select>
 
 </mapper>
