@@ -1,10 +1,11 @@
 "use strict"
 
-import { marketMainRegion } from '../common/region.js'
+import { Region1 } from '../common/region.js'
 
 var itemList = document.querySelector("#item-list");
 var regionSelect = document.querySelector("#region");
 var city = document.getElementById("city");
+var itemPhoto = document.querySelector("#item-photo");
 
 $(document).ready(function(e){
             
@@ -35,7 +36,7 @@ $(document).ready(function(e){
           });
 
           $(this).children("svg").toggleClass("bi-heart");
-          $(this).html(`<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-heart" viewBox="0 0 16 16">
+          $(this).html(`<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(146, 219, 130)" class="bi bi-heart" viewBox="0 0 16 16">
             <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>`)
         }
     });
@@ -78,12 +79,18 @@ function listFetch() {
         transState1 = `<span class="E">거래완료</span>`;
       }
 
+      //console.log(list.photo);
+      let photo = "../ok_photo.jfif"
+      if (list.photo != null) {
+        photo = "/market/photo?filename=" + list.photo;
+      }
+
       var cols = document.createElement("div");
       cols.setAttribute('class', 'col');
       cols.setAttribute('name', 'card-col');
       cols.innerHTML = `<div class="card h-100" item-id=${list.itemId}>
-      <img src="../ok_photo.jfif" class="card-img-top" alt="...">
-      <a class="heart-click" idx=${list.itemId}><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-heart" viewBox="0 0 16 16">
+      <img id="item-photo" src=${photo} class="card-img-top" alt="...">
+      <a class="heart-click" idx=${list.itemId}><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(146, 219, 130)" class="bi bi-heart" viewBox="0 0 16 16">
       <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
       </svg></a>
       <div class="card-body">
@@ -106,39 +113,39 @@ regionSelect.addEventListener('change', (event) => {
     let value = event.target.value;
     let add;
     if (value == "서울특별시") {
-        add = marketMainRegion.seoul;
+        add = Region1.seoul;
       } else if (value == "부산광역시") {
-        add = marketMainRegion.busan;
+        add = Region1.busan;
       } else if (value == "대구광역시") {
-        add = marketMainRegion.daegu;
+        add = Region1.daegu;
       } else if (value == "인천광역시") {
-        add = marketMainRegion.incheon;
+        add = Region1.incheon;
       } else if (value == "광주광역시") {
-        add = marketMainRegion.gwangju;
+        add = Region1.gwangju;
       } else if (value == "대전광역시") {
-        add = marketMainRegion.daejeon;
+        add = Region1.daejeon;
       } else if (value == "울산광역시") {
-        add = marketMainRegion.ulsan;
+        add = Region1.ulsan;
       } else if (value == "세종특별자치시") {
-        add = marketMainRegion.sejong;
+        add = Region1.sejong;
       } else if (value == "경기도") {
-        add = marketMainRegion.gyeonggi;
+        add = Region1.gyeonggi;
       } else if (value == "강원도") {
-        add = marketMainRegion.gangwon;
+        add = Region1.gangwon;
       } else if (value == "충청북도") {
-        add = marketMainRegion.chungbuk;
+        add = Region1.chungbuk;
       } else if (value == "충청남도") {
-        add = marketMainRegion.chungnam;
+        add = Region1.chungnam;
       } else if (value == "전라북도") {
-        add = marketMainRegion.jeonbuk;
+        add = Region1.jeonbuk;
       } else if (value == "전라남도") {
-        add = marketMainRegion.jeonnam;
+        add = Region1.jeonnam;
       } else if (value == "경상북도") {
-        add = marketMainRegion.gyeongbuk;
+        add = Region1.gyeongbuk;
       } else if (value == "경상남도") {
-        add = marketMainRegion.gyeongnam;
+        add = Region1.gyeongnam;
       } else if (value == "제주특별자치도") {
-        add = marketMainRegion.jeju;
+        add = Region1.jeju;
       } else if(value == "전체") {
         add = ["도시"];
       }

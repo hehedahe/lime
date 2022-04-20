@@ -1,6 +1,6 @@
 "use strict"
 
-import { itemFormRegion } from '../common/region.js'
+import { Region2 } from '../common/region.js'
 import { textAreaAutoSizing } from '../common/textAreaAutoSizing.js';
 
 var region = document.querySelector("#region");
@@ -19,39 +19,39 @@ region.addEventListener('change', (event) => {
     let value = event.target.value;
     let add;
     if (value == "서울특별시") {
-        add = itemFormRegion.seoul;
+        add = Region2.seoul;
       } else if (value == "부산광역시") {
-        add = itemFormRegion.busan;
+        add = Region2.busan;
       } else if (value == "대구광역시") {
-        add = itemFormRegion.daegu;
+        add = Region2.daegu;
       } else if (value == "인천광역시") {
-        add = itemFormRegion.incheon;
+        add = Region2.incheon;
       } else if (value == "광주광역시") {
-        add = itemFormRegion.gwangju;
+        add = Region2.gwangju;
       } else if (value == "대전광역시") {
-        add = itemFormRegion.daejeon;
+        add = Region2.daejeon;
       } else if (value == "울산광역시") {
-        add = itemFormRegion.ulsan;
+        add = Region2.ulsan;
       } else if (value == "세종특별자치시") {
-        add = itemFormRegion.sejong;
+        add = Region2.sejong;
       } else if (value == "경기도") {
-        add = itemFormRegion.gyeonggi;
+        add = Region2.gyeonggi;
       } else if (value == "강원도") {
-        add = itemFormRegion.gangwon;
+        add = Region2.gangwon;
       } else if (value == "충청북도") {
-        add = itemFormRegion.chungbuk;
+        add = Region2.chungbuk;
       } else if (value == "충청남도") {
-        add = itemFormRegion.chungnam;
+        add = Region2.chungnam;
       } else if (value == "전라북도") {
-        add = itemFormRegion.jeonbuk;
+        add = Region2.jeonbuk;
       } else if (value == "전라남도") {
-        add = itemFormRegion.jeonnam;
+        add = Region2.jeonnam;
       } else if (value == "경상북도") {
-        add = itemFormRegion.gyeongbuk;
+        add = Region2.gyeongbuk;
       } else if (value == "경상남도") {
-        add = itemFormRegion.gyeongnam;
+        add = Region2.gyeongnam;
       } else if (value == "제주특별자치도") {
-        add = itemFormRegion.jeju;
+        add = Region2.jeju;
       } else if(value == "전체") {
         add = ["도시"];
       }
