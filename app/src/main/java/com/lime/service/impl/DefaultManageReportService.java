@@ -1,13 +1,16 @@
 package com.lime.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.lime.dao.ManageReportDao;
 import com.lime.domain.Classes;
 import com.lime.domain.Club;
 import com.lime.domain.Community;
+import com.lime.domain.ManageMaket;
 import com.lime.domain.Market;
 import com.lime.service.ManageReportService;
 
@@ -54,8 +57,8 @@ public class DefaultManageReportService implements ManageReportService {
   
   //중고게시글관리
   @Transactional
-  public List<Market> marketList() {
-    return manageReportDao.findItemAll();
+  public List<ManageMaket> marketReportList() {
+    return manageReportDao.findMaketReportAll();
   }
   //중고게시글댓글
   @Transactional

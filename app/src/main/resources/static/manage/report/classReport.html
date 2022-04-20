@@ -64,8 +64,8 @@
           <li class="list-group-item nav-item" id="rptLi">
             <a href="#">게시글관리</a>
             	<ul id="sliding_menu">
-            		<li id ="classLi"><a href="#">클래스</a></li>
-            		<li id="marketLi"><a href="#">중고마켓</a></li>
+            		<li id ="classLi"><a href="classReport.html">클래스</a></li>
+            		<li id="marketLi"><a href="marketReport.html">중고마켓</a></li>
             		<li id="clubLi"><a href="#">클럽</a></li>
             		<li id="cummunityLi"><a href="#">커뮤니티</a></li>
             	</ul>
@@ -90,14 +90,10 @@
               <thead>
                 <tr id="x-thead">
                   <th scope="col">No.</th>
-                  <th scope="col">구장명</th>
-                  <th scope="col">구장주소</th>
-                  <th scope="col">코트타입</th>
-                  <th scope="col">코트갯수</th>
-                  <th scope="col">주차장</th>
-                  <th scope="col">실내외여부</th>
-                  <th scope="col">야간라이트</th>
-                  <th scope="col">정보</th>
+                  <th scope="col">강의명</th>
+                  <th scope="col">강의소개</th>
+                  <th scope="col">개설일</th>
+                  <th scope="col">강사명</th>
                 </tr>
               </thead>
             <tbody id ="x-tbody">
@@ -127,16 +123,17 @@ let globalCurrentPage=1; //현재 페이지
        // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
        // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
 
-      fetch("/manage/field/list",{
+      fetch("/manage/class/list",{
           method:"post",
       })
       .then(function(response){
         return response.json();
       })
-      .then(function(fields){
-        totalData = fields.length;
-        displayData(1, fields);
-        paging(1,fields)
+      .then(function(classes){
+    	console.log(classes);
+        totalData = classes.length;
+        displayData(1, classes);
+        paging(1,classes)
       });
 
 	  $(document).on("click", "li[id='rptLi']" , function(){
@@ -156,7 +153,10 @@ let globalCurrentPage=1; //현재 페이지
     });
 
 
-function displayData(currentPage, fields) {
+function displayData(currentPage, classes) {
+	
+	
+
 
 let chartHtml = "";
 
@@ -169,8 +169,6 @@ const startNum =(currentPage - 1) * 5;
 const endNum = (currentPage - 1) * 5 + 5;
 
 
-
-
 for (		
   var i = startNum;
   i < endNum;
@@ -179,21 +177,17 @@ for (
 
   chartHtml +=`
   <tr id = "xTr">
-    <td id="x-no">${fields[i].fieldId}</td>
-          <td>${fields[i].name}</td>
-          <td>${fields[i].addr}</td>
-          <td>${fields[i].courtName}</td>
-          <td>${fields[i].courtCnt}</td>
-          <td>${fields[i].parkingYn}</td>
-          <td>${fields[i].indYnName}</td>
-          <td>${fields[i].lightYn}</td>
-          <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${fields.no}" margin-bottom ="10px">상세</td>
+    <td id="x-no">${classes[i].no}</td>
+          <td>${classes[i].title}</td>
+          <td>${classes[i].intr}</td>
+          <td>${classes[i].rgtDate}</td>
+          <td>${classes[i].cname}</td>
         </tr>`
 }
 $("#x-tbody").html(chartHtml);
 }
 
-function paging(no,fields) {
+function paging(no,classes) {
         console.log("no : " + no);
 
   totalPage = Math.ceil(totalData / 5); //총 페이지 수
@@ -250,9 +244,9 @@ function paging(no,fields) {
     //전역변수에 선택한 페이지 번호를 담는다...
     globalCurrentPage = selectedPage;
     //페이징 표시 재호출
-    paging(selectedPage,fields);
+    paging(selectedPage,classes);
     //글 목록 표시 재호출
-    displayData(selectedPage, fields);
+    displayData(selectedPage, classes);
   });
 }
 </script>
