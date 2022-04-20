@@ -55,27 +55,23 @@
 </select>
 
 <select id="getCourt" resultMap="fieldMap" parameterType="int">
-    SELECT f.field_id,
-           f.name,
-           f.addr,
-           f.number,
-           f.ind_yn,
-           f.parking_area,
-           f.light_yn,
-           f.lat,
-           f.lng,
-           c.court_id,
-           c.name courtName,
-           c.court_type_id,
-           c.fee
-    FROM field f
+    SELECT    f.field_id,
+              f.name,
+              f.addr,
+              f.number,
+              f.ind_yn,
+              f.parking_area,
+              f.light_yn,
+              f.lat,
+              f.lng,
+              c.court_id,
+              c.name courtName,
+              c.court_type_id,
+              c.fee
+    FROM      field f
     LEFT JOIN court c
-    ON f.field_id = c.field_id
-    WHERE f.field_type='R' AND f.field_id=#{fieldId}
+    ON        f.field_id = c.field_id
+    WHERE     f.field_type='R' AND f.field_id=#{fieldId}
 </select>
-
-
-
-
 
 </mapper>

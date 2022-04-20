@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.lime.dao.CourtRsvDao">
+
+<resultMap type="CourtRsv" id="courtMap"></resultMap>
+<!--<resultMap id="lcMap" type="LimeCash"></resultMap>-->
+
+<insert id="insert" parameterType="CourtRsv">
+    INSERT INTO court_rsv2(field_id, court_id, date_time, lime_id)
+    VALUE       (#{fieldId},#{courtId},#{dateTime},#{limeId})
+</insert>
+
+</mapper>
