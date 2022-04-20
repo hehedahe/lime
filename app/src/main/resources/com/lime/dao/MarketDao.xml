@@ -24,6 +24,11 @@
     <result column="name" property="userName"/>
     <result column="manner_score" property="mannerScore"/>
     <result column="lv_name" property="lvName"/>
+    <result column="file_path" property="photo"/>
+    <association property="writer" javaType="UserLogin">
+      <id column="no" property="no"/>
+      <result column="name" property="name"/>
+    </association>
   </resultMap>
   
 
@@ -41,12 +46,15 @@ SELECT
       ct.city_name as city_name,
       i.view_cnt as view_cnt,
       i.rgt_date as rgt_date,
-      i.trans_state as trans_state
+      i.trans_state as trans_state,
+      ii.file_path as file_path
    FROM item i
    LEFT JOIN city ct
    ON i.city_id = ct.city_id
    LEFT JOIN region rg 
    ON ct.region_id = rg.region_id
+   LEFT JOIN item_img ii 
+   ON i.item_id = ii.item_id
    WHERE i.item_name like concat('%',#{keyword},'%')
    order by rgt_date desc
    
@@ -180,11 +188,11 @@ SELECT
 	  where item_id=#{no}
   </select>
   
-  <insert id="insert" parameterType="Market">
+  <insert id="insert" parameterType="Market" useGeneratedKeys="true" keyColumn="item_id" keyProperty="itemId">
     insert into item(user_id,city_id,item_name,item_cost,content)
-      values(#{userId},(select city_id from city
+      values(#{writer.no},(select city_id from city
         WHERE region_id  = (select region_id from region where region_name=#{regionName}) 
-        AND city_name =#{cityName}),#{itemName},#{iteCost},#{content})
+        AND city_name =#{cityName}),#{itemName},#{itemCost},#{content})
   </insert>
   
   <update id="update" parameterType="Market">

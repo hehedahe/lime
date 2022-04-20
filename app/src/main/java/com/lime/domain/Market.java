@@ -1,8 +1,10 @@
 package com.lime.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 public class Market {
   int itemId;
   int userId;
@@ -21,5 +23,7 @@ public class Market {
   int mannerScore;
   String lvName;
   String photo;
+
+  UserLogin writer;
   // List<ContactTel> tels;
 }
