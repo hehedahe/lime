@@ -40,7 +40,7 @@
   
   <insert id="insert" parameterType="MatchRsv">
     insert into social_mtch_rsv(mtch_id,user_id,lime_id,state)
-    values(#{matchId},#{userId},#{limeId},#{state})
+    values(#{matchRsv.matchId},#{matchRsv.userId},#{limeId},#{matchRsv.state})
   </insert>
   
 </mapper>

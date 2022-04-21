@@ -44,16 +44,9 @@ public class DefaultLimeCashService implements LimeCashService {
   @Override
   @Transactional
   public int checkout(LimeCash limeCash) {
+    System.out.println(limeCash);
     lcDao.checkout(limeCash);
     matchRsvDao.insert(limeCash.getLimeId(), limeCash.getMatchRsv());
-    //    MatchRsv mr = MatchRsv.builder()
-    //        .limeId(limeCash.getLimeId())
-    //        .userId(limeCash.getUserId())
-    //        .matchId(limeCash.getMatchRsv().getMatchId())
-    //        .state(limeCash.getMatchRsv().getState())
-    //        .build();
-    //    System.out.println(mr);
-    //    matchRsvDao.insert(limeCash.getLimeId(), mr);
     return 1;
   }
 }

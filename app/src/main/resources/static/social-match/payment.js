@@ -12,7 +12,8 @@
 //     }
 //   });
 
-$.getJSON("/match-rsv/logincheck", (result) => {
+$.getJSON("/member/getLoginUser", (result) => {
+  console.log(result.status);
   if (result.status == "fail") {
     location.href = `/login/login.html`
   }
@@ -102,3 +103,11 @@ function getFullYmdStr(date) {
     "요일"
   );
 }
+
+$(".modal-footer button").on("click", (e) => {
+  $.getJSON(`/rsv/match?amt=20000&typeUse=U&matchId=${matchId}&state=P`), (result) => {
+    console.log(result.status)
+  }
+  console.log("하하하하하하하")
+  // location.href = `/social-match/index.html`
+})

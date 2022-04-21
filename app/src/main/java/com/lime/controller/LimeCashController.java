@@ -43,8 +43,6 @@ public class LimeCashController {
 
     log.debug("matchRsv = " + matchRsv);
 
-    //    MatchRsv matchRsv2 = new MatchRsv(matchRsv.getMatchId(), matchRsv.getUserId(), matchRsv.getState());
-
     limeCash.setMatchRsv(matchRsv);
 
     log.debug("limeCash = " + limeCash);
