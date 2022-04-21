@@ -12,6 +12,9 @@ const PATH = {
     },
     member: {
         getLoginUser: '/member/getLoginUser'
+    },
+    courtRsv: {
+        rsvsByDate: '/court-rsv/get'
     }
 };
 
@@ -102,3 +105,16 @@ export async function findCity(cityName, regionId) {
 // *********************
 // member
 // *********************
+
+// *********************
+// court reservation
+// *********************
+
+export async function rsvsByDate(date, fieldId) {
+    try {
+        const response = await axios(`${PATH.courtRsv.rsvsByDate}?date=${date}&fieldId=${fieldId}`)
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
