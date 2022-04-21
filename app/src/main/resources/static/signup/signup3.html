@@ -55,46 +55,56 @@
   </nav>
 
   <main class="form-lime mt-5">
-    <form>
+    
       <h1 class="h4 mb-4 h-lime">추가정보를 작성해주세요.</h1>
 
       <br>
 
+      
       <div class="form-signup">
+        <form name="form3">
         <label for="inputPassword" class="form-label">환불 계좌 은행</label>
         <div class="row">
-          <select class="form-select" aria-label="gender" name="" id="">
+          <select class="form-select" aria-label="gender" name="bankId" id="">
             <option selected>선택해주세요</option>
-            <option value="1">남성</option>
-            <option value="2">여성</option>
+            <option value="1">국민은행</option>
+            <option value="2">신한은행</option>
+            <option value="3">농협</option>
+            <option value="4">도이치뱅크</option>
+            <option value="5">우리은행</option>
           </select>
         </div>
       </div>
       <div class="form-signup">
-        <label for="inputEmail" class="form-label">환불 계좌 번호</label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="계좌 번호">
+        <label for="inputEmail" class="form-label">환불 계좌 번호1</label>
+        <input type="text" class="form-control" id="inputEmail" name="accountNo" placeholder="계좌 번호">
       </div>
       <div class="form-signup">
         <label for="inputEmail" class="form-label">환불 계좌 예금주</label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="예금주">
+        <input type="text" class="form-control" id="inputEmail" name="accountHolder" placeholder="예금주">
       </div>
-
+    
       <div class="indicator">
         <div></div>
         <div></div>
         <div></div>
       </div>
 
-      <button class="w-100 btn btn-primary mb-4" type="button" id="btn-signup"
-        onclick="location.href='signup4.html'">다음</button>
+      <button class="w-100 btn btn-primary mb-4" id="btn-signup"
+        >다음</button>
     </form>
+
+       <!-- <button class="w-100 btn btn-primary mb-4" id="btn-signup"
+        onclick="location.href='signup4.html'">다음</button>
+      -->
+   
   </main>
 
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
   <script type="text/javascript">
-    $(document).ready(function () {
+   /* $(document).ready(function () {
       $.getJSON("http://localhost:8080/bank/list", function (arr) {
         console.log(arr)
         const bankList = $("option:first-child")
@@ -104,7 +114,42 @@
         }
         $("option:first-child").html(str)
       })
+    }) */
+
+
+
+    const bankName = document.querySelector("select[name=bankId]")
+    const accountNo = document.querySelector("select[name=accountNo]")
+    const accountHolder = document.querySelector("select[name=accountHolder]")
+
+
+
+  document.querySelector("form[name=form3]").onsubmit = function() {
+  
+  
+  var fd = new FormData(document.forms.namedItem("form3"));
+  console.log("fd>>>>>>>>>>>>>>>>>>", fd)
+
+
+  fetch("/signup/signup3", { 
+      method: "POST",
+      body: new URLSearchParams(fd)
+      
+    }) 
+    .then(function(response) {
+      return response.text();
     })
+    .then(function(text) {
+      if (text == "success") {
+        window.alert("가입 성공")
+    	  //location.href = "signup2.html";
+      } else {
+        location.href = "signup4.html";
+    	  //window.alert("가입 실패");
+      }
+    });
+  return false; 
+};
 
   </script>
 

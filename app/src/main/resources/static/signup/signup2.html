@@ -55,18 +55,18 @@
   </nav>
 
   <main class="form-lime mt-5">
-    <form>
+
       <h1 class="h4 mb-4 h-lime">추가정보를 작성해주세요.</h1>
 
       <br>
-
+<form name="form2">
       <div class="form-signup">
         <label for="inputEmail" class="form-label">생년월일</label>
         <div class="row day-of-birth">
           <select class="form-select col" aria-label="year" name="yy" id="year">
             년
           </select>
-          <select class="form-select col" aria-label="year" name="month" id="month">
+          <select class="form-select col" aria-label="year" name="mm" id="month">
             월
           </select>
           <select class="form-select col" aria-label="year" name="dd" id="day">
@@ -77,10 +77,10 @@
       <div class="form-signup">
         <label for="inputPassword" class="form-label">성별</label>
         <div class="row">
-          <select class="form-select col" aria-label="gender" name="" id="">
+          <select class="form-select col" aria-label="gender" name="gender" id="">
             <option selected>선택해주세요</option>
-            <option value="1">남성</option>
-            <option value="2">여성</option>
+            <option value="M">남성</option>
+            <option value="W">여성</option>
           </select>
           <!-- <select class="form-select col" style="visibility: hidden;">
           </select> -->
@@ -93,8 +93,12 @@
         <div></div>
       </div>
 
-      <button class="w-100 btn btn-primary mb-4" type="button" id="btn-signup"
-        onclick="location.href='signup3.html'">다음</button>
+      <button class="w-100 btn btn-primary mb-4" id="btn-signup"
+       >다음</button>
+
+
+        <!-- <button class="w-100 btn btn-primary mb-4" id="btn-signup"
+        onclick="location.href='signup3.html'">다음</button> -->
     </form>
   </main>
 
@@ -112,6 +116,43 @@
    $("#day > option[value="+day+"]").attr("selected", "true"); 
   })
 
+
+  const yy = document.querySelector("select[name=yy]")
+  const mm = document.querySelector("select[name=mm]")
+  const dd = document.querySelector("select[name=dd]")
+
+  const gender = document.querySelector("select[name=gender]")
+
+
+
+
+
+  document.querySelector("form[name=form2]").onsubmit = function() {
+  
+  
+  var fd = new FormData(document.forms.namedItem("form2"));
+  console.log("fd>>>>>>>>>>>>>>>>>>", fd)
+
+
+  fetch("/signup/signup2", { 
+      method: "POST",
+      body: new URLSearchParams(fd)
+      
+    }) 
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      if (text == "success") {
+        window.alert("가입 성공")
+    	  //location.href = "signup2.html";
+      } else {
+        location.href = "signup3.html";
+    	  //window.alert("가입 실패");
+      }
+    });
+  return false; 
+};
 
 
   </script>

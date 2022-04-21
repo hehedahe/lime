@@ -162,7 +162,7 @@
           </div>
           <div>
             <input type="checkbox" id="event-chk" class="form-check-input" name="eventYn">
-            <span>이벤트 및 프로모션 알림 받기2</span>
+            <span>이벤트 및 프로모션 알림 받기</span>
             <span class="option">(선택)</span>
           </div>
         </div>
@@ -192,7 +192,22 @@ const eventYn = document.querySelector("input[name=eventYn]");
 
   
 document.querySelector("form[name=form1]").onsubmit = function() {
-  pwdCheck()
+  const p1 = document.getElementById('inputPassword').value;
+  const p2 = document.getElementById('inputPassword2').value;
+  const nameCheck = document.getElementById('inputName').value;
+   if( p1 != p2 ) {
+     alert("비밀번호가 일치 하지 않습니다.");
+     return false;
+   } 
+/* 정규표현식 사용예정
+  const rexExp = /^[가-힣]{2,5}/;
+  
+  if (rexExp.test(nameCheck) != true) {
+    alert("실명으로 사용해주세요!")
+    return false;
+  }
+*/
+
   if (email.value === "" || 
       pwd.value === "" ||
   		name.value === "" ||
@@ -203,10 +218,9 @@ document.querySelector("form[name=form1]").onsubmit = function() {
   
   var fd = new FormData(document.forms.namedItem("form1"));
 
-  fetch("/login/signup", { 
+  fetch("/signup/signup1", { 
       method: "POST",
       body: new URLSearchParams(fd)
-      
     }) 
     .then(function(response) {
       return response.text();
@@ -218,37 +232,29 @@ document.querySelector("form[name=form1]").onsubmit = function() {
     	  window.alert("중복된 이메일입니다");
       }
     });
+
   return false;
 };
 
 
 $(document).ready(function() {
-    $("#checkAll").click(function() {
-      if($("#checkAll").is(":checked")) $("input[class=form-check-input]").prop("checked", true);
-      else $("input[class=form-check-input]").prop("checked", false);
-    });
-    
-    $("input[class=form-check-input]").click(function() {
-      var total = $("input[class=form-check-input]").length;
-      var checked = $("input[class=form-check-input]:checked").length;
-      
-      if(total != checked) $("#checkAll").prop("checked", false);
-      else $("#checkAll").prop("checked", true); 
-    });
+  $("#checkAll").click(function() {
+    if($("#checkAll").is(":checked")) $("input[class=form-check-input]").prop("checked", true);
+    else $("input[class=form-check-input]").prop("checked", false);
   });
+  
+  $("input[class=form-check-input]").click(function() {
+    var total = $("input[class=form-check-input]").length;
+    var checked = $("input[class=form-check-input]:checked").length;
+    
+    if(total != checked) $("#checkAll").prop("checked", false);
+    else $("#checkAll").prop("checked", true); 
+  });
+});
 
 
 
 
-
-  function pwdCheck() {
-      var p1 = document.getElementById('inputPassword').value;
-      var p2 = document.getElementById('inputPassword2').value;
-      if( p1 != p2 ) {
-        alert("비밀번호가 일치 하지 않습니다");
-        return false;
-      } 
-    }
 
 
 </script>
