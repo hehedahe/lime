@@ -48,6 +48,7 @@
       </ul>
       <div class="nav-links">
         <a href="#">로그아웃</a>
+      </div>
     </div>
   </nav>
 
@@ -80,22 +81,21 @@
             <table id="x-table" class="table table-striped table-hover table-bordered table-condensed border-primary text-center align-middle">
 				<ul class="nav nav-tabs">
 				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab" href="marketReport.html">게시글</a>
+				    <a class="nav-link" data-toggle="tab" href="clubReport.html">클럽게시글</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab" href="marketCmtReport.html">댓글</a>
+				    <a class="nav-link  active" data-toggle="tab" href="clubCmtReport.html">댓글</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link  active" data-toggle="tab" href="marketRptReport.html">신고</a>
+				    <a class="nav-link" data-toggle="tab" href="clubRptReport.html">신고</a>
 				  </li>
 				</ul>	
               <thead>
                 <tr id="x-thead">
                   <th scope="col">No.</th>
                   <th scope="col">게시글</th>
-                  <th scope="col">게시글상세</th>
-                  <th scope="col">게시일</th>
-                  <th scope="col">판매자명</th>
+                  <th scope="col">이름</th>
+                  <th scope="col">등록일</th>
                 </tr>
               </thead>
             <tbody id ="x-tbody">
@@ -125,18 +125,19 @@ let globalCurrentPage=1; //현재 페이지
        // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
        // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
 
-      fetch("/manage/market/list",{
+      fetch("/manage/club/list",{
           method:"post",
       })
       .then(function(response){
         return response.json();
       })
-      .then(function(market){
-    	console.log(market);
-        totalData = market.length;
-        displayData(1, market);
-        paging(1,market)
+      .then(function(club){
+    	console.log(club);
+        totalData = club.length;
+        displayData(1, club);
+        paging(1,club)
       });
+
 
 	  $(document).on("click", "li[id='rptLi']" , function(){
 			if( $("#sliding_menu").css("display") ==="block"){
@@ -150,7 +151,6 @@ let globalCurrentPage=1; //현재 페이지
 
 
 
-
       $(document).on("click", "button[id='detailBtn']", function () {
 
           location.href = "userDetail.html?no=" +$(this).val();
@@ -159,7 +159,7 @@ let globalCurrentPage=1; //현재 페이지
     });
 
 
-function displayData(currentPage, market) {
+function displayData(currentPage, club) {
 	
 	
 
@@ -183,17 +183,16 @@ for (
 
   chartHtml +=`
   <tr id = "xTr">
-    <td id="x-no">${market[i].itemId}</td>
-          <td>${market[i].itemName}</td>
-          <td>${market[i].content}</td>
-          <td>${market[i].rgtDate}</td>
-          <td>${market[i].name}</td>
+    <td id="x-no">${club[i].postId}</td>
+          <td>${club[i].title}</td>
+          <td>${club[i].name}</td>
+          <td>${club[i].rgtDate}</td>
         </tr>`
 }
 $("#x-tbody").html(chartHtml);
 }
 
-function paging(no,market) {
+function paging(no,club) {
         console.log("no : " + no);
 
   totalPage = Math.ceil(totalData / 5); //총 페이지 수
@@ -250,9 +249,9 @@ function paging(no,market) {
     //전역변수에 선택한 페이지 번호를 담는다...
     globalCurrentPage = selectedPage;
     //페이징 표시 재호출
-    paging(selectedPage,market);
+    paging(selectedPage,club);
     //글 목록 표시 재호출
-    displayData(selectedPage, market);
+    displayData(selectedPage, club);
   });
 }
 </script>

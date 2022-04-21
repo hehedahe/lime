@@ -62,7 +62,7 @@
             <a href="../field/manageFiled.html"">구장관리</a>
           </li>
           <li class="list-group-item nav-item" id="rptLi">
-            <a href="../report/classReport.html">게시글관리</a>
+            게시글관리
             	<ul id="sliding_menu">
             		<li id ="classLi"><a href="../report/classReport.html">클래스</a></li>
             		<li id="marketLi"><a href="../report/marketReport.html">중고마켓</a></li>
@@ -89,7 +89,6 @@
                   <th scope="col">주차장</th>
                   <th scope="col">실내외여부</th>
                   <th scope="col">야간라이트</th>
-                  <th scope="col">정보</th>
                 </tr>
               </thead>
             <tbody id ="x-tbody">
@@ -126,17 +125,21 @@ let globalCurrentPage=1; //현재 페이지
         return response.json();
       })
       .then(function(fields){
-        totalData = fields.length;
+        totalData = fields.length-1;
         displayData(1, fields);
-        paging(1,fields)
+        paging(1,fields,totalData)
       });
 
 	  $(document).on("click", "li[id='rptLi']" , function(){
+			if( $("#sliding_menu").css("display") ==="block"){
+				$("#sliding_menu").css("display","none");
 			
-		  if( $("#sliding_menu").css("display") ==="none"){
+			}else {
 				$("#sliding_menu").css("display","block");
-			}
-		});
+				console.log($(this).attr("id"));
+			};
+		  });
+
 
 
 
@@ -168,7 +171,7 @@ for (
   i < endNum;
   i++
 ) {
-
+ if(fields[i].fieldId != undefined){
   chartHtml +=`
   <tr id = "xTr">
     <td id="x-no">${fields[i].fieldId}</td>
@@ -179,8 +182,8 @@ for (
           <td>${fields[i].parkingYn}</td>
           <td>${fields[i].indYnName}</td>
           <td>${fields[i].lightYn}</td>
-          <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${fields.no}" margin-bottom ="10px">상세</td>
         </tr>`
+ }
 }
 $("#x-tbody").html(chartHtml);
 }

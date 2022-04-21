@@ -29,7 +29,7 @@
 		<result column="commnetId" property="commnetId" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
-		<result column="cName" property="cName" />
+		<result column="name" property="name" />
 		<result column="rgtDate" property="rgtDate" />
 	</resultMap>
 	
@@ -130,12 +130,10 @@
 	<select id="findClubAll" resultMap="clubMap">
 		SELECT
 			post_id postId,
-				(select
-				  name
-				FROM club
-				WHERE club_id = cp.club_id) cName,
+			u.name  name,
 			cp.title title,
-			cp.content content
+			cp.content content,
+			date_format(cp.rgt_date,'%Y-%m-%d') rgtDate
 			FROM
 		club_post cp
 		INNER JOIN user u

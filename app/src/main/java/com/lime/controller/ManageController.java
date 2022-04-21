@@ -1,5 +1,7 @@
 package com.lime.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +11,7 @@ import com.lime.domain.Community;
 import com.lime.domain.Field;
 import com.lime.domain.Market;
 import com.lime.domain.User;
+import com.lime.domain.UserLogin;
 import com.lime.service.ManageReportService;
 import com.lime.service.ManageService;
 
@@ -23,7 +26,8 @@ public class ManageController {
    
   //회원관리-회원리스트
   @RequestMapping("/manage/user/list")
-  public Object userList() {
+  public Object userList(HttpSession session) {
+	  UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
     return manageService.userList();
   }
   //회원관리-특정회원 정보 리스트
