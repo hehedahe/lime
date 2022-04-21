@@ -1,371 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
     <meta
-      name="author"
-      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+            name="author"
+            content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="generator" content="Hugo 0.88.1"/>
     <title>라임</title>
 
     <!-- Bootstrap core CSS -->
     <link
-      rel="stylesheet"
-      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
 
     <link
-      href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css"
-      rel="stylesheet"
+            href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css"
+            rel="stylesheet"
     />
     <link
-      href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css"
-      rel="stylesheet"
+            href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css"
+            rel="stylesheet"
     />
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
         }
-      }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
     </style>
 
     <!-- Custom styles for this template -->
     <!-- <link rel="stylesheet" href="../header/user/u-adminHeader.css"> -->
-    <link href="index.css" rel="stylesheet" />
+    <link href="index.css" rel="stylesheet"/>
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
     <link
-      rel="stylesheet"
-      type="text/css"
-      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+            rel="stylesheet"
+            type="text/css"
+            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
     <script
-      type="text/javascript"
-      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+            type="text/javascript"
+            src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
     ></script>
 
     <script type="text/javascript">
-      $(document).ready(function () {
-        $("#x-header").load("/header/user/header.html"); //헤더 인클루드
-        $("#x-footer").load("/footer/footer.html");
-      });
+        $(document).ready(function () {
+            $("#x-header").load("/header/user/header.html"); //헤더 인클루드
+            $("#x-footer").load("/footer/footer.html");
+        });
     </script>
 
     <script src="import.js" type="module"></script>
-  </head>
+</head>
 
-  <body>
-    <div id="x-header" class="d-flex bd-highlight"></div>
+<body>
+<div id="x-header" class="d-flex bd-highlight"></div>
 
-    <main class="social-match mb-5" id="match-wrapper">
-      <div id="position-div" class="sticky-top">
+<main class="social-match mb-5" id="match-wrapper">
+    <div id="position-div" class="sticky-top">
         <div id="dateNav" class="mb-3">
-          <div id="navWrap">
-            <ul class="list-group date-ul">
-              <button class="btn btn-primary disabled" id="prev-btn">
-                <img src="arrow.png" alt="" />
-              </button>
-              <div class="date-div" id="date-div-1">
-                <li class="list-group-item date-li active">
-                  <a id="date-0"></a>
-                </li>
-                <li class="list-group-item date-li"><a id="date-1"></a></li>
-                <li class="list-group-item date-li"><a id="date-2"></a></li>
-                <li class="list-group-item date-li"><a id="date-3"></a></li>
-                <li class="list-group-item date-li"><a id="date-4"></a></li>
-                <li class="list-group-item date-li"><a id="date-5"></a></li>
-                <li class="list-group-item date-li"><a id="date-6"></a></li>
-                <li class="list-group-item"><a></a></li>
-                <li class="list-group-item date-li"><a id="date-7"></a></li>
-                <li class="list-group-item date-li"><a id="date-8"></a></li>
-                <li class="list-group-item date-li"><a id="date-9"></a></li>
-                <li class="list-group-item date-li"><a id="date-10"></a></li>
-                <li class="list-group-item date-li"><a id="date-11"></a></li>
-                <li class="list-group-item date-li"><a id="date-12"></a></li>
-                <li class="list-group-item date-li"><a id="date-13"></a></li>
-              </div>
-              <button class="btn btn-primary" id="next-btn">
-                <img src="arrow.png" alt="" />
-              </button>
-            </ul>
-          </div>
+            <div id="navWrap">
+                <ul class="list-group date-ul">
+                    <button class="btn btn-primary disabled" id="prev-btn">
+                        <img src="arrow.png" alt=""/>
+                    </button>
+                    <div class="date-div" id="date-div-1">
+                        <li class="list-group-item date-li active">
+                            <a id="date-0"></a>
+                        </li>
+                        <li class="list-group-item date-li"><a id="date-1"></a></li>
+                        <li class="list-group-item date-li"><a id="date-2"></a></li>
+                        <li class="list-group-item date-li"><a id="date-3"></a></li>
+                        <li class="list-group-item date-li"><a id="date-4"></a></li>
+                        <li class="list-group-item date-li"><a id="date-5"></a></li>
+                        <li class="list-group-item date-li"><a id="date-6"></a></li>
+                        <li class="list-group-item"><a></a></li>
+                        <li class="list-group-item date-li"><a id="date-7"></a></li>
+                        <li class="list-group-item date-li"><a id="date-8"></a></li>
+                        <li class="list-group-item date-li"><a id="date-9"></a></li>
+                        <li class="list-group-item date-li"><a id="date-10"></a></li>
+                        <li class="list-group-item date-li"><a id="date-11"></a></li>
+                        <li class="list-group-item date-li"><a id="date-12"></a></li>
+                        <li class="list-group-item date-li"><a id="date-13"></a></li>
+                    </div>
+                    <button class="btn btn-primary" id="next-btn">
+                        <img src="arrow.png" alt=""/>
+                    </button>
+                </ul>
+            </div>
         </div>
-      </div>
+    </div>
 
-      <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex justify-content-between mb-3">
         <div class="d-flex w-100">
-          <select
-            class="form-select"
-            aria-label="region"
-            name="region"
-            id="drop-region"
-          >
-            <option value="0" selected>지역</option>
-            <option value="1">서울</option>
-            <option value="2">부산</option>
-            <option value="3">대구</option>
-            <option value="4">인천</option>
-            <option value="5">광주</option>
-            <option value="6">대전</option>
-            <option value="7">울산</option>
-            <option value="8">세종</option>
-            <option value="9">경기</option>
-            <option value="10">강원</option>
-            <option value="11">충청북도</option>
-            <option value="12">충청남도</option>
-            <option value="13">전라북도</option>
-            <option value="14">전라남도</option>
-            <option value="15">경상북도</option>
-            <option value="16">경상남도</option>
-            <option value="17">제주</option>
-            <!-- <option value="1">모든 지역</option>
-          <option value="2">서울</option>
-          <option value="3">경기/강원</option>
-          <option value="4">인천</option>
-          <option value="5">대전/세종/충청</option>
-          <option value="6">대구/경북</option>
-          <option value="7">부산/울산/경남</option>
-          <option value="8">광주/전라</option>
-          <option value="9">제주</option> -->
-          </select>
-          <select
-            class="form-select"
-            aria-label="city"
-            name="city"
-            id="drop-city"
-          >
-            <option selected>도시</option>
-            <!-- <option value="1">서귀포시</option> -->
-          </select>
-          <select
-            class="form-select"
-            aria-label="level"
-            name="level"
-            id="levelNo"
-          >
-            <option value="0" selected>레벨</option>
-            <option value="1">모든 레벨</option>
-            <option value="2">BEGINNER</option>
-            <option value="3">INTERMEDIATE</option>
-            <option value="4">ADVANCED</option>
-            <option value="5">PRO</option>
-          </select>
-          <select
-            class="form-select"
-            aria-label="gender"
-            name="matchType"
-            id="matchType"
-          >
-            <option value="0" selected>성별</option>
-            <option value="1">남자</option>
-            <option value="2">여자</option>
-            <option value="3">남녀모두</option>
-          </select>
-          <select
-            class="form-select"
-            aria-label="court-type"
-            name="courtType"
-            id="courtType"
-          >
-            <option value="0" selected>코트</option>
-            <option value="1">하드</option>
-            <option value="2">클레이</option>
-            <option value="3">잔디</option>
-            <option value="4">앙투카</option>
-          </select>
+            <select
+                    class="form-select"
+                    aria-label="region"
+                    name="region"
+                    id="drop-region"
+            >
+                <option value="0" selected>지역</option>
+                <option value="1">서울</option>
+                <option value="2">부산</option>
+                <option value="3">대구</option>
+                <option value="4">인천</option>
+                <option value="5">광주</option>
+                <option value="6">대전</option>
+                <option value="7">울산</option>
+                <option value="8">세종</option>
+                <option value="9">경기</option>
+                <option value="10">강원</option>
+                <option value="11">충청북도</option>
+                <option value="12">충청남도</option>
+                <option value="13">전라북도</option>
+                <option value="14">전라남도</option>
+                <option value="15">경상북도</option>
+                <option value="16">경상남도</option>
+                <option value="17">제주</option>
+                <!-- <option value="1">모든 지역</option>
+              <option value="2">서울</option>
+              <option value="3">경기/강원</option>
+              <option value="4">인천</option>
+              <option value="5">대전/세종/충청</option>
+              <option value="6">대구/경북</option>
+              <option value="7">부산/울산/경남</option>
+              <option value="8">광주/전라</option>
+              <option value="9">제주</option> -->
+            </select>
+            <select
+                    class="form-select"
+                    aria-label="city"
+                    name="city"
+                    id="drop-city"
+            >
+                <option selected>도시</option>
+                <!-- <option value="1">서귀포시</option> -->
+            </select>
+            <select
+                    class="form-select"
+                    aria-label="level"
+                    name="level"
+                    id="levelNo"
+            >
+                <option value="0" selected>레벨</option>
+                <option value="1">모든 레벨</option>
+                <option value="2">BEGINNER</option>
+                <option value="3">INTERMEDIATE</option>
+                <option value="4">ADVANCED</option>
+                <option value="5">PRO</option>
+            </select>
+            <select
+                    class="form-select"
+                    aria-label="gender"
+                    name="matchType"
+                    id="matchType"
+            >
+                <option value="0" selected>성별</option>
+                <option value="1">남자</option>
+                <option value="2">여자</option>
+                <option value="3">남녀모두</option>
+            </select>
+            <select
+                    class="form-select"
+                    aria-label="court-type"
+                    name="courtType"
+                    id="courtType"
+            >
+                <option value="0" selected>코트</option>
+                <option value="1">하드</option>
+                <option value="2">클레이</option>
+                <option value="3">잔디</option>
+                <option value="4">앙투카</option>
+            </select>
         </div>
         <div id="my-preferred">
-          <input
-            type="checkbox"
-            value=""
-            name="my-preferred"
-            id="my-preferred-checkbox"
-            class="form-check-input"
-          />
-          <!-- &nbsp;&nbsp;내 선호 -->
-          <span>&nbsp;&nbsp;내 선호</span>
+            <input
+                    type="checkbox"
+                    value=""
+                    name="my-preferred"
+                    id="my-preferred-checkbox"
+                    class="form-check-input"
+            />
+            <!-- &nbsp;&nbsp;내 선호 -->
+            <span>&nbsp;&nbsp;내 선호</span>
         </div>
         <!-- <select class="form-select" aria-label="my-preferred" name="" id="preferred">
         <option selected>내 선호</option>
       </select> -->
-      </div>
+    </div>
 
-      <ul class="list-group list-group-flush match-list"></ul>
-    </main>
+    <ul class="list-group list-group-flush match-list"></ul>
+</main>
 
-    <div id="x-footer"></div>
+<div id="x-footer"></div>
 
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-      "use strict";
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    "use strict";
 
-      $(document).ready(function () {
+    $(document).ready(function () {
         var today = new Date();
         var date = today.getDate();
 
         // console.log(today);
 
         for (let i = 0; i < 14; i++) {
-          // console.log(date + i)
-          var year = today.getFullYear();
-          var month = ("0" + (today.getMonth() + 1)).slice(-2);
-          var day = ("0" + today.getDate()).slice(-2);
-          var dateString = year + "-" + month + "-" + day;
-          $(`#date-${i}`).html(`${day}<p id="${day - i}">${getDay(dateString)}</p>`);
-          if (getDay(dateString) === "토") {
-            $(`#date-${i}`).closest("li").addClass("sat");
-          } else if (getDay(dateString) === "일") {
-            $(`#date-${i}`).closest("li").addClass("sun");
-          }
-          // console.log(dateString)
-          $(`#date-${i}`).attr("date", `${dateString}`);
-          // $(`#date-${i}`).attr("href", `http://localhost:8080/match/list?matchDate=${dateString}`)
-          today.setDate(today.getDate() + 1);
+            // console.log(date + i)
+            var year = today.getFullYear();
+            var month = ("0" + (today.getMonth() + 1)).slice(-2);
+            var day = ("0" + today.getDate()).slice(-2);
+            var dateString = year + "-" + month + "-" + day;
+            $(`#date-${i}`).html(`${day}<p id="${day - i}">${getDay(dateString)}</p>`);
+            if (getDay(dateString) === "토") {
+                $(`#date-${i}`).closest("li").addClass("sat");
+            } else if (getDay(dateString) === "일") {
+                $(`#date-${i}`).closest("li").addClass("sun");
+            }
+            // console.log(dateString)
+            $(`#date-${i}`).attr("date", `${dateString}`);
+            // $(`#date-${i}`).attr("href", `http://localhost:8080/match/list?matchDate=${dateString}`)
+            today.setDate(today.getDate() + 1);
         }
 
         let matchDate = $("#date-0").attr("date");
         makeMatchList(
-          `http://localhost:8080/match/list?matchDate=${matchDate}`
+            `http://localhost:8080/match/list?matchDate=${matchDate}`
         );
-      });
+    });
 
-      function getDay(date) {
+    function getDay(date) {
         let today = new Date(date);
         const week = ["일", "월", "화", "수", "목", "금", "토"];
         let day = week[today.getDay()];
         return day;
-      }
+    }
 
-      function makeMatchList(url) {
+    function makeMatchList(url) {
         $.getJSON(url, function (arr) {
-          console.log(arr);
-          let str = "";
-          if (arr.length == 0) {
-            str += `<div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">오늘 매치는 마감되었습니다.</div>`;
-            $(".match-list").html(str);
-            return;
-          }
-          for (let i = 0; i < arr.length; i++) {
-            let state = "";
-            let aaa = "";
-            if (arr[i].state === "A") {
-              state = "신청 가능";
-            } else {
-              state = "마감";
-              aaa = "closed-btn";
+            console.log(arr);
+            let str = "";
+            if (arr.length == 0) {
+                str += `<div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">오늘 매치는 마감되었습니다.</div>`;
+                $(".match-list").html(str);
+                return;
             }
-            str += `
-          <a href="/social-match/detail.html?matchId=${
-            arr[i].matchId
-          }" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between align-items-center">
-              <div>
-                <div class="d-flex justify-content-start align-items-center">
-                  <div class="me-4 match-time">${arr[i].startTime.slice(
-                    0,
-                    5
-                  )}</div>
-                  <div class="ms-1">
-                    <h6 class="mb-1">${arr[i].court.field.name} ${
-              arr[i].court.name
-            }</h6>
-                    <p class="text-muted match-info">${checkMatchType(
-                      arr[i].matchTypeNo
-                    )} · ${checkNumOfPeople(
-              arr[i].numOfPeople
-            )} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(
-              arr[i].levelNo
-            )}</p>
-                  </div>
-                </div>
-              </div>
-              <button class="btn match-btn ${aaa}" onclick="location.href='/social-match/detail.html?matchId=${
-              arr[i].matchId
-            }'">${state}</button>
-              </div>
-            </a>`;
-          }
-          $(".match-list").html(str);
+            for (let i = 0; i < arr.length; i++) {
+                let state = "";
+                let aaa = "";
+                if (arr[i].state === "A") {
+                    state = "신청 가능";
+                } else {
+                    state = "마감";
+                    aaa = "closed-btn";
+                }
+                str += `
+                          <a href="/social-match/detail.html?matchId=${
+                                    arr[i].matchId
+                                }" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                              <div>
+                                <div class="d-flex justify-content-start align-items-center">
+                                  <div class="me-4 match-time">${arr[i].startTime.slice(
+                                    0,
+                                    5
+                                )}</div>
+                                  <div class="ms-1">
+                                    <h6 class="mb-1">${arr[i].court.field.name} ${
+                                    arr[i].court.name
+                                }</h6>
+                                    <p class="text-muted match-info">${checkMatchType(
+                                    arr[i].matchTypeNo
+                                )} · ${checkNumOfPeople(
+                                    arr[i].numOfPeople
+                                )} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(
+                                    arr[i].levelNo
+                                )}</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <button class="btn match-btn ${aaa}"
+                                      onclick="location.href='/social-match/detail.html?matchId=${arr[i].matchId}'">
+                                ${state}
+                              </button>
+                              </div>
+                            </a>`;
+                            }
+            $(".match-list").html(str);
         });
-      }
+    }
 
-      function checkMatchType(matchTypeNo) {
+    function checkMatchType(matchTypeNo) {
         switch (matchTypeNo) {
-          case 1:
-            return "남자";
-          case 2:
-            return "여자";
-          case 3:
-            return "혼성";
+            case 1:
+                return "남자";
+            case 2:
+                return "여자";
+            case 3:
+                return "혼성";
         }
-      }
+    }
 
-      function checkNumOfPeople(numOfPeople) {
+    function checkNumOfPeople(numOfPeople) {
         switch (numOfPeople) {
-          case "S":
-            return "1vs1";
-          case "D":
-            return "2vs2";
+            case "S":
+                return "1vs1";
+            case "D":
+                return "2vs2";
         }
-      }
+    }
 
-      function checkLevel(level) {
+    function checkLevel(level) {
         switch (level) {
-          case 1:
-            return "모든 레벨";
-          case 2:
-            return "BEGINNER";
-          case 3:
-            return "INTERMEDIATE";
-          case 4:
-            return "ADVANCED";
-          case 5:
-            return "PRO";
+            case 1:
+                return "모든 레벨";
+            case 2:
+                return "BEGINNER";
+            case 3:
+                return "INTERMEDIATE";
+            case 4:
+                return "ADVANCED";
+            case 5:
+                return "PRO";
         }
-      }
+    }
 
-      function checkCourtType(courtTypeNo) {
+    function checkCourtType(courtTypeNo) {
         switch (courtTypeNo) {
-          case 1:
-            return "하드";
-          case 2:
-            return "클레이";
-          case 3:
-            return "잔디";
-          case 4:
-            return "앙투카";
+            case 1:
+                return "하드";
+            case 2:
+                return "클레이";
+            case 3:
+                return "잔디";
+            case 4:
+                return "앙투카";
         }
-      }
+    }
 
-      var URLSearchParams = new URLSearchParams();
-      console.log("URLSearchParams : " + URLSearchParams);
+    var URLSearchParams = new URLSearchParams();
+    console.log("URLSearchParams : " + URLSearchParams);
 
-      $(".form-select").on("change", function (e) {
+    $(".form-select").on("change", function (e) {
         const name = $(e.target).attr("name");
         console.log(name);
         const value = e.target.value;
         console.log(value);
 
         if (value == 0) {
-          URLSearchParams.delete(name);
+            URLSearchParams.delete(name);
         } else {
-          URLSearchParams.set(name, value);
+            URLSearchParams.set(name, value);
         }
 
         let matchDate = $(".active a").attr("date");
@@ -376,78 +377,78 @@
         console.log("URLSearchParams : " + URLSearchParams);
 
         $.getJSON(
-          `http://localhost:8080/match/list?${URLSearchParams}`,
-          function (arr) {
-            console.log(arr);
-            const matchList = $(".match-list");
-            let str = "";
-            for (let i = 0; i < arr.length; i++) {
-              let state = "";
-              let aaa = "";
-              if (arr[i].state === "A") {
-                state = "신청 가능";
-              } else {
-                state = "마감";
-                aaa = "closed-btn";
-              }
-              str += `
+            `http://localhost:8080/match/list?${URLSearchParams}`,
+            function (arr) {
+                console.log(arr);
+                const matchList = $(".match-list");
+                let str = "";
+                for (let i = 0; i < arr.length; i++) {
+                    let state = "";
+                    let aaa = "";
+                    if (arr[i].state === "A") {
+                        state = "신청 가능";
+                    } else {
+                        state = "마감";
+                        aaa = "closed-btn";
+                    }
+                    str += `
           <a href="/social_match/index.html" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between align-items-center">
               <div>
                 <div class="d-flex justify-content-start align-items-center">
                   <div class="me-4 match-time">${arr[i].startTime.slice(
-                    0,
-                    5
-                  )}</div>
+                        0,
+                        5
+                    )}</div>
                   <div class="ms-1">
                     <h6 class="mb-1">${arr[i].court.field.name} ${
-                arr[i].court.name
-              }</h6>
+                        arr[i].court.name
+                    }</h6>
                     <p class="text-muted match-info">${checkMatchType(
-                      arr[i].matchTypeNo
+                        arr[i].matchTypeNo
                     )} · ${checkNumOfPeople(
-                arr[i].numOfPeople
-              )} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(
-                arr[i].levelNo
-              )}</p>
+                        arr[i].numOfPeople
+                    )} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(
+                        arr[i].levelNo
+                    )}</p>
                   </div>
                 </div>
               </div>
               <button class="btn match-btn ${aaa}">${state}</button>
               </div>
             </a>`;
+                }
+                $(".match-list").html(str);
             }
-            $(".match-list").html(str);
-          }
         );
-      });
+    });
 
-      $("#next-btn").on("click", (e) => {
+    $("#next-btn").on("click", (e) => {
         $(".date-div")
-          .css("transform", "translateX(-53.1%)")
-          .css("transition", "all .5s");
+            .css("transform", "translateX(-53.1%)")
+            .css("transition", "all .5s");
         $("#next-btn").addClass("disabled");
         $("#prev-btn").removeClass("disabled");
-      });
+    });
 
-      $("#prev-btn").on("click", (e) => {
+    $("#prev-btn").on("click", (e) => {
         $(".date-div")
-          .css("transform", "translateX(0%)")
-          .css("transition", "all .5s");
+            .css("transform", "translateX(0%)")
+            .css("transition", "all .5s");
         $("#prev-btn").addClass("disabled");
         $("#next-btn").removeClass("disabled");
-      });
+    });
 
-      $(".date-li a").on("click", (e) => {
+    $(".date-li a").on("click", (e) => {
         // console.log(e.target.getAttribute("date"))
         $(".date-li.active").removeClass("active");
         $(e.target).closest("li").addClass("active");
         // let matchDate = e.target.getAttribute("date")
         let matchDate = $(e.target).closest("a").attr("date");
         makeMatchList(
-          `http://localhost:8080/match/list?matchDate=${matchDate}`
+            `http://localhost:8080/match/list?matchDate=${matchDate}`
         );
-      });
-    </script>
-  </body>
+    });
+</script>
+</body>
 </html>

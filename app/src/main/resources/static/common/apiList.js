@@ -55,7 +55,7 @@ export async function fieldList() {
     }
 };
 
-// 테니스장 리스트 by 좌표
+// 시도/시군구 중심좌표로 테니스장 리스트 가져오기
 export async function courtList(lat, lng) {
     try {
         const response = await axios(`${PATH.field.courtList}?lat=${lat}&lng=${lng}`);

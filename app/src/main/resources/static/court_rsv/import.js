@@ -243,9 +243,14 @@ $(document).on('click', '.date-wrap', async function (e) {
 // =====================================
 // 결제 페이지로 데이터 넘기기
 // =====================================
-// $('sche-btn').on('click', aysnc function (e) {
-//     const res = await bookCourt()
-// })
+$('sche-btn').on('click', function (e) {
+    fetch('/book/court', {
+        method: "POST",
+        body: {
+
+        }
+    })
+})
 
 
 
