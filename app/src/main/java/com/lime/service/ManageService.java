@@ -7,6 +7,8 @@ import com.lime.domain.User;
 public interface ManageService {
 
   List<User> userList();
+  
+  List<User> managerList();
 
   int userCount();
   
