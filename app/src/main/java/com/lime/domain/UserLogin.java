@@ -1,32 +1,40 @@
 package com.lime.domain;
 
-import java.sql.Date;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
 public class UserLogin {
-  String no;
-  String userId; // user_id
-  String name; 
+  int userId;
   String email;
-  String userType;
-  String rgtDate;
-  int sum;
-  String gender; //gender
-  String bankName; // 은행명
-  String acntNo; // 계좌번호
-  String acntHolder; // 예금주명
-  String blockDate; // 제재일
-  
-  
-  String password;
+  String name;
   String phoneNo;
+  String rgtDate;
+  String unrgtDate;
+  boolean unrgtYn;
+  int password;
+  String userImg;
+  String userType;
+  //로그인에서 안받는 정보
+  int clubId;
+  String gender;
+  String brthDate;
+  int socialId;
+  boolean socialYn;
+  int bankId;
+  String bankName;
+  String accountNo;
+  String accountHolder;
   boolean eventYn;
-  Date brthDay;
-  String UserImg;
-  String UserType;
-  
+  String scope;
+  int preferDays;
+  int preferWeekend;
+  int cityId;
+  int regionId;
+  String cityName;
+  String regionName;
+  int courtTypeId;
+  String courtTypeName;
+  String leftYn;
 }

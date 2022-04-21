@@ -1,6 +1,8 @@
 "use strict"
 
-import {Region1} from './region.js';
+import {Region1} from './region.js'
+
+
 
 // ================
 // 시도/시군구 선택
