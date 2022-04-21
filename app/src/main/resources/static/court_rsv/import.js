@@ -1,15 +1,25 @@
 "use strict"
 
 import {selectCity} from '../common/selectCity.js'
-import {fieldList, getCourt, courtList, findRegion, findCity, rsvsByDate} from '../common/apiList.js'
+import {
+    fieldList,
+    getCourt,
+    courtList,
+    findRegion,
+    findCity,
+    rsvsByDate,
+    dateFormat,
+    bookCourt
+} from '../common/apiList.js'
 
 
 
 
 
-// =================
+// =====================================
 // 카카오 지도 API
-// =================
+// =====================================
+
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 var options = { //지도를 생성할 때 필요한 기본 옵션
     center: new kakao.maps.LatLng(37.499, 127.029), //지도의 중심좌표.
@@ -40,9 +50,10 @@ function panTo(lat, lng) {
 
 
 
-// =================
+// =====================================
 // 전체 코트 마커 뿌리기
-// =================
+// =====================================
+
 var marker, markerPosition;
 
 (async function () {
@@ -68,9 +79,10 @@ var marker, markerPosition;
 
 
 
-// =================
+// =====================================
 // 시도/시군구 sorting & 중심좌표 뿌리기
-// =================
+// =====================================
+
 const dropRegion = $('#drop-region');
 const dropCity = $('#drop-city');
 
@@ -158,9 +170,9 @@ dropCity.on('change', async function (e) {
 
 
 
-// =================
+// =====================================
 // 카드 클릭 시 효과
-// =================
+// =====================================
 $(document).on('click', '.card-btn', async function(e) {
     // 카드 css 효과 유지
     $('.card').removeClass('selected-card');
@@ -186,35 +198,61 @@ $(document).on('click', '.card-btn', async function(e) {
     $('#crt-indYn').text(checkIndoor(court.indYn) + '  ·');
     $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
     $('#crt-parking').text(checkParking(court.parkingArea));
+
+    // 날짜 형식 YYMMDD
+    let today = new Date();
+    let month = ("0" + (today.getMonth() + 1)).slice(-2);
+    let year = ("0" + today.getFullYear()).slice(-2);
+    let date = today.getDate();
+    today = year + month + ("0" + date).slice(-2);
+
+    // 현재 날짜 예약 시간 비활성화
+    const res = await rsvsByDate(today, court.fieldId);
+
+    res.data?.map((rsv) => {
+        let time = ("0" + rsv.dateTime).slice(-2);
+        $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).addClass('closed');
+    });
 });
 
+
+
+
+
+// =====================================
 // 해당 날짜 예약 리스트 가져오기
+// =====================================
+
 $(document).on('click', '.date-wrap', async function (e) {
+    $('[data-time]').removeClass('closed');
+
     let selectedDate = e.target.getAttribute('data-date');
     let selectedField = $('#crt-name').attr('data-court-id');
-
     const res = await rsvsByDate(selectedDate, selectedField);
 
-    console.log(res);
     res.data?.map((rsv) => {
-
         let time = ("0" + rsv.dateTime).slice(-2);
-
-        $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).addClass("closed");
+        $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).addClass('closed');
     })
-
-
-
-})
-
+});
 
 
 
 
 
-// =================
+// =====================================
+// 결제 페이지로 데이터 넘기기
+// =====================================
+// $('sche-btn').on('click', aysnc function (e) {
+//     const res = await bookCourt()
+// })
+
+
+
+
+// =====================================
 // 코트 타입 / 실내외 / 주차여부
-// =================
+// =====================================
 
 // 코트타입 체크
 function checkCourtType(courtTypeId) {

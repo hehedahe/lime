@@ -12,7 +12,7 @@ for (let i = 0; i < 14; i++) {
     let month = ("0" + (today.getMonth() + 1)).slice(-2);
     let year = ("0" + today.getFullYear()).slice(-2);
     let date = today.getDate();
-    let dateFormat = year + month + ("0" + today.getDate()).slice(-2);
+    let dateFormat = year + month + ("0" + date).slice(-2);
     let day = WEEKDAY[today.getDay()];
 
     if (day == '토') {
