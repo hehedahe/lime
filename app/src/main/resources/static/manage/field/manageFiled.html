@@ -84,10 +84,10 @@
                   <th scope="col">구장명</th>
                   <th scope="col">구장주소</th>
                   <th scope="col">코트타입</th>
-                  <th scope="col">코트갯수</th>
+                  <th scope="col">코트수</th>
                   <th scope="col">주차장</th>
-                  <th scope="col">실내외여부</th>
-                  <th scope="col">야간라이트</th>
+                  <th scope="col">실내외</th>
+                  <th scope="col">라이트</th>
                 </tr>
               </thead>
             <tbody id ="x-tbody">
@@ -170,19 +170,36 @@ for (
   i < endNum;
   i++
 ) {
- if(fields[i].fieldId != undefined){
+ 
+	var arr =fields[i].addr.split(" ");	
+	var goo = '';
+	var remainAddr='';
+	
+	if(arr.length > 3){
+	 	goo = arr[0]+' '+ arr[1] + ' ' +arr[2] + ' ' + arr[3];
+		
+	 	for(var j = 0 ; j<arr.length;j++){
+			if(j > 3){
+				remainAddr += arr[j] + ' ';
+			}
+		}
+	}else{
+		goo = arr[0]+' ' + arr[1] + ' ' + arr[2]
+	}
+			
+	
   chartHtml +=`
   <tr id = "xTr">
     <td id="x-no">${fields[i].fieldId}</td>
           <td>${fields[i].name}</td>
-          <td>${fields[i].addr}</td>
+          <td>${goo}</br>${remainAddr}</td>
           <td>${fields[i].courtName}</td>
           <td>${fields[i].courtCnt}</td>
           <td>${fields[i].parkingYn}</td>
           <td>${fields[i].indYnName}</td>
           <td>${fields[i].lightYn}</td>
         </tr>`
- }
+ 		remainAddr ='';
 }
 $("#x-tbody").html(chartHtml);
 }
