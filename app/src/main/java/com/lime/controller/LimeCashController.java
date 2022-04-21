@@ -15,7 +15,7 @@ import com.lime.domain.UserLogin;
 import com.lime.service.LimeCashService;
 
 @RestController
-@RequestMapping("/rsv")
+@RequestMapping("/book")
 public class LimeCashController {
 
   private static final Logger log = LogManager.getLogger(LimeCashController.class);

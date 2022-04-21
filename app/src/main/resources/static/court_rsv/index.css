@@ -265,9 +265,10 @@ button.date-wrap.selected-date {
 
 .closed {
     background-color: rgb(240, 240, 240);
+    color: rgb(127, 127, 127);
 }
 .closed:hover {
     background-color: rgb(240, 240, 240);
-    color: #000;
+    color: rgb(127, 127, 127);
     cursor: default;
 }

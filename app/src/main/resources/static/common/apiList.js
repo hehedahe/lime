@@ -14,7 +14,8 @@ const PATH = {
         getLoginUser: '/member/getLoginUser'
     },
     courtRsv: {
-        rsvsByDate: '/court-rsv/get'
+        rsvsByDate: '/court-rsv/get',
+        bookCourt: '/book/court'
     }
 };
 
@@ -110,6 +111,7 @@ export async function findCity(cityName, regionId) {
 // court reservation
 // *********************
 
+// 코트 예약 리스트 가져오기
 export async function rsvsByDate(date, fieldId) {
     try {
         const response = await axios(`${PATH.courtRsv.rsvsByDate}?date=${date}&fieldId=${fieldId}`)
@@ -118,3 +120,14 @@ export async function rsvsByDate(date, fieldId) {
         console.log(e);
     }
 }
+
+// 코트 예약하기
+export async function bookCourt(bookInfo) {
+    try {
+        const response = await axios(`${PATH.courtRsv.bookCourt}`);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
