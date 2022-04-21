@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.lime.domain.LimeCash;
 import com.lime.domain.MatchRsv;
+import com.lime.domain.Member;
 import com.lime.domain.SearchCondition;
 import com.lime.domain.UserLogin;
 import com.lime.service.LimeCashService;
@@ -52,16 +54,27 @@ public class MatchRsvController {
     }
   }
 
-  //  @RequestMapping("/order")
-  //  public Object add(LimeCash limeCash, MatchRsv matchRsv, HttpSession session) {
-  //    log.info("소셜매치 결제!"); // 운영자가 확인하기를 원하는 정보
-  //    log.debug(matchRsv.toString()); // 개발자가 확인하기를 원하는 정보
-  //
-  //    UserLogin member = (UserLogin) session.getAttribute("loginUser");
-  //    matchRsv.setUserId(Integer.parseInt(member.getUserId()));
-  //
-  //    matchRsvService.add(matchRsv.getUserId(), matchRsv, limeCash);
-  //
-  //    return new ResultMap().setStatus(SUCCESS);
-  //  }
+  @RequestMapping("/add")
+  public Object checkout(LimeCash limeCash, MatchRsv matchRsv, HttpSession session) {
+
+    // 요청 파라미터 분석 및 가공
+
+    Member user = (Member) session.getAttribute("loginUser");
+    limeCash.setUserId(user.getNo());
+
+    log.debug("limeCash = " + limeCash);
+
+    matchRsv.setUserId(user.getNo());
+    matchRsv.setLimeId(limeCash.getLimeId());
+
+    log.debug("matchRsv = " + matchRsv);
+
+    limeCash.setMatchRsv(matchRsv);
+
+    log.debug("limeCash = " + limeCash);
+
+    limeCashService.checkout(limeCash);
+
+    return new ResultMap().setStatus(SUCCESS);
+  }
 }

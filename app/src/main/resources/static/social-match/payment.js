@@ -104,10 +104,9 @@ function getFullYmdStr(date) {
   );
 }
 
-$(".modal-footer button").on("click", (e) => {
-  $.getJSON(`/rsv/match?amt=20000&typeUse=U&matchId=${matchId}&state=P`), (result) => {
-    console.log(result.status)
-  }
-  console.log("하하하하하하하")
+$(".modal-footer button").on("click", function () {
+  $.getJSON(`/rsv/match/add?amt=20000&typeUse=U&matchId=${matchId}&state=P`, function (result) {
+    console.log('소셜매치 결제 : ' + result.status)
+  })
   // location.href = `/social-match/index.html`
 })
