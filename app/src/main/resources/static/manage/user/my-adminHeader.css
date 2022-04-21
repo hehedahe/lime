@@ -23,6 +23,11 @@ html {
     font-family: 'NG';
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+}
+
 /* header 전체*/
 #h-nav {
     width: 100vw;

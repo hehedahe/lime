@@ -49,10 +49,6 @@ nav {
     background-color: rgb(191, 186, 178);
 }
 
-body{
-    max-width: 1024px; 
-}
-
 /* 로고 */
 .nav-logo {
     height: 10vh;
