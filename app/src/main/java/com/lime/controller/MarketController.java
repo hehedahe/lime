@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -20,6 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import com.lime.domain.ItemImage;
+import com.lime.domain.ItemLike;
 import com.lime.domain.Market;
 import com.lime.domain.UserLogin;
 import com.lime.service.MarketService;
@@ -93,6 +96,15 @@ public class MarketController {
     return new ResultMap().setStatus(SUCCESS).setData(market);
   }
 
+  @RequestMapping("/market/getPhoto")
+  public Object getPhoto(int no) {
+    List<ItemImage> itemImage = marketService.getPhoto(no);
+    if (itemImage == null) {
+      return new ResultMap().setStatus(FAIL).setData("해당 번호의 게시글이 없습니다."); // 컨트롤러는 서비스 객체의 리턴 값에 따라 응답 데이터를 적절히 가공하여 리턴한다.
+    }
+    return new ResultMap().setStatus(SUCCESS).setData(itemImage);
+  }
+
   @RequestMapping("/market/add")
   public Object add(Market market, MultipartFile[] files, HttpSession session) {
     UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
@@ -111,13 +123,34 @@ public class MarketController {
     }
   }
 
+  @RequestMapping("/market/like")
+  public Object update(ItemLike itemLike, HttpSession session) {
+    UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
+    itemLike.setWriter(userLogin);
+    System.out.println(itemLike);
+
+    if (itemLike.isDone()) {
+      //      marketService.add(itemLike);
+    } 
+    if (!(itemLike.isDone())) {
+      System.out.println("조아요 해제!");
+    }
+    return 1;
+  }
+
 
   @RequestMapping("/market/photo")
-  public ResponseEntity<Resource> photo(String filename) {
+  public ResponseEntity<Resource> photo(String filename, String type) {
 
     try {
-      // 다운로드할 파일의 입력 스트림 자원을 준비한다.
-      File downloadFile = new File("./upload/item/" + filename); // 다운로드 상대 경로 준비
+      File downloadFile;
+      if (type.equals("main")) {
+        // 다운로드할 파일의 입력 스트림 자원을 준비한다.
+        downloadFile = new File("./upload/item/" + "300x250_" + filename); // 다운로드 상대 경로 준비
+      } else {
+        // 다운로드할 파일의 입력 스트림 자원을 준비한다.
+        downloadFile = new File("./upload/item/"  + filename); // 다운로드 상대 경로 준비
+      }
       FileInputStream fileIn = new FileInputStream(downloadFile.getCanonicalPath()); // 다운로드 파일의 실제
       // 경로를 지정하여 입력
       // 스트림 준비
@@ -180,8 +213,8 @@ public class MarketController {
         file.transferTo(photoFile.getCanonicalFile()); // 프로젝트 폴더의 전체 경로를 전달한다.
 
         // 썸네일 이미지 파일 생성
-        Thumbnails.of(photoFile).size(50, 50).crop(Positions.CENTER).outputFormat("jpg")
-        .toFile(new File("./upload/item/" + "50x50_" + filename));
+        Thumbnails.of(photoFile).size(300, 250).crop(Positions.CENTER).outputFormat("jpg")
+        .toFile(new File("./upload/item/" + "300x250_" + filename));
 
         System.out.println("filename>>" + filename);
         fileNames.add(filename);

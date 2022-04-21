@@ -19,6 +19,12 @@
   <!-- 
     id => 인터페이스의 메서드 이름과 일치해야 한다.
    -->
+   <select id="findByNo" resultMap="imageMap" parameterType="int">
+    select
+     file_path
+    from item_img 
+    where item_id=#{no}
+  </select>
   
   <insert id="insert" parameterType="ItemImage">
     insert into item_img(item_id,file_path)

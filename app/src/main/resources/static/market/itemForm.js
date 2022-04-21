@@ -13,7 +13,35 @@ var contentValue = document.querySelector("textarea");
 
 $(document).ready(function(e) {
   textAreaAutoSizing();
+
+  
+  $(document).on("click", "#complete-btn", function() {
+    if ($("#region").val() == "" || 
+        $("#city").val() == "" ||
+        $("#item-price").val() == "" ||
+        $("#item-name").val() == "" ||
+        $("#item-content").val() == "" ||
+        !$("#btnAtt").val()) {
+      window.alert("모든 항목을 입력해주세요");
+      return;
+    }
+    
+    var fd = new FormData(document.forms.namedItem("form1"));
+    
+    fetch("/market/add", { 
+        method: "POST",
+        body: fd
+      }) 
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text);
+        location.href = "marketMain.html";
+      });
+  });
 });
+
 
 region.addEventListener('change', (event) => {
     let value = event.target.value;
@@ -93,7 +121,7 @@ region.addEventListener('change', (event) => {
     }
 
     
-    /*첨부된 이미리즐을 배열에 넣고 미리보기 */
+    /*첨부된 이미지들을 배열에 넣고 미리보기 */
     var imageLoader = function(file){
       sel_files.push(file);
       var reader = new FileReader();
@@ -143,27 +171,3 @@ region.addEventListener('change', (event) => {
   }
 )('att_zone', 'btnAtt')
 
-document.querySelector("#complete-btn").onclick = function() {
-  // if (regionValue.value == "" || 
-  //     cityValue.value == "" ||
-  //     priceValue.value == "" ||
-  //     titleValue.value == "" ||
-  //     contentValue.value == "") {
-  //   window.alert("필수 입력 항목이 비어 있습니다.");
-  //   return;
-  // }
-  
-  var fd = new FormData(document.forms.namedItem("form1"));
-  
-  fetch("/market/add", { 
-      method: "POST",
-      body: fd
-    }) 
-    .then(function(response) {
-      return response.text();
-    })
-    .then(function(text) {
-      console.log(text);
-      //location.href = "?content=/book/index.html";
-    });
-};

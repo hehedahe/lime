@@ -1,11 +1,11 @@
 package com.lime.service;
 
 import java.util.List;
+import com.lime.domain.ItemImage;
 import com.lime.domain.Market;
+import com.lime.domain.ItemLike;
 
 public interface MarketService {
-
-  int add(Market market, Object fileList);
 
   List<Market> list(String keyword);
 
@@ -21,7 +21,11 @@ public interface MarketService {
 
   Market get(int no);
 
+  int add(Market market, Object fileList);
 
+  int add(ItemLike itemLike);
+
+  List<ItemImage> getPhoto(int no);
 
   //int update(Market contact);
 
