@@ -25,6 +25,8 @@ public interface MarketDao {
   Market findByNo(int no);
 
   int insert(Market market);
+
+  int increaseViewCount(int no);
   //
   //
   //  Market findByEmail(String email);

@@ -1,5 +1,6 @@
 package com.lime.domain;
 
+import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -22,7 +23,7 @@ public class Market {
   String userName;
   int mannerScore;
   String lvName;
-  String photo;
+  List<ItemImage> photo;
 
   ///중고물품게시판 
   String name; //판매자
