@@ -41,6 +41,10 @@ public class  DefaultMenageService implements ManageService {
     
     return userNo;
   }
+@Override
+public List<User> managerList() {
+	return manageDao.findManagerAll();
+}
 }
 
 

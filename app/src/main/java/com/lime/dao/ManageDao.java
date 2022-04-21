@@ -17,6 +17,8 @@ public interface ManageDao {
   int countUserAll();
 
   List<User> findAll();
+  
+  List<User> findManagerAll();
 
   User findByNo(int no);
   

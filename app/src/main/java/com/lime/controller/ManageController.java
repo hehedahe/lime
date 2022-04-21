@@ -30,6 +30,13 @@ public class ManageController {
 	  UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
     return manageService.userList();
   }
+  @RequestMapping("/manage/manager/list")
+  public Object managerList(HttpSession session) {
+	  UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
+    return manageService.managerList();
+  }
+  
+  
   //회원관리-특정회원 정보 리스트
   @RequestMapping("/manage/user/get")
   public Object userGet(int no) {
