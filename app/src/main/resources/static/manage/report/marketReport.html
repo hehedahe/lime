@@ -61,12 +61,12 @@
             <a href="../field/manageFiled.html"">구장관리</a>
           </li>
           <li class="list-group-item nav-item" id="rptLi">
-            <a href="#">게시글관리</a>
+             게시글관리
             	<ul id="sliding_menu">
-            		<li id ="classLi"><a href="manageReport.html">클래스</a></li>
-            		<li id="marketLi"><a href="marketReport.html">중고마켓</a></li>
-            		<li id="clubLi"><a href="#">클럽</a></li>
-            		<li id="cummunityLi"><a href="#">커뮤니티</a></li>
+            		<li id="classLi"><a href="../report/classReport.html" >클래스</a></li>
+            		<li><a href="../report/marketReport.html">중고마켓</a></li>
+            		<li><a href="../report/clubReport.html">클럽</a></li>
+            		<li><a href="../report/communityReport.html">커뮤니티</a></li>
             	</ul>
           </li>
           <li class="list-group-item nav-item">
@@ -138,14 +138,16 @@ let globalCurrentPage=1; //현재 페이지
         paging(1,market)
       });
 
+
 	  $(document).on("click", "li[id='rptLi']" , function(){
+			if( $("#sliding_menu").css("display") ==="block"){
+				$("#sliding_menu").css("display","none");
 			
-		  if( $("#sliding_menu").css("display") ==="none"){
+			}else {
 				$("#sliding_menu").css("display","block");
-			}
-		});
-
-
+				console.log($(this).attr("id"));
+			};
+		  });
 
       $(document).on("click", "button[id='detailBtn']", function () {
 

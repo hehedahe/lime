@@ -9,5 +9,5 @@ public class Club {
   String title;
   String content;
   String rgtDate;
-  String cName;
+  String name;
 }

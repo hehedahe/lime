@@ -1,7 +1,11 @@
 "use strict"
 
 import {selectCity} from '../common/selectCity.js'
-import {fieldList, getCourt, courtList, findRegion, findCity} from '../common/apiList.js'
+import {fieldList, getCourt, courtList, findRegion, findCity, rsvsByDate} from '../common/apiList.js'
+
+
+
+
 
 // =================
 // 카카오 지도 API
@@ -33,6 +37,9 @@ function panTo(lat, lng) {
 };
 
 
+
+
+
 // =================
 // 전체 코트 마커 뿌리기
 // =================
@@ -56,6 +63,10 @@ var marker, markerPosition;
         marker.setMap(map);
     })
 })();
+
+
+
+
 
 // =================
 // 시도/시군구 sorting & 중심좌표 뿌리기
@@ -144,25 +155,8 @@ dropCity.on('change', async function (e) {
 });
 
 
-// =================
-// 날짜 swiper
-// =================
-var swiper = new Swiper(".date-swiper", {
-    slidesPerView: 7,
-    slidesPerGroup: 7,
-    spaceBetween: 10, // slidesPerView 여백
-    simulateTouch: false,
-    direction: getDirection(),
-    navigation: {
-        nextEl: "#date-next",
-        prevEl: "#date-prev"
-    },
-    on: {
-        resize: function () {
-            swiper.changeDirection(getDirection());
-        }
-    }
-});
+
+
 
 // =================
 // 카드 클릭 시 효과
@@ -187,12 +181,35 @@ $(document).on('click', '.card-btn', async function(e) {
     let court = response.data[0];
 
     // 카드 상세정보 뿌려주기
-    $('#crt-name').text(court.name);
+    $('#crt-name').text(court.name).attr('data-court-id', court.fieldId);
     $('#crt-addr').text(court.addr);
     $('#crt-indYn').text(checkIndoor(court.indYn) + '  ·');
     $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
     $('#crt-parking').text(checkParking(court.parkingArea));
 });
+
+// 해당 날짜 예약 리스트 가져오기
+$(document).on('click', '.date-wrap', async function (e) {
+    let selectedDate = e.target.getAttribute('data-date');
+    let selectedField = $('#crt-name').attr('data-court-id');
+
+    const res = await rsvsByDate(selectedDate, selectedField);
+
+    console.log(res);
+    res.data?.map((rsv) => {
+
+        let time = ("0" + rsv.dateTime).slice(-2);
+
+        $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).addClass("closed");
+    })
+
+
+
+})
+
+
+
+
 
 
 // =================

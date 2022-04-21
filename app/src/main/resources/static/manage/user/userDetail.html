@@ -91,6 +91,9 @@ $(document).ready(function(){
   })
   .then(function(detail){
         console.log(detail);
+        if(detail.sum <0 ){
+        	detail.sum =0;
+        }
         content1+= `
         <tr id = "xTr">
           <td>${detail.name}</td>

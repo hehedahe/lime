@@ -20,6 +20,10 @@
     <style>
 
     
+    #sliding_menu{
+  	display : none;
+   }
+    
       .pagination{
         text-align: center;
       }
@@ -59,12 +63,12 @@
             <a href="../field/manageFiled.html"">구장관리</a>
           </li>
           <li class="list-group-item nav-item" id="rptLi">
-            <a href="#">게시글관리</a>
+             게시글관리
             	<ul id="sliding_menu">
-            		<li><a href="#">클래스</a></li>
-            		<li><a href="#">중고마켓</a></li>
-            		<li><a href="#">클럽</a></li>
-            		<li><a href="#">커뮤니티</a></li>
+            		<li id="classLi"><a href="../report/classReport.html" >클래스</a></li>
+            		<li><a href="../report/marketReport.html">중고마켓</a></li>
+            		<li><a href="../report/clubReport.html">클럽</a></li>
+            		<li><a href="../report/communityReport.html">커뮤니티</a></li>
             	</ul>
           </li>
           <li class="list-group-item nav-item">
@@ -123,7 +127,7 @@ let globalCurrentPage=1; //현재 페이지
         return response.json();
       })
       .then(function(manages){
-        totalData = manages.length;
+        totalData = manages.length-1;
         displayData(1, manages);
         paging(1,manages)
       });
@@ -131,8 +135,10 @@ let globalCurrentPage=1; //현재 페이지
 	  $(document).on("click", "li[id='rptLi']" , function(){
 			if( $("#sliding_menu").css("display") ==="block"){
 				$("#sliding_menu").css("display","none");
+			
 			}else {
 				$("#sliding_menu").css("display","block");
+				console.log($(this).attr("id"));
 			};
 		  });
 
@@ -164,6 +170,9 @@ for (
   i < endNum;
   i++
 ) {
+  if(manages[i].sum < 0){
+	  manages[i].sum = 0;
+  }
   chartHtml +=`
   <tr id = "xTr">
           <td id="x-no">${manages[i].no}</td>
