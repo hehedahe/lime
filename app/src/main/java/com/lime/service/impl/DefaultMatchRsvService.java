@@ -32,6 +32,11 @@ public class DefaultMatchRsvService implements MatchRsvService {
     return matchRsvDao.findByMatchIdAndUserId(matchId, userId);
   }
 
+  @Override
+  public List<MatchRsv> get(Integer userId) {
+    return matchRsvDao.findByUserId(userId);
+  }
+
   //  @Override
   //  public int add(int limeId, MatchRsv matchRsv) {
   //    matchRsvDao.insert(limeId, matchRsv);
