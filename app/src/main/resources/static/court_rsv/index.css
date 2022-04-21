@@ -167,11 +167,6 @@ button.card:hover {
     font-weight: bold;
 }
 
-/* 다음, 이전 날짜가 있을 때 좌우버튼 색*/
-/*#date-r-btn > i {*/
-/*    color: rgb(33, 159, 148);*/
-/*}*/
-
 .date-wrap {
     border-radius: 50px;
     font-weight: bolder;
@@ -274,4 +269,5 @@ button.date-wrap.selected-date {
 .closed:hover {
     background-color: rgb(240, 240, 240);
     color: #000;
+    cursor: default;
 }

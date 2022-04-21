@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="index.css">
 
-    <!-- fontawesome -->
-    <!--    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">-->
-    <!--    <script src="https://kit.fontawesome.com/0b4dd5be7a.js" crossorigin="anonymous"></script>-->
-
     <!-- slick -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -19,7 +15,6 @@
     <!-- swiper -->
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-
     <script src="../node_modules/axios/dist/axios.js"></script>
 
     <title>LIME - 코트 예약</title>
@@ -109,20 +104,20 @@
     <div id="swiper-temp" class="my-4">
         <div class="swiper date-swiper">
             <div class="date-wrapper swiper-wrapper">
-                <button class="date-wrap swiper-slide date0"></button>
-                <button class="date-wrap swiper-slide date1"></button>
-                <button class="date-wrap swiper-slide date2"></button>
-                <button class="date-wrap swiper-slide date3"></button>
-                <button class="date-wrap swiper-slide date4"></button>
-                <button class="date-wrap swiper-slide date5"></button>
-                <button class="date-wrap swiper-slide date6"></button>
-                <button class="date-wrap swiper-slide date7"></button>
-                <button class="date-wrap swiper-slide date8"></button>
-                <button class="date-wrap swiper-slide date9"></button>
-                <button class="date-wrap swiper-slide date10"></button>
-                <button class="date-wrap swiper-slide date11"></button>
-                <button class="date-wrap swiper-slide date12"></button>
-                <button class="date-wrap swiper-slide date13"></button>
+                <button class="date-wrap swiper-slide selected-date" data-order="0"></button>
+                <button class="date-wrap swiper-slide" data-order="1"></button>
+                <button class="date-wrap swiper-slide" data-order="2"></button>
+                <button class="date-wrap swiper-slide" data-order="3"></button>
+                <button class="date-wrap swiper-slide" data-order="4"></button>
+                <button class="date-wrap swiper-slide" data-order="5"></button>
+                <button class="date-wrap swiper-slide" data-order="6"></button>
+                <button class="date-wrap swiper-slide" data-order="7"></button>
+                <button class="date-wrap swiper-slide" data-order="8"></button>
+                <button class="date-wrap swiper-slide" data-order="9"></button>
+                <button class="date-wrap swiper-slide" data-order="10"></button>
+                <button class="date-wrap swiper-slide" data-order="11"></button>
+                <button class="date-wrap swiper-slide" data-order="12"></button>
+                <button class="date-wrap swiper-slide" data-order="13"></button>
             </div>
         </div>
         <div id="date-next" class="swiper-button-next"></div>
@@ -143,8 +138,8 @@
                 <button class="sche-btn border-0 p-3" data-time="20">20:00<br>~22:00</button>
             </div>
         </div>
-        <div class="w-100 d-flex justify-content-around my-3" data-court="1">
-            <div class="crt-no crt2">코트2</div>
+        <div class="w-100 d-flex justify-content-around my-3" data-court="2">
+            <div class="crt-no">코트2</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
                 <button class="sche-btn border-0 p-3" data-time="06">06:00<br>~08:00</button>
                 <button class="sche-btn border-0 p-3" data-time="08">08:00<br>~10:00</button>
@@ -156,8 +151,8 @@
                 <button class="sche-btn border-0 p-3" data-time="20">20:00<br>~22:00</button>
             </div>
         </div>
-        <div class="w-100 d-flex justify-content-around my-3" data-court="crt3">
-            <div class="crt-no  crt3">코트3</div>
+        <div class="w-100 d-flex justify-content-around my-3" data-court="3">
+            <div class="crt-no">코트3</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
                 <button class="sche-btn border-0 p-3" data-time="06">06:00<br>~08:00</button>
                 <button class="sche-btn border-0 p-3" data-time="08">08:00<br>~10:00</button>
@@ -169,8 +164,8 @@
                 <button class="sche-btn border-0 p-3" data-time="20">20:00<br>~22:00</button>
             </div>
         </div>
-        <div class="w-100 d-flex justify-content-around my-3" data-court="crt4">
-            <div class="crt-no crt4">코트4</div>
+        <div class="w-100 d-flex justify-content-around my-3" data-court="4">
+            <div class="crt-no">코트4</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
                 <button class="sche-btn border-0 p-3" data-time="06">06:00<br>~08:00</button>
                 <button class="sche-btn border-0 p-3" data-time="08">08:00<br>~10:00</button>
@@ -182,8 +177,8 @@
                 <button class="sche-btn border-0 p-3" data-time="20">20:00<br>~22:00</button>
             </div>
         </div>
-        <div class="w-100 d-flex justify-content-around my-3" data-court="crt5">
-            <div class="crt-no crt5">코트5</div>
+        <div class="w-100 d-flex justify-content-around my-3" data-court="5">
+            <div class="crt-no">코트5</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
                 <button class="sche-btn border-0 p-3" data-time="06">06:00<br>~08:00</button>
                 <button class="sche-btn border-0 p-3" data-time="08">08:00<br>~10:00</button>
@@ -195,8 +190,8 @@
                 <button class="sche-btn border-0 p-3" data-time="20">20:00<br>~22:00</button>
             </div>
         </div>
-        <div class="w-100 d-flex justify-content-around my-3" data-court="crt6">
-            <div class="crt-no crt6">코트6</div>
+        <div class="w-100 d-flex justify-content-around my-3" data-court="6">
+            <div class="crt-no">코트6</div>
             <div class="schedule-wrapper w-100 d-flex justify-content-between pe-4">
                 <button class="sche-btn border-0 p-3" data-time="06">06:00<br>~08:00</button>
                 <button class="sche-btn border-0 p-3" data-time="08">08:00<br>~10:00</button>

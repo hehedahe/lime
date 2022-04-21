@@ -14,8 +14,8 @@ public class DefaultCourtRsvService implements CourtRsvService {
     CourtRsvDao crDao;
 
     @Override
-    public List<CourtRsv> findByDate(String date) {
-        List<CourtRsv> res = crDao.findByDate(date);
+    public List<CourtRsv> findByDate(String date, int fieldId) {
+        List<CourtRsv> res = crDao.findByDate(date, fieldId);
         System.out.println("res:::::::::" + res);
         return res;
     }

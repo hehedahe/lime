@@ -4,5 +4,5 @@ import com.lime.domain.CourtRsv;
 import java.util.List;
 
 public interface CourtRsvService {
-    List<CourtRsv> findByDate(String date);
+    List<CourtRsv> findByDate(String date, int fieldId);
 }
