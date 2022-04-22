@@ -24,7 +24,9 @@ public class DefaultClazzService implements ClazzService{
   @Override
   @Transactional
   public int add(Clazz clazz) {
-    return clazzDao.insert(clazz);
+    clazzDao.insert(clazz);
+
+    return 1;
   }
 
 
