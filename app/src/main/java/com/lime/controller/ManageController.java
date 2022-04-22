@@ -1,7 +1,6 @@
 package com.lime.controller;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,9 +8,8 @@ import com.lime.domain.Classes;
 import com.lime.domain.Club;
 import com.lime.domain.Community;
 import com.lime.domain.Field;
-import com.lime.domain.Market;
+import com.lime.domain.Member;
 import com.lime.domain.User;
-import com.lime.domain.UserLogin;
 import com.lime.service.ManageReportService;
 import com.lime.service.ManageService;
 
@@ -20,23 +18,23 @@ public class ManageController {
 
   @Autowired
   ManageService manageService;//회원관리,구장관리
-   @Autowired 
-   ManageReportService manageReportService;//게시물관리 
-   
-   
+  @Autowired 
+  ManageReportService manageReportService;//게시물관리 
+
+
   //회원관리-회원리스트
   @RequestMapping("/manage/user/list")
   public Object userList(HttpSession session) {
-	  UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
+    Member userLogin = (Member) session.getAttribute("loginUser");
     return manageService.userList();
   }
   @RequestMapping("/manage/manager/list")
   public Object managerList(HttpSession session) {
-	  UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
+    Member userLogin = (Member) session.getAttribute("loginUser");
     return manageService.managerList();
   }
-  
-  
+
+
   //회원관리-특정회원 정보 리스트
   @RequestMapping("/manage/user/get")
   public Object userGet(int no) {
@@ -46,8 +44,8 @@ public class ManageController {
     }
     return manage;
   }
-  
-  
+
+
   /*
    * @RequestMapping("/manage/user/userCount") public User userCount() {
    * 
@@ -56,7 +54,7 @@ public class ManageController {
    * return userCount; }
    */
 
-//=========================================================  
+  //=========================================================  
   //구장관리- 리스트 조회
   @RequestMapping("/manage/field/list")
   public Object fieldList() {
@@ -74,9 +72,9 @@ public class ManageController {
     return field;
   }
 
-//=========================================================  
+  //=========================================================  
   //게시글 및 댓글, 신고글 관리
-  
+
   //클래스게시글 조회
   @RequestMapping("/manage/class/list")
   public Object classList() {
@@ -91,7 +89,7 @@ public class ManageController {
     }
     return classes;
   }
-  
+
   //커뮤니티게시글 조회
   @RequestMapping("/manage/community/list")
   public Object communityList() {
@@ -106,7 +104,7 @@ public class ManageController {
     }
     return community;
   }
-  
+
   //클럽게시글 조회
   @RequestMapping("/manage/club/list")
   public Object clubList() {
@@ -123,7 +121,7 @@ public class ManageController {
     }
     return club;
   }
-  
+
   //마켓 조회
   @RequestMapping("/manage/market/list")
   public Object marketList() {
