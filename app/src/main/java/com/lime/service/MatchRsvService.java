@@ -13,5 +13,5 @@ public interface MatchRsvService {
 
   MatchRsv get(int matchId, int userId);
 
-  List<MatchRsv> get(Integer userId);
+  List<MatchRsv> get(int userId);
 }

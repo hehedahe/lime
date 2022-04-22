@@ -2,6 +2,7 @@ package com.lime.controller;
 
 import static com.lime.controller.ResultMap.FAIL;
 import static com.lime.controller.ResultMap.SUCCESS;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,13 +35,26 @@ public class MatchRsvController {
     return matchRsvService.list();
   }
 
+  //  @GetMapping("/get")
+  //  public Object get(int matchId, int userId) {
+  //    MatchRsv match = matchRsvService.get(matchId, userId);
+  //    if (match == null) {
+  //      return new ResultMap().setStatus(FAIL).setData("해당 번호의 예약 내역이 없습니다.");
+  //    }
+  //    return new ResultMap().setStatus(SUCCESS).setData(match);
+  //  }
+
   @GetMapping("/get")
-  public Object get(int matchId, int userId) {
-    MatchRsv match = matchRsvService.get(matchId, userId);
-    if (match == null) {
-      return new ResultMap().setStatus(FAIL).setData("해당 번호의 예약 내역이 없습니다.");
+  public Object get(HttpSession session) {
+    Member user = (Member) session.getAttribute("loginUser");
+
+    int userId = user.getNo();
+
+    List<MatchRsv> matchList = matchRsvService.get(userId);
+    if (matchList == null) {
+      return new ResultMap().setStatus(FAIL).setData("해당 유저의 예약 내역이 없습니다.");
     }
-    return new ResultMap().setStatus(SUCCESS).setData(match);
+    return new ResultMap().setStatus(SUCCESS).setData(matchList);
   }
 
   @GetMapping("/logincheck")

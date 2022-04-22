@@ -16,6 +16,6 @@ public interface MatchRsvDao {
 
   MatchRsv findByMatchIdAndUserId(@Param("matchId") int matchId, @Param("userId") int userId);
 
-  List<MatchRsv> findByUserId(Integer userId);
+  List<MatchRsv> findByUserId(int userId);
 
 }
