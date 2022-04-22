@@ -8,18 +8,14 @@
   <resultMap type="matchRsv" id="matchRsvMap">
     <id column="mtch_id" property="matchId"/>
     <id column="user_id" property="userId"/>
-    <!-- <id column="{mtchId=mtch_id,userId=user_id}"/> -->
     <result column="lime_id" property="limeId"/>
     <result column="state" property="state"/>
-    <!--  
-    <association property="match" javaType="Match">
-      <id column="mtch_id" property="matchId"/>
-      <result column="mtch_date" property="matchDate"/>
-      <result column="st_time" property="startTime"/>
-      <result column="state" property="state"/>
-    </association>
-    -->
+    <result column="date" property="date"/>
     
+<!--     <association property="limeId" javaType="LimeCash">
+      <id column="lc_lime_id" property="limeId"/>
+      <result column="date" property="date"/>
+    </association> -->
   </resultMap>
 
   <select id="countAll" resultType="int">
@@ -45,16 +41,17 @@
   
     <select id="findByUserId" resultMap="matchRsvMap">
     select 
-      mtch_id,
-      user_id,
-      lime_id,
-      state
-    from 
-      social_mtch_rsv
-    order by 
-      lime_id asc
+      smr.mtch_id,
+      smr.user_id,
+      smr.lime_id,
+      smr.state,
+      lc.date
+    from social_mtch_rsv smr
+      left outer join lime_cash lc on smr.lime_id=lc.lime_id
     where
-     user_id=#{userId}
+     smr.user_id=#{userId}
+    order by 
+      smr.mtch_id asc
   </select>
   
 </mapper>

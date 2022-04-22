@@ -33,7 +33,7 @@ public class DefaultMatchRsvService implements MatchRsvService {
   }
 
   @Override
-  public List<MatchRsv> get(Integer userId) {
+  public List<MatchRsv> get(int userId) {
     return matchRsvDao.findByUserId(userId);
   }
 
