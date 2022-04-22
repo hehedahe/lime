@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lime.domain.ItemImage;
 import com.lime.domain.ItemLike;
 import com.lime.domain.Market;
+import com.lime.domain.Member;
 import com.lime.domain.UserLogin;
 import com.lime.service.MarketService;
 import net.coobird.thumbnailator.Thumbnails;
@@ -107,10 +108,10 @@ public class MarketController {
 
   @RequestMapping("/market/add")
   public Object add(Market market, MultipartFile[] files, HttpSession session) {
-    UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
-    System.out.println(userLogin);
+    Member member = (Member) session.getAttribute("loginUser");
+    System.out.println(member);
     System.out.println(files);
-    market.setWriter(userLogin);
+    market.setWriter(member);
     try {
       Object fileList = saveFile(files);
       return marketService.add(market, fileList);
