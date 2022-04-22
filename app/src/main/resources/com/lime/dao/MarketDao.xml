@@ -25,7 +25,7 @@
     <result column="manner_score" property="mannerScore"/>
     <result column="lv_name" property="lvName"/>
     
-    <association property="writer" javaType="UserLogin">
+    <association property="writer" javaType="Member">
       <id column="no" property="no"/>
       <result column="name" property="name"/>
     </association>

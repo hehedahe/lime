@@ -28,7 +28,7 @@ public class Market {
   ///중고물품게시판 
   String name; //판매자
 
-  UserLogin writer;
+  Member writer;
 
   // List<ContactTel> tels;
 }
