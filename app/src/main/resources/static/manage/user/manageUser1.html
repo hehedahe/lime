@@ -49,8 +49,11 @@
         <li>lime</li>
         <li>administrator</li>
       </ul>
-      <div class="nav-links">
-        <a href="#">로그아웃</a>
+      <div class="nav-links" >
+        <ul>
+        <li><p id="loginP"></p></li>
+        <li><a href="../mLogin/login.html">로그아웃</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -121,51 +124,72 @@ let globalCurrentPage=1; //현재 페이지
 
 
   $(document).ready(function () {
-
-        // $("#x-header").load("my-adminHeader.html");  //헤더 인클루드&ndash;&gt;
-       // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
-       // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
-
-      fetch("/manage/user/list",{
-          method:"post",
-      })
-      .then(function(response){
-        return response.json();
-      })
-      .then(function(manages){
-        totalData = manages.length-1;
-        displayData(1, manages);
-        paging(1,manages)
-      });
-
-	  $(document).on("click", "li[id='rptLi']" , function(){
-          if( $("#sliding_menu").css("display") ==="block"){
-            $("#sliding_menu").css("display","none");
           
-          }else {
-            $("#sliding_menu").css("display","block");
-            console.log($(this).attr("id"));
-          };
-		  });
-	  
-	  $(document).on("click", "li[id='userLi']" , function(){
-          if( $("#user-sliding-menu").css("display") ==="block"){
-            $("#user-sliding-menu").css("display","none");
-          
-          }else {
-            $("#user-sliding-menu").css("display","block");
-            console.log($(this).attr("id"));
-          };
-		  });
+    
+          fetch("/manage/user/list1",{
+              method:"post"
+          })
+          .then(function(response){
+            return response.json();
+          })
+          .then(function(manages){
+                  console.log(`manages[0] : ${manages[0].email}`)
+                  if(manages[0] === null){
+                    console.log(`manages[0] 로그인되지않음!!!`);
+                    alert("로그인이 필요합니다.");
+                    location.href ="../mLogin/login.html";
+                    
+                  }else{
+                    console.log(`manages[0] : ${manages[0]}`)
+                    console.log("로그인됨!!!");
+                    
+                      fetch("/manage/user/list",{
+                          method:"post",
+                      })
+                      .then(function(response){
+                        return response.json();
+                      })
+                      .then(function(manages){
+                        console.log(`manages : ${manages[0].json}`);
+                        totalData = manages.length-1;
+                        displayData(1, manages);
+                        paging(1,manages)
+                      });
+
+                    $("#loginP").html(`${manages[0].name}`)  
+
+                    $(document).on("click", "li[id='rptLi']" , function(){
+                          if( $("#sliding_menu").css("display") ==="block"){
+                            $("#sliding_menu").css("display","none");
+                          
+                          }else {
+                            $("#sliding_menu").css("display","block");
+                            console.log($(this).attr("id"));
+                          };
+                      });
+                    
+                    $(document).on("click", "li[id='userLi']" , function(){
+                          if( $("#user-sliding-menu").css("display") ==="block"){
+                            $("#user-sliding-menu").css("display","none");
+                          
+                          }else {
+                            $("#user-sliding-menu").css("display","block");
+                            console.log($(this).attr("id"));
+                          };
+                      });
 
 
-      $(document).on("click", "button[id='detailBtn']", function () {
+                      $(document).on("click", "button[id='detailBtn']", function () {
 
-          location.href = "userDetail.html?no=" +$(this).val();
+                          location.href = "userDetail.html?no=" +$(this).val();
 
-      }); 
-    });
+                      }); 
+                      
+                      
+                  }// else (로그인된경우)
 
+            });//로그인여부처리 then   
+  }) // jquery ReadyFunction
 
 function displayData(currentPage, manages) {
 
@@ -201,9 +225,13 @@ for (
         </tr>`
 }
 $("#x-tbody").html(chartHtml);
-}
 
-function paging(no,manages) {
+
+
+
+}//로그인 시 lIST데이터 뿌려줌
+
+function paging(no,manages) {//로그인시 lIST데이터 페이징 처리
         console.log("no : " + no);
 
   totalPage = Math.ceil(totalData / 10); //총 페이지 수
@@ -265,6 +293,7 @@ function paging(no,manages) {
     displayData(selectedPage, manages);
   });
 }
+
 </script>
 </body>
 </html>
