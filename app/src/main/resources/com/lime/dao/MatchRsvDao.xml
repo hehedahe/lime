@@ -43,4 +43,18 @@
     values(#{matchRsv.matchId},#{matchRsv.userId},#{limeId},#{matchRsv.state})
   </insert>
   
+    <select id="findByUserId" resultMap="matchRsvMap">
+    select 
+      mtch_id,
+      user_id,
+      lime_id,
+      state
+    from 
+      social_mtch_rsv
+    order by 
+      lime_id asc
+    where
+     user_id=#{userId}
+  </select>
+  
 </mapper>

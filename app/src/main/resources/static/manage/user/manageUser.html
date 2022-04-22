@@ -19,6 +19,9 @@
     
     <style>
 
+	#user-sliding-menu {
+	 display: none;
+	}
     
     #sliding_menu{
   	display : none;
@@ -55,8 +58,12 @@
   <main class="admin-user">
     <div id="sidebar" class="d-flex flex-column flex-shrink-0 border-end">
         <ul class="list-group nav nav-pills flex-column mb-auto">
-          <li class="list-group-item nav-item">
-            <a href="../user/manageUser.html">회원관리</a>
+          <li class="list-group-item nav-item" id="userLi">
+            회원관리
+             <ul id="user-sliding-menu">
+            		<li><a href="manageUser.html">유저</a></li>
+            		<li><a href="manageManager.html">매니저</a></li>
+            </ul>
           </li>
           <li class="list-group-item nav-item">
             <a href="../field/manageFiled.html"">구장관리</a>
@@ -137,6 +144,16 @@ let globalCurrentPage=1; //현재 페이지
 			
 			}else {
 				$("#sliding_menu").css("display","block");
+				console.log($(this).attr("id"));
+			};
+		  });
+	  
+	  $(document).on("click", "li[id='userLi']" , function(){
+			if( $("#user-sliding-menu").css("display") ==="block"){
+				$("#user-sliding-menu").css("display","none");
+			
+			}else {
+				$("#user-sliding-menu").css("display","block");
 				console.log($(this).attr("id"));
 			};
 		  });

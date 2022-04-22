@@ -15,22 +15,60 @@
     <result column="name" property="name"/>
     <result column="phone_no" property="phoneNo"/>
     <result column="evnt_yn" property="eventYn"/>
-    <result column="brth_date" property="brthDay"/>
+    <result column="brth_date" property="brthDate"/>
     <result column="gender" property="gender"/>
+    <result column="bank_id" property="bankId"/>
+    <result column="bank_name" property="bankName"/>
+    <result column="acnt_no" property="accountNo"/>
+    <result column="acnt_holder" property="accountHolder"/>
+    
+    <result column="preferred_weekdays" property="preferDays"/>
+    <result column="preferred_weekends" property="preferWeekend"/>
+    <result column="lefty_yn" property="leftYn"/>
+    <result column="court_type_id" property="courtTypeId"/>
+    <result column="city_id" property="cityId"/>
+    <result column="region_id" property="regionId"/>
+    <result column="scope" property="scope"/>
   </resultMap>
   
-  
+  <!-- 
   <insert id="insert" parameterType="userlogin" keyProperty="userId" keyColumn="user_id" useGeneratedKeys="true">
-    insert into user(email, pwd, name, phone_no) <!-- user 테이블에 insert해줌 -->
-    values(#{email},password(#{password}),#{name},#{phoneNo})
+    insert into user(email, pwd, name, phone_no) 
+    values(#{email},pwd(#{password}),#{name},#{phoneNo})
   </insert>
   
   
   <insert id="insert1" parameterType="userlogin" keyProperty="userId" keyColumn="user_id" useGeneratedKeys="true">
   
     INSERT INTO member (user_id, evnt_yn) 
-  	VALUES(LAST_INSERT_ID(), #{eventYn})    <!-- 마지막 insert_id()를 찾아서 member table 에 evnt_yn 값 삽입 -->
+  	VALUES(LAST_INSERT_ID(), #{eventYn})     마지막 insert_id()를 찾아서 member table 에 evnt_yn 값 삽입
+  	
   </insert>
+   -->
+  
+  <insert id="insert" parameterType="userlogin" keyProperty="userId" keyColumn="user_id"  useGeneratedKeys="true">
+    insert into user(email, pwd, name, phone_no)
+    values(#{email},#{password},#{name},#{phoneNo})
+  </insert>
+  
+  <insert id="insert1" parameterType="userlogin" >
+    insert into member(user_id, evnt_yn, brth_date, gender, bank_id, acnt_no, acnt_holder, scope, preferred_weekdays, preferred_weekends, lefty_yn, court_type_id, city_id)
+    values(#{userId},#{eventYn},#{brthDate},#{gender},#{bankId},#{accountNo},#{accountHolder},#{scope},#{preferDays},#{preferWeekend},#{leftYn},#{courtTypeId}, #{cityId})
+  </insert>
+  
+  <!-- 
+  <insert id="insert2" parameterType="userlogin" keyProperty="courtTypeId" keyColumn="court_type_id" useGeneratedKeys="true">
+    insert into member(user_id, city_id)
+    values(#{userId}, #{cityId})
+  </insert>
+  
+    <insert id="insert3" parameterType="userlogin">
+    insert into member(user_id, court_type_id)
+    values(#{userId}, #{courtTypeId})
+  </insert>
+   -->
+
+  
   
   
   

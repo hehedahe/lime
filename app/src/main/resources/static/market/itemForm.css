@@ -28,10 +28,10 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-left: 20px;
     width: 100px;
     height: 38px;
-    color: rgb(127, 127, 127);
+    color: aliceblue;
     font-size: large;
     font-weight: bold;
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(102, 200, 141);
     /* background-color: rgb(102, 200, 141); */
     border: none;
     border-radius: 5px;

@@ -42,6 +42,7 @@ $(document).ready(function(e){
 
   var itemBox = document.querySelector("#item-box");
   var replyBox = document.querySelector("#reply-box");
+  var itemImageWrap = document.querySelector("#item-img-wrap");
 
   var arr = location.href.split("?");
   console.log(arr);
@@ -63,6 +64,7 @@ $(document).ready(function(e){
   }
 
   itemViewFetch();
+  //getPhoto();
 
 function itemViewFetch() {
     fetch(`/market/get?no=${no}`)
@@ -90,6 +92,12 @@ function itemViewFetch() {
         }
         else if (levelName == "P") {
             levelName = `<span class="badge bg-danger">PRO</span>`;
+        }
+
+        let photoFilePath ="";
+        for (let photo of item.data.photo) {
+            photoFilePath += `<div class="photo-wrap"><img src="/market/photo?filename=${photo.filePath}&type=view"></div>`;
+            console.log(photoFilePath);
         }
         
         console.log(item.data);
@@ -120,7 +128,7 @@ function itemViewFetch() {
                     </div>
                 </div>
                 <div id="item-content"><p>${item.data.content}</p></div>
-                <div id="item-img-wrap"><img src="../asset/image/1.jpg"><img src="../asset/image/2.jpg"></div>
+                <div id="item-img-wrap">${photoFilePath}</div>
                 <div id="heart-wrap">
                     <a class="heart-click" idx=${item.data.itemId}><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(146, 219, 130)" class="bi bi-heart" viewBox="0 0 16 16">
                     <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
@@ -140,5 +148,26 @@ function itemViewFetch() {
                                 </div>
                               </div>`
              
+    })
+}
+
+function getPhoto() {
+    fetch(`/market/getPhoto?no=${no}`)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(item){
+        if (item.status == "fail") {
+        window.alert("서버 요청 오류!");
+        return;
+        }
+        console.log(item);
+        for (let list of item.data) {
+            console.log(list.filePath);
+            let photo = "/market/photo?filename=" + list.filePath;
+            console.log(photo);
+            itemBox.innerHTML = `<div id="item-img-wrap"><img src=${photo}></div>`;
+        }
+        
     })
 }

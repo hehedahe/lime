@@ -24,11 +24,21 @@
     <result column="name" property="userName"/>
     <result column="manner_score" property="mannerScore"/>
     <result column="lv_name" property="lvName"/>
-    <result column="file_path" property="photo"/>
+    
     <association property="writer" javaType="UserLogin">
       <id column="no" property="no"/>
       <result column="name" property="name"/>
     </association>
+    
+    <collection property="photo" ofType="ItemImage">
+      <id column="item_img_id" property="imgId"/>
+      <result column="file_path" property="filePath"/>
+    </collection>
+  </resultMap>
+  
+  <resultMap type="ItemImage" id="ItemImageMap">
+    <id column="item_img_id" property="imgId"/>
+    <result column="file_path" property="filePath"/>
   </resultMap>
   
 
@@ -47,7 +57,8 @@ SELECT
       i.view_cnt as view_cnt,
       i.rgt_date as rgt_date,
       i.trans_state as trans_state,
-      ii.file_path as file_path
+      ii.file_path as file_path,
+      ii.item_img_id
    FROM item i
    LEFT JOIN city ct
    ON i.city_id = ct.city_id
@@ -69,12 +80,16 @@ SELECT
 		      replace(ct.city_name, '\r', '') as city_name,
 		      i.view_cnt as view_cnt,
 		      i.rgt_date as rgt_date,
-		      i.trans_state as trans_state
+		      i.trans_state as trans_state,
+		      ii.file_path as file_path,
+          ii.item_img_id
 		FROM item i
 		  LEFT JOIN city ct
 		   ON i.city_id = ct.city_id
 		  LEFT JOIN region rg 
 		   ON ct.region_id = rg.region_id
+		  LEFT JOIN item_img ii 
+       ON i.item_id = ii.item_id
 		where region_name=#{regionName} AND i.item_name like concat('%',#{keyword},'%')
 		   order by rgt_date desc
 
@@ -89,12 +104,16 @@ SELECT
           replace(ct.city_name, '\r', '') as city_name,
           i.view_cnt as view_cnt,
           i.rgt_date as rgt_date,
-          i.trans_state as trans_state
+          i.trans_state as trans_state,
+          ii.file_path as file_path,
+          ii.item_img_id
     FROM item i
       LEFT JOIN city ct
        ON i.city_id = ct.city_id
       LEFT JOIN region rg 
        ON ct.region_id = rg.region_id
+      LEFT JOIN item_img ii 
+       ON i.item_id = ii.item_id
     where region_name=#{regionName} AND city_name=#{cityName} AND i.item_name like concat('%',#{keyword},'%')
        order by rgt_date desc
 
@@ -109,12 +128,16 @@ SELECT
       ct.city_name as city_name,
       i.view_cnt as view_cnt,
       i.rgt_date as rgt_date,
-      i.trans_state as trans_state
+      i.trans_state as trans_state,
+      ii.file_path as file_path,
+      ii.item_img_id
    FROM item i
    LEFT JOIN city ct
-   ON i.city_id = ct.city_id
+    ON i.city_id = ct.city_id
    LEFT JOIN region rg 
-   ON ct.region_id = rg.region_id
+    ON ct.region_id = rg.region_id
+   LEFT JOIN item_img ii 
+    ON i.item_id = ii.item_id
    where trans_state="S" AND i.item_name like concat('%',#{keyword},'%')
    order by rgt_date desc
    
@@ -129,12 +152,16 @@ SELECT
           replace(ct.city_name, '\r', '') as city_name,
           i.view_cnt as view_cnt,
           i.rgt_date as rgt_date,
-          i.trans_state as trans_state
+          i.trans_state as trans_state,
+          ii.file_path as file_path,
+          ii.item_img_id
     FROM item i
       LEFT JOIN city ct
        ON i.city_id = ct.city_id
       LEFT JOIN region rg 
        ON ct.region_id = rg.region_id
+      LEFT JOIN item_img ii 
+       ON i.item_id = ii.item_id
     where region_name=#{regionName} AND trans_state="S" AND i.item_name like concat('%',#{keyword},'%')
        order by rgt_date desc
 
@@ -149,12 +176,16 @@ SELECT
           replace(ct.city_name, '\r', '') as city_name,
           i.view_cnt as view_cnt,
           i.rgt_date as rgt_date,
-          i.trans_state as trans_state
+          i.trans_state as trans_state,
+          ii.file_path as file_path,
+          ii.item_img_id
     FROM item i
       LEFT JOIN city ct
        ON i.city_id = ct.city_id
       LEFT JOIN region rg 
        ON ct.region_id = rg.region_id
+      LEFT JOIN item_img ii 
+       ON i.item_id = ii.item_id
     where region_name=#{regionName} AND city_name=#{cityName} AND trans_state="S" AND i.item_name like concat('%',#{keyword},'%')
        order by rgt_date desc
 
@@ -173,7 +204,9 @@ SELECT
 	   u.user_id,
 	   u.name,
 	   m.manner_score,
-     lv.lv_name
+     lv.lv_name,
+     ii.file_path,
+     ii.item_img_id
 	  from item i
 	   left join city ct
 	     on i.city_id = ct.city_id
@@ -185,7 +218,10 @@ SELECT
        on i.user_id = m.user_id 
      left join lv
        on m.lv_id  = lv.lv_id
-	  where item_id=#{no}
+     left join item_img ii
+       on i.item_id = ii.item_id
+	  where i.item_id=#{no}
+	  order by ii.item_img_id asc
   </select>
   
   <insert id="insert" parameterType="Market" useGeneratedKeys="true" keyColumn="item_id" keyProperty="itemId">
@@ -213,9 +249,9 @@ SELECT
   </delete>
   
   <update id="increaseViewCount" parameterType="int">
-    update ml_board set
-      view_count=view_count + 1 
-    where board_no=#{no}
+    update item set
+      view_cnt=view_cnt + 1 
+    where item_id=#{no}
   </update>
   
 </mapper>
