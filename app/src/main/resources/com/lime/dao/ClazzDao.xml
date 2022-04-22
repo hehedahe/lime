@@ -9,10 +9,11 @@
   
   
   <resultMap type="clazz" id="clsMap">
-  	<id column="cls_id" property="no"/>
+  	<id column="cls_id" property="clsId"/>
   	<result column="user_id" property="userId"/>
     <result column="city_id" property="cityId"/>
     <result column="city_name" property="cityName"/>
+    <result column="region_id" property="regionId"/>
     <result column="region_name" property="regionName"/>
     <result column="title" property="title"/>
     <result column="intr" property="intro"/>
@@ -42,11 +43,17 @@
   
   
    <insert id="insert" parameterType="clazz">
-    insert into ml_book(title,img) 
-    values(#{title},#{img})
+    insert into cls(user_id, img, title, intr, cost, st_date, end_date, per_week, level, tchr_intr, dtl_intr, city_name) 
+    values(#{userId}, #{img}, #{title}, #{intro}, #{cost}, #{startDate}, #{endDate}, #{perWeek}, #{level}, #{tchrIntro}, #{dtlIntro}, (select city_id from city
+        WHERE region_id  = (select region_id from region where region_name=#{regionName})
   </insert>
   
   
+  
+  
+  
+  
+  <!-- 
   <select id="findByRegion" resultMap="clsMap" parameterType="string">
   
   		select 
@@ -79,8 +86,7 @@
 
     </select>
   
-  
-  
+   -->
   
   
   </mapper>

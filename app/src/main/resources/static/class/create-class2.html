@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>클래스 상세</title>
+    <link href="cC_CSS/createClass.css" rel="stylesheet">
+
+</head>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- header, footer 삽입 제이쿼리-->
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.footer').load('../footer/footer.html');
+        $(".header").load("../header/user/header.html");
+    })
+</script>
+
+
+
+
+
+<body>
+
+
+<div class="header"></div>
+
+
+<div id="top-div" class="cont-wrapper">
+<form name="form2">
+<select class="class-cont" name="level">
+    <option>클래스 대상자 선택</option>
+    <option value="D">DEVELOPMENT</option>
+    <option value="B">BEGGINER</option>
+    <option value="I">INTERMEDIATE</option>
+    <option value="A">ADVENCED</option>
+    <option value="P">PRO</option>
+</select>
+</div>
+<div id="second-div" class="cont-wrapper">
+<select class="class-cont" name="perWeek">
+    <option>주횟수 최대5일</option>
+    <option value="1">1일</option>
+    <option value="2">2일</option>
+    <option value="3">3일</option>
+    <option value="4">4일</option>
+    <option value="5">5일</option>
+</select>
+</div>
+<div id="third-div" class="wrapper">
+    <input id="class-name" type="text" name="cost" placeholder="&nbsp;클래스 강의비용을 입력해주세요." style="width:300px;" onfocus="this.placeholder=''" onblur="this.placeholder='클래스 이름을 입력해주세요.'">
+</div>
+
+<div class="page-turn">
+    <a href="createClass-1.html"><button id="pre-btn" class="page" type="button">이전</button></a>
+    <span id="page-no">2/3</span>
+    <a href="create-class3.html"><button id="next-btn" class="page">다음</button></a>
+
+</form>    
+</div>
+</div>
+
+
+<div class="footer"></div>
+
+
+
+<script>
+
+
+
+const level = document.querySelector("input[name=level]");
+const perWeek = document.querySelector("input[name=perWeek]");
+const cost = document.querySelector("input[name=cost]")
+
+
+
+document.querySelector("form[name=form2]").onsubmit = function() {
+
+var fd = new FormData(document.forms.namedItem("form2"));
+
+fetch("/class/open2", { 
+    method: "POST",
+    body: new URLSearchParams(fd)
+  }) 
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(text) {
+    if (text == "success") {
+        location.href = "create-class3.html";
+      alert("성공성공!")
+    } else {
+        window.alert("중복된 이메일입니다");
+    }
+  });
+
+return false;
+};
+
+
+
+</script>
+
+
+</body>
+</html>

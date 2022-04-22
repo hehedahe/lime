@@ -1,6 +1,4 @@
-html {
-    width : 1024px;
-}
+
 body {
     align-items: center;
     margin: 0 auto;
@@ -92,7 +90,6 @@ ul{
     align-items: center;
 }
 .page-turn {
-    position: absolute;
     text-align: center;
     width: 100%;
     margin-top: 20vh;
