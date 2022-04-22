@@ -8,11 +8,8 @@ import {
     findRegion,
     findCity,
     rsvsByDate,
-    dateFormat,
     bookCourt
 } from '../common/apiList.js'
-
-
 
 
 
@@ -47,9 +44,6 @@ function panTo(lat, lng) {
 };
 
 
-
-
-
 // =====================================
 // 전체 코트 마커 뿌리기
 // =====================================
@@ -57,7 +51,7 @@ function panTo(lat, lng) {
 var marker, markerPosition;
 
 (async function () {
-    var response = await fieldList();
+    const response = await fieldList();
 
     response?.map((court) => {
         // 마커가 표시될 위치입니다
@@ -83,35 +77,33 @@ var marker, markerPosition;
 // 시도/시군구 sorting & 중심좌표 뿌리기
 // =====================================
 
-const dropRegion = $('#drop-region');
-const dropCity = $('#drop-city');
-
 // 시도
-dropRegion.on('change', async function (e) {
+$('#drop-region').on('change', async function (e) {
     e.preventDefault();
     e.stopPropagation();
 
     // 코트 카드 리셋
     let card = $('#crt-card');
-    if ($('#crt-card div') != null) {
-        card.empty();
-    };
+    if ($('#crt-card div') != null) { card.empty() };
 
-    selectCity(dropRegion.val());
+    // 시도 → 시군구
+    selectCity(e.target.value);
 
     const coordinateRegion = await findRegion(Number($('#drop-region option:selected').val()));
 
     let regionLat = coordinateRegion.region?.regionLat;
     let regionLng = coordinateRegion.region?.regionLng;
 
+    // 중심좌표 이동
     panTo(regionLat, regionLng);
 
+    // 중심좌표 반경 내에 있는 테니스장 리스트
     const crtByRegion = await courtList(regionLat, regionLng);
 
     crtByRegion?.map((fields) => {
         card.append(
             `<div class="card-cover swiper-slide">
-                <button class="card-btn card border-0" >
+                <button class="card-btn card border-0" type="button">
                     <div class="card-body">
                         <h5 class="card-title" style="height: 48px" data-value="${fields.fieldId}">${fields.name}</h5>
                         <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
@@ -127,14 +119,13 @@ dropRegion.on('change', async function (e) {
 });
 
 // 시군구
-dropCity.on('change', async function (e) {
+$('#drop-city').on('change', async function (e) {
     e.preventDefault();
     e.stopPropagation();
 
     // 코트 카드 리셋
     let card = $('#crt-card');
-    if ($('#crt-card div') != null) {
-        card.empty();
+    if ($('#crt-card div') != null) { card.empty();
     };
 
     let city = $('#drop-city option:checked').text();
@@ -152,13 +143,13 @@ dropCity.on('change', async function (e) {
     crtByCity?.map((fields) => {
         card.append(
             `<div class="card-cover swiper-slide">
-                <button class="card-btn card border-0">
+                <button class="card-btn card border-0" type="button">
                     <div class="card-body">
                         <h5 class="card-title" style="height: 48px" data-value="${fields.fieldId}">${fields.name}</h5>
                         <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
                         <div class="content3">
                             <p class="card-text">${fields.distance} km</p>
-                            <a href="view.html?" class="btn btn-sm info-btn">정보</a>
+                            <a href="#" class="btn btn-sm info-btn">정보</a>
                         </div>
                     </div>
                 </button>
@@ -167,13 +158,21 @@ dropCity.on('change', async function (e) {
 });
 
 
-
-
-
 // =====================================
 // 카드 클릭 시 효과
 // =====================================
-$(document).on('click', '.card-btn', async function(e) {
+
+// ***예약 페이지로 넘길 데이터
+var expectedRsv = {
+    fieldId : '',
+    courtId : '',
+    date : '',
+    time : ''
+};
+
+var fieldId;
+
+$(document).on('click', '.card-btn', async function (e) {
     // 카드 css 효과 유지
     $('.card').removeClass('selected-card');
     $(this).addClass('selected-card');
@@ -184,9 +183,12 @@ $(document).on('click', '.card-btn', async function(e) {
     var offset = $('#swiper-temp2').offset();
     $('html').animate({scrollTop: offset.top}, 400);
     // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
-    
+
     // 선택된 카드(테니스장) field_id 값 찾기
-    let fieldId = e.target.getAttribute('data-value');
+    fieldId = e.target.getAttribute('data-value');
+
+    // ***선택한 테니스장 번호 담아두기
+    expectedRsv.fieldId = fieldId;
 
     // 선택된 카드 정보 한개 가져오기
     let response = await getCourt(fieldId);
@@ -204,10 +206,10 @@ $(document).on('click', '.card-btn', async function(e) {
     let month = ("0" + (today.getMonth() + 1)).slice(-2);
     let year = ("0" + today.getFullYear()).slice(-2);
     let date = today.getDate();
-    today = year + month + ("0" + date).slice(-2);
+    expectedRsv.date = year + month + ("0" + date).slice(-2); // ***YYMMDD 형태로 현재 날짜 디폴트로 담아두기
 
-    // 현재 날짜 예약 시간 비활성화
-    const res = await rsvsByDate(today, court.fieldId);
+    // 현재 예약되어 있는 시간 비활성화
+    const res = await rsvsByDate(expectedRsv.date, court.fieldId);
 
     res.data?.map((rsv) => {
         let time = ("0" + rsv.dateTime).slice(-2);
@@ -222,13 +224,13 @@ $(document).on('click', '.card-btn', async function(e) {
 // =====================================
 // 해당 날짜 예약 리스트 가져오기
 // =====================================
-
 $(document).on('click', '.date-wrap', async function (e) {
     $('[data-time]').removeClass('closed');
 
-    let selectedDate = e.target.getAttribute('data-date');
-    let selectedField = $('#crt-name').attr('data-court-id');
-    const res = await rsvsByDate(selectedDate, selectedField);
+    // ***선택 날짜 담아두기
+    expectedRsv.date = $(e.target).attr('data-date');
+
+    const res = await rsvsByDate(expectedRsv.date, expectedRsv.fieldId);
 
     res.data?.map((rsv) => {
         let time = ("0" + rsv.dateTime).slice(-2);
@@ -243,16 +245,20 @@ $(document).on('click', '.date-wrap', async function (e) {
 // =====================================
 // 결제 페이지로 데이터 넘기기
 // =====================================
-$('sche-btn').on('click', function (e) {
-    fetch('/book/court', {
-        method: "POST",
-        body: {
+$('.sche-btn').on('click', function (e) {
+    if (fieldId == null) {
+        window.alert("구장을 먼저 선택해 주세요! 🎾")
+    }
 
-        }
-    })
-})
+    expectedRsv.courtId = $(e.target).parent('div').attr('data-court');
+    expectedRsv.time = $(e.target).attr('data-time');
 
+    console.log(expectedRsv);
 
+    let url = new URLSearchParams(expectedRsv).toString();
+
+    location.href = `view.html?${url}`;
+});
 
 
 // =====================================
@@ -290,3 +296,5 @@ function checkParking(parkingArea) {
         return '주차장 없음'
     }
 };
+
+
