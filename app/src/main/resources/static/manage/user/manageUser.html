@@ -19,6 +19,9 @@
     
     <style>
 
+	#user-sliding-menu {
+	 display: none;
+	}
     
     #sliding_menu{
   	display : none;
@@ -57,7 +60,7 @@
         <ul class="list-group nav nav-pills flex-column mb-auto">
           <li class="list-group-item nav-item" id="userLi">
             회원관리
-             <ul id="user_sliding_menu">
+             <ul id="user-sliding-menu">
             		<li><a href="manageUser.html">유저</a></li>
             		<li><a href="manageManager.html">매니저</a></li>
             </ul>
@@ -146,11 +149,11 @@ let globalCurrentPage=1; //현재 페이지
 		  });
 	  
 	  $(document).on("click", "li[id='userLi']" , function(){
-			if( $("#user_sliding_menu").css("display") ==="block"){
-				$("#user_sliding_menu").css("display","none");
+			if( $("#user-sliding-menu").css("display") ==="block"){
+				$("#user-sliding-menu").css("display","none");
 			
 			}else {
-				$("#user_sliding_menu").css("display","block");
+				$("#user-sliding-menu").css("display","block");
 				console.log($(this).attr("id"));
 			};
 		  });
