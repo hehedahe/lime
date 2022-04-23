@@ -1,0 +1,11 @@
+html,
+body {
+  /* height: 100%; */
+  font-family: "NanumGothic";
+}
+
+/* 체크박스 옆에 있는 텍스트 */
+.charge-check .form-check-label {
+    /* margin-left: 0.3rem; */
+    font-size: 14px;
+  }
