@@ -44,6 +44,16 @@ public class ManageController {
     return manageService.managerList();
   }
 
+  @RequestMapping("/manage/manager/list1")
+  public Object managerList1(HttpSession session) {
+    Member userLogin = (Member) session.getAttribute("loginUser");
+    ArrayList<Object> list = new ArrayList<Object>();
+    list.add(userLogin);
+    list.add(manageService.managerList());
+    
+    return list;
+  }
+  
 
   //회원관리-특정회원 정보 리스트
   @RequestMapping("/manage/user/get")
@@ -67,10 +77,19 @@ public class ManageController {
   //=========================================================  
   //구장관리- 리스트 조회
   @RequestMapping("/manage/field/list")
-  public Object fieldList() {
-    Object obj=  manageService.fieldList();
-    System.out.println(obj);
+  public Object fieldList(HttpSession session) {
+     
+    Member userLogin = (Member) session.getAttribute("loginUser");
     return manageService.fieldList();
+  }
+  @RequestMapping("/manage/field/list1")
+  public Object fieldList1(HttpSession session) {
+     
+    Member userLogin = (Member) session.getAttribute("loginUser");
+    ArrayList<Object> list = new ArrayList<Object>();
+    list.add(userLogin);
+    list.add(manageService.fieldList());
+    return list;
   }
   //회원관리-특정회원 정보 리스트 조회
   @RequestMapping("/manage/field/get")

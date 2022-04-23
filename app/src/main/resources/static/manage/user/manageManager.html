@@ -19,9 +19,9 @@
     
     <style>
 
-    #user-sliding-menu{
-     display : none;
-    }
+	#user-sliding-menu {
+	 display: none;
+	}
     
     #sliding_menu{
   	display : none;
@@ -38,6 +38,10 @@
     
   }
 
+  #loginP{
+    margin: 0%;
+  }
+
     
     </style>
 </head>
@@ -49,8 +53,11 @@
         <li>lime</li>
         <li>administrator</li>
       </ul>
-      <div class="nav-links">
-        <a href="#">로그아웃</a>
+      <div class="nav-links" >
+        <ul>
+        <li><p id="loginP"></p></li>
+        <li><a href="../mLogin/login.html">로그아웃</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -88,7 +95,7 @@
             <table id="x-table" class="table table-striped table-hover table-bordered table-condensed border-primary text-center align-middle">
               <thead>
                 <tr id="x-thead">
-                  <th scope="col">매니저번호</th>
+                  <th scope="col">회원번호</th>
                   <th scope="col">이름</th>
                   <th scope="col">이메일</th>
                   <th scope="col">회원유형</th>
@@ -121,51 +128,71 @@ let globalCurrentPage=1; //현재 페이지
 
 
   $(document).ready(function () {
+          
+    
+          fetch("/manage/manager/list1",{
+              method:"post"
+          })
+          .then(function(response){
+            return response.json();
+          })
+          .then(function(manages){
+                  if(manages[0] === null){
+                    console.log(`manages[0] 로그인되지않음!!!`);
+                    alert("로그인이 필요합니다.");
+                    location.href ="../mLogin/login.html";
+                    
+                  }else{
+                    console.log(`manages[0] : ${manages[0]}`)
+                    console.log("로그인됨!!!");
+                    
+                      fetch("/manage/manager/list",{
+                          method:"post",
+                      })
+                      .then(function(response){
+                        return response.json();
+                      })
+                      .then(function(manages){
+                        console.log(`manages : ${manages[0].json}`);
+                        totalData = manages.length-1;
+                        displayData(1, manages);
+                        paging(1,manages)
+                      });
 
-        // $("#x-header").load("my-adminHeader.html");  //헤더 인클루드&ndash;&gt;
-       // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
-       // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
+                    $("#loginP").html(`${manages[0].name}`)  
 
-      fetch("/manage/manager/list",{
-          method:"post",
-      })
-      .then(function(response){
-        return response.json();
-      })
-      .then(function(manages){
-        totalData = manages.length-1;
-        displayData(1, manages);
-        paging(1,manages)
-      });
-
-	  $(document).on("click", "li[id='rptLi']" , function(){
-			if( $("#sliding_menu").css("display") ==="block"){
-				$("#sliding_menu").css("display","none");
-			
-			}else {
-				$("#sliding_menu").css("display","block");
-				console.log($(this).attr("id"));
-			};
-		  });
-	  
-	  $(document).on("click", "li[id='userLi']" , function(){
-			if( $("#user-sliding-menu").css("display") ==="block"){
-				$("#user-sliding-menu").css("display","none");
-			
-			}else {
-				$("#user-sliding-menu").css("display","block");
-				console.log($(this).attr("id"));
-			};
-		  });
+                    $(document).on("click", "li[id='rptLi']" , function(){
+                          if( $("#sliding_menu").css("display") ==="block"){
+                            $("#sliding_menu").css("display","none");
+                          
+                          }else {
+                            $("#sliding_menu").css("display","block");
+                            console.log($(this).attr("id"));
+                          };
+                      });
+                    
+                    $(document).on("click", "li[id='userLi']" , function(){
+                          if( $("#user-sliding-menu").css("display") ==="block"){
+                            $("#user-sliding-menu").css("display","none");
+                          
+                          }else {
+                            $("#user-sliding-menu").css("display","block");
+                            console.log($(this).attr("id"));
+                          };
+                      });
 
 
-      $(document).on("click", "button[id='detailBtn']", function () {
+                      $(document).on("click", "button[id='detailBtn']", function () {
 
-          location.href = "userDetail.html?no=" +$(this).val();
+                          location.href = "userDetail.html?no=" +$(this).val();
 
-      }); 
-    });
+                      }); 
+                      
+                      
+                  }// else (로그인된경우)
 
+            });//로그인여부처리 then   
+  }) // jquery ReadyFunction
 
 function displayData(currentPage, manages) {
 
@@ -186,7 +213,9 @@ for (
   i < endNum;
   i++
 ) {
-
+  if(manages[i].sum < 0){
+	  manages[i].sum = 0;
+  }
   chartHtml +=`
   <tr id = "xTr">
           <td id="x-no">${manages[i].no}</td>
@@ -199,9 +228,13 @@ for (
         </tr>`
 }
 $("#x-tbody").html(chartHtml);
-}
 
-function paging(no,manages) {
+
+
+
+}//로그인 시 lIST데이터 뿌려줌
+
+function paging(no,manages) {//로그인시 lIST데이터 페이징 처리
         console.log("no : " + no);
 
   totalPage = Math.ceil(totalData / 10); //총 페이지 수
@@ -263,6 +296,7 @@ function paging(no,manages) {
     displayData(selectedPage, manages);
   });
 }
+
 </script>
 </body>
 </html>
