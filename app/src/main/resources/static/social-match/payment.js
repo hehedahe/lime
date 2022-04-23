@@ -76,6 +76,12 @@ $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
   }
 });
 
+$.getJSON("/rsv/match/balance", function (result) {
+  console.log(result);
+  let userInfo = result.data;
+  xBalance.text(`잔액 ${(userInfo.sum).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`)
+})
+
 function getDay(date) {
   let today = new Date(date);
   const week = [

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lime.domain.LimeCash;
 import com.lime.domain.MatchRsv;
 import com.lime.domain.Member;
+import com.lime.domain.User;
 import com.lime.service.LimeCashService;
+import com.lime.service.ManageService;
 import com.lime.service.MatchRsvService;
 
 @RestController
@@ -28,6 +30,9 @@ public class MatchRsvController {
   @Autowired
   LimeCashService limeCashService;
 
+  @Autowired
+  ManageService manageService;
+
   @GetMapping("/list")
   public Object list() {
     return matchRsvService.list();
@@ -37,8 +42,12 @@ public class MatchRsvController {
   public Object getBalance(HttpSession session) {
     Member user = (Member) session.getAttribute("loginUser");
 
+    int userId = user.getNo();
+
+    User userInfo = manageService.userGet(userId);
+
     if (user != null) {
-      return new ResultMap().setStatus(SUCCESS).setData(user);
+      return new ResultMap().setStatus(SUCCESS).setData(userInfo);
     }
     return new ResultMap().setStatus(FAIL).setData("로그인하지 않았습니다.");
   }

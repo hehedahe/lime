@@ -1,7 +1,6 @@
 package com.lime.domain;
 
 import java.sql.Date;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,8 +19,8 @@ public class User {
   String acntNo; // 계좌번호
   String acntHolder; // 예금주명
   String blockDate; // 제재일
-  
-  
+
+
   String password;
   String phoneNo;
   boolean eventYn;
@@ -29,7 +28,7 @@ public class User {
   String UserImg;
   String UserType;
 
-  
+
   int num;//페이징처리(row_number index)
   int userCount;//총 회원수
 }
