@@ -36,21 +36,6 @@ public class MemberController {
       return "fail";
     }
 
-<<<<<<< HEAD
-    @RequestMapping("/member/getLoginUser")
-    public Object getLoginUser(HttpSession session) {
-        Member member = (Member) session.getAttribute("loginUser");
-        System.out.println("member::::::::" + member);
-        if (member != null) {
-            return new ResultMap()
-                    .setStatus(SUCCESS)
-                    .setData(member);
-        } else {
-            return new ResultMap()
-                    .setStatus(FAIL)
-                    .setData("로그인 하지 않았습니다.");
-        }
-=======
     // 로그인이 성공하면,
     // 다른 요청을 처리할 때 로그인 회원의 정보를 사용할 있도록 세션에 보관한다.
     session.setAttribute("loginUser", loginUser);
@@ -62,7 +47,6 @@ public class MemberController {
     } else {
       cookie = new Cookie("userEmail", "");
       cookie.setMaxAge(0); // 클라이언트에게 해당 이름의 쿠키를 삭제하도록 요구한다.
->>>>>>> il
     }
     response.addCookie(cookie); // 응답할 때 쿠키 정보를 응답헤더에 포함시킨다.
 
