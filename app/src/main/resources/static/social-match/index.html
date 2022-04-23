@@ -48,16 +48,6 @@
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
-    <link
-            rel="stylesheet"
-            type="text/css"
-            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-    />
-    <script
-            type="text/javascript"
-            src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
             $("#x-header").load("/header/user/header.html"); //헤더 인클루드
@@ -354,8 +344,8 @@
         }
     }
 
-    var URLSearchParams = new URLSearchParams();
-    console.log("URLSearchParams : " + URLSearchParams);
+    var params = new URLSearchParams();
+    // console.log("params : " + params);
 
     $(".form-select").on("change", function (e) {
         const name = $(e.target).attr("name");
@@ -364,20 +354,20 @@
         console.log(value);
 
         if (value == 0) {
-            URLSearchParams.delete(name);
+            params.delete(name);
         } else {
-            URLSearchParams.set(name, value);
+            params.set(name, value);
         }
 
         let matchDate = $(".active a").attr("date");
         console.log(matchDate);
 
-        URLSearchParams.set("matchDate", matchDate);
+        params.set("matchDate", matchDate);
 
-        console.log("URLSearchParams : " + URLSearchParams);
+        console.log("parameter : " + params);
 
         $.getJSON(
-            `http://localhost:8080/match/list?${URLSearchParams}`,
+            `http://localhost:8080/match/list?${params}`,
             function (arr) {
                 console.log(arr);
                 const matchList = $(".match-list");
