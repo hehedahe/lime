@@ -17,7 +17,7 @@
     <result column="region_name" property="regionName"/>
     <result column="title" property="title"/>
     <result column="intr" property="intro"/>
-    <result column="img" property="img"/>
+    <result column="img" property="photo"/>
     <result column="cost" property="cost"/>
     <result column="st_date" property="startDate"/>
     <result column="end_date" property="endDate"/>
@@ -52,7 +52,7 @@
     insert into cls(user_id, city_id, img, title, intr, cost, st_date, end_date, per_week, level, tchr_intr, dtl_intr)
       values(#{writer.no},(select city_id from city
         WHERE region_id  = (select region_id from region where region_name=#{regionName}) 
-        AND city_name =#{cityName}), #{img}, #{title}, #{intro}, #{cost}, #{startDate}, #{endDate}, #{perWeek}, #{level}, #{tchrIntro}, #{dtlIntro})
+        AND city_name =#{cityName}), #{photo}, #{title}, #{intro}, #{cost}, #{startDate}, #{endDate}, #{perWeek}, #{level}, #{tchrIntro}, #{dtlIntro})
   </insert>
   
   

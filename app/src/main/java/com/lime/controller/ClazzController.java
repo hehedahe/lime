@@ -27,7 +27,6 @@ public class ClazzController {
   @Autowired
   ClazzService clazzService;
 
-  MultipartFile img = null;
 
   @RequestMapping("/class/list")
   public Object list() {
@@ -37,18 +36,36 @@ public class ClazzController {
 
 
   @RequestMapping("/class/open1")
-  public Object open1(Clazz cls, MultipartFile img, HttpServletResponse response, HttpSession session) {
+  public Object open1(Clazz cls, MultipartFile file, HttpSession session) {
 
     Member member = (Member) session.getAttribute("loginUser");
-    System.out.println(member);
+
+    cls.setWriter(member);
+
+
+    System.out.println("photo-----------------");
+    System.out.println(cls.getPhoto());
+    System.out.println("photo-----------------");
+
+
+    System.out.println("-------file----------");
+    System.out.println(file);
+    System.out.println("-------file----------");
 
     try {
-      cls.setImg(saveFile(img));
+      cls.setPhoto(saveFile(file));
+      System.out.println("---------------------");
+      System.out.println(cls.getPhoto());
+      System.out.println("---------------------");
     } catch(Exception e) {
       e.printStackTrace();
     }
 
-    cls.setWriter(member);
+    System.out.println("-----------------");
+    System.out.println(file);
+    System.out.println("-----------------");
+
+
     session.setAttribute("classOpen", cls);
 
 
@@ -87,8 +104,8 @@ public class ClazzController {
   }
 
 
-  @RequestMapping("/class/img")
-  public ResponseEntity<Resource> img(String filename) {
+  @RequestMapping("/class/photo")
+  public ResponseEntity<Resource> photo(String filename) {
 
     try {
       // 다운로드할 파일의 입력 스트림 자원을 준비한다.
@@ -132,7 +149,6 @@ public class ClazzController {
     }
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
   private String saveFile(MultipartFile file) throws Exception {
     if (file != null && file.getSize() > 0) { 
       // 파일을 저장할 때 사용할 파일명을 준비한다.

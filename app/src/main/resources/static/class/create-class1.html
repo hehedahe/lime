@@ -32,8 +32,11 @@
     <div>
       <h2>&nbsp;&nbsp;썸네일</h2><br>
       <form name="form1">
-        <input type=file name='img' style='display: none;'>
-        <img src='img/img-select.PNG' border='0' style="width: 140px" onclick='document.all.img.click();'><span id="base-sentence">&nbsp;&nbsp;&nbsp;이미지를 등록하지 않으시면 기본 이미지가 제공됩니다.</span>
+      <div>
+        <input type="file" name="file">
+        <border='0' style="width: 140px"><span id="base-sentence">&nbsp;&nbsp;&nbsp;이미지를 등록하지 않으시면 기본 이미지가 제공됩니다.</span>
+        </border>
+        </div>
     </div>
 </div>
 <div class="wrapper">
@@ -117,7 +120,6 @@ const city = document.getElementById("city");
 
 
 
-const img = document.querySelector("input[name=img]");
 const title = document.querySelector("input[name=title]");
 const intro = document.querySelector("input[name=intro]");
 const regionId = document.querySelector("input[name=regionName]");
@@ -131,9 +133,10 @@ document.querySelector("form[name=form1]").onsubmit = function() {
 
   var fd = new FormData(document.forms.namedItem("form1"));
 
+
   fetch("/class/open1", { 
       method: "POST",
-      body: new URLSearchParams(fd)
+      body: fd
     }) 
     .then(function(response) {
       return response.text();

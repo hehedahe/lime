@@ -12,7 +12,7 @@ public class Clazz {
   int cityId;
   String title;
   String intro;
-  String img;
+  String photo;
   int cost;
   String startDate;
   String endDate;
