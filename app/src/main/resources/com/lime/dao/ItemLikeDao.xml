@@ -11,13 +11,23 @@
   <!--  테이블의 컬럼과 객체 필드를 연결한다. -->
   <resultMap type="ItemLike" id="ItemLikeMap">
     <id column="item_id" property="itemId"/>
-    <id column="user_id" property="itemId"/>
+    <id column="user_id" property="userId"/>
   </resultMap>
   
 
   <!-- 
     id => 인터페이스의 메서드 이름과 일치해야 한다.
    -->
+   
+  <insert id="insert" parameterType="ItemLike">
+    insert into item_like(user_id,item_id)
+      values(#{userId}, #{itemId})
+  </insert>
+  
+  <delete id="delete" parameterType="ItemLike">
+    delete from item_like
+    where user_id=#{userId} and item_id=#{itemId}
+  </delete>
    
   
 </mapper>

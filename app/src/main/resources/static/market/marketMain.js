@@ -1,6 +1,8 @@
 "use strict"
 
 import { Region1 } from '../common/region.js'
+import { getLogin } from '../common/getLogin.js';
+import { itemForm } from "../common/link.js";
 
 var itemList = document.querySelector("#item-list");
 var regionSelect = document.querySelector("#region");
@@ -42,7 +44,7 @@ $(document).ready(function(e){
     });
 
     $(document).on("click", "#market-write", function() {
-      location.href = "itemForm.html";
+      getLogin(itemForm);
     })
 });
 
@@ -79,7 +81,6 @@ function listFetch() {
         transState1 = `<span class="E">거래완료</span>`;
       }
 
-      //console.log(list.photo);
       let photo = "../itembasic.png"
 
       let arr = [];
@@ -100,12 +101,6 @@ function listFetch() {
         console.log("최소값의 경로>> " + filePath);
         photo = "/market/photo?filename=" + filePath + "&type=main";
       }
-
-
-      // if (list.photo != "") {
-      //     console.log(list.photo[0].filePath); 
-      //   photo = "/market/photo?filename=" + list.photo[0].filePath + "&type=main";
-      // }
 
       var cols = document.createElement("div");
       cols.setAttribute('class', 'col');
@@ -128,7 +123,14 @@ function listFetch() {
 }
 
 
-listFetch(); // 첫 화면
+fetch(`/member/getLoginUser`)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(result){
+      console.log(result.data);
+      listFetch(); // 첫 화면
+    });
 
 // 지역 선택
 regionSelect.addEventListener('change', (event) => {
