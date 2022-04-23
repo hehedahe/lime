@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lime.domain.LimeCash;
 import com.lime.domain.MatchRsv;
 import com.lime.domain.Member;
-import com.lime.domain.SearchCondition;
-import com.lime.domain.UserLogin;
+import com.lime.domain.User;
 import com.lime.service.LimeCashService;
+import com.lime.service.ManageService;
 import com.lime.service.MatchRsvService;
 
 @RestController
@@ -30,19 +30,27 @@ public class MatchRsvController {
   @Autowired
   LimeCashService limeCashService;
 
+  @Autowired
+  ManageService manageService;
+
   @GetMapping("/list")
   public Object list() {
     return matchRsvService.list();
   }
 
-  //  @GetMapping("/get")
-  //  public Object get(int matchId, int userId) {
-  //    MatchRsv match = matchRsvService.get(matchId, userId);
-  //    if (match == null) {
-  //      return new ResultMap().setStatus(FAIL).setData("해당 번호의 예약 내역이 없습니다.");
-  //    }
-  //    return new ResultMap().setStatus(SUCCESS).setData(match);
-  //  }
+  @GetMapping("/balance")
+  public Object getBalance(HttpSession session) {
+    Member user = (Member) session.getAttribute("loginUser");
+
+    int userId = user.getNo();
+
+    User userInfo = manageService.userGet(userId);
+
+    if (user != null) {
+      return new ResultMap().setStatus(SUCCESS).setData(userInfo);
+    }
+    return new ResultMap().setStatus(FAIL).setData("로그인하지 않았습니다.");
+  }
 
   @GetMapping("/get")
   public Object get(HttpSession session) {
@@ -51,28 +59,13 @@ public class MatchRsvController {
     int userId = user.getNo();
 
     List<MatchRsv> matchList = matchRsvService.get(userId);
-    if (matchList == null) {
-      return new ResultMap().setStatus(FAIL).setData("해당 유저의 예약 내역이 없습니다.");
-    }
-    return new ResultMap().setStatus(SUCCESS).setData(matchList);
-  }
 
-  @GetMapping("/logincheck")
-  public Object getOrderPage(SearchCondition sc, HttpSession session) {
-    UserLogin user = (UserLogin) session.getAttribute("loginUser");
-    //    log.info(Integer.parseInt(user.getUserId()));
-    if (user == null) {
-      return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
-    } else {
-      return new ResultMap().setStatus(SUCCESS);
-    }
+    return new ResultMap().setStatus(SUCCESS).setData(matchList);
   }
 
   @RequestMapping("/add")
   public Object checkout(LimeCash limeCash, MatchRsv matchRsv, HttpSession session) {
-
     // 요청 파라미터 분석 및 가공
-
     Member user = (Member) session.getAttribute("loginUser");
     limeCash.setUserId(user.getNo());
 

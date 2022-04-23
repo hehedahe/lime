@@ -146,3 +146,41 @@ where
   f.region_id=1 and f.city_id=22 and m.lv_id=1 and m.mtch_type_id=1 and c.court_type_id=1
 order by
   m.st_time asc, f.name asc
+
+select 
+  smr.mtch_id,
+  smr.user_id,
+  smr.lime_id,
+  smr.state,
+  m.mtch_id,
+  m.court_id,
+  m.user_id,
+  m.mtch_type_id,
+  m.mtch_date,
+  m.st_time,
+  m.end_time,
+  m.fee,
+  m.state,
+  m.num_of_people,
+  m.lv_id,
+  c.court_id,
+  c.name,
+  c.court_type_id,
+  c.field_id,
+  f.field_id,
+  f.name as field_name,
+  f.addr,
+  f.region_id,
+  f.city_id,
+  city.city_name,
+  lc.date
+from social_mtch_rsv smr
+  left outer join social_mtch m on smr.mtch_id=m.mtch_id
+  left outer join court c on m.court_id=c.court_id
+  left outer join field f on c.field_id=f.field_id
+  left outer join city on f.city_id=city.city_id
+  left outer join lime_cash lc on smr.lime_id=lc.lime_id
+where
+  smr.user_id=2
+order by 
+  m.mtch_id asc;
