@@ -1,5 +1,6 @@
 package com.lime.controller;
 
+import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,15 @@ public class ManageController {
   public Object userList(HttpSession session) {
     Member userLogin = (Member) session.getAttribute("loginUser");
     return manageService.userList();
+  }
+  //회원관리-회원리스트
+  @RequestMapping("/manage/user/list1")
+  public Object userList1(HttpSession session) {
+    Member userLogin = (Member) session.getAttribute("loginUser");
+    ArrayList<Object> list = new ArrayList<Object>();
+    list.add(userLogin);
+    list.add(manageService.userList());
+    return list;
   }
   @RequestMapping("/manage/manager/list")
   public Object managerList(HttpSession session) {

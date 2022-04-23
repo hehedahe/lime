@@ -54,6 +54,7 @@
   <main class="form-signin">
     <form name="form1">
       <!-- <h1 class="h2 mb-4" id="login-h">로그인</h1> -->
+      <h1>관리자 로그인</h1>
       <h1 class="h1 mb-3" id="login-h">lime</h1>
 
       <div class="form-login">
@@ -142,8 +143,7 @@
     .then(function(text) {
       if (text == "success") {
         window.alert("로그인 성공!")
-        console.log(`쿠키값 : $.cookie().length()`);
-    	  //location.href = "/social-match/index.html";
+    	  location.href = "../user/manageUser1.html";
         // location.href = "/court_rsv/index.html"
       } else {
     	  window.alert("로그인 실패!");
