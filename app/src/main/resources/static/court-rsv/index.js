@@ -1,6 +1,7 @@
 "use strict"
 
 import {selectCity} from '../common/selectCity.js'
+import {checkCourtType, checkIndoor, checkParking} from '../common/typeCheck.js'
 import {
     fieldList,
     getCourt,
@@ -10,6 +11,27 @@ import {
     rsvsByDate
 } from '../common/apiList.js'
 
+
+// ***예약 페이지로 넘길 데이터
+var expectedRsv = {
+    fieldId: '',
+    courtId: '',
+    date: '',
+    day: '',
+    time: ''
+};
+
+// 현재 날짜
+let today = new Date();
+let now = today.getHours();
+// 날짜 형식 YYMMDD
+let month = ("0" + (today.getMonth() + 1)).slice(-2);
+let year = ("0" + today.getFullYear()).slice(-2);
+let date = today.getDate();
+expectedRsv.date = year + month + ("0" + date).slice(-2); // ***YYMMDD 형태로 현재 날짜 디폴트로 담아두기
+
+// 지난 시간 마감 처리
+timeCheck();
 
 // =====================================
 //             카카오 지도 API
@@ -81,8 +103,7 @@ $('#drop-region').on('change', async function (e) {
     let card = $('#crt-card');
     if ($('#crt-card div') != null) {
         card.empty()
-    }
-    ;
+    };
 
     // 시도 → 시군구
     selectCity(e.target.value);
@@ -125,8 +146,7 @@ $('#drop-city').on('change', async function (e) {
     let card = $('#crt-card');
     if ($('#crt-card div') != null) {
         card.empty();
-    }
-    ;
+    };
 
     let city = $('#drop-city option:checked').text();
     let regionNo = $('#drop-region option:selected').val();
@@ -162,14 +182,6 @@ $('#drop-city').on('change', async function (e) {
 //             카드 클릭 시 효과
 // =====================================
 
-// ***예약 페이지로 넘길 데이터
-var expectedRsv = {
-    fieldId: '',
-    courtId: '',
-    date: '',
-    time: ''
-};
-
 var fieldId;
 
 $(document).on('click', '.card-btn', async function (e) {
@@ -203,19 +215,13 @@ $(document).on('click', '.card-btn', async function (e) {
     $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
     $('#crt-parking').text(checkParking(court.parkingArea));
 
-    // 날짜 형식 YYMMDD
-    let today = new Date();
-    let month = ("0" + (today.getMonth() + 1)).slice(-2);
-    let year = ("0" + today.getFullYear()).slice(-2);
-    let date = today.getDate();
-    expectedRsv.date = year + month + ("0" + date).slice(-2); // ***YYMMDD 형태로 현재 날짜 디폴트로 담아두기
 
     // 현재 예약되어 있는 시간 비활성화
     const res = await rsvsByDate(expectedRsv.date, court.fieldId);
 
     res.data?.map((rsv) => {
         let time = ("0" + rsv.dateTime).slice(-2);
-        $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).addClass('closed');
+        $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).attr('disabled', true).addClass('closed');
     });
 });
 
@@ -223,19 +229,31 @@ $(document).on('click', '.card-btn', async function (e) {
 // =====================================
 //      해당 날짜 예약 리스트 가져오기
 // =====================================
+
 $(document).on('click', '.date-wrap', async function (e) {
-    $('[data-time]').removeClass('closed');
+    $('.sche-btn').removeClass('closed').attr('disabled', false);
+    let clickedDate = $(e.target).text().slice(0,2);
 
-    // ***선택 날짜 담아두기
-    expectedRsv.date = $(e.target).attr('data-date');
+    if (date == clickedDate) {
+        timeCheck();
+    }
+    if (fieldId == null) {
+        window.alert("구장을 먼저 선택해 주세요! 🎾");
+    } else {
 
-    const res = await rsvsByDate(expectedRsv.date, expectedRsv.fieldId);
+        // ***선택 요일 담아두기
+        expectedRsv.day = $(e.target).find('span').text();
 
-    res.data?.map((rsv) => {
-        let time = ("0" + rsv.dateTime).slice(-2);
-        $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).addClass('closed');
-    })
+        const res = await rsvsByDate(expectedRsv.date, expectedRsv.fieldId);
+
+        res.data?.map((rsv) => {
+            let time = ("0" + rsv.dateTime).slice(-2);
+            $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).attr('disabled', true).addClass('closed');
+        })
+    }
 });
+
+
 
 
 // =====================================
@@ -257,40 +275,22 @@ $('.sche-btn').on('click', function (e) {
 });
 
 
-// =====================================
-//    코트 타입 / 실내외 / 주차여부 체크
-// =====================================
 
-// 코트타입 체크
-function checkCourtType(courtTypeId) {
-    switch (courtTypeId) {
-        case 1:
-            return '하드 코트'
-        case 2:
-            return '클레이 코트'
-        case 3:
-            return '잔디 코트'
-        case 4:
-            return '앙투카 코트'
+
+
+// 지난 시간 마감 처리 함수
+function timeCheck() {
+    for (var i = 6; i <= 16; i++) {
+        let targetTime = $(`.sche-btn[data-time=${now}]`).attr('data-time');
+        if (targetTime <= now) {
+            let no;
+            if (i < 10) {
+                no = '0' + i;
+                $(`.sche-btn[data-time=${no}]`).attr('disabled', true).addClass('closed');
+            } else {
+                $(`.sche-btn[data-time=${i}]`).attr('disabled', true).addClass('closed');
+            }
+        }
+        i++;
     }
 };
-
-// 실내/외 체크
-function checkIndoor(indYn) {
-    if (indYn) {
-        return '실내';
-    } else {
-        return '야외'
-    }
-};
-
-// 주차 가능 여부 체크
-function checkParking(parkingArea) {
-    if (parkingArea) {
-        return '주차 가능';
-    } else {
-        return '주차장 없음'
-    }
-};
-
-

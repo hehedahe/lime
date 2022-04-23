@@ -31,5 +31,7 @@ public class User {
 
   int num;//페이징처리(row_number index)
   int userCount;//총 회원수
+  
+  int ttlCash; // 라임캐시 잔액
 }
 

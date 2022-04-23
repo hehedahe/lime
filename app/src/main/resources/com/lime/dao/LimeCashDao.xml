@@ -20,4 +20,19 @@
 </insert>
 
 
+<select id="findCash" parameterType="int" resultType="int">
+    SELECT sum(A.cal_amt)
+    FROM
+    (SELECT CASE
+            WHEN type_use='C'
+            THEN amt
+            WHEN type_use='U'
+            THEN -amt
+            ELSE 0
+            END AS cal_amt
+    FROM    lime_cash
+    WHERE   user_id=#{userId}) AS A
+</select>
+
+
 </mapper>
