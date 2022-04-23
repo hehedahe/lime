@@ -10,6 +10,12 @@
     src: url("../asset/font/NanumGothicBold.woff") format("woff");
 }
 
+html,
+body {
+  height: 100%;
+  font-family: "Nanum Gothic";
+}
+
 * {
     margin: 0;
     padding: 0;
