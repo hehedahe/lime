@@ -7,28 +7,29 @@
 
 </head>
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-<!-- header, footer 삽입 제이쿼리-->
-<!-- <script type="text/javascript">
 
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- header, footer 삽입 제이쿼리-->
+<script type="text/javascript">
 
     $(document).ready(function(){
         $('.footer').load('../footer/footer.html');
-        $(".header").load("../header/user/loggedheader.html");
+        $(".header").load("../header/user/header.html");
     })
-</script> -->
-<style>
-    body
-    {
-        margin: 0 auto;
-        width: 1024px;
-    }
-</style>
+</script>
+
+
 
 <body>
 
+<div class="header"></div>
+
+
+<form name="form3">
 <div id="text-title" class="cl-info-comment">수강생들에게 미리 제공할 정보를 적어주세요.(상세정보)</div>
 <div id="detail-info" class="cl-info-comment">
-<textarea id="intro-info" cols="60" rows="17" placeholder="
+<textarea id="intro-info" name="tchrIntro" cols="60" rows="17" placeholder="
 
 [클래스 정보]
 
@@ -55,7 +56,7 @@
 <div class="cl-info-comment"></div>
 <div id="qna" class="cl-info-comment"> Q & A </div>
 <div class="cl-info-comment">
-<textarea id="qna-text" cols="60" rows="17" placeholder="
+<textarea id="qna-text" name="dtlIntro" cols="60" rows="17" placeholder="
 
 Q & A 작성공간입니다.
 
@@ -72,9 +73,58 @@ A. 네 상호합의하에 최대한 클래스 신청자분께 맞춰드리는 �
 "></textarea></div>
 
 <div class="page-turn">
-    <button id="pre-btn" class="page" type="button" a href="createClass-2.html">이전</button>
+    <button id="pre-btn" class="page" type="button" a href="create-class2.html">이전</button>
     <span id="page-no">3/3</span>
-    <button id="next-btn" class="page" type="button">등록</button>
+    <button id="next-btn" class="page">등록</button>
+</form>
 </div>
+
+
+
+
+
+
+
+
+<div class="footer"></div>
+
+
+<script>
+
+
+
+const level = document.querySelector("input[name=tchrIntro]");
+const perWeek = document.querySelector("input[name=dtlIntro]");
+
+
+
+document.querySelector("form[name=form3]").onsubmit = function() {
+
+var fd = new FormData(document.forms.namedItem("form3"));
+
+fetch("/class/open3", { 
+    method: "POST",
+    body: new URLSearchParams(fd)
+  }) 
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(text) {
+    if (text == "success") {
+        //location.href = "signup2.html";
+      alert("성공성공!")
+    } else {
+        window.alert("중복된 이메일입니다");
+    }
+  });
+
+return false;
+};
+
+
+
+</script>
+
+
 </body>
 </html>

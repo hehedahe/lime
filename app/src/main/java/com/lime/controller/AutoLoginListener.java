@@ -21,5 +21,7 @@ public class AutoLoginListener implements ServletRequestListener {
     HttpServletRequest httpRequest = (HttpServletRequest) sre.getServletRequest(); 
     HttpSession session = httpRequest.getSession();
     session.setAttribute("loginUser", loginUser);
+
+    session.getAttribute("loginUser");
   }
 }

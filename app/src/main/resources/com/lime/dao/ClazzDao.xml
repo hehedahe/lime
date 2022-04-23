@@ -9,14 +9,15 @@
   
   
   <resultMap type="clazz" id="clsMap">
-  	<id column="cls_id" property="no"/>
+  	<id column="cls_id" property="clsId"/>
   	<result column="user_id" property="userId"/>
     <result column="city_id" property="cityId"/>
     <result column="city_name" property="cityName"/>
+    <result column="region_id" property="regionId"/>
     <result column="region_name" property="regionName"/>
     <result column="title" property="title"/>
     <result column="intr" property="intro"/>
-    <result column="img" property="img"/>
+    <result column="img" property="photo"/>
     <result column="cost" property="cost"/>
     <result column="st_date" property="startDate"/>
     <result column="end_date" property="endDate"/>
@@ -26,8 +27,14 @@
     <result column="dtl_intr" property="dtlIntro"/>
     <result column="rgt_date" property="rgtDate"/>
     <result column="mdfy_date" property="mdfyDate"/>
-  
+    
+    <association property="writer" javaType="Member">
+      <id column="no" property="no"/>
+      <result column="name" property="name"/>
+    </association>
   </resultMap>
+  
+  
   
    <select id="findAll" resultMap="clsMap">
     select 
@@ -41,12 +48,19 @@
   </select>
   
   
-   <insert id="insert" parameterType="clazz">
-    insert into ml_book(title,img) 
-    values(#{title},#{img})
+  <insert id="insert" parameterType="clazz" useGeneratedKeys="true" keyColumn="cls_id" keyProperty="clsId">
+    insert into cls(user_id, city_id, img, title, intr, cost, st_date, end_date, per_week, level, tchr_intr, dtl_intr)
+      values(#{writer.no},(select city_id from city
+        WHERE region_id  = (select region_id from region where region_name=#{regionName}) 
+        AND city_name =#{cityName}), #{photo}, #{title}, #{intro}, #{cost}, #{startDate}, #{endDate}, #{perWeek}, #{level}, #{tchrIntro}, #{dtlIntro})
   </insert>
   
   
+  
+  
+  
+  
+  <!-- 
   <select id="findByRegion" resultMap="clsMap" parameterType="string">
   
   		select 
@@ -79,8 +93,7 @@
 
     </select>
   
-  
-  
+   -->
   
   
   </mapper>

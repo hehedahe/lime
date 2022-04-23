@@ -1,15 +1,14 @@
-html {
+/* html {
     width : 1024px;
-}
-body {
+} */
+/* body {
     align-items: center;
     margin: 0 auto;
-}
+} */
 
 .container {
-    max-width: 1024px; /* 컨텐츠 width 1024로 맞춰주기 */
-    height: 100vh;
-    padding: 0;
+    width: 1024; /* 컨텐츠 width 1024로 맞춰주기 */
+    margin: 0 auto;
 }
 
 

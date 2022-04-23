@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>클래스 상세</title>
+    <link href="cC_CSS/createClass.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- header, footer 삽입 제이쿼리-->
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.footer').load('../footer/footer.html');
+        $(".header").load("../header/user/header.html");
+    })
+</script>
+<body>
+<div class="header"></div>
+
+
+
+
+
+
+
+<div class="div-wrapper">
+<div id="body-wrapper">
+
+
+<div class="thumbnail">
+    <div>
+      <h2>&nbsp;&nbsp;썸네일</h2><br>
+      <form name="form1">
+      <div>
+        <input type="file" name="file">
+        <border='0' style="width: 140px"><span id="base-sentence">&nbsp;&nbsp;&nbsp;이미지를 등록하지 않으시면 기본 이미지가 제공됩니다.</span>
+        </border>
+        </div>
+    </div>
+</div>
+<div class="wrapper">
+    <input id="class-name" type="text" name="title" placeholder="&nbsp;클래스 이름을 입력해주세요." style="width:300px;" onfocus="this.placeholder=''" onblur="this.placeholder='클래스 이름을 입력해주세요.'">
+</div>
+<div class="wrapper">
+    <input id="one-intro"type="text" name="intro" placeholder="&nbsp;클래스 한줄소개를 입력해주세요." style="width:300px;" onfocus="this.placeholder=''" onblur="this.placeholder='클래스 한줄소개를 입력해주세요.'">
+</div>
+<form name="form1">
+<ul id="re-ul" class="chose">지역
+    <li class="re-ci-choose">
+        <select class="search-wrapper" id="region" name="regionName">
+          <option selected disabled hidden>지역</option>
+          <option value="전체">전체</option>
+          <option value="서울특별시">서울특별시</option>
+          <option value="부산광역시">부산광역시</option>
+          <option value="대구광역시">대구광역시</option>
+          <option value="인천광역시">인천광역시</option>
+          <option value="광주광역시">광주광역시</option>
+          <option value="대전광역시">대전광역시</option>
+          <option value="울산광역시">울산광역시</option>
+          <option value="세종특별자치시">세종특별자치시</option>
+          <option value="경기도">경기도</option>
+          <option value="강원도">강원도</option>
+          <option value="충청북도">충청북도</option>
+          <option value="충청남도">충청남도</option>
+          <option value="전라북도">전라북도</option>
+          <option value="전라남도">전라남도</option>
+          <option value="경상북도">경상북도</option>
+          <option value="경상남도">경상남도</option>
+          <option value="제주특별자치도">제주특별자치도</option>
+        </select>
+    </li>
+</ul>
+<ul id="city-ul" class="chose">도시
+    <li class="re-ci-choose">
+        <select  class="search-wrapper" id="city" name="cityName">
+          <option selected hidden>도시</option>
+          <option value="강남구">강남구</option>
+        </select>
+    </li>
+</ul>
+<div>
+    <span id="open-date-intro">클래스 개설일을 선택해주세요. (최소1달)</span>
+</div>
+<ul id="st-ul" class="st-end-chose" style="font-weight: bold">시작일
+    <li class="cl-st-end">
+        <input type="text" name="startDate" id="startDate" autocomplete="off">
+    </li>
+</ul>
+<ul id="end-ul" class="st-end-chose" style="font-weight: bold">종료일
+    <li class="cl-st-end">
+        <input type="text" name="endDate" id="endDate" autocomplete="off">
+    </li>
+</ul>
+<div class="page-turn">
+    <a href="class-main.html"><button id="pre-btn" class="page" type="button">나가기</button></a>
+    <span id="page-no">1/3</span>
+    <a href="create-class-2.html"><button id="next-btn" class="page">다음</button></a>
+</div>
+</form>
+
+</div>
+
+</div>
+
+<div class="footer"></div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="../../node_modules/jquery/dist/jquery.min.js"></script> -->
+<script>
+
+
+
+
+
+const regionSelect = document.querySelector("#region");
+const city = document.getElementById("city");
+
+
+
+const title = document.querySelector("input[name=title]");
+const intro = document.querySelector("input[name=intro]");
+const regionId = document.querySelector("input[name=regionName]");
+const cityName = document.querySelector("input[name=cityName]");
+const startDate = document.querySelector("input[name=startDate]");
+const endDate = document.querySelector("input[name=endDate]");
+
+
+
+document.querySelector("form[name=form1]").onsubmit = function() {
+
+  var fd = new FormData(document.forms.namedItem("form1"));
+
+
+  fetch("/class/open1", { 
+      method: "POST",
+      body: fd
+    }) 
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      if (text == "success") {
+    	  location.href = "create-class2.html";
+        alert("성공성공!")
+      } else {
+    	  window.alert("중복된 이메일입니다");
+      }
+    });
+
+  return false;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+var dateFormat = "yy/mm/dd",
+  from = $( "#startDate" )
+    .datepicker({
+      showMonthAfterYear: true, //연도,달 순서로 지정
+      changeMonth: true,//달 변경 지정
+      dateFormat:"yy/mm/dd",//날짜 포맷
+      dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],//요일 이름 지정
+      monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],//월 이름 지정
+      minDate:0 //오늘 이전 날짜를 선택할 수 없음
+    })
+    .on( "change", function() {
+      to.datepicker( "option", "minDate", getDate(this) );//종료일의 minDate 지정
+    }),
+  to = $( "#endDate" ).datepicker({
+ showMonthAfterYear: true,  
+    changeMonth: true,
+    dateFormat:"yy/mm/dd",
+    dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],
+    monthNamesShort: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    minDate:'+1D' //내일부터 선택가능, 지정형식 예(+1D +1M +1Y)
+  })
+  .on( "change", function() {
+    from.datepicker( "option", "maxDate", getDate(this) );//시작일의 maxDate 지정
+  });
+
+function getDate(element) {
+  var date;
+  try {
+    date = $.datepicker.parseDate( dateFormat, element.value );
+    if(element.id == 'startDate'){
+    date.setDate(date.getDate()+30);//종료일은 시작보다 하루 이후부터 지정할 수 있도록 설정
+    }else{
+     date.setDate(date.getDate()-1);//시작일은 종료일보다 하루 전부터 지정할 수 있도록 설정
+    }
+  } catch( error ) {
+    date = null;
+  }
+  return date;
+}
+
+/*
+
+const Region1 = {
+    seoul : ["도시","강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"],
+    busan : ["도시","강서구","금정구","남구","동구","동래구","부산진구","북구","사상구","사하구","서구","수영구","연제구","영도구","중구","해운대구","기장군"],
+    daegu : ["도시","남구", "달서구", "동구", "북구", "서구", "수성구", "중구", "달성군"],
+    incheon : ["도시","계양구","남동구","동구","미추홀구","부평구","서구","연수구","중구","강화군","옹진군"],
+    gwangju : ["도시","광산구", "남구", "동구", "북구", "서구"],
+    daejeon : ["도시","대덕구", "동구", "서구", "유성구", "중구"],
+    ulsan : ["도시","남구","동구","북구","중구","울주군"],
+    sejong : ["세종특별자치시"],
+    gyeonggi : ["도시","고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"],
+    gangwon : ["도시","강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"],
+    chungbuk : ["도시","제천시","청주시","충주시","괴산군","단양군","보은군","영동군","옥천군","음성군","증평군","진천군","청원군"],
+    chungnam : ["도시","계룡시","공주시","금산군","논산시","당진시","보령시","부여군","서산시","서천군","아산시","예산군","천안시","청양군","태안군","홍성군"],
+    jeonbuk : ["도시","군산시", "김제시", "남원시", "익산시", "전주시", "정읍시", "고창군", "무주군", "부안군", "순창군", "완주군", "임실군", "장수군", "진안군"],
+    jeonnam : ["도시","광양시","나주시","목포시","순천시","여수시","강진군","고흥군","곡성군","구례군","담양군","무안군","보성군","신안군","영광군","영암군","완도군","장성군","장흥군","진도군","함평군","해남군","화순군"],
+    gyeongbuk : ["도시","경산시","경주시","구미시","김천시","문경시","상주시","안동시","영주시","영천시","포항시","고령군","군위군","봉화군","성주군","영덕군","영양군","예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군"],
+    gyeongnam : ["도시","거제시", "김해시", "밀양시", "사천시", "양산시", "진주시", "진해시", "창원시", "통영시", "거창군", "고성군", "남해군", "산청군", "의령군", "창녕군", "하동군", "함안군", "함양군", "합천군"],
+    jeju : ["도시","서귀포시","제주시"]
+}
+
+const Region2 = {
+    seoul : ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"],
+    busan : ["강서구","금정구","남구","동구","동래구","부산진구","북구","사상구","사하구","서구","수영구","연제구","영도구","중구","해운대구","기장군"],
+    daegu : ["남구", "달서구", "동구", "북구", "서구", "수성구", "중구", "달성군"],
+    incheon : ["계양구","남동구","동구","미추홀구","부평구","서구","연수구","중구","강화군","옹진군"],
+    gwangju : ["광산구", "남구", "동구", "북구", "서구"],
+    daejeon : ["대덕구", "동구", "서구", "유성구", "중구"],
+    ulsan : ["남구","동구","북구","중구","울주군"],
+    sejong : ["세종특별자치시"],
+    gyeonggi : ["고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"],
+    gangwon : ["강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"],
+    chungbuk : ["제천시","청주시","충주시","괴산군","단양군","보은군","영동군","옥천군","음성군","증평군","진천군","청원군"],
+    chungnam : ["계룡시","공주시","금산군","논산시","당진시","보령시","부여군","서산시","서천군","아산시","예산군","천안시","청양군","태안군","홍성군"],
+    jeonbuk : ["군산시", "김제시", "남원시", "익산시", "전주시", "정읍시", "고창군", "무주군", "부안군", "순창군", "완주군", "임실군", "장수군", "진안군"],
+    jeonnam : ["광양시","나주시","목포시","순천시","여수시","강진군","고흥군","곡성군","구례군","담양군","무안군","보성군","신안군","영광군","영암군","완도군","장성군","장흥군","진도군","함평군","해남군","화순군"],
+    gyeongbuk : ["경산시","경주시","구미시","김천시","문경시","상주시","안동시","영주시","영천시","포항시","고령군","군위군","봉화군","성주군","영덕군","영양군","예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군"],
+    gyeongnam : ["거제시", "김해시", "밀양시", "사천시", "양산시", "진주시", "진해시", "창원시", "통영시", "거창군", "고성군", "남해군", "산청군", "의령군", "창녕군", "하동군", "함안군", "함양군", "합천군"],
+    jeju : ["서귀포시","제주시"]
+}
+
+
+function selectCity(e) {
+    //var xxx = e[e.selectedIndex].text;
+    if (e == 1) var cities = Region1.seoul;
+    else if (e == 2) var cities = Region1.busan;
+    else if (e == 3) var cities = Region1.daegu;
+    else if (e == 4) var cities = Region1.incheon;
+    else if (e == 5) var cities = Region1.gwangju;
+    else if (e == 6) var cities = Region1.daejeon;
+    else if (e == 7) var cities = Region1.ulsan;
+    else if (e == 8) var cities = Region1.sejong;
+    else if (e == 9) var cities = Region1.gyeonggi;
+    else if (e == 10) var cities = Region1.gangwon;
+    else if (e == 11) var cities = Region1.chungbuk;
+    else if (e == 12) var cities = Region1.chungnam;
+    else if (e == 13) var cities = Region1.jeonbuk;
+    else if (e == 14) var cities = Region1.jeonnam;
+    else if (e == 15) var cities = Region1.gyeongbuk;
+    else if (e == 16) var cities = Region1.gyeongnam;
+    else if (e == 17) var cities = Region1.jeju;
+
+    var target = document.querySelector('#drop-city');
+    target.options.length = 0;
+
+    cities?.map((city, index) => {
+        var opt = `<option value="${index}">${city}</option>`;
+        $('#drop-city').append(opt);
+    });
+
+};
+
+
+regionSelect.addEventListener('change', (event) => {
+    let value = event.target.value;
+    let add;
+    if (value == "서울특별시") {
+        add = Region1.seoul;
+      } else if (value == "부산광역시") {
+        add = Region1.busan;
+      } else if (value == "대구광역시") {
+        add = Region1.daegu;
+      } else if (value == "인천광역시") {
+        add = Region1.incheon;
+      } else if (value == "광주광역시") {
+        add = Region1.gwangju;
+      } else if (value == "대전광역시") {
+        add = Region1.daejeon;
+      } else if (value == "울산광역시") {
+        add = Region1.ulsan;
+      } else if (value == "세종특별자치시") {
+        add = Region1.sejong;
+      } else if (value == "경기도") {
+        add = Region1.gyeonggi;
+      } else if (value == "강원도") {
+        add = Region1.gangwon;
+      } else if (value == "충청북도") {
+        add = Region1.chungbuk;
+      } else if (value == "충청남도") {
+        add = Region1.chungnam;
+      } else if (value == "전라북도") {
+        add = Region1.jeonbuk;
+      } else if (value == "전라남도") {
+        add = Region1.jeonnam;
+      } else if (value == "경상북도") {
+        add = Region1.gyeongbuk;
+      } else if (value == "경상남도") {
+        add = Region1.gyeongnam;
+      } else if (value == "제주특별자치도") {
+        add = Region1.jeju;
+      } else if(value == "전체") {
+        add = ["도시"];
+      }
+      city.options.length = 1;
+    
+      for (let property in add) {
+        let opt = document.createElement("option");
+        opt.value = add[property];
+        opt.innerHTML = add[property];
+        city.appendChild(opt);
+      }
+});
+
+// 도시 선택
+city.addEventListener('change', (event) => {
+    listFetch();
+})
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
