@@ -9,5 +9,5 @@ import com.lime.domain.Field;
 public interface FieldDao {
   List<Field> findByLatLng(@Param("preferLat")float preferLat, @Param("preferLng")float preferLng);
   List<Field> findAll();
-  List<Field> getCourt(int fieldId);
+  Field getCourt(int fieldId);
 }

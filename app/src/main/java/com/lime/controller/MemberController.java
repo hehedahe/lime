@@ -60,7 +60,7 @@ public class MemberController {
 
     @RequestMapping("/member/getLoginUser")
     public Object getLoginUser(HttpSession session) {
-        Object member = session.getAttribute("loginUser");
+        Member member = (Member) session.getAttribute("loginUser");
         System.out.println("member::::::::" + member);
         if (member != null) {
             return new ResultMap()

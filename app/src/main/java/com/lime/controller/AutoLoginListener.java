@@ -23,4 +23,3 @@ public class AutoLoginListener implements ServletRequestListener {
     session.setAttribute("loginUser", loginUser);
   }
 }
- */

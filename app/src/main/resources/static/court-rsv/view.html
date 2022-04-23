@@ -7,9 +7,12 @@
 
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="view.css">
+
     <!-- swiper -->
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+    <script src="../../node_modules/axios/dist/axios.js"></script>
 
     <title>LIME - 코트 정보</title>
 
@@ -29,6 +32,7 @@
 <!-- 메인 컨텐츠 -->
 <div class="container">
 
+    <!--  지도  -->
     <div id="map" class="my-5"></div>
 
     <!-- Swiper -->
@@ -43,22 +47,23 @@
         <div class="swiper-pagination border border-0 rounded-pill" style="width:60px;"></div>
     </div>
 
+    <!--  예약 테니스장 정보  -->
     <div class="my-4 border-bottom d-flex justify-content-between align-items-center">
         <div class="row m-3">
-            <div id="crt-name" class="d-flex align-items-baseline">
-                <h4>테니스장1</h4>
+            <div id="crt-name-wrap" class="d-flex align-items-baseline">
+                <h4 id="crt-name">테니스장1</h4>
                 <span class="mx-2">|</span>
-                <p onclick="showMap()"
-                   style="cursor:pointer">지도보기</p>
+                <p id="map-photo" style="cursor:pointer">지도보기</p>
             </div>
-            <p class="mb-1">테니스장 주소</p>
-            <p class="mb-1">010-1111-2222</p>
+            <p id="crt-addr" class="mb-1">테니스장 주소</p>
+            <p id="crt-contact" class="mb-1">010-1111-2222</p>
         </div>
-        <a id="to-index"
+        <a id="book-btn"
            class="mx-5 border p-4"
-           style="cursor:pointer" href="javascript:history.back();">코트 예약</a>
+           style="cursor:pointer" href="#">코트 예약</a>
     </div>
 
+    <!--  시설 정보  -->
     <div id="facility-info" class="px-4">
         <div id="x-title2" class="my-3">코트 시설</div>
         <div class="d-flex justify-content-evenly my-1">
@@ -103,6 +108,7 @@
 <footer id="x-footer"></footer>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c77b7df52ca018e8760dea5bc1e3c519"></script>
-<script type="module" src="view.js"></script>
+<script src="./view.js" type="module"></script>
+
 </body>
 </html>

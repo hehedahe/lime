@@ -24,7 +24,7 @@ public class DefaultFieldService implements FieldService {
   }
 
   @Override
-  public List<Field> getCourt(int fieldId) {
+  public Field getCourt(int fieldId) {
     return fieldDao.getCourt(fieldId);
   }
 }

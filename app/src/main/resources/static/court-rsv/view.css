@@ -40,22 +40,22 @@
 }
 
 /* 코트사진 버튼*/
-#crt-name > span,
-#crt-name > p {
+#crt-name-wrap > span,
+#crt-name-wrap > p {
     color:rgb(102, 200, 141);
 }
-#crt-name > h4 {
+#crt-name-wrap > h4 {
     font-weight: bolder;
 }
 
-#to-index {
+#book-btn {
     text-decoration: none;
     color: #fff;
     background-color: rgb(102, 200, 141);
     font-size: 18px;
     border-radius: 15px;
 }
-#to-index:hover {
+#book-btn:hover {
     box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 30%);
 }
 

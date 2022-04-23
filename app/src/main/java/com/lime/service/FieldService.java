@@ -6,5 +6,5 @@ import com.lime.domain.Field;
 public interface FieldService {
   List<Field> findByLatLng(float lat, float lng);
   List<Field> findAll();
-  List<Field> getCourt(int fieldId);
+  Field getCourt(int fieldId);
 }

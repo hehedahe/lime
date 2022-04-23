@@ -38,11 +38,9 @@
                     f.addr,
                     f.ind_yn,
                     f.parking_area,
+                    f.court_type_id,
                     f.lat,
                     f.lng,
-                    c.court_id,
-                    c.name courtName,
-                    c.court_type_id,
                     TRUNCATE ((6371*acos(cos(radians(#{preferLat}))*cos(radians(lat))*cos(radians(lng)-radians(#{preferLng}))
                     +sin(radians(#{preferLat}))*sin(radians(lat)))), 2) AS distance
     FROM            field f
@@ -55,23 +53,18 @@
 </select>
 
 <select id="getCourt" resultMap="fieldMap" parameterType="int">
-    SELECT    f.field_id,
-              f.name,
-              f.addr,
-              f.number,
-              f.ind_yn,
-              f.parking_area,
-              f.light_yn,
-              f.lat,
-              f.lng,
-              c.court_id,
-              c.name courtName,
-              c.court_type_id,
-              c.fee
-    FROM      field f
-    LEFT JOIN court c
-    ON        f.field_id = c.field_id
-    WHERE     f.field_type='R' AND f.field_id=#{fieldId}
+    SELECT f.field_id,
+           f.name,
+           f.number,
+           f.addr,
+           f.ind_yn,
+           f.parking_area,
+           f.light_yn,
+           f.court_type_id,
+           f.lat,
+           f.lng
+    FROM   field f
+    WHERE f.field_type='R' and f.field_id=#{fieldId}
 </select>
 
 </mapper>

@@ -19,6 +19,8 @@ const PATH = {
     }
 };
 
+
+
 // *********************
 // dateFormat
 // *********************
@@ -41,6 +43,8 @@ export async function dateFormat(colon, date) {
     return formatDate;
 }
 
+
+
 // *********************
 // field
 // *********************
@@ -59,8 +63,8 @@ export async function fieldList() {
 export async function courtList(lat, lng) {
     try {
         const response = await axios(`${PATH.field.courtList}?lat=${lat}&lng=${lng}`);
-        console.log("r:::::::::::::", response);
-        console.log("data::::::::::", response.data);
+        // console.log("r:::::::::::::", response);
+        // console.log("data::::::::::", response.data);
         return response.data;
     } catch (e) {
         console.log(e);
@@ -76,6 +80,7 @@ export async function getCourt(fieldId) {
         console.log(e);
     }
 }
+
 
 
 // *********************
@@ -103,9 +108,20 @@ export async function findCity(cityName, regionId) {
 };
 
 
+
 // *********************
 // member
 // *********************
+export async function getLoginUser() {
+    try {
+        const res = await axios(`${PATH.member.getLoginUser}`);
+        return res.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
 
 // *********************
 // court reservation

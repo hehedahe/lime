@@ -24,11 +24,13 @@ public class DefaultLimeCashService implements LimeCashService {
 
   @Override
   @Transactional
-  public int add(LimeCash limeCash) {
+  public int addCourtRsv(LimeCash limeCash) {
     Integer lcRes = lcDao.insert(limeCash);
+
     if(lcRes == 0){
       return 0;
     }
+
     //System.out.println(limeCash.getCourtRsv());
     CourtRsv cr = CourtRsv.builder()
         .limeId(limeCash.getLimeId())
@@ -36,7 +38,8 @@ public class DefaultLimeCashService implements LimeCashService {
         .courtId(limeCash.getCourtRsv().getCourtId())
         .dateTime(limeCash.getCourtRsv().getDateTime())
         .build();
-    System.out.println(cr);
+//    System.out.println(cr);
+
     crDao.insert(cr);
     return 1;
   }

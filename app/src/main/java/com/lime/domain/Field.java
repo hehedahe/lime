@@ -9,6 +9,7 @@ public class Field {
   int fieldId;
   String name;
   String addr;
+  String number;
   boolean indYn;
   boolean parkingArea;
   float lat;
