@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -21,11 +20,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.lime.domain.ItemImage;
 import com.lime.domain.ItemLike;
 import com.lime.domain.Market;
 import com.lime.domain.Member;
-import com.lime.domain.UserLogin;
 import com.lime.service.MarketService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -97,20 +94,10 @@ public class MarketController {
     return new ResultMap().setStatus(SUCCESS).setData(market);
   }
 
-  @RequestMapping("/market/getPhoto")
-  public Object getPhoto(int no) {
-    List<ItemImage> itemImage = marketService.getPhoto(no);
-    if (itemImage == null) {
-      return new ResultMap().setStatus(FAIL).setData("해당 번호의 게시글이 없습니다."); // 컨트롤러는 서비스 객체의 리턴 값에 따라 응답 데이터를 적절히 가공하여 리턴한다.
-    }
-    return new ResultMap().setStatus(SUCCESS).setData(itemImage);
-  }
-
   @RequestMapping("/market/add")
   public Object add(Market market, MultipartFile[] files, HttpSession session) {
     Member member = (Member) session.getAttribute("loginUser");
     System.out.println(member);
-    System.out.println(files);
     market.setWriter(member);
     try {
       Object fileList = saveFile(files);
@@ -126,15 +113,15 @@ public class MarketController {
 
   @RequestMapping("/market/like")
   public Object update(ItemLike itemLike, HttpSession session) {
-    UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
-    itemLike.setWriter(userLogin);
+    Member member = (Member) session.getAttribute("loginUser");
+    itemLike.setUserId(member.getNo());
     System.out.println(itemLike);
 
     if (itemLike.isDone()) {
-      //      marketService.add(itemLike);
+      return marketService.add(itemLike);
     } 
     if (!(itemLike.isDone())) {
-      System.out.println("조아요 해제!");
+      return marketService.delete(itemLike);
     }
     return 1;
   }
@@ -205,6 +192,7 @@ public class MarketController {
 
         // 파일명의 확장자를 알아낸다.
         int dotIndex = file.getOriginalFilename().lastIndexOf(".");
+        String fileFormat = file.getOriginalFilename().substring(dotIndex + 1);
         if (dotIndex != -1) {
           filename += file.getOriginalFilename().substring(dotIndex);
         }
@@ -214,7 +202,7 @@ public class MarketController {
         file.transferTo(photoFile.getCanonicalFile()); // 프로젝트 폴더의 전체 경로를 전달한다.
 
         // 썸네일 이미지 파일 생성
-        Thumbnails.of(photoFile).size(300, 250).crop(Positions.CENTER).outputFormat("jpg")
+        Thumbnails.of(photoFile).size(300, 250).crop(Positions.CENTER).outputFormat(fileFormat)
         .toFile(new File("./upload/item/" + "300x250_" + filename));
 
         System.out.println("filename>>" + filename);
@@ -222,7 +210,6 @@ public class MarketController {
       }
 
       return fileNames;
-
     } else {
       return null;
     }

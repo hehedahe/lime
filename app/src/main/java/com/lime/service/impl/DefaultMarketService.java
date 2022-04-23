@@ -73,10 +73,6 @@ public class DefaultMarketService implements MarketService {
     return market;
   }
 
-  @Override
-  public List<ItemImage> getPhoto(int no) {
-    return itemImageDao.findByNo(no);
-  }
 
   @Override
   @Transactional
@@ -100,7 +96,13 @@ public class DefaultMarketService implements MarketService {
   @Override
   public int add(ItemLike itemLike) {
     itemLikeDao.insert(itemLike);
-    return 0;
+    return 1000;
+  }
+
+  @Override
+  public int delete(ItemLike itemLike) {
+    itemLikeDao.delete(itemLike);
+    return 1000;
   }
 
   //  @Override

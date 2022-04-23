@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class ItemLike {
-  int itemId;
   int userId;
-  UserLogin writer;
+  int itemId;
   boolean done;
+
+  Member writer;
+
 }

@@ -6,4 +6,5 @@ import com.lime.domain.ItemLike;
 @Mapper
 public interface ItemLikeDao {
   int insert(ItemLike itemLike);
+  int delete(ItemLike itemLike);
 }
