@@ -134,6 +134,16 @@ public class ManageController {
   public Object communityList() {
     return  manageReportService.communityList();
   }
+  
+  //커뮤니티게시글 조회
+  @RequestMapping("/manage/community/list1")
+  public Object communityList1(HttpSession session) {
+    Member userLogin = (Member) session.getAttribute("loginUser");
+    ArrayList<Object> list = new ArrayList<Object>();
+    list.add(userLogin);
+    list.add(manageReportService.communityList());
+    return list;
+  }
   //특정 커뮤니티게시글 조회 
   @RequestMapping("/manage/community/get")
   public Object communityGet(int no) {
@@ -174,6 +184,14 @@ public class ManageController {
   @RequestMapping("/manage/market/list")
   public Object marketList() {
     return manageReportService.marketReportList();
+  }
+  @RequestMapping("/manage/market/list1")
+  public Object marketList1(HttpSession session) {
+    Member userLogin = (Member) session.getAttribute("loginUser");
+    ArrayList<Object> list = new ArrayList<Object>();
+    list.add(userLogin);
+    list.add(manageReportService.marketReportList());
+    return list;
   }
   @RequestMapping("/manage/marketCmt/list")
   public Object marketCmtList() {

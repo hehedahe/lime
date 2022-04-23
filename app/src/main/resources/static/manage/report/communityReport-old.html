@@ -17,33 +17,26 @@
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     
-<style>
+    <style>
 
-    #user-sliding-menu {
-    display: none;
-    }
+   #sliding_menu{
+  	display : none;
+   }
     
-    #sliding_menu{
-      display : none;
-    }
-    
-    .pagination{
-     text-align: center;
+   .pagination{
+    text-align: center;
     }
 
     #x-table {
-      align-items: center;
-      height: 50%;
-      text-justify: auto;
-      
-    }
-
-    #loginP{
-      margin: 0%;
-    }
+    align-items: center;
+    height: 50%;
+    text-justify: auto;
+    
+  }
 
 
-</style>
+    
+    </style>
 </head>
 
 <body>
@@ -53,11 +46,8 @@
         <li>lime</li>
         <li>administrator</li>
       </ul>
-      <div class="nav-links" >
-        <ul>
-        <li><p id="loginP"></p></li>
-        <li><a href="../mLogin/login.html">로그아웃</a></li>
-        </ul>
+      <div class="nav-links">
+        <a href="#">로그아웃</a>
       </div>
     </div>
   </nav>
@@ -65,12 +55,8 @@
   <main class="admin-user">
     <div id="sidebar" class="d-flex flex-column flex-shrink-0 border-end">
         <ul class="list-group nav nav-pills flex-column mb-auto">
-          <li class="list-group-item nav-item" id="userLi">
-            회원관리
-             <ul id="user-sliding-menu">
-            		<li><a href="../user/manageUser.html">유저</a></li>
-            		<li><a href="../user/manageManager.html">매니저</a></li>
-            </ul>
+          <li class="list-group-item nav-item">
+            <a href="../user/manageUser.html">회원관리</a>
           </li>
           <li class="list-group-item nav-item">
             <a href="../field/manageFiled.html"">구장관리</a>
@@ -95,22 +81,21 @@
             <table id="x-table" class="table table-striped table-hover table-bordered table-condensed border-primary text-center align-middle">
 				<ul class="nav nav-tabs">
 				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab" href="marketReport.html">게시글</a>
+				    <a class="nav-link active" data-toggle="tab" href="communityReport.html">게시글</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab" href="marketCmtReport.html">댓글</a>
+				    <a class="nav-link" data-toggle="tab" href="communityCmtReport.html">댓글</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link active" data-toggle="tab" href="marketRptReport.html">신고</a>
+				    <a class="nav-link" data-toggle="tab" href="communityRptReport.html">신고</a>
 				  </li>
 				</ul>	
               <thead>
                 <tr id="x-thead">
                   <th scope="col">No.</th>
                   <th scope="col">게시글</th>
-                  <th scope="col">게시글상세</th>
-                  <th scope="col">게시일</th>
-                  <th scope="col">판매자명</th>
+                  <th scope="col">이름</th>
+                  <th scope="col">등록일</th>
                 </tr>
               </thead>
             <tbody id ="x-tbody">
@@ -136,67 +121,44 @@ let globalCurrentPage=1; //현재 페이지
 
   $(document).ready(function () {
 
-          fetch("/manage/market/list1",{
-              method:"post",
-          })
-          .then(function(response){
-            return response.json();
-          })
-          .then(function(market){
-            if(market[0] === null){
-                console.log(`market[0] 로그인되지않음!!!`);
-                alert("로그인이 필요합니다.");
-                location.href ="../mLogin/login.html";
-            }else{
-                      fetch("/manage/market/list",{
-                      method:"post",
-                        })
-                        .then(function(response){
-                          return response.json();
-                        })
-                        .then(function(market){
-                          console.log(market);
-                          totalData = market.length;
-                          displayData(1, market);
-                          paging(1,market)
-                        });
-                        $("#loginP").html(`${market[0].name}`)  
+        // $("#x-header").load("my-adminHeader.html");  //헤더 인클루드&ndash;&gt;
+       // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
+       // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
 
-                        $(document).on("click", "li[id='rptLi']" , function(){
-                          if( $("#sliding_menu").css("display") ==="block"){
-                            $("#sliding_menu").css("display","none");
-                          
-                          }else {
-                            $("#sliding_menu").css("display","block");
-                            console.log($(this).attr("id"));
-                          };
-                          });
+      fetch("/manage/community/list",{
+          method:"post",
+      })
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(community){
+    	console.log(community);
+        totalData = community.length;
+        displayData(1, community);
+        paging(1,community)
+      });
 
-                          $(document).on("click", "li[id='userLi']" , function(){
-                                if( $("#user-sliding-menu").css("display") ==="block"){
-                                  $("#user-sliding-menu").css("display","none");
-                                
-                                }else {
-                                  $("#user-sliding-menu").css("display","block");
-                                  console.log($(this).attr("id"));
-                                };
-                            });
+	  $(document).on("click", "li[id='rptLi']" , function(){
+			if( $("#sliding_menu").css("display") ==="block"){
+				$("#sliding_menu").css("display","none");
+			
+			}else {
+				$("#sliding_menu").css("display","block");
+				console.log($(this).attr("id"));
+			};
+		  });
 
 
-                            $(document).on("click", "button[id='detailBtn']", function () {
 
-                                location.href = "userDetail.html?no=" +$(this).val();
+      $(document).on("click", "button[id='detailBtn']", function () {
 
-                            });         
-              
-              
-    
-             }
-           });//로그인여부처리 then                        
-    });// jquery ready function() end !! 
+          location.href = "userDetail.html?no=" +$(this).val();
+
+      }); 
+    });
 
 
-function displayData(currentPage, market) {
+function displayData(currentPage, community) {
 	
 	
 
@@ -220,17 +182,16 @@ for (
 
   chartHtml +=`
   <tr id = "xTr">
-    <td id="x-no">${market[i].itemId}</td>
-          <td>${market[i].itemName}</td>
-          <td>${market[i].content}</td>
-          <td>${market[i].rgtDate}</td>
-          <td>${market[i].name}</td>
+    <td id="x-no">${community[i].postId}</td>
+          <td>${community[i].title}</td>
+          <td>${community[i].name}</td>
+          <td>${community[i].rgtDate}</td>
         </tr>`
 }
 $("#x-tbody").html(chartHtml);
 }
 
-function paging(no,market) {
+function paging(no,community) {
         console.log("no : " + no);
 
   totalPage = Math.ceil(totalData / 5); //총 페이지 수
@@ -287,9 +248,9 @@ function paging(no,market) {
     //전역변수에 선택한 페이지 번호를 담는다...
     globalCurrentPage = selectedPage;
     //페이징 표시 재호출
-    paging(selectedPage,market);
+    paging(selectedPage,community);
     //글 목록 표시 재호출
-    displayData(selectedPage, market);
+    displayData(selectedPage, community);
   });
 }
 </script>
