@@ -19,6 +19,11 @@
     
     <style>
 
+
+  #user-sliding-menu {
+	 display: none;
+	}   
+
    #sliding_menu{
   	display : none;
    }
@@ -34,6 +39,9 @@
     
   }
 
+  #loginP{
+    margin: 0%;
+  }
     
     </style>
 </head>
@@ -45,8 +53,11 @@
         <li>lime</li>
         <li>administrator</li>
       </ul>
-      <div class="nav-links">
-        <a href="#">로그아웃</a>
+      <div class="nav-links" >
+        <ul>
+        <li><p id="loginP"></p></li>
+        <li><a href="../mLogin/login.html">로그아웃</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -54,8 +65,12 @@
   <main class="admin-user">
     <div id="sidebar" class="d-flex flex-column flex-shrink-0 border-end">
         <ul class="list-group nav nav-pills flex-column mb-auto">
-          <li class="list-group-item nav-item">
-            <a href="../user/manageUser.html">회원관리</a>
+          <li class="list-group-item nav-item" id="userLi">
+            회원관리
+             <ul id="user-sliding-menu">
+            		<li><a href="../user/manageUser.html">유저</a></li>
+            		<li><a href="../user/manageManager.html">매니저</a></li>
+            </ul>
           </li>
           <li class="list-group-item nav-item">
             <a href="../field/manageFiled.html"">구장관리</a>
@@ -65,7 +80,7 @@
             	<ul id="sliding_menu">
             		<li id ="classLi"><a href="../report/classReport.html">클래스</a></li>
             		<li id="marketLi"><a href="../report/marketReport.html">중고마켓</a></li>
-            		<li id="clubLi"><a href="..">클럽</a></li>
+            		<li id="clubLi"><a href="../report/clubReport.html">클럽</a></li>
             		<li id="cummunityLi"><a href="#">커뮤니티</a></li>
             	</ul>
           </li>
@@ -75,7 +90,7 @@
         </ul>
     </div>
     
-    <div id="user-table" class="mt-5 justify-content-center">
+    <div id="user-table" class="d-flex mt-5 justify-content-center">
       <div class="table-responsive table-condensed">
             <table id="x-table" class="table table-striped table-hover table-bordered table-condensed border-primary text-center align-middle">
 				<ul class="nav nav-tabs">
@@ -116,34 +131,67 @@ let dataPerPage = 5; //한 페이지에 나타낼 글 수
 let pageCount = 5; //페이징에 나타낼 페이지 수
 let globalCurrentPage=1; //현재 페이지 
 
-  $(document).ready(function () {
+$(document).ready(function () {
 
         // $("#x-header").load("my-adminHeader.html");  //헤더 인클루드&ndash;&gt;
        // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
        // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
 
-      fetch("/manage/class/list",{
+      fetch("/manage/class/list1",{
           method:"post",
       })
       .then(function(response){
         return response.json();
       })
       .then(function(classes){
-    	console.log(classes);
-        totalData = classes.length;
-        displayData(1, classes);
-        paging(1,classes)
-      });
+        if(classes[0] === null){
+          console.log(`classes[0] 로그인되지않음!!!`);
+          alert("로그인이 필요합니다.");
+          location.href ="../mLogin/login.html";
+        }else{
+                    console.log(`classes[0] : ${classes[0]}`)
+                    console.log("로그인됨!!!");
+
+                    fetch("/manage/class/list",{
+                        method:"post",
+                    })
+                    .then(function(response){
+                      return response.json();
+                    })
+                    .then(function(classes){
+                    console.log(classes);
+                      totalData = classes.length;
+                      displayData(1, classes);
+                      paging(1,classes)
+                    });
+
+                  $("#loginP").html(`${classes[0].name}`)    
+
+                
+                    
+        }//else end!!
+      });//로그인후 then
+
+      
 
 	  $(document).on("click", "li[id='rptLi']" , function(){
-			if( $("#sliding_menu").css("display") ==="block"){
-				$("#sliding_menu").css("display","none");
-			
-			}else {
-				$("#sliding_menu").css("display","block");
-				console.log($(this).attr("id"));
-			};
-		  });
+        if( $("#sliding_menu").css("display") ==="block"){
+          $("#sliding_menu").css("display","none");        
+        }else {
+          $("#sliding_menu").css("display","block");
+          console.log($(this).attr("id"));
+        };
+    });
+
+      $(document).on("click", "li[id='userLi']" , function(){
+          if( $("#user-sliding-menu").css("display") ==="block"){
+            $("#user-sliding-menu").css("display","none");
+          
+          }else {
+            $("#user-sliding-menu").css("display","block");
+            console.log($(this).attr("id"));
+          };
+      });
 
 
 
@@ -152,7 +200,9 @@ let globalCurrentPage=1; //현재 페이지
           location.href = "userDetail.html?no=" +$(this).val();
 
       }); 
-    });
+
+
+});//jquery ready function end!!
 
 
 function displayData(currentPage, classes) {

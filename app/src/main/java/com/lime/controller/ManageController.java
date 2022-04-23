@@ -109,6 +109,16 @@ public class ManageController {
   public Object classList() {
     return  manageReportService.classList();
   }
+  
+  @RequestMapping("/manage/class/list1")
+  public Object classList1(HttpSession session) {
+    Member userLogin = (Member) session.getAttribute("loginUser");
+    ArrayList<Object> list = new ArrayList<Object>();
+    list.add(userLogin);
+    list.add(manageReportService.classList());
+    return  list;
+  }
+  
   //특정 커뮤니티게시글 조회 
   @RequestMapping("/manage/class/get")
   public Object classGet(int no) {
@@ -140,6 +150,15 @@ public class ManageController {
     Object obj=  manageReportService.clubList();
     System.out.println(obj);
     return manageReportService.clubList();
+  }
+  
+  @RequestMapping("/manage/club/list1")
+  public Object clubList1(HttpSession session) {
+    Member userLogin = (Member) session.getAttribute("loginUser");
+    ArrayList<Object> list = new ArrayList<Object>();
+    list.add(userLogin);
+    list.add(manageReportService.clubList());
+    return list;
   }
   //특정 클럽게시글 조회 
   @RequestMapping("/manage/club/get")

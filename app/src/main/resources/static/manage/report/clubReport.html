@@ -19,12 +19,16 @@
     
     <style>
 
-   #sliding_menu{
+  #user-sliding-menu {
+	 display: none;
+	}
+    
+    #sliding_menu{
   	display : none;
    }
     
-   .pagination{
-    text-align: center;
+    .pagination{
+     text-align: center;
     }
 
     #x-table {
@@ -34,9 +38,14 @@
     
   }
 
+  #loginP{
+    margin: 0%;
+  }
+
+
 
     
-    </style>
+</style>
 </head>
 
 <body>
@@ -55,8 +64,12 @@
   <main class="admin-user">
     <div id="sidebar" class="d-flex flex-column flex-shrink-0 border-end">
         <ul class="list-group nav nav-pills flex-column mb-auto">
-          <li class="list-group-item nav-item">
-            <a href="../user/manageUser.html">회원관리</a>
+          <li class="list-group-item nav-item" id="userLi">
+            회원관리
+             <ul id="user-sliding-menu">
+            		<li><a href="../user/manageUser.html">유저</a></li>
+            		<li><a href="../user/manageManager.html">매니저</a></li>
+            </ul>
           </li>
           <li class="list-group-item nav-item">
             <a href="../field/manageFiled.html"">구장관리</a>
@@ -119,43 +132,65 @@ let dataPerPage = 5; //한 페이지에 나타낼 글 수
 let pageCount = 5; //페이징에 나타낼 페이지 수
 let globalCurrentPage=1; //현재 페이지 
 
-  $(document).ready(function () {
+$(document).ready(function () {
 
         // $("#x-header").load("my-adminHeader.html");  //헤더 인클루드&ndash;&gt;
        // $("#x-header").load("/header/manager/header.html");  //헤더 인클루드&ndash;&gt;
        // $("#sidebar").load("/header/sidebar/sidebar.html");  //헤더 인클루드-->
 
-      fetch("/manage/club/list",{
+      fetch("/manage/club/list1",{
           method:"post",
       })
       .then(function(response){
         return response.json();
       })
       .then(function(club){
-    	console.log(club);
-        totalData = club.length;
-        displayData(1, club);
-        paging(1,club)
-      });
 
-	  $(document).on("click", "li[id='rptLi']" , function(){
-			if( $("#sliding_menu").css("display") ==="block"){
-				$("#sliding_menu").css("display","none");
-			
-			}else {
-				$("#sliding_menu").css("display","block");
-				console.log($(this).attr("id"));
-			};
-		  });
+        if(club[0] === null){
+                    console.log(`manages[0] 로그인되지않음!!!`);
+                    alert("로그인이 필요합니다.");
+                    location.href ="../mLogin/login.html";
+                    
+        }else{
+              console.log(`club[0] : ${club[0]}`)
+              console.log("로그인됨!!!");
+      
+              fetch("/manage/club/list",{
+              method:"post",
+              })
+              .then(function(response){
+                return response.json();
+              })
+              .then(function(club){
+                console.log(club);
+                totalData = club.length;
+                displayData(1, club);
+                paging(1,club)
+              });
 
+            $(document).on("click", "li[id='rptLi']" , function(){
+              if( $("#sliding_menu").css("display") ==="block"){
+                $("#sliding_menu").css("display","none");
+              
+              }else {
+                $("#sliding_menu").css("display","block");
+                console.log($(this).attr("id"));
+              };
+            });
 
-
-      $(document).on("click", "button[id='detailBtn']", function () {
-
-          location.href = "userDetail.html?no=" +$(this).val();
-
-      }); 
-    });
+            $(document).on("click", "li[id='userLi']" , function(){
+                if( $("#user-sliding-menu").css("display") ==="block"){
+                  $("#user-sliding-menu").css("display","none");
+                
+                }else {
+                  $("#user-sliding-menu").css("display","block");
+                  console.log($(this).attr("id"));
+                };
+            });
+       
+        }//else end!!
+      });//로그인여부처리 then!!  
+});// jquery ready function() end!!
 
 
 function displayData(currentPage, club) {
