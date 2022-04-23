@@ -1,5 +1,6 @@
 package com.lime.service.impl;
 
+import com.lime.dao.MemberDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,9 @@ public class DefaultLimeCashService implements LimeCashService {
 
   @Autowired
   MatchRsvDao matchRsvDao;
+
+  @Autowired
+  MemberDao mbDao;
 
   @Override
   @Transactional
@@ -52,4 +56,11 @@ public class DefaultLimeCashService implements LimeCashService {
     matchRsvDao.insert(limeCash.getLimeId(), limeCash.getMatchRsv());
     return 1;
   }
+
+  @Override
+  public int findCash(int userId) {
+    return lcDao.findCash(userId);
+  }
+
+
 }

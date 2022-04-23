@@ -1,6 +1,7 @@
 "use strict"
 
-import {getCourt, bookCourt} from "../common/apiList.js";
+import {checkCourtType, checkIndoor, checkParking, checkLight} from "../common/typeCheck.js"
+import { getCourt } from "../common/apiList.js";
 
 
 
@@ -32,7 +33,7 @@ console.log("예약할 정보", rsvInfo);
 
 
 // =====================================
-// 코트 사진 / 지도
+//            코트 사진 / 지도
 // =====================================
 
 // 지도
@@ -48,6 +49,16 @@ var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리
 var markerImage = new kakao.maps.MarkerImage('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
     new kakao.maps.Size(44, 49), // 마커이미지의 크기입니다
     {offset: new kakao.maps.Point(27, 69)}); // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+// 중심좌표 부드럽게 이동하기
+function panTo(lat, lng) {
+    // 이동할 위도 경도 위치를 생성합니다
+    var moveLatLon = new kakao.maps.LatLng(lat, lng);
+
+    // 지도 중심을 부드럽게 이동시킵니다
+    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    map.panTo(moveLatLon);
+};
 
 // swiper slide
 var swiper = new Swiper(".mySwiper", {
@@ -88,8 +99,32 @@ $('#map-photo').on('click', function(e) {
     $('#crt-addr').text(court.addr)
     $('#crt-contact').text(court.number);
 
+    $('#c-indoor').text(checkIndoor(court.indYn));
+    $('#c-type').text(checkCourtType(court.courtTypeId));
+    $('#c-light').text(checkLight(court.lightYn));
+    $('#c-parking').text(checkParking(court.parkingArea))
+
+    panTo(court.lat, court.lng);
+
+    // 마커가 표시될 위치입니다
+    var markerPosition = new kakao.maps.LatLng(court.lat, court.lng);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image: markerImage, // 마커이미지 설정
+        clickable: true  // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
 })();
 
+
+
+// =====================================
+//    예약 버튼 클릭 시 로그인 유무 확인
+// =====================================
 $('#book-btn').on('click', function (e) {
     fetch('/member/getLoginUser')
         .then(function (res) {
@@ -99,8 +134,10 @@ $('#book-btn').on('click', function (e) {
             console.log(r)
             if (r.status == "fail") {
                 alert('로그인이 필요한 페이지입니다.');
+            } else {
+                location.href = `/court-rsv/payment.html?${urlArr[1]}`;
             }
-        });
+    });
 
 })
 
