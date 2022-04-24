@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache">
 
   <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -56,7 +57,8 @@
       <div class="nav-links" >
         <ul>
         <li><p id="loginP"></p></li>
-        <li><a href="../mLogin/login.html">로그아웃</a></li>
+       <!-- <li><a href="../mLogin/login.html">로그아웃</a></li>-->
+        <li id="logOutLi">로그아웃</li>
         </ul>
       </div>
     </div>
@@ -137,13 +139,14 @@ let globalCurrentPage=1; //현재 페이지
             return response.json();
           })
           .then(function(manages){
+                  console.log(manages[0]);
                   if(manages[0] === null){
                     console.log(`manages[0] 로그인되지않음!!!`);
                     alert("로그인이 필요합니다.");
                     location.href ="../mLogin/login.html";
                     
                   }else{
-                    console.log(`manages[0] : ${manages[0]}`)
+                    console.log(`manages[0] : ${manages[0].name}`)
                     console.log("로그인됨!!!");
                     
                       fetch("/manage/user/list",{
@@ -192,6 +195,17 @@ let globalCurrentPage=1; //현재 페이지
                   }// else (로그인된경우)
 
             });//로그인여부처리 then   
+
+
+
+             $(document).on("click" ,"li[id='logOutLi']",function(){
+                  sessionStorage.clear();
+                  sessionStorage.removeItem("name");
+                  location.href = "../mLogin/login.html"
+             }) 
+
+
+
   }) // jquery ReadyFunction
 
 function displayData(currentPage, manages) {
