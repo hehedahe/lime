@@ -58,20 +58,20 @@ public class MemberController {
 
   @RequestMapping("/member/getLoginUser")
   public Object getLoginUser(HttpSession session) {
-    Member member = (Member) session.getAttribute("loginUser");
+      Member member = (Member) session.getAttribute("loginUser");
+      System.out.println("member::::::::" + member);
 
-    System.out.println("member::::::::" + member);
-    if (member != null) {
-      int ttlCash = lcDao.findCash(member.getNo());
-      member.setTtlCash(ttlCash);
-      return new ResultMap()
-          .setStatus(SUCCESS)
-          .setData(member);
-    } else {
-      return new ResultMap()
-          .setStatus(FAIL)
-          .setData("로그인 하지 않았습니다.");
-    }
+      if (member != null) {
+        int ttlCash = lcDao.findCash(member.getNo());
+        member.setTtlCash(ttlCash);
+        return new ResultMap()
+                  .setStatus(SUCCESS)
+                  .setData(member);
+      } else {
+        return new ResultMap()
+                .setStatus(FAIL)
+                .setData("로그인 하지 않았습니다.");
+      }
   }
 
   @RequestMapping("/member/signout")

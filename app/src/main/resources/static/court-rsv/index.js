@@ -1,5 +1,3 @@
-"use strict"
-
 import {selectCity} from '../common/selectCity.js'
 import {checkCourtType, checkIndoor, checkParking} from '../common/typeCheck.js'
 import {
@@ -24,14 +22,17 @@ var expectedRsv = {
 // 현재 날짜
 let today = new Date();
 let now = today.getHours();
+console.log(now)
+
 // 날짜 형식 YYMMDD
 let month = ("0" + (today.getMonth() + 1)).slice(-2);
 let year = ("0" + today.getFullYear()).slice(-2);
 let date = today.getDate();
 expectedRsv.date = year + month + ("0" + date).slice(-2); // ***YYMMDD 형태로 현재 날짜 디폴트로 담아두기
 
+
 // 지난 시간 마감 처리
-timeCheck();
+timeCheck(now);
 
 // =====================================
 //             카카오 지도 API
@@ -89,6 +90,14 @@ var marker, markerPosition;
     })
 })();
 
+function getCitiName(e) {
+    // 시도 → 시군구
+    selectCity(e.target.value);
+}
+
+function getRegion() {
+
+}
 
 // =====================================
 //   시도/시군구 sorting & 중심좌표 뿌리기
@@ -100,13 +109,16 @@ $('#drop-region').on('change', async function (e) {
     e.stopPropagation();
 
     // 코트 카드 리셋
+
     let card = $('#crt-card');
     if ($('#crt-card div') != null) {
         card.empty()
     };
-
     // 시도 → 시군구
-    selectCity(e.target.value);
+
+    // selectCity(e.target.value);
+    getCitiName(e);
+    console.log($('#drop-region option:selected').val());
 
     const coordinateRegion = await findRegion(Number($('#drop-region option:selected').val()));
 
@@ -163,9 +175,9 @@ $('#drop-city').on('change', async function (e) {
     crtByCity?.map((fields) => {
         card.append(
             `<div class="card-cover swiper-slide">
-                <button class="card-btn card border-0" type="button">
+                <button class="card-btn card border-0" type="button" data-value="${fields.fieldId}">
                     <div class="card-body">
-                        <h5 class="card-title" style="height: 48px" data-value="${fields.fieldId}">${fields.name}</h5>
+                        <h5 class="card-title" style="height: 48px">${fields.name}</h5>
                         <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
                         <div class="content3">
                             <p class="card-text">${fields.distance} km</p>
@@ -176,6 +188,8 @@ $('#drop-city').on('change', async function (e) {
             </div>`);
     });
 });
+
+
 
 
 // =====================================
@@ -196,8 +210,11 @@ $(document).on('click', '.card-btn', async function (e) {
     $('html').animate({scrollTop: offset.top}, 400);
     // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
 
+
     // 선택된 카드(테니스장) field_id 값 찾기
-    fieldId = e.target.getAttribute('data-value');
+    fieldId = $(this).closest('.card-btn').attr('data-value');
+    // fieldId = $('.card-title').attr('data-value');
+
 
     // ***선택한 테니스장 번호 담아두기
     expectedRsv.fieldId = fieldId;
@@ -207,13 +224,13 @@ $(document).on('click', '.card-btn', async function (e) {
     let court = response.data;
     console.log("hereL:::::::::::::::::::::::", court)
 
-
     // 카드 상세정보 뿌려주기
     $('#crt-name').text(court.name).attr('data-court-id', court.fieldId);
     $('#crt-addr').text(court.addr);
     $('#crt-indYn').text(checkIndoor(court.indYn) + '  ·');
     $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
     $('#crt-parking').text(checkParking(court.parkingArea));
+
 
 
     // 현재 예약되어 있는 시간 비활성화
@@ -235,13 +252,14 @@ $(document).on('click', '.date-wrap', async function (e) {
     let clickedDate = $(e.target).text().slice(0,2);
 
     if (date == clickedDate) {
-        timeCheck();
+        timeCheck(now);
     }
     if (fieldId == null) {
         window.alert("구장을 먼저 선택해 주세요! 🎾");
     } else {
 
-        // ***선택 요일 담아두기
+        // ***선택 날짜, 요일 담아두기
+        expectedRsv.date = $(e.target).attr('data-date');
         expectedRsv.day = $(e.target).find('span').text();
 
         const res = await rsvsByDate(expectedRsv.date, expectedRsv.fieldId);
@@ -279,18 +297,24 @@ $('.sche-btn').on('click', function (e) {
 
 
 // 지난 시간 마감 처리 함수
-function timeCheck() {
-    for (var i = 6; i <= 16; i++) {
-        let targetTime = $(`.sche-btn[data-time=${now}]`).attr('data-time');
+function timeCheck(now) {
+    for (var i = 6; i <= now; i++) {
+        let no;
+
+        if (i < 10) {
+            no = '0' + i;
+        } else {
+            no = i;
+        }
+
+        let targetTime = $(`.sche-btn[data-time=${no}]`).attr('data-time');
+
         if (targetTime <= now) {
-            let no;
-            if (i < 10) {
-                no = '0' + i;
-                $(`.sche-btn[data-time=${no}]`).attr('disabled', true).addClass('closed');
-            } else {
-                $(`.sche-btn[data-time=${i}]`).attr('disabled', true).addClass('closed');
-            }
+            $(`.sche-btn[data-time=${no}]`).attr('disabled', true).addClass('closed');
         }
         i++;
     }
 };
+
+
+console.log("test:::::::::::::::", expectedRsv);
