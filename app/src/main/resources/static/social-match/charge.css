@@ -76,6 +76,7 @@ body {
     text-align: end;
     font-weight: normal;
     color: #66C88D;
+    width: fit-content;
 }
 
 #charge-title-1 {

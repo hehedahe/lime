@@ -54,9 +54,12 @@ var amount = $('input:radio[name="chargeAmount"]:checked').next().text()
 
 console.log(amount)
 
+xAmount.text(`${amount}`);
+
 $(".form-check-input").on("click", function (e) {
-    var v = $('input:radio[name="chargeAmount"]:checked').next().text()
-    console.log(v);
+  var v = $('input:radio[name="chargeAmount"]:checked').next().text()
+  console.log(v);
+  xAmount.text(`${v}`);
 })
 
 var payMethod = $('input:radio[name="paymentMethod"]:checked').next().text()
@@ -69,10 +72,16 @@ $(".form-check-input").on("click", function (e) {
 })
 
 $("#charge-btn").on("click", function (e) {
-    if (!($('#agreement1').is(':checked')) && ($('#agreement2').is(':checked'))) {
-        window.alert("구매 조건 및 정보 제공 등에 동의해 주세요.");
-        return;
-    }
+  console.log('클릭')
+  let a1 = $('#agreement1').is(':checked')
+  console.log(a1)
+  let a2 = $('#agreement2').is(':checked')
+  console.log(a2)
+  if (($('#agreement1').is(':checked')) && ($('#agreement2').is(':checked'))) {
+    console.log('둘 다 체크함')
+  } else {
+    window.alert("구매 조건 및 정보 제공 등에 동의해 주세요.");
+  }
 })
 
 

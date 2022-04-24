@@ -15,8 +15,8 @@ public class AutoLoginListener implements ServletRequestListener {
   public void requestInitialized(ServletRequestEvent sre) {
     System.out.println("AutoLoginListener.requestInitialized() 호출됨!");
     Member loginUser = new Member();
-    loginUser.setNo(94);
-    loginUser.setName("user94");
+    loginUser.setNo(227);
+    loginUser.setName("user227");
 
     HttpServletRequest httpRequest = (HttpServletRequest) sre.getServletRequest(); 
     HttpSession session = httpRequest.getSession();
