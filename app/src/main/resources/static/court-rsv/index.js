@@ -134,9 +134,9 @@ $('#drop-region').on('change', async function (e) {
     crtByRegion?.map((fields) => {
         card.append(
             `<div class="card-cover swiper-slide">
-                <button class="card-btn card border-0" type="button">
+                <button class="card-btn card border-0" type="button" data-value="${fields.fieldId}">
                     <div class="card-body">
-                        <h5 class="card-title" style="height: 48px" data-value="${fields.fieldId}">${fields.name}</h5>
+                        <h5 class="card-title" style="height: 48px">${fields.name}</h5>
                         <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
                         <div class="content3">
                             <p class="card-text">${fields.distance} km</p>
