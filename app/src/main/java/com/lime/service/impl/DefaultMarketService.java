@@ -94,6 +94,11 @@ public class DefaultMarketService implements MarketService {
   }
 
   @Override
+  public List<ItemLike> getLike(int userId) {
+    return itemLikeDao.findLike(userId);
+  }
+
+  @Override
   public int add(ItemLike itemLike) {
     itemLikeDao.insert(itemLike);
     return 1000;
