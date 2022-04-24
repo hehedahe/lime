@@ -1,51 +1,65 @@
 "use strict";
 
-// var myModal = document.getElementById('chargeModal')
-// var myInput = document.getElementById('myInput')
+// fetch("/match-rsv/order")
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (result) {
+//     if (result.status == "fail") {
+//       window.alert("서버 요청 오류!");
+//       console.log(result.data);
+//       return;
+//     }
+//   });
 
-// myModal.addEventListener('shown.bs.modal', function () {
-//   myInput.focus()
-// })
+$.getJSON("/member/getLoginUser", (result) => {
+  console.log(result.status);
+  if (result.status == "fail") {
+    location.href = `/login/login.html`
+  }
+  // console.log(result.status);
+})
 
-// $("input[name=flexRadioDefault]")
+// 1) URL에서 쿼리스트링(query string)을 추출한다.
+var arr = location.href.split("?");
+console.log(arr);
 
-// let aa = $('input[name="chargeAmount"]:checked').val()
+if (arr.length == 1) {
+  alert("요청 형식이 올바르지 않습니다.");
+  throw "URL 형식 오류!";
+}
 
-// console.log(aa)
+var qs = arr[1];
+console.log(qs);
 
-// $(".form-check").on("change", function (e) {
-// console.log($(this).val())
-// })
+var params = new URLSearchParams(qs);
+var matchId = params.get("matchId");
 
-// $(".date-li a").on("click", (e) => {
-//     // console.log(e.target.getAttribute("date"))
-//     $(".date-li.active").removeClass("active");
-//     $(e.target).closest("li").addClass("active");
-//     // let matchDate = e.target.getAttribute("date")
-//     let matchDate = $(e.target).closest("a").attr("date");
-//     makeMatchList(
-//         `http://localhost:8080/match/list?matchDate=${matchDate}`
-//     );
-// });
+if (matchId == null) {
+  alert("매치 번호가 없습니다.");
+  throw "파라미터 오류!";
+}
+console.log(matchId);
 
-// $(document).ready(function (e) {
-//     var radioVal = $('input[name="radioTxt"]:checked').val();
-//     console.log(radioVal);
-// })
+const xBalance = $("#balance");
+const xAmount = $("#amount");
 
-// var amount = $('input[name=chargeAmount]:checked').val()
-
-// var amount = $('#selectAmount input:radio:checked').val()
-
-// var amount = $('input:radio[name="chargeAmount"]:checked').siblings("label").text()
+$.getJSON("/rsv/match/balance", function (result) {
+  console.log(result);
+  let userInfo = result.data;
+  xBalance.text(`보유 캐시 ${(userInfo.sum).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`)
+})
 
 var amount = $('input:radio[name="chargeAmount"]:checked').next().text()
 
 console.log(amount)
 
+xAmount.text(`${amount}`);
+
 $(".form-check-input").on("click", function (e) {
-    var v = $('input:radio[name="chargeAmount"]:checked').next().text()
-    console.log(v);
+  var v = $('input:radio[name="chargeAmount"]:checked').next().text()
+  console.log(v);
+  xAmount.text(`${v}`);
 })
 
 var payMethod = $('input:radio[name="paymentMethod"]:checked').next().text()
@@ -57,10 +71,23 @@ $(".form-check-input").on("click", function (e) {
     console.log(v);
 })
 
-$("#pay-btn").on("click", function (e) {
-    if (!($('#agreement1').is(':checked')) && ($('#agreement2').is(':checked'))) {
-        window.alert("구매 조건 및 정보 제공 등에 동의해 주세요.");
-        return;
-    }
+$("#charge-btn").on("click", function (e) {
+  console.log('클릭')
+  let a1 = $('#agreement1').is(':checked')
+  console.log(a1)
+  let a2 = $('#agreement2').is(':checked')
+  console.log(a2)
+  if (($('#agreement1').is(':checked')) && ($('#agreement2').is(':checked'))) {
+    console.log('둘 다 체크함')
+  } else {
+    window.alert("구매 조건 및 정보 제공 등에 동의해 주세요.");
+  }
 })
 
+
+$(".modal-footer button").on("click", function () {
+  $.getJSON(`/rsv/match/add?amt=20000&typeUse=U&matchId=${matchId}&state=P`, function (result) {
+    console.log('소셜매치 결제 : ' + result.status)
+  })
+  location.href = `/social-match/rsv.html`
+})

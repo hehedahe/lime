@@ -1,11 +1,153 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'NG';
+    src: url("../asset/font/NanumGothic.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'NGBold';
+    src: url("../asset/font/NanumGothicBold.woff") format("woff");
+}
+
 html,
 body {
-  /* height: 100%; */
-  font-family: "NanumGothic";
+  height: 100%;
+  font-family: "Nanum Gothic";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* container height 변동에 따른 footer 위치 변경*/
+body {
+    height: 100%;
+    background-color: rgb(250, 250, 250);
+}
+
+/* .container {
+    max-width: 1024px;
+    min-height: 100%; /* body height: 100%와 짝꿍
+    padding: 0;
+} */
+
+#x-header {
+    background-color: #fff;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    /* padding: 10px; */
+    margin: auto;
+    background-color: #fff;
+    border-radius: 0.4rem;
+}
+
+/* 이미지 속 코트예약 정보 */
+#rsv-info {
+    font-size: 27px;
+    font-weight: bolder;
+    color: #fff;
+}
+
+/* 결제 상세 */
+#pay-detail {
+    background-color: rgb(250, 250, 250);
+    color: rgb(127, 127, 127);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#pay-detail div:nth-child(2) {
+    font-size: medium;
+    font-weight: normal;
+}
+
+#charge-amount {
+    text-align: end;
+}
+
+#balance {
+    margin: 0;
+    font-size: small;
+    text-align: end;
+    font-weight: normal;
+    color: #66C88D;
+    width: fit-content;
+}
+
+#charge-title-1 {
+    font-weight: bold;
+}
+
+#charge-title-1 span {
+    color: rgb(102, 200, 141);
+}
+
+#charge-title-2 h5 {
+    margin-bottom: 0.2rem;
+    font-weight: bold;
+}
+
+.charge-sub-title {
+    font-size: 17px;
+    font-weight: bold;
 }
 
 /* 체크박스 옆에 있는 텍스트 */
 .charge-check .form-check-label {
-    /* margin-left: 0.3rem; */
     font-size: 14px;
-  }
+}
+
+/* 충전하기 버튼 */
+#charge-btn {
+    background-color: #66c88d;
+    border: none;
+    height: 3.3rem;
+    font-weight: bold;
+}
+
+/* 충전하기 버튼 hover */
+#charge-btn:hover {
+    background-color: #52b479;
+}
+
+.section-border {
+    border-top: 1px solid rgb(224, 224, 224);
+}
+
+.form-check-input:checked {
+    background-color: #66c88d;
+    border-color: #66c88d;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+    border-color: rgb(224, 224, 224);
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+    border-color: rgb(224, 224, 224);
+}
+
+#selectAmount .form-check, #selectMethod .form-check {
+    margin-bottom: 0.5rem;
+}
+
+ul {
+    margin-bottom: 0;
+    padding-left: 1rem;
+}
+
+#charge-info-title {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#charge-info {
+    font-size: 13px;
+}

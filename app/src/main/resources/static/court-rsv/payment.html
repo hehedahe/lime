@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="payment.css">
+
+    <script src="../node_modules/axios/dist/axios.js"></script>
+
     <title>LIME - 결제</title>
 
     <!-- header, footer 삽입 제이쿼리 -->
@@ -32,9 +35,9 @@
              class="img-fluid w-100 h-25 ">
         <div id="rsv-info"
              class="d-flex flex-column px-4 position-absolute top-50 start-0">
-            <span>5월 2일 월요일</span>
-            <span>18:00~20:00</span>
-            <span>인천 시립 테니스장 코트1</span>
+<!--            <span>5월 2일 월요일</span>-->
+<!--            <span>18:00~20:00</span>-->
+<!--            <span>인천 시립 테니스장 코트1</span>-->
         </div>
     </div>
 
@@ -43,14 +46,14 @@
         <span>코트예약</span>
         <div class="my-3 py-3 border-bottom d-flex justify-content-between">
             <span>결제금액</span>
-            <span class="border-1 p-2">20,000원</span>
+            <span class="border-1 p-2">50,000원</span>
         </div>
         <div class="pt-3 d-flex justify-content-between align-items-center">
             <span>사용 가능 캐시</span>
             <div class="input-group mb-3 w-25">
                 <input type="text"
                        class="form-control"
-                       placeholder="100,000원"
+                       placeholder="캐시 잔액"
                        aria-label="cash"
                        aria-describedby="button-addon">
                 <button class="btn"
@@ -111,58 +114,64 @@
     <div class="d-grid p-5">
         <button id="payment-btn"
                 class="py-3"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop">20,000원 결제하기</button>
+                type="button">50,000원 결제하기</button>
     </div>
 
+    <!--    <div class="d-grid p-5">-->
+<!--        <button id="payment-btn"-->
+<!--                class="py-3"-->
+<!--                type="button"-->
+<!--                data-bs-toggle="modal"-->
+<!--                data-bs-target="#staticBackdrop">50,000원 결제하기</button>-->
+<!--    </div>-->
+
     <!--  결제 모달  -->
-    <div class="modal fade"
-         id="staticBackdrop"
-         data-bs-backdrop="static"
-         data-bs-keyboard="false"
-         tabindex="-1"
-         aria-labelledby="staticBackdropLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">결제하기</h5>
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <span>20,000 캐시</span>
-                    <div>
-                        <span>결제 금액</span>
-                        <span>20,000원</span>
-                    </div>
-                    <div>
-                        <p>결제 수단</p>
-                        <ul>
-                            <li>무통장 입금</li>
-                            <li>카드 결제</li>
-                            <li>카카오페이</li>
-                            <li>네이버페이</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="modal-footer">
+<!--    <div class="modal fade"-->
+<!--         id="staticBackdrop"-->
+<!--         data-bs-backdrop="static"-->
+<!--         data-bs-keyboard="false"-->
+<!--         tabindex="-1"-->
+<!--         aria-labelledby="staticBackdropLabel"-->
+<!--         aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-dialog-centered">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="staticBackdropLabel">결제하기</h5>-->
 <!--                    <button type="button"-->
-<!--                            class="btn btn-secondary"-->
-<!--                            data-bs-dismiss="modal">Close</button>-->
-                    <button type="button" class="btn btn-primary">결제하기</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--                            class="btn-close"-->
+<!--                            data-bs-dismiss="modal"-->
+<!--                            aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <span>20,000 캐시</span>-->
+<!--                    <div>-->
+<!--                        <span>결제 금액</span>-->
+<!--                        <span>20,000원</span>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <p>결제 수단</p>-->
+<!--                        <ul>-->
+<!--                            <li>무통장 입금</li>-->
+<!--                            <li>카드 결제</li>-->
+<!--                            <li>카카오페이</li>-->
+<!--                            <li>네이버페이</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--&lt;!&ndash;                    <button type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;                            class="btn btn-secondary"&ndash;&gt;-->
+<!--&lt;!&ndash;                            data-bs-dismiss="modal">Close</button>&ndash;&gt;-->
+<!--                    <button type="button" class="btn btn-primary">결제하기</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 
 <!-- 푸터 -->
 <footer id="x-footer"></footer>
 
-<script type="text/javascript" src="payment.js"></script>
+<script type="module" src="payment.js"></script>
 </body>
 </html>
