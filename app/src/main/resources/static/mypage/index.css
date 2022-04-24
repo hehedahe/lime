@@ -490,3 +490,6 @@ p {
   background-color: rgb(146, 219, 130);
 }
 
+.list-group-item-action {
+  cursor: pointer;
+}
