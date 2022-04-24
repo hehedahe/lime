@@ -1,10 +1,13 @@
 package com.lime.controller;
 
+import static com.lime.controller.ResultMap.SUCCESS;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -24,13 +27,38 @@ import net.coobird.thumbnailator.geometry.Positions;
 @RestController
 public class ClazzController {
 
+  private static final Logger log = LogManager.getLogger(ClazzController.class);
+
+
   @Autowired
   ClazzService clazzService;
 
 
   @RequestMapping("/class/list")
-  public Object list() {
-    return clazzService.clazzList();
+  public Object list(String regionName, String cityName, String title, String level, Member writer) {
+
+    log.info("게시물 목록 조회!");
+
+
+    log.debug("강의제목: " + title);
+    log.debug("지역: " + regionName);
+    log.debug("도시: " + cityName);
+    log.debug("도시: " + cityName);
+    if (regionName.equals("지역") || regionName.equals("전체")) {
+      return new ResultMap()
+          .setStatus(SUCCESS)
+          .setData(clazzService.list(writer));
+    }
+
+    if (cityName.equals("도시")) {
+      return new ResultMap()
+          .setStatus(SUCCESS)
+          .setData(clazzService.listRegion(regionName, writer));
+    }
+
+    return new ResultMap()
+        .setStatus(SUCCESS)
+        .setData(clazzService.listCity(regionName, cityName, writer));
   }
 
 
@@ -179,6 +207,7 @@ public class ClazzController {
   }
 
 
+  /*
 
   @RequestMapping("/class/list/1")
   public Object list(String regionName, String cityName) {
@@ -197,7 +226,7 @@ public class ClazzController {
     return clazzService.cityList(regionName, cityName);
 
   }
-
+   */
 
   /*
   @RequestMapping("/class/add")

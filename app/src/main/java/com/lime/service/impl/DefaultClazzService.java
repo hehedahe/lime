@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.lime.dao.ClazzDao;
 import com.lime.domain.Clazz;
+import com.lime.domain.Member;
 import com.lime.service.ClazzService;
 
 @Service
@@ -29,15 +30,20 @@ public class DefaultClazzService implements ClazzService{
     return 1;
   }
 
-
   @Override
-  public List<Clazz> regionList(String regionName) {
-    return clazzDao.findByRegion(regionName);
+  public List<Clazz> list(Member writer) {
+    return clazzDao.findAll(writer);
   }
 
   @Override
-  public List<Clazz> cityList(String regionName, String cityName) {
-    return clazzDao.findByCity(regionName, cityName);	
+  public List<Clazz> listRegion(String regionName, Member writer) {
+    return clazzDao.findByRegion(regionName, writer);
   }
+
+  @Override
+  public List<Clazz> listCity(String regionName, String cityName, Member writer) {
+    return clazzDao.findByCity(regionName, cityName, writer);
+  }
+
 
 }
