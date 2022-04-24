@@ -42,11 +42,9 @@ public class MatchRsvController {
   public Object getBalance(HttpSession session) {
     Member user = (Member) session.getAttribute("loginUser");
 
-    int userId = user.getNo();
-
-    User userInfo = manageService.userGet(userId);
-
     if (user != null) {
+      int userId = user.getNo();      
+      User userInfo = manageService.userGet(userId);
       return new ResultMap().setStatus(SUCCESS).setData(userInfo);
     }
     return new ResultMap().setStatus(FAIL).setData("로그인하지 않았습니다.");
