@@ -15,7 +15,7 @@ const PATH = {
     },
     courtRsv: {
         rsvsByDate: '/court-rsv/get',
-        bookCourt: '/book/court'
+        bookCourt: '/court-rsv/add'
     }
 };
 
@@ -135,15 +135,5 @@ export async function rsvsByDate(date, fieldId) {
     } catch (e) {
         console.log(e);
     }
-}
-
-// 코트 예약하기
-export async function bookCourt(bookInfo) {
-    try {
-        const response = await axios(`${PATH.courtRsv.bookCourt}`);
-        return response.data;
-    } catch (e) {
-        console.log(e);
-    }
-}
+};
 
