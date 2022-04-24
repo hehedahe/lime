@@ -126,6 +126,23 @@ public class MarketController {
     return 1;
   }
 
+  @RequestMapping("/market/getLike")
+  public Object getLike(HttpSession session) {
+    Member member = (Member) session.getAttribute("loginUser");
+    ItemLike itemLike = new ItemLike();
+    System.out.println("member::::::::" + member);
+
+    if (member != null) {
+      return new ResultMap()
+          .setStatus(SUCCESS)
+          .setData(marketService.getLike(member.getNo()));
+    } else {
+      return new ResultMap()
+          .setStatus(FAIL)
+          .setData("로그인 후 이용해주세요.");
+    }
+  } 
+
 
   @RequestMapping("/market/photo")
   public ResponseEntity<Resource> photo(String filename, String type) {

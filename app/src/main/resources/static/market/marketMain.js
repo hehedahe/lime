@@ -2,17 +2,27 @@
 
 import { Region1 } from '../common/region.js'
 import { getLogin } from '../common/getLogin.js';
-import { itemForm } from "../common/link.js";
+import { itemForm, marketMain } from "../common/link.js";
 
 var itemList = document.querySelector("#item-list");
 var regionSelect = document.querySelector("#region");
 var city = document.getElementById("city");
-var itemPhoto = document.querySelector("#item-photo");
 
 $(document).ready(function(e){
+  // 버튼을 동적연결한다.
             
-    // 버튼을 동적연결한다.
+  fetch(`/member/getLoginUser`)
+  .then(function(response){
+      return response.json();
+  })
+  .then(function(result){
+    
     $(document).on("click", ".heart-click", function(){
+      if (result.status == "fail") {
+        window.alert("로그인 후 이용해주세요.");
+        return;
+      }
+
         let no = $(this).attr("idx");
 
         if ($(this).children("svg").attr("class") == "bi bi-heart") {
@@ -41,6 +51,7 @@ $(document).ready(function(e){
           $(this).html(`<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(146, 219, 130)" class="bi bi-heart" viewBox="0 0 16 16">
             <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>`)
         }
+      });
     });
 
     $(document).on("click", "#market-write", function() {
@@ -48,37 +59,61 @@ $(document).ready(function(e){
     })
 });
 
-
 function listFetch() {
   $("div[name=card-col]").remove();
   $("div[id=empty-notice]").remove();
+
+  // 좋아요 테이블 가져오기
+  fetch(`/market/getLike`)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(itemLike){
+
   fetch(`/market/list?regionName=${regionSelect.value}&cityName=${city.value}&checked=${$("#nav-checkbox").is(":checked")}
   &keyword=${$("input[type=search]").val()}`)
   .then(function(response){
     return response.json();
   })
   .then(function(lists){
+    console.log(itemLike.data, itemLike.status);
+    
     if (lists.status == "fail") {
       window.alert("서버 요청 오류!");
       return;
     }
+
+    // 물건이 없는 경우
     if (lists.data.length == 0) {
       var emptyNotice = document.createElement("div");
       emptyNotice.setAttribute('id', 'empty-notice');
       emptyNotice.innerHTML = `<p>찾으시는 물건이 없습니다!</p>`
       itemList.appendChild(emptyNotice);
     }
+
+    const arrLike = [];
+    for (let list of itemLike.data) {
+      arrLike.push(list.itemId);
+    }
+
     console.log(lists.data);
     for (var list of lists.data) {
       let transState1 = list.transState;
-      if (transState1 == "S") {
-      transState1 = "";
+      let itemNo = list.itemId;
+      let likeState = "";
+
+      if (arrLike.includes(itemNo)) {
+        likeState = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(146, 219, 130)" class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>`
+      } else {
+        likeState = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(146, 219, 130)" class="bi bi-heart" viewBox="0 0 16 16">
+        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>`
       }
-      else if (transState1 == "R") {
-        transState1 = `<span class="R">예약중</span>`;
-      }
-      else if (transState1 == "E") {
-        transState1 = `<span class="E">거래완료</span>`;
+
+      switch (transState1) {
+        case "S" : transState1 = "";
+        case "R" : transState1 = `<span class="R">예약중</span>`;
+        case "E" : transState1 = `<span class="E">거래완료</span>`;
       }
 
       let photo = "../itembasic.png"
@@ -107,9 +142,7 @@ function listFetch() {
       cols.setAttribute('name', 'card-col');
       cols.innerHTML = `<div class="card h-100" item-id=${list.itemId}>
       <a href="/market/view.html?no=${list.itemId}"><div id="photo-wrap" style="background-image: url(${photo});"></div></a>
-      <a class="heart-click" idx=${list.itemId}><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(146, 219, 130)" class="bi bi-heart" viewBox="0 0 16 16">
-      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-      </svg></a>
+      <a class="heart-click" idx=${itemNo}> ${likeState}</a>
       <div class="card-body">
         <h5 class="card-title"><a href="/market/view.html?no=${list.itemId}">${list.itemName}</a></h5>
         <span class="item-price">${list.itemCost}원 ${transState1}</span><br>
@@ -120,17 +153,11 @@ function listFetch() {
       itemList.appendChild(cols);
     }      
 })
+    })
 }
 
-
-fetch(`/member/getLoginUser`)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(result){
-      console.log(result.data);
-      listFetch(); // 첫 화면
-    });
+// 첫 화면
+  listFetch();
 
 // 지역 선택
 regionSelect.addEventListener('change', (event) => {

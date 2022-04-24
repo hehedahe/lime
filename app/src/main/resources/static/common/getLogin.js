@@ -2,7 +2,7 @@
 
 
 
-export function getLogin(link) {
+export function getLogin(content) {
     fetch(`/member/getLoginUser`)
     .then(function(response){
         return response.json();
@@ -12,6 +12,6 @@ export function getLogin(link) {
             window.alert("로그인 후 이용해주세요.");
             return;
           }
-          location.href = link;
+          location.href = content;
     });
 };
