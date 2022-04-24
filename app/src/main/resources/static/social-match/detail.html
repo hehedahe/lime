@@ -514,6 +514,13 @@
     })
 
     $("#apply-btn").on("click", (e) => {
+      $.getJSON("/member/getLoginUser", (result) => {
+        console.log(result.status);
+        if (result.status == "fail") {
+          location.href = `/login/login.html`
+        }
+        // console.log(result.status);
+      })
       $.getJSON("/rsv/match/balance", function (result) {
         console.log(result);
         let userInfo = result.data;
