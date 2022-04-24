@@ -5,11 +5,10 @@ import static com.lime.controller.ResultMap.SUCCESS;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.lime.dao.LimeCashDao;
-import com.lime.domain.LimeCash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.lime.dao.LimeCashDao;
 import com.lime.domain.Member;
 import com.lime.service.MemberService;
 
@@ -59,20 +58,20 @@ public class MemberController {
 
   @RequestMapping("/member/getLoginUser")
   public Object getLoginUser(HttpSession session) {
-      Member member = (Member) session.getAttribute("loginUser");
+    Member member = (Member) session.getAttribute("loginUser");
+
+    System.out.println("member::::::::" + member);
+    if (member != null) {
       int ttlCash = lcDao.findCash(member.getNo());
       member.setTtlCash(ttlCash);
-
-      System.out.println("member::::::::" + member);
-      if (member != null) {
-          return new ResultMap()
-                  .setStatus(SUCCESS)
-                  .setData(member);
-      } else {
-          return new ResultMap()
-                  .setStatus(FAIL)
-                  .setData("로그인 하지 않았습니다.");
-      }
+      return new ResultMap()
+          .setStatus(SUCCESS)
+          .setData(member);
+    } else {
+      return new ResultMap()
+          .setStatus(FAIL)
+          .setData("로그인 하지 않았습니다.");
+    }
   }
 
   @RequestMapping("/member/signout")
