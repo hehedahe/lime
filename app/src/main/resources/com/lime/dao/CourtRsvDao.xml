@@ -6,7 +6,8 @@
   
 <mapper namespace="com.lime.dao.CourtRsvDao">
 
-<resultMap type="CourtRsv" id="courtRsvMap"></resultMap>
+<resultMap type="CourtRsv" id="courtRsvMap">
+</resultMap>
 
 <insert id="insert" parameterType="CourtRsv">
     INSERT INTO court_rsv2(field_id, court_id, date_time, lime_id)
@@ -16,8 +17,24 @@
 <select id="findByDate" resultMap="courtRsvMap">
     SELECT cr.field_id, cr.court_id, cr.date_time
     FROM   court_rsv2 cr
-    WHERE  (DATE_FORMAT(#{date}, '%y%m%d') &lt;= date_time AND date_time &lt; DATE_FORMAT(#{date} + 1, '%y%m%d'))
+    WHERE  (DATE_FORMAT(#{date}, '%y%m%d') &lt;= date_time
+    AND    date_time &lt; DATE_FORMAT(#{date} + 1, '%y%m%d'))
     AND    field_id = #{fieldId}
+</select>
+
+<select id="findByUser" parameterType="int" resultMap="courtRsvMap">
+    SELECT    cr.field_id,
+              cr.court_id,
+              cr.date_time,
+              cr.rgt_date,
+              cr.state,
+              f.name,
+              f.addr
+    FROM      court_rsv2 cr
+    LEFT JOIN lime_cash lc ON cr.lime_id=lc.lime_id
+    LEFT JOIN field f      ON cr.field_id=f.field_id
+    WHERE     lc.user_id=#{userId}
+    ORDER BY  cr.rgt_date DESC;
 </select>
 
 

@@ -19,4 +19,7 @@ public class CourtRsv {
     int limeId;
     Date rgtDate;
     String state;
+    String name;
+    String addr;
+    int courtTypeId;
 }

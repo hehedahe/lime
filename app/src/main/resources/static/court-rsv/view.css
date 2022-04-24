@@ -49,6 +49,7 @@
 }
 
 #book-btn {
+    width: 140px;
     text-decoration: none;
     color: #fff;
     background-color: rgb(102, 200, 141);

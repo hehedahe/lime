@@ -68,7 +68,7 @@ let cash = cashToRE(user.ttlCash);
 
 $('input[aria-label="cash"]').attr('placeholder', `${cash} 캐시`);
 
-let body1 = {
+let rsvData = {
     userId : user.no,
     amt : 50000,
     typeUse : "U",
@@ -79,7 +79,6 @@ let body1 = {
     }
 };
 
-let body2 = JSON.stringify(body1);
 
 
 
@@ -90,12 +89,12 @@ $('#payment-btn').on('click', function (e) {
     if (user.ttlCash <= 50000) {
         alert("라임 캐시 충전이 필요합니다. 🪙");
     } else {
-        fetch(('/court-rsv/add'), {
+        fetch(('/rsv/court/add'), {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
             },
-            body: JSON.stringify(body1)
+            body: JSON.stringify(rsvData)
         }).then(function (response) {
             return response.json();
         }).then(function (result) {
