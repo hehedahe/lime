@@ -18,6 +18,11 @@
 		<result column="gender" property="gender" />
 		<result column="bankName" property="bankName" />
 		<result column="num" property="num" />
+		<result column="manner_score" property="mannerScore" />
+		<result column="addr" property="region" />
+		<result column="club_name" property="club" />
+		<result column="lefty_yn" property="hand" />
+		<result column="lv_name" property="level" />
 	</resultMap>
 	
  	 <resultMap type="field" id="fieldMap">
@@ -240,7 +245,7 @@
 	
 	
 	<select id="findByNo" resultMap="userMap" parameterType="int">
-	SELECT
+   SELECT
           tt.userId userId,
           tt.name name,
           tt.email email,
@@ -256,26 +261,40 @@
           replace(tt.bankName,'\r','') bankName,
           tt.acnt_no acntNo,
           tt.acnt_holder acntHolder,
+          tt.manner_score,          
+          CONCAT(r_region_name,' ' ,c_city_name ) addr,          
+          c_city_name,
+          r_region_name,          
+          club_name,
+          lv_name,
+          (
+             case
+                when m_lefty_yn = 'Y'
+                   then '왼손잡이'
+                ELSE 
+                   '오른손잡이'
+             end      
+          ) lefty_yn,
           IFNULL(date_format(tt.block_date ,'%Y-%m-%d.'),'기록 없음') blockDate
     from
           (SELECT
-          u.user_id userId,
-          u.name name,
-          u.email email,
-          (CASE
-          WHEN replace(u.user_type,'\r','') = "U" THEN '유저'
-          WHEN replace(u.user_type,'\r','') = "M" THEN '매니저'
-          ELSE 'admin' END) userType,
-          u.rgt_date rgtDate ,
-          (SELECT
-          SUM(case
-          when
-          lc2.type_use = 'U'
-          then CONCAT('-',lc2.amt)
-          when lc2.type_use = 'C'
-          then CONCAT(lc2.amt)
-          ELSE lc2.amt
-          end)
+             u.user_id userId,
+             u.name name,
+             u.email email,
+             (CASE
+             WHEN replace(u.user_type,'\r','') = "U" THEN '유저'
+             WHEN replace(u.user_type,'\r','') = "M" THEN '매니저'
+             ELSE 'admin' END) userType,
+             u.rgt_date rgtDate ,
+             (SELECT
+             SUM(case
+             when
+             lc2.type_use = 'U'
+             then CONCAT('-',lc2.amt)
+             when lc2.type_use = 'C'
+             then CONCAT(lc2.amt)
+             ELSE lc2.amt
+             END)
           FROM lime_cash lc2
           WHERE lc2.user_id =u.user_id) SUM,
           -- 성별, 은행명, 계좌번호, 예금주명, 제재
@@ -293,6 +312,13 @@
           m.acnt_no acnt_no
           ,m.acnt_holder acnt_holder
           ,m.block_date block_date
+          ,m.manner_score
+          ,m.city_id m_city_id
+          ,r1.region_name r_region_name
+          ,club1.name club_name
+          ,lv2.lv_name lv_name
+          ,m.lefty_yn m_lefty_yn
+          ,c2.city_name c_city_name
           FROM user u
           LEFT JOIN member m
           ON u.user_id = m.user_id
@@ -300,10 +326,18 @@
           ON m.bank_id = bi.bank_id
           left JOIN lime_cash lc
           ON m.user_id = lc.user_id
+          INNER JOIN city c2 
+          ON m.city_id = c2.city_id
+          INNER JOIN region r1
+          ON c2.region_id = r1.region_id
+          INNER JOIN club club1
+          ON m.club_id = club1.club_id
+          INNER JOIN lv lv2
+          ON m.lv_id = lv2.lv_id
           GROUP BY u.user_id
           ) tt
     WHERE tt.userType = '유저'
-		and tt.userId = #{no}
+      and tt.userId = #{no}
 	</select>
 	
 	<select id="findFieldAll" resultMap="fieldMap">
