@@ -116,3 +116,22 @@ $(".modal-footer button").on("click", function () {
   })
   location.href = `/social-match/rsv.html`
 })
+
+// =====================================
+//          캐시 잔액 확인 후 결제
+// =====================================
+$('#payment-btn').on('click', function (e) {
+  $.getJSON("/rsv/match/balance", function (result) {
+    console.log(result);
+    let userInfo = result.data;
+    if (userInfo.sum < 20000) {
+      alert("라임 캐시 충전이 필요합니다. 🪙");
+      window.open('/common/charge.html', '라임캐시 충전', 'width=500, height=820, left=-1500, top=100, resizable=false');
+    } else {
+      $.getJSON(`/rsv/match/add?amt=20000&typeUse=U&matchId=${matchId}&state=P`, function (result) {
+        console.log('소셜매치 결제 : ' + result.status)
+      })
+      location.href = `/social-match/rsv.html`
+    }
+  })
+});
