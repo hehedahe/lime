@@ -22,6 +22,8 @@ public interface MarketService {
 
   int add(Market market, Object fileList);
 
+  List<ItemLike> getLike(int userId);
+
   int add(ItemLike itemLike);
 
   int delete(ItemLike itemLike);

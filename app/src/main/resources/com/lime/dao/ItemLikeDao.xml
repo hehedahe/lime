@@ -19,6 +19,14 @@
     id => 인터페이스의 메서드 이름과 일치해야 한다.
    -->
    
+  <select id="findLike" resultMap="ItemLikeMap">
+    select
+      user_id,
+      item_id
+    from item_like
+    where #{userId} = item_like.user_id;
+  </select>
+   
   <insert id="insert" parameterType="ItemLike">
     insert into item_like(user_id,item_id)
       values(#{userId}, #{itemId})

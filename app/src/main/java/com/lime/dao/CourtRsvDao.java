@@ -10,4 +10,5 @@ import java.util.List;
 public interface CourtRsvDao {
     int insert(CourtRsv courtRsv);
     List<CourtRsv> findByDate(@Param("date") String date, @Param("fieldId") int fieldId);
+    List<CourtRsv> findByUser(int userId);
 }

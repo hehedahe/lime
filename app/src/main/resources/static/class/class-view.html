@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+
+
+</head>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- header, footer 삽입 제이쿼리-->
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.footer').load('../footer/footer.html');
+        $(".header").load("../header/user/header.html");
+    })
+</script>
+<body>
+<div class="header"></div>
+
+    <div></div>
+
+
+
+
+
+
+
+
+<div class="footer"></div>
+
+
+
+
+<script type="module" src="view.js"></script>
+
+</body>
+</html>

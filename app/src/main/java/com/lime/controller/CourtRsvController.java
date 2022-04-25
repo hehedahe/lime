@@ -15,7 +15,7 @@ import static com.lime.controller.ResultMap.FAIL;
 import static com.lime.controller.ResultMap.SUCCESS;
 
 @RestController
-@RequestMapping("/court-rsv")
+@RequestMapping("/rsv/court")
 public class CourtRsvController {
 
     private static final Logger log = LogManager.getLogger(MatchRsvController.class);
@@ -31,7 +31,6 @@ public class CourtRsvController {
         List<CourtRsv> rsvs = crService.findByDate(date, fieldId);
         //System.out.println(date);
         //System.out.println(rsvs);
-
         return new ResultMap().setStatus(SUCCESS).setData(rsvs);
     }
 
@@ -39,10 +38,29 @@ public class CourtRsvController {
     public Object add(@RequestBody LimeCash limeCash) {
         int rsvData = lcService.addCourtRsv(limeCash);
 
+        System.out.println(rsvData);
+
         if (rsvData == 1) {
             return new ResultMap().setStatus(SUCCESS).setData(rsvData);
         } else {
             return new ResultMap().setStatus(FAIL).setData("코트 예약 실패!");
+        }
+    }
+
+    @GetMapping("/getList")
+    public Object findByUser(HttpSession session) {
+        Member member = (Member) session.getAttribute("loginUser");
+
+        log.debug(member.getNo());
+
+        if (member == null) {
+            return new ResultMap()
+                    .setStatus("FAIL")
+                    .setData("유저 정보가 없습니다.");
+        } else {
+            return new ResultMap()
+                    .setStatus("SUCCESS")
+                    .setData(crService.findByUser(member.getNo()));
         }
     }
 }
