@@ -1,7 +1,5 @@
 "use strict";
 
-import { dateFormat } from "./apiList";
-
 // fetch("/match-rsv/order")
 //   .then(function (response) {
 //     return response.json();
@@ -13,13 +11,20 @@ import { dateFormat } from "./apiList";
 //       return;
 //     }
 //   });
-
+var user;
 $.getJSON("/member/getLoginUser", (result) => {
-    console.log(result.status);
+    user = result.data
+    console.log(result.data);
     if (result.status == "fail") {
         location.href = `/login/login.html`
+    } else {
+        $("#balance").text(
+            `보유 캐시 ${(result.data.ttlCash).toString()
+                .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`);
     }
-})
+});
+
+console.log("user::::::::::::::", user)
 
 // 1) URL에서 쿼리스트링(query string)을 추출한다.
 // var arr = location.href.split("?");
@@ -42,13 +47,6 @@ $.getJSON("/member/getLoginUser", (result) => {
 // }
 // console.log(matchId);
 
-
-$.getJSON("/member/getLoginUser", function (result) {
-    console.log(result);
-    $("#balance").text(
-        `보유 캐시 ${(result.data.ttlCash).toString()
-            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`);
-})
 
 // 결제 금액
 var amount = $('input:radio[name="chargeAmount"]:checked').next().text()
@@ -88,7 +86,6 @@ $(".modal-footer button").on("click", function () {
 
 $("#charge-btn").click(function (e) {
     console.log(methodValue);
-    
 
     let a1 = $('#agreement1').is(':checked')
     console.log(a1)
@@ -106,39 +103,36 @@ $("#charge-btn").click(function (e) {
         IMP.init("imp96641277"); // 예: imp00000000
 
         // IMP.request_pay(param, callback) 결제창 호출
-        IMP.request_pay({
+        IMP.request_pay({ // param
             pg: 'html5_inicis',
             pay_method: 'card',
-            merchant_uid: 'lc_' + new Date().getTime(),
+            merchant_uid: 'merchant_' + new Date().getTime(),
             name: '라임캐시 충전'/*상품명*/,
             amount: 100/*상품 가격*/,
-            buyer_email: 'iamport@siot.do'/*구매자 이메일*/,
-            buyer_name: '구매자이름',
-            buyer_tel: '010-1234-5678'/*구매자 연락처*/,
-            buyer_addr: '서울특별시 강남구 삼성동'/*구매자 주소*/,
-            buyer_postcode: '123-456'/*구매자 우편번호*/
-        }, rsp => {
-            var result = '';
-            if (rsp.success) {
+            buyer_email: user.email/*구매자 이메일*/,
+            buyer_name: user.name,
+            buyer_tel: phNoFormat(user.phoneNo)/*구매자 연락처*/
+        }, function (rsp) { // callback
+            if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
                 // axios로 HTTP 요청
-                axios({
-                    url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
-                    method: "post",
-                    headers: { "Content-Type": "application/json" },
-                    data: {
-                        imp_uid: rsp.imp_uid,
-                        merchant_uid: rsp.merchant_uid
-                    }
-                }).then((data) => {
-                    // 서버 결제 API 성공시 로직
-                })
+                // axios({
+                //     url: '/limeCash/charge', // 예: https://www.myservice.com/payments/complete
+                //     method: "post",
+                //     headers: { "Content-Type": "application/json" },
+                //     data: {
+                //         imp_uid: rsp.imp_uid,
+                //         merchant_uid: rsp.merchant_uid,
+                //         userId: user.userId,
+                //         amount: amount
+                //     }
+                // }).then((data) => {
+                //     console.log(data.status);
+                // })
+                console.log(rsp);
+                location.href= $.getContextPath();
             } else {
                 alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
             }
-            if (result == '0') {
-                location.href = $.getContextPath() + "/Cart/Success";
-            }
-            alert(msg);
         });
     } else if (($('#agreement1').is(':checked'))
             && ($('#agreement2').is(':checked'))
@@ -152,3 +146,9 @@ $("#charge-btn").click(function (e) {
 
 
 });
+
+
+
+function phNoFormat(phNo) {
+    return phNo.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+}
