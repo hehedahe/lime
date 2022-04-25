@@ -89,7 +89,7 @@
           </div>
           <div class="col">
             <label for="inputPassword" class="form-label">도시</label>
-            <select class="form-select" aria-label="city" name="cityName" id="drop-city">
+            <select class="form-select" aria-label="city" name="cityId" id="drop-city">
               <option selected>시/군/구</option>
             </select>
           </div>
@@ -301,8 +301,8 @@
   <script type="text/javascript">
 
   //const regionName = document.querySelector("select[name=regionId]").value
-  const regionName = document.querySelector("select[name=regionId]").value
-  const cityName = document.querySelector("select[name=cityName]").value
+  const regionId = document.querySelector("select[name=regionId]").value
+  const cityId = document.querySelector("select[name=cityId]")
   const scope = document.querySelector("input[name=scope]").value
   const preferDays = document.querySelector("input[name=preferDays]").value
   const preferWeekend = document.querySelector("input[name=preferWeekend]").value
@@ -336,7 +336,6 @@ fetch("/signup/signup4", {
   });
 return false; 
 };
-
 
 
 
