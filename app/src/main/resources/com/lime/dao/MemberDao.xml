@@ -17,7 +17,7 @@
 
     <insert id="insert" parameterType="member">
         insert into user(name, email, password)
-        values (#{name}, #{email}, #{password})
+        values      (#{name}, #{email}, #{password})
     </insert>
 
 
@@ -25,17 +25,17 @@
         select user_id,
                name,
                email
-        from user
-        where email = #{email}
-          and pwd = #{password}
+        from   user
+        where  email = #{email}
+          and  pwd = #{password}
     </select>
 
     <select id="findByEmail" resultMap="memberMap" parameterType="string">
         select user_id,
                name,
                email
-        from user
-        where email = #{email}
+        from   user
+        where  email = #{email}
     </select>
 
 </mapper>
