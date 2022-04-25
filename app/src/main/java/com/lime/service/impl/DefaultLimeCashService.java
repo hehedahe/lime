@@ -29,7 +29,7 @@ public class DefaultLimeCashService implements LimeCashService {
   @Override
   @Transactional
   public int addCourtRsv(LimeCash limeCash) {
-    Integer lcRes = lcDao.insert(limeCash);
+    Integer lcRes = lcDao.insertUse(limeCash);
 
     if(lcRes == 0){
       return 0;
@@ -54,12 +54,25 @@ public class DefaultLimeCashService implements LimeCashService {
     System.out.println(limeCash);
     lcDao.checkout(limeCash);
     matchRsvDao.insert(limeCash.getLimeId(), limeCash.getMatchRsv());
+
     return 1;
   }
+
 
   @Override
   public int findCash(int userId) {
     return lcDao.findCash(userId);
+  }
+
+  @Override
+  public int addCash(LimeCash limeCash) {
+    Integer chargeCash = lcDao.insertCash(limeCash);
+
+    if (chargeCash == 0) {
+      return 0;
+    } else {
+      return 1;
+    }
   }
 
 

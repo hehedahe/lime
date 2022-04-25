@@ -8,7 +8,7 @@
 
 <resultMap type="LimeCash" id="cashMap"></resultMap>
 
-<insert id="insert" parameterType="LimeCash" keyProperty="limeId" keyColumn="lime_id" useGeneratedKeys="true">
+<insert id="insertUse" parameterType="LimeCash" keyProperty="limeId" keyColumn="lime_id" useGeneratedKeys="true">
     INSERT INTO lime_cash(user_id, amt, type_use)
     VALUE       (#{userId},#{amt},#{typeUse})
 </insert>
@@ -32,5 +32,9 @@
             WHERE   user_id=#{userId}) AS A
 </select>
 
+<insert id="insertCash" parameterType="LimeCash">
+    INSERT INTO lime_cash(user_id, amt, type_use, merchant_uid, imp_uid)
+    VALUE       (#{userId}, #{amt}, 'C', #{merchantUid}, #{impUid})
+</insert>
 
 </mapper>

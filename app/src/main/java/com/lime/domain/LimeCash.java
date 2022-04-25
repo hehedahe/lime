@@ -17,6 +17,8 @@ public class LimeCash {
   int userId;
   int amt;
   Date date;
+  String merchantUid;
+  String impUid;
   String typeUse;
   CourtRsv courtRsv;
   MatchRsv matchRsv;

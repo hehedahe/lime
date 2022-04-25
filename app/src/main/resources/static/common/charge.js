@@ -50,14 +50,14 @@ console.log("user::::::::::::::", user)
 
 // 결제 금액
 var amount = $('input:radio[name="chargeAmount"]:checked').next().text()
-console.log("결제 예정 금액::::::::::", amount);
+console.log("결제 예정 금액::::::::::", amount.replace(',', '').replace('원',''));
 const xAmount = $("#amount");
 xAmount.text(`${amount}`);
 
 $(".form-check-input").on("click", function (e) {
-    var amountValue = $('input:radio[name="chargeAmount"]:checked').next().text()
-    console.log(amountValue);
-    xAmount.text(`${amountValue}`);
+    var amount = $('input:radio[name="chargeAmount"]:checked').next().text()
+    console.log(amount);
+    xAmount.text(`${amount}`);
 })
 
 // 결제 수단
@@ -87,6 +87,7 @@ $(".modal-footer button").on("click", function () {
 $("#charge-btn").click(function (e) {
     console.log(methodValue);
 
+
     let a1 = $('#agreement1').is(':checked')
     console.log(a1)
     let a2 = $('#agreement2').is(':checked')
@@ -113,23 +114,25 @@ $("#charge-btn").click(function (e) {
             buyer_name: user.name,
             buyer_tel: phNoFormat(user.phoneNo)/*구매자 연락처*/
         }, function (rsp) { // callback
+            const chargeData = {
+                impUid: rsp.imp_uid,
+                merchantUid: rsp.merchant_uid,
+                userId: user.userId,
+                amt: amount.replace('원', '')
+            }
+            console.log(chargeData)
             if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
                 // axios로 HTTP 요청
-                // axios({
-                //     url: '/limeCash/charge', // 예: https://www.myservice.com/payments/complete
-                //     method: "post",
-                //     headers: { "Content-Type": "application/json" },
-                //     data: {
-                //         imp_uid: rsp.imp_uid,
-                //         merchant_uid: rsp.merchant_uid,
-                //         userId: user.userId,
-                //         amount: amount
-                //     }
-                // }).then((data) => {
-                //     console.log(data.status);
-                // })
-                console.log(rsp);
-                location.href= $.getContextPath();
+                axios.post('/limecash/charge',{
+                    impUid: rsp.imp_uid,
+                    merchantUid: rsp.merchant_uid,
+                    userId: user.userId,
+                    amt: amount.replace(',', '').replace('원','')
+                }).then((data) => {
+                    console.log(data.status);
+                });
+
+                window.close();
             } else {
                 alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
             }
@@ -138,7 +141,8 @@ $("#charge-btn").click(function (e) {
             && ($('#agreement2').is(':checked'))
             && methodValue == '무통장 입금'){
 
-        alert('무통장 입금 성공!!')
+        alert('무통장 입금 성공!!');
+        window.close();
 
     } else {
         window.alert("구매 조건 및 정보 제공 등에 동의해 주세요.");
