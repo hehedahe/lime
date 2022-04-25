@@ -5,9 +5,7 @@
 
   
   <mapper namespace="com.lime.dao.ClazzDao">
-  
-  
-  
+
   <resultMap type="clazz" id="clsMap">
   	<id column="cls_id" property="clsId"/>
   	<result column="user_id" property="userId"/>
@@ -28,14 +26,12 @@
     <result column="rgt_date" property="rgtDate"/>
     <result column="mdfy_date" property="mdfyDate"/>
     
-    <association property="writer" javaType="Member">
+    <association property="writer" javaType="User">
       <id column="no" property="no"/>
       <result column="name" property="name"/>
     </association>
   </resultMap>
-  
-  
-  
+
    <select id="findAll" resultMap="clsMap">
     select 
 	*

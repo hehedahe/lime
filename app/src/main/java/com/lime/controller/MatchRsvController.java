@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.lime.domain.LimeCash;
 import com.lime.domain.MatchRsv;
-import com.lime.domain.Member;
 import com.lime.domain.User;
 import com.lime.service.LimeCashService;
 import com.lime.service.ManageService;
@@ -40,10 +39,10 @@ public class MatchRsvController {
 
   @GetMapping("/balance")
   public Object getBalance(HttpSession session) {
-    Member user = (Member) session.getAttribute("loginUser");
+    User user = (User) session.getAttribute("loginUser");
 
     if (user != null) {
-      int userId = user.getNo();      
+      int userId = user.getUserId();
       User userInfo = manageService.userGet(userId);
       return new ResultMap().setStatus(SUCCESS).setData(userInfo);
     }
@@ -52,9 +51,9 @@ public class MatchRsvController {
 
   @GetMapping("/get")
   public Object get(HttpSession session) {
-    Member user = (Member) session.getAttribute("loginUser");
+    User user = (User) session.getAttribute("loginUser");
 
-    int userId = user.getNo();
+    int userId = user.getUserId();
 
     List<MatchRsv> matchList = matchRsvService.get(userId);
 
@@ -64,12 +63,12 @@ public class MatchRsvController {
   @RequestMapping("/add")
   public Object checkout(LimeCash limeCash, MatchRsv matchRsv, HttpSession session) {
     // 요청 파라미터 분석 및 가공
-    Member user = (Member) session.getAttribute("loginUser");
-    limeCash.setUserId(user.getNo());
+    User user = (User) session.getAttribute("loginUser");
+    limeCash.setUserId(user.getUserId());
 
     log.debug("limeCash = " + limeCash);
 
-    matchRsv.setUserId(user.getNo());
+    matchRsv.setUserId(user.getUserId());
     matchRsv.setLimeId(limeCash.getLimeId());
 
     log.debug("matchRsv = " + matchRsv);

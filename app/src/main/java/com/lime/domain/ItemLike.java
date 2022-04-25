@@ -8,6 +8,6 @@ public class ItemLike {
   int itemId;
   boolean done;
 
-  Member writer;
+  User writer;
 
 }

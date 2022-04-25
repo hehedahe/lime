@@ -2,7 +2,7 @@ package com.lime.controller;
 
 import com.lime.domain.CourtRsv;
 import com.lime.domain.LimeCash;
-import com.lime.domain.Member;
+import com.lime.domain.User;
 import com.lime.service.CourtRsvService;
 import com.lime.service.LimeCashService;
 import org.apache.logging.log4j.LogManager;
@@ -49,18 +49,18 @@ public class CourtRsvController {
 
     @GetMapping("/getList")
     public Object findByUser(HttpSession session) {
-        Member member = (Member) session.getAttribute("loginUser");
+        User user = (User) session.getAttribute("loginUser");
 
-        log.debug(member.getNo());
+        log.debug(user.getUserId());
 
-        if (member == null) {
+        if (user == null) {
             return new ResultMap()
                     .setStatus("FAIL")
                     .setData("유저 정보가 없습니다.");
         } else {
             return new ResultMap()
                     .setStatus("SUCCESS")
-                    .setData(crService.findByUser(member.getNo()));
+                    .setData(crService.findByUser(user.getUserId()));
         }
     }
 }

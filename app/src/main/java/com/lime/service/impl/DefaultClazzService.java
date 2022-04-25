@@ -1,12 +1,13 @@
 package com.lime.service.impl;
 
 import java.util.List;
+
+import com.lime.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.lime.dao.ClazzDao;
 import com.lime.domain.Clazz;
-import com.lime.domain.Member;
 import com.lime.service.ClazzService;
 
 @Service
@@ -31,17 +32,17 @@ public class DefaultClazzService implements ClazzService{
   }
 
   @Override
-  public List<Clazz> list(Member writer) {
+  public List<Clazz> list(User writer) {
     return clazzDao.findAll(writer);
   }
 
   @Override
-  public List<Clazz> listRegion(String regionName, Member writer) {
+  public List<Clazz> listRegion(String regionName, User writer) {
     return clazzDao.findByRegion(regionName, writer);
   }
 
   @Override
-  public List<Clazz> listCity(String regionName, String cityName, Member writer) {
+  public List<Clazz> listCity(String regionName, String cityName, User writer) {
     return clazzDao.findByCity(regionName, cityName, writer);
   }
 
