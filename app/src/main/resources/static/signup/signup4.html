@@ -66,36 +66,31 @@
         <div class="row">
           <div class="col">
             <label for="inputPassword" class="form-label">지역</label>
-            <select class="form-select" aria-label="region" name="regionId" id="">
+            <select class="form-select" aria-label="region" name="regionId" id="region">
               <option selected>시/도</option>
-                <option value="1">서울</option>
-                <option value="2">부산</option>
-                <option value="3">대구</option>
-                <option value="4">인천</option>
-                <option value="5">광주</option>
-                <option value="6">대전</option>
-                <option value="7">울산</option>
-                <option value="8">세종</option>
-                <option value="9">경기</option>
-                <option value="10">강원</option>
-                <option value="11">충청북도</option>
-                <option value="12">충청남도</option>
-                <option value="13">전라북도</option>
-                <option value="14">전라남도</option>
-                <option value="15">경상북도</option>
-                <option value="16">경상남도</option>
-                <option value="17">제주</option>
+              <option value="1">서울</option>
+              <option value="2">부산</option>
+              <option value="3">대구</option>
+              <option value="4">인천</option>
+              <option value="5">광주</option>
+              <option value="6">대전</option>
+              <option value="7">울산</option>
+              <option value="8">세종</option>
+              <option value="9">경기</option>
+              <option value="10">강원</option>
+              <option value="11">충청북도</option>
+              <option value="12">충청남도</option>
+              <option value="13">전라북도</option>
+              <option value="14">전라남도</option>
+              <option value="15">경상북도</option>
+              <option value="16">경상남도</option>
+              <option value="17">제주</option>
             </select>
           </div>
           <div class="col">
             <label for="inputPassword" class="form-label">도시</label>
-            <select class="form-select" aria-label="city" name="cityName" id="">
+            <select class="form-select" aria-label="city" name="cityName" id="drop-city">
               <option selected>시/군/구</option>
-              <option value="1">남구</option>
-              <option value="2">동구</option>
-              <option value="3">북구</option>
-              <option value="4">중구</option>
-              <option value="5">울주군</option>
             </select>
           </div>
         </div>
@@ -307,7 +302,7 @@
 
   //const regionName = document.querySelector("select[name=regionId]").value
   const regionName = document.querySelector("select[name=regionId]").value
-  const cityName = document.querySelector("select[name=cityId]").value
+  const cityName = document.querySelector("select[name=cityName]").value
   const scope = document.querySelector("input[name=scope]").value
   const preferDays = document.querySelector("input[name=preferDays]").value
   const preferWeekend = document.querySelector("input[name=preferWeekend]").value
@@ -327,7 +322,6 @@ console.log("fd>>>>>>>>>>>>>>>>>>", fd)
 fetch("/signup/signup4", { 
     method: "POST",
     body: new URLSearchParams(fd)
-    
   }) 
   .then(function(response) {
     return response.text();
@@ -351,7 +345,7 @@ return false;
 
 </script>
 
-<script type="module" src="itemForm.js"></script>
+<script type="module" src="signupForm.js"></script>
 
 </body>
 

@@ -14,7 +14,7 @@ import com.lime.domain.LimeCash;
 import com.lime.domain.MatchRsv;
 import com.lime.domain.Member;
 import com.lime.domain.SearchCondition;
-import com.lime.domain.UserLogin;
+import com.lime.domain.UserSignUp;
 import com.lime.service.LimeCashService;
 import com.lime.service.MatchRsvService;
 
@@ -59,7 +59,7 @@ public class MatchRsvController {
 
   @GetMapping("/logincheck")
   public Object getOrderPage(SearchCondition sc, HttpSession session) {
-    UserLogin user = (UserLogin) session.getAttribute("loginUser");
+    UserSignUp user = (UserSignUp) session.getAttribute("loginUser");
     //    log.info(Integer.parseInt(user.getUserId()));
     if (user == null) {
       return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");

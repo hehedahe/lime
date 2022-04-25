@@ -4,19 +4,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.lime.domain.UserLogin;
-import com.lime.service.UserLoginService;
+import com.lime.domain.UserSignUp;
+import com.lime.service.UserSignUpService;
 
 
 @RestController
-public class UserLoginController {
+public class UserSignUpController {
 
   @Autowired
-  UserLoginService userLoginService;
+  UserSignUpService userLoginService;
 
 
   @RequestMapping("/signup/signup1")
-  public Object signup(UserLogin userLogin, HttpServletResponse response, HttpSession session) {
+  public Object signup(UserSignUp userLogin, HttpServletResponse response, HttpSession session) {
 
     System.out.println(">>>>>>>>>>>>>>>>" + userLogin);
 
@@ -53,7 +53,7 @@ public class UserLoginController {
   @RequestMapping("/signup/signup2") 
   public Object signUp2(String yy, String mm, String dd, String gender, HttpServletResponse response, HttpSession session) throws Exception {
 
-    UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
+    UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");
     String birthday = yy+"-"+mm+"-"+dd;
     userLogin.setBrthDate(birthday);       
     userLogin.setGender(gender);
@@ -78,7 +78,7 @@ public class UserLoginController {
 
   @RequestMapping("/signup/signup3") 
   public Object signUp3(int bankId, String accountNo, String accountHolder, HttpServletResponse response, HttpSession session) throws Exception {
-    UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
+    UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");
     userLogin.setBankId(bankId);
     userLogin.setAccountNo(accountNo);
     userLogin.setAccountHolder(accountHolder);
@@ -97,7 +97,7 @@ public class UserLoginController {
       String scope, int preferDays, int preferWeekend, String courtTypeName, String leftYn, 
       int courtTypeId, HttpServletResponse response, HttpSession session) throws Exception {
 
-    UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");;
+    UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");;
 
     userLogin.setRegionId(regionId);
     userLogin.setCityId(cityId);

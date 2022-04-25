@@ -14,17 +14,17 @@ fetch('/member/getLoginUser').then(function (response) {
             <div id="u-links-msg">
                 <img src="/asset/image/header/msg2.png" height="30px" width="30px">
             </div>
-            <ul class="nav nav-pills id="u-links-user"">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="../header/userImg.png" height="30px" width="30px"/></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">마이페이지</a></li>
-                            <li><a class="dropdown-item" href="#">나의 활동</a></li>
-                            <li><a class="dropdown-item" href="#">찜목록</a></li>
-                            <li><a class="dropdown-item" id="logoutBtn" href="#" style="color: red;">로그아웃</a></li>
-                        </ul>
-                </li>
-            </ul>
+            <div class="btn-group dropend">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="../header/userImg.png" height="30px" width="30px"/>
+                     Dropend
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                    <li><a class="dropdown-item" href="#">나의활동</a></li>
+                    <li><a class="dropdown-item" href="#">찜목록</a></li>
+                    <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                </ul>
+            </div>
         `)
         $('#logoutBtn').on('click', function() {
             fetch("/member/signout").then(function(response) {
@@ -36,3 +36,11 @@ fetch('/member/getLoginUser').then(function (response) {
         });
     }
 });
+
+
+
+.btn-secondary {
+    /* color: #fff; */
+    /* background-color: #6c757d; */
+    /* border-color: #6c757d; */
+}

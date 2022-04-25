@@ -6,6 +6,6 @@ import lombok.Data;
 public class ItemLike {
   int itemId;
   int userId;
-  UserLogin writer;
+  UserSignUp writer;
   boolean done;
 }

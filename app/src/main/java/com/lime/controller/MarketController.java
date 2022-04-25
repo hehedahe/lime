@@ -25,7 +25,7 @@ import com.lime.domain.ItemImage;
 import com.lime.domain.ItemLike;
 import com.lime.domain.Market;
 import com.lime.domain.Member;
-import com.lime.domain.UserLogin;
+import com.lime.domain.UserSignUp;
 import com.lime.service.MarketService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -126,7 +126,7 @@ public class MarketController {
 
   @RequestMapping("/market/like")
   public Object update(ItemLike itemLike, HttpSession session) {
-    UserLogin userLogin = (UserLogin) session.getAttribute("loginUser");
+    UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");
     itemLike.setWriter(userLogin);
     System.out.println(itemLike);
 
