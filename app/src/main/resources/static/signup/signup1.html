@@ -50,7 +50,7 @@
   </script> -->
   <style>
     #pwd-check {
-      color:blue;
+      color:red;
     }
 
   </style>
@@ -128,12 +128,12 @@
       <div class="form-signup">
         <label for="inputPassword" class="form-label">비밀번호</label>
         <div class="form-text mb-2 signup-help">영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</div>
-        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="비밀번호">
+        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="비밀번호" >
       </div>
       <div class="form-signup">
         <label for="inputPassword2" class="form-label">비밀번호 확인</label>
-        <input type="password" name="password" class="form-control" id="inputPassword2" placeholder="비밀번호 확인">
-        <div id="pwd-check" style='font-size: 12px'>비밀번호가 일치하지 않습니다.</div>
+        <input type="password" name="password2" class="form-control" id="inputPassword2" placeholder="비밀번호 확인">
+        <div id="pwd-check" style="font-size: 12px;"></div>
       </div>
       <div class="form-signup">
         <label for="inputName" class="form-label">이름</label>
@@ -196,43 +196,33 @@ const name = document.querySelector("input[name=name]");
 const phoneNo = document.querySelector("input[name=phoneNo]");
 const eventYn = document.querySelector("input[name=eventYn]");
 
-const pwdChk = document.querySelector('#pwd-check')
 
+$(".form-control").focusout(function() {
+  let pass1 = $("#inputPassword").val();
+  let pass2 = $("#inputPassword2").val();
+
+  if (pass1 !="" || pass2 !="") {
+    if (pass1 == pass2)
+    $("#pwd-check").html("");
+    $("#pwd-check").attr('color','green');
+  } else {
+    $("#pwd-check").html("비밀번호가 일치하지 않습니다.")
+    $("#pwd-check").attr('color','red')
+  }
+})
 
 
   
 document.querySelector("form[name=form1]").onsubmit = function() {
+
   const p1 = document.getElementById('inputPassword').value;
   const p2 = document.getElementById('inputPassword2').value;
-
-  console.log(p1)
-  console.log(p2)
-
-  console.log("--------------------")
-
-  console.log($('#inputPassword2'))
-
-  $('#inputPassword2').on('input',function(e){
-    console.log($('#inputPassword2').val())
-    $(this).val();
-   // checkPWd($('#inputPassword').val(), $('#inputPassword2').val());
-  })
-  const nameCheck = document.getElementById('#inputName').value;
-
-  const checkPWd = (p1, p2) => {
    if( p1 != p2 ) {
-    alert("okokokokoko")
-
-    console.log("okokokoko")
-
-    pwdChk.style.color = 'red';
-    alert("비밀번호가 일치 하지 않습니다.");
-
+     alert("비밀번호가 일치 하지 않습니다.");
      return false;
    } 
-  }
 
-  
+
 /* 정규표현식 사용예정
   const rexExp = /^[가-힣]{2,5}/;
   
@@ -241,8 +231,6 @@ document.querySelector("form[name=form1]").onsubmit = function() {
     return false;
   }
 */
-
-/*
   if (email.value === "" || 
       pwd.value === "" ||
   		name.value === "" ||
@@ -250,7 +238,7 @@ document.querySelector("form[name=form1]").onsubmit = function() {
     window.alert("필수입력사항이 비어있습니다.");
     return false;
   }
-  /*
+
   var fd = new FormData(document.forms.namedItem("form1"));
 
   fetch("/signup/signup1", { 
@@ -269,7 +257,6 @@ document.querySelector("form[name=form1]").onsubmit = function() {
     });
 
   return false;
-  */
 };
 
 

@@ -54,40 +54,38 @@ public class UserSignUpController {
   @RequestMapping("/signup/signup2")
   public Object signUp2(String yy, String mm, String dd, String gender, HttpServletResponse response, HttpSession session) throws Exception {
 
-    UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");
-    String birthday = yy + "-" + mm + "-" + dd;
-    userLogin.setBrthDate(birthday);
-    userLogin.setGender(gender);
+    UserSignUp userSignUp = (UserSignUp) session.getAttribute("loginUser");
+    String birthday = yy+"-"+mm+"-"+dd;
+    userSignUp.setBrthDate(birthday);       
+    userSignUp.setGender(gender);
 
-    System.out.println(userLogin);
-    int userId = userLogin.getUserId();
+
+    System.out.println(userSignUp);
+    int userId = userSignUp.getUserId();
     System.out.println(userId);
 
 
-    session.setAttribute("loginUser", userLogin);
 
-    //    Cookie cookie = null;
-    //
-    //    cookie = new Cookie("birthDay", birthday);
-    //    cookie = new Cookie("gender", gender);
-    //
-    //    response.addCookie(cookie);
+    session.setAttribute("loginUser", userSignUp);
 
 
     return 1;
   }
 
+
+
+
   @RequestMapping("/signup/signup3")
   public Object signUp3(int bankId, String accountNo, String accountHolder, HttpServletResponse response, HttpSession session) throws Exception {
-    UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");
-    userLogin.setBankId(bankId);
-    userLogin.setAccountNo(accountNo);
-    userLogin.setAccountHolder(accountHolder);
+    UserSignUp userSignUp = (UserSignUp) session.getAttribute("loginUser");
+    userSignUp.setBankId(bankId);
+    userSignUp.setAccountNo(accountNo);
+    userSignUp.setAccountHolder(accountHolder);
 
 
-    session.setAttribute("loginUser", userLogin);
+    session.setAttribute("loginUser", userSignUp);
 
-    System.out.println(userLogin);
+    System.out.println(userSignUp);
     return 1;
   }
 
@@ -98,7 +96,6 @@ public class UserSignUpController {
       int courtTypeId, HttpServletResponse response, HttpSession session) throws Exception {
 
     UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");
-    ;
 
     userLogin.setRegionId(regionId);
     userLogin.setCityId(cityId);
@@ -107,6 +104,7 @@ public class UserSignUpController {
     userLogin.setPreferWeekend(preferWeekend);
     userLogin.setCourtTypeId(courtTypeId);
     userLogin.setLeftYn(leftYn);
+
 
 
     session.setAttribute("loginUser", userLogin);
