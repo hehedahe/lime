@@ -26,7 +26,37 @@
     <div id="body-wrapper">
         <div id="content-body">
             <div id="item-box">
-                
+              <div id="item-region"><p id="item-region-p"></p></div>
+              <div id="item-title"><p id="item-title-p"></p></div>
+              <div id="item-price"><p id="item-price-p"></p></div>
+              <div id="user-info">
+                  <div class="container g-0">
+                      <div class="row g-0">
+                          <div id="user-img-wrap"><img src="../asset/image/user-img.jpg"></div>
+                          <div class="col-sm-8">
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col"><span id="user-name"></span>  <span id="manner"></span></div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col" id="rgt-date"></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col">
+                              <button id="ask" type="button">
+                              구매 문의하기
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div id="item-content"><p id="item-content-p"></p></div>
+              <div id="item-img-wrap"></div>
+              <div id="heart-wrap">
+                  <a class="heart-click" idx=${item.data.itemId}></a>
+                  <span id="like-count">  </span>
+              </div>
             </div>
             <div id="reply-box">
                 

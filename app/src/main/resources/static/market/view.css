@@ -20,17 +20,17 @@ html, body {
     /* border: 1px solid black; */
 }
 
-#item-region > p {
+#item-region-p {
     font-size: 1.1em;
     font-weight: bold;
 }
 
-#item-title > p {
+#item-title-p {
     font-size: 2em;
     font-weight: bold;
 }
 
-#item-price > p {
+#item-price-p {
     font-size: 1.6em;
     font-weight: bold;
 }
@@ -68,7 +68,7 @@ html, body {
     float: right;
 }
 
-#item-content > p {
+#item-content-p {
     width: inherit;
 }
 

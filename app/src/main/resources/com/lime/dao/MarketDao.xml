@@ -34,12 +34,18 @@
       <id column="item_img_id" property="imgId"/>
       <result column="file_path" property="filePath"/>
     </collection>
+    
+    
+    
   </resultMap>
   
   <resultMap type="ItemImage" id="ItemImageMap">
     <id column="item_img_id" property="imgId"/>
     <result column="file_path" property="filePath"/>
   </resultMap>
+  
+  
+  
   
 
   <!-- 
@@ -206,7 +212,11 @@ SELECT
 	   m.manner_score,
      lv.lv_name,
      ii.file_path,
-     ii.item_img_id
+     ii.item_img_id,
+     (SELECT 
+           COUNT(*) 
+      FROM item_like 
+      WHERE item_id = il.item_id ) like_count
 	  from item i
 	   left join city ct
 	     on i.city_id = ct.city_id
@@ -220,6 +230,8 @@ SELECT
        on m.lv_id  = lv.lv_id
      left join item_img ii
        on i.item_id = ii.item_id
+     LEFT join item_like il 
+       on i.item_id = il.item_id
 	  where i.item_id=#{no}
 	  order by ii.item_img_id asc
   </select>
