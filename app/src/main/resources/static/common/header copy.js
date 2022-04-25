@@ -21,12 +21,12 @@ fetch('/member/getLoginUser').then(function (response) {
                             <li><a class="dropdown-item" href="#">마이페이지</a></li>
                             <li><a class="dropdown-item" href="#">나의 활동</a></li>
                             <li><a class="dropdown-item" href="#">찜목록</a></li>
-                            <li><a class="dropdown-item" id="logoutBtn" href="#" style="color: red;">로그아웃</a></li>
+                            <li><a class="dropdown-item" href="#" style="color: red;">로그아웃</a></li>
                         </ul>
                 </li>
             </ul>
         `)
-        $('#logoutBtn').on('click', function() {
+        $('#myDropdown').on('click', function() {
             fetch("/member/signout").then(function(response) {
                 $('#u-nav-links').html(`
                 <li><a href="/login/login.html">로그인</a></li>
@@ -36,3 +36,6 @@ fetch('/member/getLoginUser').then(function (response) {
         });
     }
 });
+
+
+
