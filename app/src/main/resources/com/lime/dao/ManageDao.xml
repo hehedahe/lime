@@ -6,8 +6,7 @@
 <mapper namespace="com.lime.dao.ManageDao">
 
 	<resultMap type="user" id="userMap">
-		<id column="userId" property="no" />
-		<result column="userId" property="userId" />
+		<id column="userId" property="userId" />
 		<result column="name" property="name" />
 		<result column="email" property="email" />
 		<result column="userType" property="userType" />
@@ -287,14 +286,14 @@
              ELSE 'admin' END) userType,
              u.rgt_date rgtDate ,
              (SELECT
-             SUM(case
+             IFNULL(SUM(case
              when
              lc2.type_use = 'U'
              then CONCAT('-',lc2.amt)
              when lc2.type_use = 'C'
              then CONCAT(lc2.amt)
              ELSE lc2.amt
-             END)
+             END), 0)
           FROM lime_cash lc2
           WHERE lc2.user_id =u.user_id) SUM,
           -- 성별, 은행명, 계좌번호, 예금주명, 제재
@@ -326,18 +325,19 @@
           ON m.bank_id = bi.bank_id
           left JOIN lime_cash lc
           ON m.user_id = lc.user_id
-          INNER JOIN city c2 
+          LEFT JOIN city c2 
           ON m.city_id = c2.city_id
-          INNER JOIN region r1
+          LEFT JOIN region r1
           ON c2.region_id = r1.region_id
-          INNER JOIN club club1
+          left JOIN club club1
           ON m.club_id = club1.club_id
-          INNER JOIN lv lv2
+          left JOIN lv lv2
           ON m.lv_id = lv2.lv_id
           GROUP BY u.user_id
           ) tt
     WHERE tt.userType = '유저'
-      and tt.userId = #{no}
+    AND userId = #{no}
+   
 	</select>
 	
 	<select id="findFieldAll" resultMap="fieldMap">
