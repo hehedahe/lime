@@ -95,10 +95,6 @@ function getCitiName(e) {
     selectCity(e.target.value);
 }
 
-function getRegion() {
-
-}
-
 // =====================================
 //   시도/시군구 sorting & 중심좌표 뿌리기
 // =====================================
@@ -116,8 +112,8 @@ $('#drop-region').on('change', async function (e) {
     };
     // 시도 → 시군구
 
-    // selectCity(e.target.value);
-    getCitiName(e);
+    selectCity(e.target.value);
+    // getCitiName(e);
     console.log($('#drop-region option:selected').val());
 
     const coordinateRegion = await findRegion(Number($('#drop-region option:selected').val()));

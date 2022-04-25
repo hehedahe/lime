@@ -43,32 +43,34 @@ $.getJSON("/member/getLoginUser", (result) => {
 
 $.getJSON("/member/getLoginUser", function (result) {
     console.log(result);
-    $("#balance").text(`보유 캐시 ${(result.data.ttlCash).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`)
+    $("#balance").text(
+        `보유 캐시 ${(result.data.ttlCash).toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`);
 })
 
+// 결제 금액
 var amount = $('input:radio[name="chargeAmount"]:checked').next().text()
-console.log(amount);
-
+console.log("결제 예정 금액::::::::::", amount);
 const xAmount = $("#amount");
 xAmount.text(`${amount}`);
 
 $(".form-check-input").on("click", function (e) {
-    var v = $('input:radio[name="chargeAmount"]:checked').next().text()
-    console.log(v);
-    xAmount.text(`${v}`);
+    var amountValue = $('input:radio[name="chargeAmount"]:checked').next().text()
+    console.log(amountValue);
+    xAmount.text(`${amountValue}`);
 })
 
+// 결제 수단
 var payMethod = $('input:radio[name="paymentMethod"]:checked').next().text()
 console.log(payMethod)
-
-var v;
+var methodValue = $('input:radio[name="paymentMethod"]:checked').next().text();
 
 $(".form-check-input").on("click", function (e) {
-    v = $('input:radio[name="paymentMethod"]:checked').next().text()
-    console.log(v);
+    methodValue = $('input:radio[name="paymentMethod"]:checked').next().text()
+    console.log(methodValue);
 })
 
-console.log(v);
+
 
 $(".modal-footer button").on("click", function () {
     $.getJSON(`/rsv/match/add?amt=20000&typeUse=U&matchId=${matchId}&state=P`, function (result) {
@@ -82,12 +84,8 @@ $(".modal-footer button").on("click", function () {
 //            이니시스 API
 // =====================================
 
-
-
-
-
 $("#charge-btn").click(function (e) {
-    console.log('클릭');
+    console.log(methodValue);
     
 
     let a1 = $('#agreement1').is(':checked')
@@ -95,8 +93,11 @@ $("#charge-btn").click(function (e) {
     let a2 = $('#agreement2').is(':checked')
     console.log(a2)
 
-    if (($('#agreement1').is(':checked')) && ($('#agreement2').is(':checked')) && v == '카드 결제') {
-        window.resizeTo(1000,820);
+    if (($('#agreement1').is(':checked'))
+        && ($('#agreement2').is(':checked'))
+        && methodValue == '카드 결제') {
+
+        window.resizeTo(1200,890);
 
         //결제시 전달되는 정보
         var IMP = window.IMP; // 생략 가능
@@ -106,7 +107,7 @@ $("#charge-btn").click(function (e) {
         IMP.request_pay({
             pg: 'html5_inicis',
             pay_method: 'card',
-            merchant_uid: 'merchant_' + new Date().getTime(),
+            merchant_uid: 'lc_' + new Date().getTime(),
             name: '라임캐시 충전'/*상품명*/,
             amount: 100/*상품 가격*/,
             buyer_email: 'iamport@siot.do'/*구매자 이메일*/,
@@ -137,6 +138,12 @@ $("#charge-btn").click(function (e) {
             }
             alert(msg);
         });
+    } else if (($('#agreement1').is(':checked'))
+            && ($('#agreement2').is(':checked'))
+            && methodValue == '무통장 입금'){
+
+        alert('무통장 입금 성공!!')
+
     } else {
         window.alert("구매 조건 및 정보 제공 등에 동의해 주세요.");
     }

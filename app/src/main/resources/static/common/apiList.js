@@ -64,7 +64,7 @@ export async function fieldList() {
 export async function courtList(lat, lng) {
     try {
         const response = await axios(`${PATH.field.courtList}?lat=${lat}&lng=${lng}`);
-        // console.log("r:::::::::::::", response);
+        // console.log("rtest:::::::::::::", response);
         // console.log("data::::::::::", response.data);
         return response.data;
     } catch (e) {

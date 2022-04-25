@@ -33,6 +33,6 @@ export function selectCity(e) {
     cities?.map((city, index) => {
         var opt = `<option value="${index}">${city}</option>`;
         $('#drop-city').append(opt);
-    });6
+    });
 
 };
