@@ -102,6 +102,19 @@ body {
     font-size: 14px;
 }
 
+/* 입금자명 */
+.input-group {
+    width: 200px;
+}
+.input-group-text {
+    background-color: rgba(102, 200, 141, 0.8);
+    color: #fff;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+    border: none;
+}
+
 /* 충전하기 버튼 */
 #charge-btn {
     background-color: #66c88d;
