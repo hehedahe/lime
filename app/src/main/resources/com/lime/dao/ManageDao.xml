@@ -286,14 +286,14 @@
              ELSE 'admin' END) userType,
              u.rgt_date rgtDate ,
              (SELECT
-             IFNULL(SUM(case
+             SUM(case
              when
              lc2.type_use = 'U'
              then CONCAT('-',lc2.amt)
              when lc2.type_use = 'C'
              then CONCAT(lc2.amt)
              ELSE lc2.amt
-             END), 0)
+             END)
           FROM lime_cash lc2
           WHERE lc2.user_id =u.user_id) SUM,
           -- 성별, 은행명, 계좌번호, 예금주명, 제재
@@ -337,7 +337,6 @@
           ) tt
     WHERE tt.userType = '유저'
     AND userId = #{no}
-   
 	</select>
 	
 	<select id="findFieldAll" resultMap="fieldMap">
