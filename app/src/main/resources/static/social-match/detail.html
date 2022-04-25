@@ -526,7 +526,7 @@
         let userInfo = result.data;
         if (userInfo.sum < 20000) {
           window.alert("라임캐시가 부족합니다. 충전하시겠습니까?");
-          location.href = `/social-match/charge.html?matchId=${matchId}`
+          location.href = `../common/charge.html`
         } else {
           $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
         }

@@ -88,6 +88,7 @@ let rsvData = {
 $('#payment-btn').on('click', function (e) {
     if (user.ttlCash <= 50000) {
         alert("라임 캐시 충전이 필요합니다. 🪙");
+        window.open('/common/charge.html', '라임캐시 충전', 'width=500, height=820, left=-1500, top=100, resizable=false');
     } else {
         fetch(('/rsv/court/add'), {
             method: 'post',
@@ -106,7 +107,15 @@ $('#payment-btn').on('click', function (e) {
             }
         })
     }
-})
+});
 
 
+
+
+// =====================================
+//            라임 캐시 충전
+// =====================================
+$('#addon-btn').on('click', function (e) {
+    window.open('/common/charge.html', '라임캐시 충전', 'width=500, height=820, left=-1500, top=100, resizable=false');
+});
 

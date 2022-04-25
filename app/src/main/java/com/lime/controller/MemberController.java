@@ -62,8 +62,12 @@ public class MemberController {
       System.out.println("member::::::::" + member);
 
       if (member != null) {
-        int ttlCash = lcDao.findCash(member.getNo());
-        member.setTtlCash(ttlCash);
+        try {
+          int ttlCash = lcDao.findCash(member.getNo());
+          member.setTtlCash(ttlCash);
+        } catch (Exception e) {
+          System.out.println(e + "::::캐시가 없습니다.");
+        }
         return new ResultMap()
                   .setStatus(SUCCESS)
                   .setData(member);
@@ -72,6 +76,7 @@ public class MemberController {
                 .setStatus(FAIL)
                 .setData("로그인 하지 않았습니다.");
       }
+
   }
 
   @RequestMapping("/member/signout")

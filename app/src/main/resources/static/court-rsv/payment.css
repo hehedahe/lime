@@ -44,12 +44,12 @@ body {
 /***********
  라임캐시 충전 버튼
  ***********/
-#button-addon {
+#addon-btn {
     background-color: rgb(102, 200, 141);
     color: #fff;
 }
-#button-addon:hover,
-#button-addon:focus {
+#addon-btn:hover,
+#addon-btn:focus {
     box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
 }
 input[aria-label="cash"]:hover,
