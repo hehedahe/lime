@@ -114,8 +114,13 @@ public class MarketController {
 
   @RequestMapping("/market/like")
   public Object update(ItemLike itemLike, HttpSession session) {
+<<<<<<< HEAD
     User user = (User) session.getAttribute("loginUser");
     itemLike.setUserId(user.getUserId());
+=======
+    UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");
+    itemLike.setWriter(userLogin);
+>>>>>>> il
     System.out.println(itemLike);
 
     if (itemLike.isDone()) {

@@ -6,9 +6,9 @@
 <!-- 
   namespace => 인터페이스의 패키지 및 이름과 namespace의 이름이 일치해야 한다.
  -->
-<mapper namespace="com.lime.dao.UserLoginDao">
+<mapper namespace="com.lime.dao.UserSignUpDao">
 
-  <resultMap type="userLogin" id="userloginMap">
+  <resultMap type="userSignUp" id="userloginMap">
     <id column="no" property="no"/>
     <result column="email" property="email"/>
     <result column="pwd" property="password"/>
@@ -46,12 +46,12 @@
   </insert>
    -->
   
-  <insert id="insert" parameterType="userlogin" keyProperty="userId" keyColumn="user_id"  useGeneratedKeys="true">
+  <insert id="insert" parameterType="userSignUp" keyProperty="userId" keyColumn="user_id"  useGeneratedKeys="true">
     insert into user(email, pwd, name, phone_no)
     values(#{email},#{password},#{name},#{phoneNo})
   </insert>
   
-  <insert id="insert1" parameterType="userlogin" >
+  <insert id="insert1" parameterType="userSignUp" >
     insert into member(user_id, evnt_yn, brth_date, gender, bank_id, acnt_no, acnt_holder, scope, preferred_weekdays, preferred_weekends, lefty_yn, court_type_id, city_id)
     values(#{userId},#{eventYn},#{brthDate},#{gender},#{bankId},#{accountNo},#{accountHolder},#{scope},#{preferDays},#{preferWeekend},#{leftYn},#{courtTypeId}, #{cityId})
   </insert>

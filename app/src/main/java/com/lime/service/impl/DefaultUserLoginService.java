@@ -4,16 +4,16 @@ import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.lime.dao.UserLoginDao;
-import com.lime.domain.UserLogin;
-import com.lime.service.UserLoginService;
+import com.lime.dao.UserSignUpDao;
+import com.lime.domain.UserSignUp;
+import com.lime.service.UserSignUpService;
 
 
 @Service
-public class DefaultUserLoginService implements UserLoginService {
+public class DefaultUserLoginService implements UserSignUpService {
 
   @Autowired
-  UserLoginDao userLoginDao;
+  UserSignUpDao userLoginDao;
 
   @Options(useGeneratedKeys = true, keyProperty = "userId")
   @Transactional
@@ -31,28 +31,28 @@ public class DefaultUserLoginService implements UserLoginService {
    */
 
   @Override
-  public int add(UserLogin userLogin) { // 각각의 table에 insert
+  public int add(UserSignUp userLogin) { // 각각의 table에 insert
     return userLoginDao.insert(userLogin);
   }
 
   @Override
-  public int memberAdd(UserLogin userLogin) { // 각각의 table에 insert
+  public int memberAdd(UserSignUp userLogin) { // 각각의 table에 insert
     return userLoginDao.insert1(userLogin);
   }
 
 
   @Override
-  public UserLogin get(String email, String password) {
+  public UserSignUp get(String email, String password) {
     return userLoginDao.findByEmailAndPassword(email, password);
   }
 
   @Override
-  public UserLogin get(String email) {
+  public UserSignUp get(String email) {
     return userLoginDao.findByEmail(email);
   }
 
   @Override
-  public int add1(UserLogin userLogin) {
+  public int add1(UserSignUp userLogin) {
     userLoginDao.insert(userLogin);
     userLoginDao.insert1(userLogin);
 
@@ -61,13 +61,13 @@ public class DefaultUserLoginService implements UserLoginService {
   }
 
   @Override
-  public int insert(UserLogin userLogin) {
+  public int insert(UserSignUp userLogin) {
     // TODO Auto-generated method stub
     return 0;
   }
 
   @Override
-  public int insert1(UserLogin userLogin) {
+  public int insert1(UserSignUp userLogin) {
     // TODO Auto-generated method stub
     return 0;
   }

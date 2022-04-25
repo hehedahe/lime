@@ -12,7 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.lime.domain.LimeCash;
 import com.lime.domain.MatchRsv;
+<<<<<<< HEAD
 import com.lime.domain.User;
+=======
+import com.lime.domain.Member;
+import com.lime.domain.SearchCondition;
+import com.lime.domain.UserSignUp;
+>>>>>>> il
 import com.lime.service.LimeCashService;
 import com.lime.service.ManageService;
 import com.lime.service.MatchRsvService;
