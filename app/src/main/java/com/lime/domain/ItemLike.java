@@ -9,6 +9,6 @@ public class ItemLike {
   boolean done;
   int likeCount;
 
-  Member writer;
+  User writer;
 
 }

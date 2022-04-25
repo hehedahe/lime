@@ -7,32 +7,23 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class User {
-  String no;
-  String userId; // user_id
+  int userId; // user_id
   String name; 
   String email;
+  String password;
   String userType;
   String rgtDate;
-  int sum;
+  int ttlCash; // 라임캐시 잔액
   String gender; //gender
   String bankName; // 은행명
   String acntNo; // 계좌번호
   String acntHolder; // 예금주명
   String blockDate; // 제재일
-
-
-  String password;
   String phoneNo;
   boolean eventYn;
-  Date brthDay;
+  String brthDay;
   String UserImg;
   String UserType;
-
-
-  int num;//페이징처리(row_number index)
-  int userCount;//총 회원수
-
-  int ttlCash; // 라임캐시 잔액
 
   Integer mannerScore; // 매너점수
   String region;
@@ -40,5 +31,9 @@ public class User {
   String club;
   String hand;
   String level;
+
+  int sum;
+  int num;//페이징처리(row_number index)
+  int userCount;//총 회원수
 }
 

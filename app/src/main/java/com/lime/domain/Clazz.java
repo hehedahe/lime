@@ -26,5 +26,5 @@ public class Clazz {
   String regionName;
   String cityName;
 
-  Member writer;
+  User writer;
 }

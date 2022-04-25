@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.lime.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.lime.domain.Clazz;
-import com.lime.domain.Member;
 import com.lime.service.ClazzService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -35,7 +36,7 @@ public class ClazzController {
 
 
   @RequestMapping("/class/list")
-  public Object list(String regionName, String cityName, String title, String level, Member writer) {
+  public Object list(String regionName, String cityName, String title, String level, User writer) {
 
     log.info("게시물 목록 조회!");
 
@@ -66,9 +67,9 @@ public class ClazzController {
   @RequestMapping("/class/open1")
   public Object open1(Clazz cls, MultipartFile file, HttpSession session) {
 
-    Member member = (Member) session.getAttribute("loginUser");
+    User user = (User) session.getAttribute("loginUser");
 
-    cls.setWriter(member);
+    cls.setWriter(user);
 
 
     System.out.println("photo-----------------");

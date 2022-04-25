@@ -9,6 +9,8 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
+
+import com.lime.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.lime.domain.ItemLike;
 import com.lime.domain.Market;
-import com.lime.domain.Member;
 import com.lime.service.MarketService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -96,9 +97,9 @@ public class MarketController {
 
   @RequestMapping("/market/add")
   public Object add(Market market, MultipartFile[] files, HttpSession session) {
-    Member member = (Member) session.getAttribute("loginUser");
-    System.out.println(member);
-    market.setWriter(member);
+    User user = (User) session.getAttribute("loginUser");
+    System.out.println(user);
+    market.setWriter(user);
     try {
       Object fileList = saveFile(files);
       return marketService.add(market, fileList);
@@ -113,8 +114,8 @@ public class MarketController {
 
   @RequestMapping("/market/like")
   public Object update(ItemLike itemLike, HttpSession session) {
-    Member member = (Member) session.getAttribute("loginUser");
-    itemLike.setUserId(member.getNo());
+    User user = (User) session.getAttribute("loginUser");
+    itemLike.setUserId(user.getUserId());
     System.out.println(itemLike);
 
     if (itemLike.isDone()) {
@@ -128,14 +129,14 @@ public class MarketController {
 
   @RequestMapping("/market/getLike")
   public Object getLike(HttpSession session) {
-    Member member = (Member) session.getAttribute("loginUser");
+    User user = (User) session.getAttribute("loginUser");
     ItemLike itemLike = new ItemLike();
-    System.out.println("member::::::::" + member);
+    System.out.println("User::::::::" + user);
 
-    if (member != null) {
+    if (user != null) {
       return new ResultMap()
           .setStatus(SUCCESS)
-          .setData(marketService.getLike(member.getNo()));
+          .setData(marketService.getLike(user.getUserId()));
     } else {
       return new ResultMap()
           .setStatus(FAIL)

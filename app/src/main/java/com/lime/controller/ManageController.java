@@ -9,7 +9,6 @@ import com.lime.domain.Classes;
 import com.lime.domain.Club;
 import com.lime.domain.Community;
 import com.lime.domain.Field;
-import com.lime.domain.Member;
 import com.lime.domain.User;
 import com.lime.service.ManageReportService;
 import com.lime.service.ManageService;
@@ -26,13 +25,13 @@ public class ManageController {
   //회원관리-회원리스트
   @RequestMapping("/manage/user/list")
   public Object userList(HttpSession session) {
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     return manageService.userList();
   }
   //회원관리-회원리스트
   @RequestMapping("/manage/user/list1")
   public Object userList1(HttpSession session) {
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     ArrayList<Object> list = new ArrayList<Object>();
     list.add(userLogin);
     list.add(manageService.userList());
@@ -40,13 +39,13 @@ public class ManageController {
   }
   @RequestMapping("/manage/manager/list")
   public Object managerList(HttpSession session) {
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     return manageService.managerList();
   }
 
   @RequestMapping("/manage/manager/list1")
   public Object managerList1(HttpSession session) {
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     ArrayList<Object> list = new ArrayList<Object>();
     list.add(userLogin);
     list.add(manageService.managerList());
@@ -79,13 +78,13 @@ public class ManageController {
   @RequestMapping("/manage/field/list")
   public Object fieldList(HttpSession session) {
      
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     return manageService.fieldList();
   }
   @RequestMapping("/manage/field/list1")
   public Object fieldList1(HttpSession session) {
      
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     ArrayList<Object> list = new ArrayList<Object>();
     list.add(userLogin);
     list.add(manageService.fieldList());
@@ -112,7 +111,7 @@ public class ManageController {
   
   @RequestMapping("/manage/class/list1")
   public Object classList1(HttpSession session) {
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     ArrayList<Object> list = new ArrayList<Object>();
     list.add(userLogin);
     list.add(manageReportService.classList());
@@ -138,7 +137,7 @@ public class ManageController {
   //커뮤니티게시글 조회
   @RequestMapping("/manage/community/list1")
   public Object communityList1(HttpSession session) {
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     ArrayList<Object> list = new ArrayList<Object>();
     list.add(userLogin);
     list.add(manageReportService.communityList());
@@ -164,7 +163,7 @@ public class ManageController {
   
   @RequestMapping("/manage/club/list1")
   public Object clubList1(HttpSession session) {
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     ArrayList<Object> list = new ArrayList<Object>();
     list.add(userLogin);
     list.add(manageReportService.clubList());
@@ -187,7 +186,7 @@ public class ManageController {
   }
   @RequestMapping("/manage/market/list1")
   public Object marketList1(HttpSession session) {
-    Member userLogin = (Member) session.getAttribute("loginUser");
+    User userLogin = (User) session.getAttribute("loginUser");
     ArrayList<Object> list = new ArrayList<Object>();
     list.add(userLogin);
     list.add(manageReportService.marketReportList());
