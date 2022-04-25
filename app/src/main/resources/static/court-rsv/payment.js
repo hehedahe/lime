@@ -69,7 +69,7 @@ let cash = cashToRE(user.ttlCash);
 $('input[aria-label="cash"]').attr('placeholder', `${cash} 캐시`);
 
 let rsvData = {
-    userId : user.no,
+    userId : user.userId,
     amt : 50000,
     typeUse : "U",
     courtRsv : {

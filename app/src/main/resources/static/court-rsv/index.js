@@ -258,6 +258,7 @@ $(document).on('click', '.date-wrap', async function (e) {
         expectedRsv.date = $(e.target).attr('data-date');
         expectedRsv.day = $(e.target).find('span').text();
 
+
         const res = await rsvsByDate(expectedRsv.date, expectedRsv.fieldId);
 
         res.data?.map((rsv) => {
