@@ -14,6 +14,7 @@ const xClub = $("#user-club");
 const xBalance = $("#balance");
 const xLevel = $("#user-level");
 const xManner = $("#user-manner");
+const xMannerBar = $("#manner-bar");
 
 $.getJSON("/rsv/match/balance", function (result) {
     console.log(result);
@@ -24,6 +25,7 @@ $.getJSON("/rsv/match/balance", function (result) {
     xBalance.text(`${(userInfo.sum).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`)
     xLevel.text(`${checkLevel(userInfo.level)}`)
     xManner.text(`${userInfo.mannerScore} Point`)
+    xMannerBar.attr('style', `width: ${userInfo.mannerScore}%`).attr('aria-valuenow', `${userInfo.mannerScore}`)
   })
 
   function checkLevel(courtTypeNo) {

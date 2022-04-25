@@ -18,7 +18,7 @@ fetch('/member/getLoginUser').then(function (response) {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="../header/userImg.png" height="30px" width="30px"/></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                            <li><a class="dropdown-item" href="/mypage/index.html">마이페이지</a></li>
                             <li><a class="dropdown-item" href="#">나의 활동</a></li>
                             <li><a class="dropdown-item" href="#">찜목록</a></li>
                             <li><a class="dropdown-item" id="logoutBtn" href="#" style="color: red;">로그아웃</a></li>
