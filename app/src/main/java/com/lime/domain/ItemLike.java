@@ -7,6 +7,7 @@ public class ItemLike {
   int userId;
   int itemId;
   boolean done;
+  int likeCount;
 
   Member writer;
 

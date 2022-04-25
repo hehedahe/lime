@@ -67,6 +67,7 @@ public class DefaultMarketService implements MarketService {
   @Override
   public Market get(int no) {
     Market market = marketDao.findByNo(no);
+    market.setLikeCount(itemLikeDao.count(market.getItemId()));
     if (market != null) {
       marketDao.increaseViewCount(no);
     }

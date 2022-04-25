@@ -9,4 +9,5 @@ public interface ItemLikeDao {
   List<ItemLike> findLike(int userId);
   int insert(ItemLike itemLike);
   int delete(ItemLike itemLike);
+  int count(int itemId);
 }

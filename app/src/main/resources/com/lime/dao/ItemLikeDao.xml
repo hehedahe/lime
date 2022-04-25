@@ -36,6 +36,11 @@
     delete from item_like
     where user_id=#{userId} and item_id=#{itemId}
   </delete>
+  
+  <select id="count" resultType="int">
+    select count(*) from item_like
+    where item_id = #{no}
+  </select>
    
   
 </mapper>
