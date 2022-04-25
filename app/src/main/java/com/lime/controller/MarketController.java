@@ -9,8 +9,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
-
-import com.lime.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.lime.domain.ItemLike;
 import com.lime.domain.Market;
+import com.lime.domain.User;
 import com.lime.service.MarketService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -114,13 +113,10 @@ public class MarketController {
 
   @RequestMapping("/market/like")
   public Object update(ItemLike itemLike, HttpSession session) {
-<<<<<<< HEAD
+
     User user = (User) session.getAttribute("loginUser");
     itemLike.setUserId(user.getUserId());
-=======
-    UserSignUp userLogin = (UserSignUp) session.getAttribute("loginUser");
-    itemLike.setWriter(userLogin);
->>>>>>> il
+
     System.out.println(itemLike);
 
     if (itemLike.isDone()) {
