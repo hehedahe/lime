@@ -52,12 +52,12 @@ input::placeholder {
     font-weight: bold;
     font-size: large;
 }
-.re-search {
+.form-select {
     margin-left: 10px;
     border-radius: 25px;
     padding: 10px;
     width: 90px;
-}
+}s
 .tag-btn {
     margin-top: 15px;
     margin-left: 10px;
