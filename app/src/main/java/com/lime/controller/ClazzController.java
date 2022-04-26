@@ -1,13 +1,10 @@
 package com.lime.controller;
 
-import static com.lime.controller.ResultMap.SUCCESS;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.lime.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.lime.domain.Clazz;
+import com.lime.domain.User;
 import com.lime.service.ClazzService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -36,31 +34,10 @@ public class ClazzController {
 
 
   @RequestMapping("/class/list")
-  public Object list(String regionName, String cityName, String title, String level, User writer) {
-
-    log.info("게시물 목록 조회!");
-
-
-    log.debug("강의제목: " + title);
-    log.debug("지역: " + regionName);
-    log.debug("도시: " + cityName);
-    log.debug("도시: " + cityName);
-    if (regionName.equals("지역") || regionName.equals("전체")) {
-      return new ResultMap()
-          .setStatus(SUCCESS)
-          .setData(clazzService.list(writer));
-    }
-
-    if (cityName.equals("도시")) {
-      return new ResultMap()
-          .setStatus(SUCCESS)
-          .setData(clazzService.listRegion(regionName, writer));
-    }
-
-    return new ResultMap()
-        .setStatus(SUCCESS)
-        .setData(clazzService.listCity(regionName, cityName, writer));
+  public Object list() {
+    return clazzService.clazzList();
   }
+
 
 
 
