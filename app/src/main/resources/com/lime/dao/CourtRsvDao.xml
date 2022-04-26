@@ -15,7 +15,9 @@
 </insert>
 
 <select id="findByDate" resultMap="courtRsvMap">
-    SELECT cr.field_id, cr.court_id, cr.date_time
+    SELECT cr.field_id,
+           cr.court_id,
+           cr.date_time
     FROM   court_rsv2 cr
     WHERE  (DATE_FORMAT(#{date}, '%y%m%d') &lt;= date_time
     AND    date_time &lt; DATE_FORMAT(#{date} + 1, '%y%m%d'))

@@ -78,6 +78,9 @@ var marker, markerPosition;
         // 마커가 표시될 위치입니다
         markerPosition = new kakao.maps.LatLng(court.lat, court.lng);
 
+        console.log(typeof court.lat)
+
+
         // 마커를 생성합니다
         marker = new kakao.maps.Marker({
             position: markerPosition,
