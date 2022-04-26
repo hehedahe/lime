@@ -262,10 +262,10 @@ const countDownTimer = function (id, date) {
     $("#apply-btn").on("click", (e) => {
       $.getJSON("/member/getLoginUser", (result) => {
         console.log(result.status);
-        if (result.status == "fail") {
-          location.href = `/login/login.html`
+          if (result.status == "fail") {
+            alert("로그인이 필요한 서비스입니다.");
+            location.href = `/login/login.html`
         }
-        // console.log(result.status);
       })
 
       $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
