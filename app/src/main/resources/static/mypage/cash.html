@@ -61,44 +61,44 @@
 
     <h3 id="rsv-title" class="fw-bolder">라임캐시</h3>
 
-    <div id="my-cash" class="d-flex justify-content-between align-items-center">
-        <div>
+    <div id="my-cash" class="">
+        <div class="d-flex justify-content-between align-items-center w-100 h-100">
             <div class="align-middle">
                 <p>보유 캐시</p>
-                <h4 class="fw-bold"><img src="cash-img.png" alt=""> 20,000원</h4>
+                <h4 id="balance" class="fw-bold"><img src="cash-img.png" alt=""><span class="align-middle">20,000원</span></h4>
             </div>
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <button class="btn btn-primary mb-2">충전하기</button>
-                <button class="btn btn-primary">환불 문의</button>
+            <div class="d-flex flex-column">
+                <button id="charge-btn" class="btn btn-primary mb-2">충전하기</button>
+                <button id="refund-btn" class="btn btn-primary">환불 문의</button>
             </div>
         </div>
-        <p id="aa" class="font13">환불은 1:1 문의 게시판을 이용해주세요</p>
+        <!-- <div class="d-flex justify-content-end text-end">
+            <p id="refund-info" class="font13">환불은 1:1 문의 게시판을 이용해주세요</p>
+        </div> -->
     </div>
 
     <!-- <div class="section-border mt-4"></div> -->
 
-    <ul class="list-group list-group-flush match-rsv-list">
-        <div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">
+    <ul id="lclist" class="list-group list-group-flush">
+        <!-- <div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">
             충전 및 사용 내역이 존재하지 않습니다.
-        </div>
-<!--        <li class="list-group-item list-group-item-action">-->
-<!--            <div class="d-flex w-100 justify-content-between align-items-center">-->
-<!--                <div>-->
-<!--                    <div class="d-flex justify-content-start align-items-center">-->
-<!--                        <div class="ms-5">-->
-<!--                            <p id="match-date" class="mb-1">2022년 3월 5일 토요일 18:00</p>-->
-<!--                            <h6 id="field-court-name" class="mb-1">만석동 테니스장 코트4</h6>-->
-<!--                            <p id="field-addr" class="mb-1">대구 수성구 알파시티2로 95 5층</p>-->
-<!--                            <p id="match-detail" class="text-muted match-info">여자 · 1vs1 · 하드 · 모든 레벨</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div id="pay-date" class="text-center align-items-center text-muted">-->
-<!--                    <p>결제일시 2022.02.25 15:32</p>-->
-<!--                    <p>결제 완료</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </li>-->
+        </div> -->
+       <li class="list-group-item list-group-item-action">
+           <div class="d-flex w-100 h-100 justify-content-between align-items-center">
+               <div>
+                   <div class="d-flex justify-content-start align-items-center">
+                       <div class="ms-5">
+                           <p id="match-date" class="mb-1">2022.02.24 18:00</p>
+                           <h6 id="field-court-name">캐시 충전</h6>
+                           <span class="pay-date">소셜 매치</span>
+                       </div>
+                   </div>
+               </div>
+               <div id="pay-date" class="text-center align-items-center text-muted">
+                   <p>+20,000원</p>
+               </div>
+           </div>
+       </li>
     </ul>
 </main>
 

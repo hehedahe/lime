@@ -1,5 +1,6 @@
 package com.lime.service;
 
+import java.util.List;
 import com.lime.domain.LimeCash;
 
 public interface LimeCashService {
@@ -7,4 +8,5 @@ public interface LimeCashService {
   int checkout(LimeCash limeCash);
   int findCash(int userId);
   int addCash(LimeCash limeCash);
+  List<LimeCash> findByUserId(int userId);
 }

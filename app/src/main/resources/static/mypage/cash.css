@@ -82,12 +82,13 @@ p {
   color: #fff;
 }
 
-.match-rsv-list {
+#lclist {
   margin-top: 2rem;
 }
 
 .list-group-item {
   padding: 1.4rem;
+  height: 140px;
 }
 
 .list-group-flush > .list-group-item:first-child {
@@ -402,8 +403,9 @@ h3.fw-bolder {
   position: relative;
 }
 
-#my-cash img {
-  width: 25%
+#balance img {
+  width: 17%;
+  margin-right: 0.5rem;
 }
 
 #my-cash p:first-child {
@@ -415,10 +417,43 @@ h3.fw-bolder {
   font-size: 13px;
 }
 
-#aa {
+#refund-info {
   position: absolute;
+  right: 10;
+  color: rgb(158, 158, 158);
 }
 
 h4 {
+  margin: 0;
+}
+
+#charge-btn {
+  /* background-color: rgb(249, 248, 113);
+  color: #212529; */
+}
+
+#refund-btn {
+  background-color: rgb(224, 224, 224);
+  color: #212529;
+}
+
+#charge-btn, #refund-btn {
+  font-size: 15px;
+}
+
+.use-cash {
+  color: #ef5350;
+}
+
+.charge-cash {
+  color: rgb(102, 200, 141);
+}
+
+.pay-date {
+  color: rgb(158, 158, 158);
+  font-size: 14px;
+}
+
+h6 {
   margin: 0;
 }
