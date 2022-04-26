@@ -202,6 +202,7 @@ SELECT
 	   i.item_id,
 	   i.item_name,
 	   i.item_cost,
+	   i.trans_state,
 	   rg.region_name,
 	   ct.city_name,
 	   i.view_cnt,
@@ -242,6 +243,13 @@ SELECT
         WHERE region_id  = (select region_id from region where region_name=#{regionName}) 
         AND city_name =#{cityName}),#{itemName},#{itemCost},#{content})
   </insert>
+  
+  <update id="updateState" parameterType="Market">
+    update item set 
+      trans_state=#{transState}
+    where 
+      item_id=#{itemId} and user_id=#{userId}
+  </update>
   
   <update id="update" parameterType="Market">
     update ml_board set 

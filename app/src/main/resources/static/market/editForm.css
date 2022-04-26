@@ -120,9 +120,5 @@ textarea.autosize {
 	width: 660px;
 	min-height:150px;
 	padding:10px;
-	/* border:1px dotted #00f; */
-    /* display: inline-block; */
-    float: right;
-    margin-right: 250px;
     
 }

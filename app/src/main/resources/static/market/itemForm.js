@@ -40,6 +40,7 @@ $(document).ready(function(e) {
         location.href = "marketMain.html";
       });
   });
+
 });
 
 

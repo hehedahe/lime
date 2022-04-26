@@ -26,6 +26,8 @@ public interface MarketDao {
 
   int insert(Market market);
 
+  int updateState(Market market);
+
   int increaseViewCount(int no);
   //
   //
