@@ -37,4 +37,19 @@
     VALUE       (#{userId}, #{amt}, 'C', #{merchantUid}, #{impUid})
 </insert>
 
+<select id="findByUserId" resultMap="cashMap">
+    select 
+      lime_id,
+      user_id,
+      date myDate,
+      type_use,
+      amt,
+      used
+    from lime_cash
+    where
+     user_id=#{userId}
+    order by 
+      lime_id asc
+</select>
+
 </mapper>

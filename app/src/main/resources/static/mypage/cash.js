@@ -12,7 +12,6 @@ $(".nav-tabs").on("click", (e) => {
     // );
 });
 
-
 $.getJSON("/member/getLoginUser", (result) => {
     console.log(result.status);
     console.log("user::::::::::::::", result.data);
@@ -22,169 +21,130 @@ $.getJSON("/member/getLoginUser", (result) => {
     console.log(result.data.no);
 })
 
-getListSM();
+const xBalance = $("#balance span");
 
+$.getJSON("/rsv/match/balance", function (result) {
+    console.log(result);
+    let userInfo = result.data;
+    xBalance.text(`${(userInfo.sum).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`)
+  })
 
-function getListSM() {
-    $.getJSON("/rsv/match/get", function (result) {
-        let arr = result.data
-        let matchId;
-        let str = "";
-        if (arr.length == 0) {
-            str += `<div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">
-                    예약 내역이 존재하지 않습니다.
-            </div>`;
-            $(".match-rsv-list").html(str);
-            return;
+$.getJSON("/limecash/get", function (result) {
+    console.log(result.status);
+    if (result.status == "fail") {
+        window.alert("서버 요청 오류!");
+        console.log(result.data);
+        return;
+    }
+    let lcList = result.data;
+    let str = "";
+    if (lcList.length == 0) {
+        str += `
+        <div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">
+            충전 및 사용 내역이 존재하지 않습니다.
+        </div>`;
+        $("#lclist").html(str);
+        return;
+    }
+    for (let i = 0; i < lcList.length; i++) {
+        let textcolor = '';
+        let plusMinus = '';
+        if (lcList[i].typeUse == 'C') {
+            textcolor = 'charge-cash';
+            plusMinus = '+';
+        } else {
+            textcolor = 'use-cash';
+            plusMinus = '-';
         }
-
-        for (let i = 0; i < arr.length; i++) {
-            console.log(arr[i].matchId)
-            matchId = arr[i].matchId;
-            $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
-                var match = result.data;
-                str += `
-      <li class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between align-items-center">
-        <div>
-          <div class="d-flex justify-content-start align-items-center">
-            <div class="ms-5">
-              <p id="match-date" class="mb-1">${getFullYmdStr(match.matchDate)} ${match.startTime.slice(0, 5)}</p>
-              <h6 id="field-court-name" class="mb-1">${match.court.field.name} ${match.court.name}</h6>
-              <p id="field-addr" class="mb-1">${match.court.field.addr}</p>
-              <p id="match-detail" class="text-muted match-info">
-              ${checkMatchType(match.matchTypeNo)} · ${checkNumOfPeople(match.numOfPeople)} · ${checkCourtType(match.court.courtTypeNo)} · ${checkLevel(match.levelNo)}</p>
-            </div>
-          </div>
-        </div>
-        <div id="pay-date" class="text-center align-items-center text-muted">
-          <p id="">결제일시 ${(arr[i].date).replace(/-/g, '.')}</p>
-          <p id="">${checkRsvState(arr[i].state)}</p>
-        </div>
-      </div>
-      </li>
-      `;
-                // console.log('str = ' + str)
-                $(".match-rsv-list").html(str);
-            })
-        }
-        // console.log('str = ' + str)
-        // $(".match-rsv-list").html(str);
-    })
-}
-
-
-function getFullYmdStr(date) {
-    let d = new Date(date);
-    return d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일 " + '일월화수목금토'.charAt(d.getUTCDay()) + '요일';
-}
-
-function checkMatchType(matchTypeNo) {
-    switch (matchTypeNo) {
-        case 1:
-            return "남자";
-        case 2:
-            return "여자";
-        case 3:
-            return "혼성";
-    }
-}
-
-function checkNumOfPeople(numOfPeople) {
-    switch (numOfPeople) {
-        case "S":
-            return "1vs1";
-        case "D":
-            return "2vs2";
-    }
-}
-
-function checkLevel(level) {
-    switch (level) {
-        case 1:
-            return "모든 레벨";
-        case 2:
-            return "BEGINNER";
-        case 3:
-            return "INTERMEDIATE";
-        case 4:
-            return "ADVANCED";
-        case 5:
-            return "PRO";
-    }
-}
-
-function checkCourtType(courtTypeNo) {
-    switch (courtTypeNo) {
-        case 1:
-            return "하드";
-        case 2:
-            return "클레이";
-        case 3:
-            return "잔디";
-        case 4:
-            return "앙투카";
-    }
-}
-
-function checkRsvState(state) {
-    switch (state) {
-        case "P":
-            return "결제 완료";
-        case "U":
-            return "이용 완료";
-        case "C":
-            return "취소 완료";
-    }
-}
-
-
-// =====================================
-//             코트 예약 리스트
-// =====================================
-
-$('#court-rsv').on('click', function (e) {
-    fetch('/rsv/court/getList').then(function (res) {
-        return res.json();
-    }).then(function (result) {
-        let lists = result.data;
-        console.log(lists);
-
-        let str = "";
-        if (lists.length == 0) {
-            str = `<div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">
-                    예약 내역이 존재하지 않습니다.
-            </div>`;
-            $(".match-rsv-list").html(str);
-            return;
-        }
-
-        for (let i = 0; i < lists.length; i++) {
-            let date = getFullYmdStr(dateFormat(lists[i].dateTime));
-            let time = lists[i].dateTime.slice(-2);
-
-            str += `
-                <li class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between align-items-center">
-                        <div>
-                            <div class="d-flex justify-content-start align-items-center">
-                                <div class="ms-5">
-                                    <p id="match-date" class="mb-1">${date} ${time}:00</p>
-                                    <h6 id="field-court-name" class="mb-1">${lists[i].name} 코트 ${lists[i].courtId}</h6>
-                                    <p id="field-addr" class="mb-1">${lists[i].addr}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="pay-date" class="text-center align-items-center text-muted">
-                            <p>결제일시 ${lists[i].rgtDate}</p>
-                            <p>${checkRsvState(lists[i].state)}</p>
-                        </div>
+        str += `
+        <li class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 h-100 justify-content-between align-items-center">
+            <div>
+                <div class="d-flex justify-content-start align-items-center">
+                    <div class="ms-5 text-center">
+                        <p class="pay-date mb-1">${lcList[i].myDate.replace(/-/g, '.')}</p>
+                        <h6 id="field-court-name">${checkChargeUse(lcList[i].typeUse)}</h6>
+                        <span class="pay-date">${checkUsed(lcList[i].used)}</span>
                     </div>
-                </li>`;
-        }
-        $(".match-rsv-list").html(str);
-    });
-});
+                </div>
+            </div>
+            <div id="pay-date" class="text-center align-items-center text-muted">
+                <p class="${textcolor}">${plusMinus}${(lcList[i].amt).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</p>
+            </div>
+        </div>
+    </li>
+    `
+    }
+    $("#lclist").html(str);
+})
+
+function checkChargeUse(typeUse) {
+    switch (typeUse) {        
+        case "C":
+            return "캐시 충전";
+        case "U":
+            return "캐시 사용";
+    }
+}
+
+function checkUsed(used) {
+    switch (used) {
+        case "C":
+            return "코트 예약";
+        case "M":
+            return "소셜 매치";
+        default:
+            return "";
+    }
+}
+
+
+// // =====================================
+// //             코트 예약 리스트
+// // =====================================
+
+// $('#court-rsv').on('click', function (e) {
+//     fetch('/rsv/court/getList').then(function (res) {
+//         return res.json();
+//     }).then(function (result) {
+//         let lists = result.data;
+//         console.log(lists);
+
+//         let str = "";
+//         if (lists.length == 0) {
+//             str = `<div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">
+//                     예약 내역이 존재하지 않습니다.
+//             </div>`;
+//             $(".match-rsv-list").html(str);
+//             return;
+//         }
+
+//         for (let i = 0; i < lists.length; i++) {
+//             let date = getFullYmdStr(dateFormat(lists[i].dateTime));
+//             let time = lists[i].dateTime.slice(-2);
+
+//             str += `
+//                 <li class="list-group-item list-group-item-action">
+//                     <div class="d-flex w-100 justify-content-between align-items-center">
+//                         <div>
+//                             <div class="d-flex justify-content-start align-items-center">
+//                                 <div class="ms-5">
+//                                     <p id="match-date" class="mb-1">${date} ${time}:00</p>
+//                                     <h6 id="field-court-name" class="mb-1">${lists[i].name} 코트 ${lists[i].courtId}</h6>
+//                                     <p id="field-addr" class="mb-1">${lists[i].addr}</p>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                         <div id="pay-date" class="text-center align-items-center text-muted">
+//                             <p>결제일시 ${lists[i].rgtDate}</p>
+//                             <p>${checkRsvState(lists[i].state)}</p>
+//                         </div>
+//                     </div>
+//                 </li>`;
+//         }
+//         $(".match-rsv-list").html(str);
+//     });
+// });
 
 
 

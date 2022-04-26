@@ -1,12 +1,13 @@
 package com.lime.service.impl;
 
-import com.lime.dao.UserDao;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.lime.dao.CourtRsvDao;
 import com.lime.dao.LimeCashDao;
 import com.lime.dao.MatchRsvDao;
+import com.lime.dao.UserDao;
 import com.lime.domain.CourtRsv;
 import com.lime.domain.LimeCash;
 import com.lime.service.LimeCashService;
@@ -42,7 +43,7 @@ public class DefaultLimeCashService implements LimeCashService {
         .courtId(limeCash.getCourtRsv().getCourtId())
         .dateTime(limeCash.getCourtRsv().getDateTime())
         .build();
-//    System.out.println(cr);
+    //    System.out.println(cr);
 
     crDao.insert(cr);
     return 1;
@@ -75,5 +76,8 @@ public class DefaultLimeCashService implements LimeCashService {
     }
   }
 
-
+  @Override
+  public List<LimeCash> findByUserId(int userId) {
+    return lcDao.findByUserId(userId);
+  }
 }
