@@ -7,8 +7,7 @@ fetch('/member/getLoginUser').then(function (response) {
     if (result.status == "success") {
         $('#u-nav-links').html(`
             <div id="u-links-cal">
-                <a href="/social-match/rsv.html"><link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-                <link rel="stylesheet" href="/header/headertest-1.css" type="text/css">
+                <a href="/social-match/rsv.html">
                     <img src="/asset/image/header/calendar.png" height="30px" width="30px">
                 </a>
             </div>
