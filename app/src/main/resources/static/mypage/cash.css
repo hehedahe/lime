@@ -41,10 +41,33 @@ a {
   text-decoration: none;
 }
 
+p {
+  margin: 0;
+}
+
+#rsv-title {
+  font-size: 1.55rem;
+  font-weight: bold;
+  margin-top: 1.7rem;
+}
+
 .match-info {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   margin-bottom: 0;
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
+}
+
+#match-date, #field-addr {
+  font-size: 0.8rem;
+}
+
+#pay-date {
+  font-size: 0.9rem;
+}
+
+#field-court-name {
+  font-size: 1.1rem;
+  font-weight: bolder;
 }
 
 .match-btn {
@@ -59,8 +82,16 @@ a {
   color: #fff;
 }
 
+.match-rsv-list {
+  margin-top: 2rem;
+}
+
 .list-group-item {
-  padding: 1rem;
+  padding: 1.4rem;
+}
+
+.list-group-flush > .list-group-item:first-child {
+  border-top-width: 1px;
 }
 
 .list-group-flush > .list-group-item:last-child {
@@ -334,9 +365,40 @@ a {
     transform : translateY(-100%);
 }
 
-.sticky-top {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 900;
+.nav-tabs {
+  border: none;
+}
+
+.nav-tabs .nav-item .nav-link {
+  border: none;
+  color: #212529;
+  font-size: 1.2rem;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  border-bottom: 0.3rem solid rgb(146, 219, 130);
+}
+
+h3.fw-bolder {
+  margin-bottom: 2rem;
+}
+
+.section-border {
+  border-top: 1px solid rgb(224, 224, 224);
+}
+
+#my-cash {
+  height: 9rem;
+  background-color: rgb(245, 245, 245);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+}
+
+#my-cash img {
+  width: 25%
+}
+
+#my-cash p:first-child {
+  padding-left: 10px;
+  /* margin-bottom: 1rem; */
 }
