@@ -15,11 +15,11 @@ fetch('/member/getLoginUser').then(function (response) {
             <div id="u-links-msg">
                 <img src="/asset/image/header/msg2.png" height="30px" width="30px">
             </div>
-            <div class="btn-group dropend">
+            <div class="btn-group dropdown">
                 <button id="prof-img" type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false"><img src="../header/userImg.png" height="30px" width="30px"/>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                    <li><a class="dropdown-item" href="/mypage/index.html">마이페이지</a></li>
                     <li><a class="dropdown-item" href="#">나의 활동</a></li>
                     <li><a class="dropdown-item" href="#">찜목록</a></li>
                     <li><a class="dropdown-item" href="#"style="color: red;" id="logoutBtn">로그아웃</a></li>
