@@ -325,6 +325,13 @@ p {
   width: 2rem;
 }
 
+.btn-primary {
+  background-color: #66c88d;
+  border: none;
+  width: 150px;
+  height: 2.5rem;
+}
+
 .date-ul .btn-primary {
   background-color: #fff;
   border-color: #fff;
@@ -392,6 +399,7 @@ h3.fw-bolder {
   background-color: rgb(245, 245, 245);
   border-radius: 10px;
   padding: 1.5rem 2rem;
+  position: relative;
 }
 
 #my-cash img {
@@ -401,4 +409,16 @@ h3.fw-bolder {
 #my-cash p:first-child {
   padding-left: 10px;
   /* margin-bottom: 1rem; */
+}
+
+.font13 {
+  font-size: 13px;
+}
+
+#aa {
+  position: absolute;
+}
+
+h4 {
+  margin: 0;
 }
