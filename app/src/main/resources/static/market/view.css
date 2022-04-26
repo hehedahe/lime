@@ -25,9 +25,25 @@ html, body {
     font-weight: bold;
 }
 
+#item-title {
+    display: flex;
+    
+}
+
 #item-title-p {
+    width: 800px;
     font-size: 2em;
     font-weight: bold;
+}
+
+#menu-wrap {
+    position: relative;
+}
+
+#menu-wrap img{
+    position:absolute; 
+    top:50%; 
+    transform:translateY(-50%);
 }
 
 #item-price-p {
@@ -65,6 +81,11 @@ html, body {
     background-color: rgb(102, 200, 141);
     border: none;
     border-radius: 5px;
+    float: right;
+}
+
+#state-select {
+    width: 110px;
     float: right;
 }
 
@@ -141,3 +162,7 @@ textarea.autosize::placeholder {
     background-color: white;
     bottom: 15px;
 }
+
+/* .dropdown-toggle{
+    display: none;
+} */

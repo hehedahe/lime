@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="editForm.css">
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+  <script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/axios/dist/axios.js"></script>
+  <title>라임마켓-물품 수정</title>
+
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#footer').load('/footer/footer.html');
+        $('#x-header').load('/header/user/header.html')
+    })
+  </script>
+
+</head>
+<body>
+<div id="x-header" class="d-flex bd-highlight mb-3"></div>
+<div id="body-wrapper">
+    <div id="content-body">
+        <div id="input-box">
+            <form name="form1">
+                <div class="container g-0" id="top-content">
+                    <div class="row">
+                        <input name="itemId" style="display: none;">
+                        <div class="col-2">
+                            <select name="regionName" id="region" class="form-select border col-1 text-center">
+                                
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <select name="cityName" id="city" class="form-select border col-1 text-center">
+                                
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <input name="itemCost" id="item-price" class="form-control border col-1" type="number" placeholder="₩ 판매가격">
+                        </div>
+                        <div class="col">
+                            <button id="complete-btn" type="button">완료</button>
+                            <button id="cancel-btn" type="button">취소</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="content-box">
+                    <div id="title-wrap">
+                        <div class="input-group input-group-lg" id="titleInput-wrap">
+                            <input name="itemName" id="item-name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="상품명을 입력하세요">
+                        </div>
+                    </div>
+                    <div id="textarea-wrap">
+                        <textarea name="content" id="item-content" class="autosize" placeholder="내용을 입력해주세요" style="overflow: hidden;"></textarea>
+                    </div>
+                </div>
+                <div id="img-add-box">
+                    <p>사진 첨부</p>
+                    <div id='att_zone'></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <footer id="footer"></footer>
+</div> <!-- body-wrapper -->
+
+<script type="module" src="editForm.js"></script>
+<script>
+
+</script>
+
+</body>
+</html>
