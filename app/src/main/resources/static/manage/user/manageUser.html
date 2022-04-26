@@ -156,7 +156,7 @@ let globalCurrentPage=1; //현재 페이지
                         return response.json();
                       })
                       .then(function(manages){
-                        console.log(`manages : ${manages[0].json}`);
+                        //console.log(`manages : ${manages[0].json}`);
                         totalData = manages.length-1;
                         displayData(1, manages);
                         paging(1,manages)
@@ -232,13 +232,13 @@ for (
   }
   chartHtml +=`
   <tr id = "xTr">
-          <td id="x-no">${manages[i].no}</td>
+          <td id="x-no">${manages[i].userId}</td>
           <td>${manages[i].name}</td>
           <td>${manages[i].email}</td>
           <td>${manages[i].userType}</td>
           <td>${manages[i].rgtDate}</td>
           <td>${manages[i].sum}</td>
-          <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${manages[i].no}">상세</td>
+          <td><button id="detailBtn"  class="btn btn-outline-success" type="button" value= "${manages[i].userId}">상세</td>
         </tr>`
 }
 $("#x-tbody").html(chartHtml);
