@@ -68,7 +68,7 @@ $.getJSON("/limecash/get", function (result) {
             <div>
                 <div class="d-flex justify-content-start align-items-center">
                     <div class="charge-mark d-flex align-items-center justify-content-center ${classMark}">${markText}</div>
-                    <div class="ms-5 text-center">
+                    <div class="ms-5">
                         <p class="pay-date mb-1">${lcList[i].myDate.replace(/-/g, '.')}</p>
                         <h6 id="field-court-name">${checkChargeUse(lcList[i].typeUse)}</h6>
                         <span class="pay-date">${checkUsed(lcList[i].used)}</span>
