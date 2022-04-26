@@ -457,3 +457,19 @@ h4 {
 h6 {
   margin: 0;
 }
+
+.charge-mark {
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgb(102, 200, 141);
+  border-radius: 50%;
+  color: rgb(102, 200, 141);
+}
+
+.use-mark {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #ef5350;
+  border-radius: 50%;
+  color: #ef5350;
+}

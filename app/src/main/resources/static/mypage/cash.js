@@ -49,18 +49,25 @@ $.getJSON("/limecash/get", function (result) {
     for (let i = 0; i < lcList.length; i++) {
         let textcolor = '';
         let plusMinus = '';
+        let markText = '';
+        let classMark = '';
         if (lcList[i].typeUse == 'C') {
             textcolor = 'charge-cash';
             plusMinus = '+';
+            markText = '충전';
+            classMark = 'charge-mark';
         } else {
             textcolor = 'use-cash';
             plusMinus = '-';
+            markText = '사용';
+            classMark = 'use-mark';
         }
         str += `
         <li class="list-group-item list-group-item-action">
         <div class="d-flex w-100 h-100 justify-content-between align-items-center">
             <div>
                 <div class="d-flex justify-content-start align-items-center">
+                    <div class="charge-mark d-flex align-items-center justify-content-center ${classMark}">${markText}</div>
                     <div class="ms-5 text-center">
                         <p class="pay-date mb-1">${lcList[i].myDate.replace(/-/g, '.')}</p>
                         <h6 id="field-court-name">${checkChargeUse(lcList[i].typeUse)}</h6>
