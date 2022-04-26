@@ -49,7 +49,7 @@
     where
      user_id=#{userId}
     order by 
-      lime_id asc
+      lime_id desc
 </select>
 
 </mapper>
