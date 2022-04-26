@@ -15,7 +15,7 @@ fetch('/member/getLoginUser').then(function (response) {
             <div id="u-links-msg">
                 <img src="/asset/image/header/msg2.png" height="30px" width="30px">
             </div>
-            <div class="btn-group dropend">
+            <div class="btn-group dropdown">
                 <button id="prof-img" type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false"><img src="../header/userImg.png" height="30px" width="30px"/>
                 </button>
                 <ul class="dropdown-menu">
