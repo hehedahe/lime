@@ -1,4 +1,4 @@
-/*package com.lime.controller;
+package com.lime.controller;
 
 import java.time.LocalDateTime;
 
@@ -43,4 +43,3 @@ public class ChatController {
 		return chatRepository.save(chat); // Object를 리턴하면 자동으로 JSON 변환 (MessageConverter)
 	}
 }
-*/
