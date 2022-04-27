@@ -28,7 +28,7 @@
         <div id="content-body">
             <div id="item-box">
               <div id="item-region"><p id="item-region-p"></p></div>
-              <div id="item-title" class="d-flex justify-content-between mb-3"><div id="item-title-p" class="p-2"></div><div id="menu-wrap" ></div></div>
+              <div id="item-title" class="d-flex justify-content-between mb-3"><div id="item-title-p" class="col g-0"></div><div id="menu-wrap" ></div></div>
               <div id="item-price"><p id="item-price-p"></p></div>
               <div id="user-info">
                   <div class="container g-0">
@@ -58,7 +58,19 @@
               </div>
             </div>
             <div id="reply-box">
-                
+              <div id="reply-wrap">
+                <p>댓글</p>
+                <div id="reply-view"></div> <!--댓글 달리는 곳-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col g-0"><img src="../asset/image/user-img.jpg"></div>
+                        <div id="reply-form" class="col-11">
+                            <textarea class="autosize" placeholder="댓글을 남겨보세요" style="overflow: hidden;"></textarea>
+                            <button id="reply-btn" type="button">등록</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
 
