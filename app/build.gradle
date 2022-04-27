@@ -39,7 +39,6 @@ dependencies {
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
   
   
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
   testImplementation 'io.projectreactor:reactor-test:3.4.9'
   
   implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'

@@ -96,9 +96,23 @@ public class DefaultMarketService implements MarketService {
 
   @Override
   @Transactional
+  public int update(Market market) {
+    int count = marketDao.update(market);
+    return count;
+  }
+
+  @Override
+  @Transactional
   public int updateState(Market market) {
     int count = marketDao.updateState(market);
     return count;
+  }
+
+  @Override
+  @Transactional
+  public int delete(Market market) {
+    return marketDao.delete(market);
+    //return contactDao.delete(no);
   }
 
   @Override
@@ -120,6 +134,11 @@ public class DefaultMarketService implements MarketService {
     return 1000;
   }
 
+  @Override
+  public List<Market> getWish(int userId) {
+    return marketDao.findWish(userId);
+  }
+
   //  @Override
   //  @Transactional
   //  public int update(Market contact) {
@@ -131,10 +150,5 @@ public class DefaultMarketService implements MarketService {
   //    return count;
   //  }
   //
-  //  @Override
-  //  @Transactional
-  //  public int delete(int no) {
-  //    contactDao.deleteTelByContactNo(no);
-  //    return contactDao.delete(no);
-  //  }
+
 }

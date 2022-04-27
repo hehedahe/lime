@@ -16,8 +16,8 @@ $(document).ready(function(e) {
 
   
   $(document).on("click", "#complete-btn", function() {
-    if ($("#region").val() == "" || 
-        $("#city").val() == "" ||
+    if ($("#region").val() == null || 
+        $("#city").val() == "도시" ||
         $("#item-price").val() == "" ||
         $("#item-name").val() == "" ||
         $("#item-content").val() == "" ||
@@ -25,6 +25,7 @@ $(document).ready(function(e) {
       window.alert("모든 항목을 입력해주세요");
       return;
     }
+    
     
     var fd = new FormData(document.forms.namedItem("form1"));
     

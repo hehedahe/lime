@@ -20,7 +20,7 @@ fetch('/member/getLoginUser').then(function (response) {
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/mypage/index.html">마이페이지</a></li>
                     <li><a class="dropdown-item" href="#">나의 활동</a></li>
-                    <li><a class="dropdown-item" href="#">찜목록</a></li>
+                    <li><a class="dropdown-item" href="../market/wishList.html">찜목록</a></li>
                     <li><a class="dropdown-item" href="#"style="color: red;" id="logoutBtn">로그아웃</a></li>
                 </ul>
             </div>

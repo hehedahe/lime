@@ -65,6 +65,12 @@ $(document).ready(function(e){
             console.log(result);
         });
     });
+
+    $(document).on("click", "#i-delete", function() {
+        console.log("삭제!");
+        console.log($(this).attr("idx"));
+        deleteItem($(this).attr("idx"));
+    })
 });
     
     // textarea 크기 자동 조절
@@ -86,9 +92,8 @@ var transState = "";
   var heartClick = document.querySelector(".heart-click");
   var likeCnt = document.querySelector("#like-count");
   var etc = document.querySelector("#etc");
-  var menu = document.querySelector("#menu");
   var menuWrap = document.querySelector("#menu-wrap");
-  var stateSelect = document.querySelector("#state-select");
+  var iDelete = document.querySelector("#i-delete");
 
   var replyBox = document.querySelector("#reply-box");
 
@@ -130,12 +135,12 @@ function itemViewFetch() {
         window.alert("서버 요청 오류!");
         return;
         }
-        console.log(loginUser.data.no);
+        console.log(loginUser.data.userId);
         
         
 
         let etcContent = `<button id="ask" type="button">구매 문의하기</button>`
-        if (item.data.userId == loginUser.data.no) {
+        if (item.data.userId == loginUser.data.userId) {
             console.log("작성자와 같음!");
             etcContent = `<select class="form-select border text-start" id="state-select">
             <option id="kkk" selected disabled hidden value=${item.data.transState}>${transState1(item.data.transState)}</option>
@@ -146,7 +151,7 @@ function itemViewFetch() {
             menuWrap.innerHTML = `<a class="nav-link my-1" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><img src="../asset/image/menu.png"></a>
             <ul class="dropdown-menu my-4">
               <li><a class="dropdown-item" href="/market/editForm.html?no=${item.data.itemId}">수정하기</a></li>
-              <li><a class="dropdown-item" href="#">삭제하기</a></li>
+              <li><a class="dropdown-item" id="i-delete" idx=${item.data.itemId}>삭제하기</a></li>
             </ul>`
             //console.log("상태값>>" + );
         } else {
@@ -174,22 +179,7 @@ function itemViewFetch() {
             <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg>`
         }
 
-        let levelName = item.data.lvName;
-        if (levelName == "D") {
-            levelName = `<span class="badge bg-secondary">DEVELOPMENT</span>`;
-        }
-        else if (levelName == "B") {
-            levelName = `<span class="badge bg-success">BEGINNER</span>`;
-        }
-        else if (levelName == "I") {
-            levelName = `<span class="badge bg-warning text-dark">INTERMEDIATE</span>`;
-        }
-        else if (levelName == "A") {
-            levelName = `<span class="badge bg-primary">ADVANCED</span>`;
-        }
-        else if (levelName == "P") {
-            levelName = `<span class="badge bg-danger">PRO</span>`;
-        }
+        
 
         let photoFilePath ="";
         for (let photo of item.data.photo) {
@@ -203,7 +193,7 @@ function itemViewFetch() {
         itemRegionP.innerHTML = `${item.data.regionName} ${item.data.cityName}`;
         itemTitleP.innerHTML = `${item.data.itemName}`;
         itemPriceP.innerHTML = `${item.data.itemCost}원`;
-        userName.innerHTML = `${item.data.userName} ${levelName}`;
+        userName.innerHTML = `${item.data.userName} ${selectLevelName(item.data.lvName)}`;
         manner.innerHTML = `매너 ${item.data.mannerScore}`;
         rgtDate.innerHTML = `${item.data.rgtDate}`;
         etc.innerHTML = etcContent;
@@ -211,21 +201,6 @@ function itemViewFetch() {
         itemImgWrap.innerHTML = `${photoFilePath}`;
         heartClick.innerHTML = `${likeState}`;
         likeCnt.innerHTML = `${item.data.likeCount}`;
-                
-        replyBox.innerHTML = `<div id="reply-wrap">
-                                <p>댓글</p>
-                                <div id="reply-view">댓글 달리는 곳</div>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col g-0"><img src="../asset/image/user-img.jpg"></div>
-                                        <div id="reply-form" class="col-11">
-                                            <textarea class="autosize" placeholder="댓글을 남겨보세요" style="overflow: hidden;"></textarea>
-                                            <button id="reply-btn" type="button">등록</button>
-                                        </div>
-                                    </div>
-                                </div>
-                              </div>`
-             
     })
 })
 }
@@ -255,6 +230,31 @@ function transState1(state) {
       case "R" : return `예약중`;
       case "E" : return `거래완료`;
     }
+}
+
+function selectLevelName(levelName) {
+    switch (levelName) {
+        case "D" : return `<span class="badge bg-secondary">DEVELOPMENT</span>`;
+        case "B" : return `<span class="badge bg-success">BEGINNER</span>`;
+        case "I" : return `<span class="badge bg-warning text-dark">INTERMEDIATE</span>`;
+        case "A" : return `<span class="badge bg-primary">ADVANCED</span>`;
+        case "P" : return `<span class="badge bg-danger">PRO</span>`;
+      }
+}
+
+function deleteItem(no) {
+    fetch(`/market/delete?no=${no}`)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(result){
+        if (result.status == "fail") {
+        window.alert("서버 요청 오류!");
+        return;
+        }
+        window.alert("삭제완료!");
+        location.href = "marketMain.html";
+    });
 }
 
 const loginUser = await getLoginUser();
