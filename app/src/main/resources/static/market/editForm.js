@@ -12,30 +12,25 @@ var itemName = document.querySelector("#item-name");
 var itemContent = document.querySelector("#item-content");
 var attZone = document.querySelector("#att_zone");
 
-var userId = 0;
 const loginUser = await getLoginUser();
 
 $(document).ready(function(e) {
     textAreaAutoSizing();
 
     $(document).on("click", "#complete-btn", function() {
-        if ($("#region").val() == "" || 
-            $("#city").val() == "" ||
-            $("#item-price").val() == "" ||
+        if ($("#item-price").val() == "" ||
             $("#item-name").val() == "" ||
             $("#item-content").val() == "") {
-          window.alert("모든 항목을 입력해주세요");
+          window.alert("모든 항목을 입력해주세요.");
           return;
         }
-        console.log($("#region").val());
-        console.log($("#city").val());
-        console.log($("#item-price").val());
-        console.log($("#item-name").val());
-        console.log($("#item-content").val());
+        if ($("#city").val() == "도시") {
+            window.alert("도시를 선택해주세요.");
+            return;
+        }
 
         var fd = new FormData(document.forms.namedItem("form1"));
-    
-        if (userId == loginUser.data.no) {
+        
             fetch("/market/update", {
                 method: "POST",
                 body: new URLSearchParams(fd)
@@ -43,15 +38,12 @@ $(document).ready(function(e) {
                 return response.json();
             }).then(function(result) {
             if (result.status == "success") {
-                //location.href = "?content=/board/index.html";
+                location.href = "marketMain.html";
             } else {
                 alert("게시글 변경 실패!");
             }
             });
-        } else {
-            window.alert("권한이 없습니다!");
-            return;
-        }
+       
     });
   
 });
@@ -84,10 +76,10 @@ var arr = location.href.split("?");
         window.alert("서버 요청 오류!");
         return;
         }
-        userId = item.data.userId;
+        
         itemNo.value = item.data.itemId;
-        console.log(loginUser.data.no);
-        // if (item.data.userId != loginUser.data.no) {
+        console.log(loginUser.data.userId);
+        // if (item.data.userId != loginUser.data.userId) {
         //     window.alert("권한이 없습니다!");
         //     return;
         // }
@@ -186,3 +178,7 @@ var arr = location.href.split("?");
           }
         
     });
+
+    $("#city").on("click", function() {
+        console.log($(this).val());
+    })

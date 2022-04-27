@@ -12,6 +12,10 @@
   <resultMap type="ItemLike" id="ItemLikeMap">
     <id column="item_id" property="itemId"/>
     <id column="user_id" property="userId"/>
+    <association property="writer" javaType="User">
+      <id column="user_id" property="userId"/>
+      <result column="name" property="name"/>
+    </association>
   </resultMap>
   
 
@@ -29,12 +33,12 @@
    
   <insert id="insert" parameterType="ItemLike">
     insert into item_like(user_id,item_id)
-      values(#{userId}, #{itemId})
+      values(#{writer.userId}, #{itemId})
   </insert>
   
   <delete id="delete" parameterType="ItemLike">
     delete from item_like
-    where user_id=#{userId} and item_id=#{itemId}
+    where user_id=#{writer.userId} and item_id=#{itemId}
   </delete>
   
   <select id="count" resultType="int">
