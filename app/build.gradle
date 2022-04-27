@@ -37,8 +37,18 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-jdbc'
   implementation 'org.springframework.boot:spring-boot-starter-web'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
+  
+  /*
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  //implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+  testImplementation 'io.projectreactor:reactor-test:3.4.9'
+  
+  implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+  implementation 'org.springframework.boot:spring-boot-starter-webflux:2.6.7'
+  implementation("org.infinispan:infinispan-core:12.0.1.Final")
+  implementation("org.infinispan:infinispan-commons:12.0.1.Final")
+  implementation("org.infinispan:infinispan-marshaller-protostuff:12.0.1.Final")
+  implementation("org.jboss.marshalling:jboss-marshalling-osgi:2.0.10.Final")
+  */
 }
 
 configurations {

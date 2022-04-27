@@ -1,0 +1,54 @@
+
+.container-fluid {
+    max-width: 1024px;
+}
+
+#submit-btn {
+    background-color: rgb(102, 200, 141);
+    color: #fff;
+    font-size: 20px;
+}
+
+/* 매치 정보 */
+#match-info {
+    background-color: rgba(203, 203, 203, 0.2);
+    border-radius: 10px;
+}
+
+.match-info {
+    color: rgb(127, 127, 127);
+}
+
+.u-level {
+    height: 20px;
+}
+
+.x-team {
+    font-size: 20px;
+    font-weight: bolder;
+    line-height: 6vh;
+    height: 6vh;
+}
+
+#x-red {
+    background: #bb2d3b;
+    color: #fff;
+}
+#x-yellow {
+    background-color: #ffca2c;
+}
+
+.eval-btn {
+    height: 20px;
+    width: 70px;
+    align-self: center;
+    line-height: 8px;
+}
+
+/*  모달  */
+
+img {
+    width: 40px;
+    height: 40px;
+}
+

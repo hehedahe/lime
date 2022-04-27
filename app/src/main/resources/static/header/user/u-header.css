@@ -175,4 +175,6 @@
     background-image: url("../../asset/image/header/user2a.png");
 }
 
-
+#prof-img {
+    padding: 0;
+}

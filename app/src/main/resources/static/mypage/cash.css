@@ -82,12 +82,13 @@ p {
   color: #fff;
 }
 
-.match-rsv-list {
+#lclist {
   margin-top: 2rem;
 }
 
 .list-group-item {
   padding: 1.4rem;
+  height: 140px;
 }
 
 .list-group-flush > .list-group-item:first-child {
@@ -325,6 +326,13 @@ p {
   width: 2rem;
 }
 
+.btn-primary {
+  background-color: #66c88d;
+  border: none;
+  width: 150px;
+  height: 2.5rem;
+}
+
 .date-ul .btn-primary {
   background-color: #fff;
   border-color: #fff;
@@ -392,13 +400,76 @@ h3.fw-bolder {
   background-color: rgb(245, 245, 245);
   border-radius: 10px;
   padding: 1.5rem 2rem;
+  position: relative;
 }
 
-#my-cash img {
-  width: 25%
+#balance img {
+  width: 17%;
+  margin-right: 0.5rem;
 }
 
 #my-cash p:first-child {
   padding-left: 10px;
   /* margin-bottom: 1rem; */
+}
+
+.font13 {
+  font-size: 13px;
+}
+
+#refund-info {
+  position: absolute;
+  right: 10;
+  color: rgb(158, 158, 158);
+}
+
+h4 {
+  margin: 0;
+}
+
+#charge-btn {
+  /* background-color: rgb(249, 248, 113);
+  color: #212529; */
+}
+
+#refund-btn {
+  background-color: rgb(224, 224, 224);
+  color: #212529;
+}
+
+#charge-btn, #refund-btn {
+  font-size: 15px;
+}
+
+.use-cash {
+  color: #ef5350;
+}
+
+.charge-cash {
+  color: rgb(102, 200, 141);
+}
+
+.pay-date {
+  color: rgb(158, 158, 158);
+  font-size: 14px;
+}
+
+h6 {
+  margin: 0;
+}
+
+.charge-mark {
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgb(102, 200, 141);
+  border-radius: 50%;
+  color: rgb(102, 200, 141);
+}
+
+.use-mark {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #ef5350;
+  border-radius: 50%;
+  color: #ef5350;
 }

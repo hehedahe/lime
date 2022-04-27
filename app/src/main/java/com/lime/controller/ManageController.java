@@ -50,6 +50,8 @@ public class ManageController {
     list.add(userLogin);
     list.add(manageService.managerList());
     
+    System.out.println("list>>>>>>:::::"+ list);
+    
     return list;
   }
   
@@ -57,7 +59,10 @@ public class ManageController {
   //회원관리-특정회원 정보 리스트
   @RequestMapping("/manage/user/get")
   public Object userGet(int no) {
+    
+    
     User manage = manageService.userGet(no);
+    System.out.println("머가나올까ㅏ???????:::::::::::::::::::::::::::::"+manageService.userGet(no));
     if (manage == null) {
       return "";
     }

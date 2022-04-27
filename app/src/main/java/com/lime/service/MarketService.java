@@ -28,7 +28,7 @@ public interface MarketService {
 
   int delete(ItemLike itemLike);
 
-  //int update(Market contact);
+  int updateState(Market market);
 
   //int delete(int no);
 }

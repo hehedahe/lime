@@ -95,17 +95,26 @@ public class DefaultMarketService implements MarketService {
   }
 
   @Override
+  @Transactional
+  public int updateState(Market market) {
+    int count = marketDao.updateState(market);
+    return count;
+  }
+
+  @Override
   public List<ItemLike> getLike(int userId) {
     return itemLikeDao.findLike(userId);
   }
 
   @Override
+  @Transactional
   public int add(ItemLike itemLike) {
     itemLikeDao.insert(itemLike);
     return 1000;
   }
 
   @Override
+  @Transactional
   public int delete(ItemLike itemLike) {
     itemLikeDao.delete(itemLike);
     return 1000;

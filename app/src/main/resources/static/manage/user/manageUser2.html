@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="manageUser.css">
+    <!-- <link rel="stylesheet" href="adminHeader.css"> -->
+    <link rel="stylesheet" href="my-adminHeader.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+    <!--<link rel="import" href="static/footer/footer.html">-->
+
+     <link rel="stylesheet" href="header.css"> 
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    
+    <style>
+
+	#user-sliding-menu {
+	 display: none;
+	}
+    
+    #sliding_menu{
+  	display : none;
+   }
+    
+    .pagination{
+     text-align: center;
+    }
+
+    #x-table {
+    align-items: center;
+    height: 50%;
+    text-justify: auto;
+    
+  }
+
+  #loginP{
+    margin: 0%;
+  }
+
+    
+</style>
+</head>
+
+<body>
+  <nav id="h-nav">
+    <div class="header">
+      <ul class="nav-logo">
+        <li>lime</li>
+        <li>administrator</li>
+      </ul>
+      <div class="nav-links" >
+        <ul>
+        <li><p id="loginP"></p></li>
+        <li><a href="../mLogin/login.html">로그아웃</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="admin-user">
+    <div id="sidebar" class="d-flex flex-column flex-shrink-0 border-end">
+        <ul class="list-group nav nav-pills flex-column mb-auto">
+          <li class="list-group-item nav-item" id="userLi">
+            회원관리
+             <ul id="user-sliding-menu">
+            		<li><a href="manageUser.html">유저</a></li>
+            		<li><a href="manageManager.html">매니저</a></li>
+            </ul>
+          </li>
+          <li class="list-group-item nav-item">
+            <a href="../field/manageFiled.html"">구장관리</a>
+          </li>
+          <li class="list-group-item nav-item" id="rptLi">
+             게시글관리
+            	<ul id="sliding_menu">
+            		<li id="classLi"><a href="../report/classReport.html" >클래스</a></li>
+            		<li><a href="../report/marketReport.html">중고마켓</a></li>
+            		<li><a href="../report/clubReport.html">클럽</a></li>
+            		<li><a href="../report/communityReport.html">커뮤니티</a></li>
+            	</ul>
+          </li>
+          <li class="list-group-item nav-item">
+            <a href="#">고객센터</a>
+          </li>
+        </ul>
+    </div>
+    
+    <div id="user-table" class="d-flex mt-5 justify-content-center">
+      <div class="table-responsive table-condensed">
+            <table id="x-table" class="table table-striped table-hover table-bordered table-condensed border-primary text-center align-middle">
+              <thead>
+                <tr id="x-thead">
+                  <th scope="col">회원번호</th>
+                  <th scope="col">이름</th>
+                  <th scope="col">이메일</th>
+                  <th scope="col">회원유형</th>
+                  <th scope="col">가입일자</th>
+                  <th scope="col">라임캐시</th>
+                  <th scope="col">상세</th>
+                </tr>
+              </thead>
+            <tbody id ="x-tbody">
+            </tbody>
+          </table>
+          <tfoot aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+            </ul>
+          </tfoot>
+      </div>
+    </div>
+  </main>
+  
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+var xTbody = document.querySelector("#x-tbody");
+let totalData; //총 데이터 수
+let dataPerPage = 5; //한 페이지에 나타낼 글 수
+let pageCount = 5; //페이징에 나타낼 페이지 수
+let globalCurrentPage=1; //현재 페이지 
+
+
+
+  $(document).ready(function () {
+          
+    
+          fetch("/manage/user/list1",{
+              method:"post"
+          })
+          .then(function(response){
+            console.log(response.json());
+          })
+        
+}); // jquery ReadyFunction
+
+
+</script>
+</body>
+</html>

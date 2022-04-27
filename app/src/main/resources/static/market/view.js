@@ -1,6 +1,7 @@
 "use strict"
 
 import { textAreaAutoSizing } from '../common/textAreaAutoSizing.js';
+import { getLoginUser } from '../common/apiList.js';
 
 $(document).ready(function(e){
 
@@ -50,11 +51,28 @@ $(document).ready(function(e){
             getLikeCnt();
         }
     });
+
+    $(document).on("change", "#state-select", function() {
+        console.log($(this).val());
+        console.log("아이템번호>>"+itemNo);
+        transState = $(this).val();
+        console.log(transState);
+        fetch(`/market/updateState?itemId=${itemNo}&transState=${transState}`)
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(result) {
+            console.log(result);
+        });
+    });
 });
     
     // textarea 크기 자동 조절
     textAreaAutoSizing();
 });
+
+var itemNo = 0;
+var transState = "";
 
   var itemBox = document.querySelector("#item-box");
   var itemRegionP = document.querySelector("#item-region-p");
@@ -67,11 +85,12 @@ $(document).ready(function(e){
   var itemImgWrap = document.querySelector("#item-img-wrap");
   var heartClick = document.querySelector(".heart-click");
   var likeCnt = document.querySelector("#like-count");
+  var etc = document.querySelector("#etc");
+  var menu = document.querySelector("#menu");
+  var menuWrap = document.querySelector("#menu-wrap");
+  var stateSelect = document.querySelector("#state-select");
 
   var replyBox = document.querySelector("#reply-box");
-  var itemImageWrap = document.querySelector("#item-img-wrap");
-  var likePlusMinus = document.querySelector("#like-count");
-  var heartWrap = document.querySelector("#heart-wrap");
 
   var arr = location.href.split("?");
   console.log(arr);
@@ -93,7 +112,6 @@ $(document).ready(function(e){
   }
 
   itemViewFetch();
-  //getPhoto();
 
 function itemViewFetch() {
 // 좋아요 테이블 가져오기
@@ -112,8 +130,35 @@ function itemViewFetch() {
         window.alert("서버 요청 오류!");
         return;
         }
+        console.log(loginUser.data.no);
+        
+        
 
-        let itemNo = item.data.itemId;
+        let etcContent = `<button id="ask" type="button">구매 문의하기</button>`
+        if (item.data.userId == loginUser.data.no) {
+            console.log("작성자와 같음!");
+            etcContent = `<select class="form-select border text-start" id="state-select">
+            <option id="kkk" selected disabled hidden value=${item.data.transState}>${transState1(item.data.transState)}</option>
+            <option value="S">판매중</option>
+            <option value="R">예약중</option>
+            <option value="E">거래완료</option>`;
+            
+            menuWrap.innerHTML = `<a class="nav-link my-1" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><img src="../asset/image/menu.png"></a>
+            <ul class="dropdown-menu my-4">
+              <li><a class="dropdown-item" href="/market/editForm.html?no=${item.data.itemId}">수정하기</a></li>
+              <li><a class="dropdown-item" href="#">삭제하기</a></li>
+            </ul>`
+            //console.log("상태값>>" + );
+        } else {
+            menuWrap.innerHTML = `<a class="nav-link my-1" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><img src="../asset/image/menu.png"></a>
+            <ul class="dropdown-menu my-4">
+              <li><a class="dropdown-item" href="#">신고하기</a></li>
+            </ul>`
+        }
+        console.log($("#kkk").val());
+
+        itemNo = item.data.itemId;
+        transState = item.data.transState;
         let likeState = "";
         const arrLike = [];
 
@@ -161,6 +206,7 @@ function itemViewFetch() {
         userName.innerHTML = `${item.data.userName} ${levelName}`;
         manner.innerHTML = `매너 ${item.data.mannerScore}`;
         rgtDate.innerHTML = `${item.data.rgtDate}`;
+        etc.innerHTML = etcContent;
         itemContentP.innerHTML = `${item.data.content}`;
         itemImgWrap.innerHTML = `${photoFilePath}`;
         heartClick.innerHTML = `${likeState}`;
@@ -184,26 +230,10 @@ function itemViewFetch() {
 })
 }
 
-function getPhoto() {
-    fetch(`/market/getPhoto?no=${no}`)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(item){
-        if (item.status == "fail") {
-        window.alert("서버 요청 오류!");
-        return;
-        }
-        console.log(item);
-        for (let list of item.data) {
-            console.log(list.filePath);
-            let photo = "/market/photo?filename=" + list.filePath;
-            console.log(photo);
-            itemBox.innerHTML = `<div id="item-img-wrap"><img src=${photo}></div>`;
-        }
-        
-    })
-}
+$("#menu").on("click", function() {
+    console.log("메뉴 눌림!");
+    console.log($("#menu").val());
+})
 
 function getLikeCnt() {
     fetch(`/market/get?no=${no}`)
@@ -218,3 +248,13 @@ function getLikeCnt() {
         likeCnt.innerHTML = `${item.data.likeCount}`
     });
 }
+
+function transState1(state) {
+    switch (state) {
+      case "S" : return "판매중";
+      case "R" : return `예약중`;
+      case "E" : return `거래완료`;
+    }
+}
+
+const loginUser = await getLoginUser();
