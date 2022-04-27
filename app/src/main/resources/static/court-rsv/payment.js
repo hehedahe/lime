@@ -85,6 +85,20 @@ let rsvData = {
 // =====================================
 //          캐시 잔액 확인 후 결제
 // =====================================
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+
+
 $('#payment-btn').on('click', function (e) {
     if (user.ttlCash <= 50000) {
         alert("라임 캐시 충전이 필요합니다. 🪙");
@@ -100,10 +114,20 @@ $('#payment-btn').on('click', function (e) {
             return response.json();
         }).then(function (result) {
             if (result.status == 'success') {
-                alert('코트 예약이 성공적으로 완료되었습니다.');
-                location.href = '/social-match/rsv.html';
+                Toast.fire({
+                    icon: 'success',
+                    title: '코트 예약이 완료되었습니다.'
+                });
+
+                setTimeout(function () {
+                    location.href = '/social-match/rsv.html';
+                }, 3000)
             } else {
-                alert('예약 실패!')
+                Toast.fire({
+                    icon: 'error',
+                    title: '코트 예약에 실패했습니다.',
+                    text: '다시 시도해 주세요.'
+                });
             }
         })
     }

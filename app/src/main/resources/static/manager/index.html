@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="index.css">
 
     <script src="../node_modules/axios/dist/axios.js"></script>
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
     <title>라임 - 매니저</title>
 </head>
@@ -68,8 +69,8 @@
                 <span class="badge bg-danger u-level">PRO</span>
             </div>
             <div class="d-grid gap-2 col-4 d-md-flex">
-                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button">RED팀</button>
-                <button class="team-btn btn btn-outline-warning col w-50">YELLOW팀</button>
+                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
+                <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
             </div>
         </div>
         <div class="row my-2 pb-2 border-bottom">
@@ -79,8 +80,8 @@
                 <span class="badge bg-secondary u-level">DEVELOPMENT</span>
             </div>
             <div class="d-grid gap-2 col-4 d-md-flex">
-                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button">RED팀</button>
-                <button class="team-btn btn btn-outline-warning col w-50">YELLOW팀</button>
+                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
+                <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
             </div>
         </div>
         <div class="row my-2 pb-2 border-bottom">
@@ -90,8 +91,8 @@
                 <span class="badge bg-success u-level">BEGINNER</span>
             </div>
             <div class="d-grid gap-2 col-4 d-md-flex">
-                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button">RED팀</button>
-                <button class="team-btn btn btn-outline-warning col w-50">YELLOW팀</button>
+                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
+                <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
             </div>
         </div>
         <div class="row my-2 pb-2 border-bottom">
@@ -101,43 +102,43 @@
                 <span class="badge bg-warning u-level">INTERMEDIATE</span>
             </div>
             <div class="d-grid gap-2 col-4 d-md-flex">
-                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button">RED팀</button>
-                <button class="team-btn btn btn-outline-warning col w-50">YELLOW팀</button>
+                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
+                <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
             </div>
         </div>
 
         <div class="row row-cols-2 mt-5">
             <div class="col border rounded-0 px-4 x-team" id="x-red">RED</div>
             <div class="col border rounded-0 px-4 x-team text-end" id="x-yellow">YELLOW</div>
-            <div class="border border-1 rounded-0">
-                <div class="col d-flex m-3 align-items-center">
-                    <div>🥎</div>
-                    <div class="mx-2 fs-5">김라임1</div>
-                    <span class="badge bg-warning u-level">INTERMEDIATE</span>
-                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>
-                </div>
-                <div class="col d-flex m-3 align-items-center">
-                    <div>🥎</div>
-                    <div class="mx-2 fs-5">김라임2</div>
-                    <span class="badge bg-danger u-level">PRO</span>
-                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>
-                </div>
+            <div class="border border-1 rounded-0 red-team">
+<!--                <div class="col d-flex m-3 align-items-center">-->
+<!--                    <div>🥎</div>-->
+<!--                    <div class="mx-2 fs-5">김라임1</div>-->
+<!--                    <span class="badge bg-warning u-level">INTERMEDIATE</span>-->
+<!--                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>-->
+<!--                </div>-->
+<!--                <div class="col d-flex m-3 align-items-center">-->
+<!--                    <div>🥎</div>-->
+<!--                    <div class="mx-2 fs-5">김라임2</div>-->
+<!--                    <span class="badge bg-danger u-level">PRO</span>-->
+<!--                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>-->
+<!--                </div>-->
             </div>
-            <div class="border border-1 rounded-0">
-                <div class="col d-flex flex-row-reverse m-3 align-items-center">
-                    <div>🥎</div>
-                    <div class="mx-2 fs-5">김라임3</div>
-                    <span class="badge bg-success u-level">BEGINNER</span>
-                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>
-                </div>
-                <div class="col d-flex flex-row-reverse m-3 align-items-center">
-                    <div>🥎</div>
-                    <div class="mx-2 fs-5">김라임4</div>
-                    <span class="badge bg-primary">ADVANCED</span>
-                    <button class="btn btn-secondary mx-2 eval-btn" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop" type="button">평가
-                    </button>
-                </div>
+            <div class="border border-1 rounded-0 yellow-team">
+<!--                <div class="col d-flex flex-row-reverse m-3 align-items-center">-->
+<!--                    <div>🥎</div>-->
+<!--                    <div class="mx-2 fs-5">김라임3</div>-->
+<!--                    <span class="badge bg-success u-level">BEGINNER</span>-->
+<!--                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>-->
+<!--                </div>-->
+<!--                <div class="col d-flex flex-row-reverse m-3 align-items-center">-->
+<!--                    <div>🥎</div>-->
+<!--                    <div class="mx-2 fs-5">김라임4</div>-->
+<!--                    <span class="badge bg-primary">ADVANCED</span>-->
+<!--                    <button class="btn btn-secondary mx-2 eval-btn" data-bs-toggle="modal"-->
+<!--                            data-bs-target="#staticBackdrop" type="button">평가-->
+<!--                    </button>-->
+<!--                </div>-->
             </div>
         </div>
 
@@ -179,56 +180,43 @@
                                 <h6 class="fw-bold fs-5 mt-4">매너 점수</h6>
                                 <div>
                                     <label class="form-label">일반</label>
-                                    <div>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="normal-point1"
-                                               autocomplete="off" checked>
+                                    <div class="point-form">
+                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point1" value="1">
                                         <label class="btn" for="normal-point1">성별 불일치</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="normal-point2"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point2" value="2">
                                         <label class="btn" for="normal-point2">무단 불참</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="normal-point3"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point3" value="3">
                                         <label class="btn" for="normal-point3">테니스화 미착용</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="normal-point4"
-                                               autocomplete="off">
-                                        <label class="btn" for="normal-point4">15분 이상 지각</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="normal-point5"
-                                               autocomplete="off">
-                                        <label class="btn" for="normal-point5">금연 구역에서 흡연</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="normal-point6"
-                                               autocomplete="off">
-                                        <label class="btn" for="normal-point6">매치 직전 취소</label>
+                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point4" value="4">
+                                        <label class="btn" for="normal-point4">지각</label>
+                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point5" value="5">
+                                        <label class="btn" for="normal-point5">15분 이상 지각</label>
+                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point6" value="6">
+                                        <label class="btn" for="normal-point6">금연 구역에서 흡연</label>
+                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point7" value="7">
+                                        <label class="btn" for="normal-point7">매치 직전 취소</label>
                                     </div>
                                 </div>
                                 <div class="mt-2">
                                     <label class="form-label">경기중</label>
-                                    <div>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point1"
-                                               autocomplete="off" checked>
+                                    <div class="point-form">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point1" value="8">
                                         <label class="btn" for="match-point1">거친 플레이</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point2"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point2" value="9">
                                         <label class="btn" for="match-point2">지시/짜증/욕설</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point3"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point3" value="10">
                                         <label class="btn" for="match-point3">운영 비협조</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point4"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point4" value="11">
                                         <label class="btn" for="match-point4">무단 이탈</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point5"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point5" value="12">
                                         <label class="btn" for="match-point5">폭행</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point6"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point6" value="13">
                                         <label class="btn" for="match-point6">보복성 플레이</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point7"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point7" value="14">
                                         <label class="btn" for="match-point7">무성의한 플레이</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point8"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point8" value="15">
                                         <label class="btn" for="match-point8">지나친 개인 플레이</label>
-                                        <input type="radio" class="btn-check" name="options-outlined" id="match-point9"
-                                               autocomplete="off">
+                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point9" value="16">
                                         <label class="btn" for="match-point9">조롱/도발/비꼼</label>
                                     </div>
                                 </div>

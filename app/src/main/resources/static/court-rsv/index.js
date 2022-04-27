@@ -22,13 +22,15 @@ var expectedRsv = {
 // 현재 날짜
 let today = new Date();
 let now = today.getHours();
-console.log(now)
+console.log(now);
 
 // 날짜 형식 YYMMDD
 let month = ("0" + (today.getMonth() + 1)).slice(-2);
 let year = ("0" + today.getFullYear()).slice(-2);
 let date = today.getDate();
 expectedRsv.date = year + month + ("0" + date).slice(-2); // ***YYMMDD 형태로 현재 날짜 디폴트로 담아두기
+const WEEKDAY = ['일','월','화','수','목','금','토'];
+expectedRsv.day = WEEKDAY[today.getDay()];
 
 
 // 지난 시간 마감 처리
@@ -78,9 +80,6 @@ var marker, markerPosition;
         // 마커가 표시될 위치입니다
         markerPosition = new kakao.maps.LatLng(court.lat, court.lng);
 
-        console.log(typeof court.lat)
-
-
         // 마커를 생성합니다
         marker = new kakao.maps.Marker({
             position: markerPosition,
@@ -108,19 +107,15 @@ $('#drop-region').on('change', async function (e) {
     e.stopPropagation();
 
     // 코트 카드 리셋
-
     let card = $('#crt-card');
     if ($('#crt-card div') != null) {
         card.empty()
     };
-    // 시도 → 시군구
 
+    // 시도 → 시군구
     selectCity(e.target.value);
-    // getCitiName(e);
-    console.log($('#drop-region option:selected').val());
 
     const coordinateRegion = await findRegion(Number($('#drop-region option:selected').val()));
-
     let regionLat = coordinateRegion.region?.regionLat;
     let regionLng = coordinateRegion.region?.regionLng;
 
@@ -261,6 +256,7 @@ $(document).on('click', '.date-wrap', async function (e) {
         expectedRsv.date = $(e.target).attr('data-date');
         expectedRsv.day = $(e.target).find('span').text();
 
+        console.log($(e.target).find('span').text())
 
         const res = await rsvsByDate(expectedRsv.date, expectedRsv.fieldId);
 
