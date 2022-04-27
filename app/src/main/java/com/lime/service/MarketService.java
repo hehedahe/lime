@@ -2,6 +2,7 @@ package com.lime.service;
 
 import java.util.List;
 import com.lime.domain.ItemLike;
+import com.lime.domain.ItemReply;
 import com.lime.domain.Market;
 
 public interface MarketService {
@@ -30,10 +31,11 @@ public interface MarketService {
 
   int delete(ItemLike itemLike);
 
-
   int update(Market market);
 
   int updateState(Market market);
 
   int delete(Market market);
+
+  List<ItemReply> getReply(int no);
 }
