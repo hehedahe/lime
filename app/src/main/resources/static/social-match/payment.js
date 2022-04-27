@@ -98,20 +98,13 @@ function getFullYmdStr(date) {
   );
 }
 
-var params = new URLSearchParams();
-params.set("amt", 20000);
-params.set("typeUse", "U");
-params.set("matchId", matchId);
-params.set("state", "P");
+var paymentInfo = {};
+paymentInfo.amt = 20000;
+paymentInfo.typeUse= "U";
+paymentInfo.matchId = matchId;
+paymentInfo.state = "P";
 
-console.log(params);
-
-$(".modal-footer button").on("click", function () {
-  $.post(`/rsv/match/add`, params, function (result) {
-    console.log('소셜매치 결제 : ' + result.status)
-  })
-  location.href = `/social-match/rsv.html`
-})
+console.log(JSON.stringify(paymentInfo));
 
 // =====================================
 //          캐시 잔액 확인 후 결제
@@ -124,7 +117,7 @@ $('#payment-btn').on('click', function (e) {
       alert("라임 캐시 충전이 필요합니다. 🪙");
       window.open('/common/charge.html', '라임캐시 충전', 'width=500, height=820, left=-1500, top=100, resizable=false');
     } else {
-      $.post(`/rsv/match/add`, params, function (result) {
+      $.post(`/rsv/match/add`, paymentInfo, function (result) {
         console.log('소셜매치 결제 : ' + result.status)
       })
       location.href = `/social-match/rsv.html`
