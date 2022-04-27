@@ -95,7 +95,7 @@ var transState = "";
   var menuWrap = document.querySelector("#menu-wrap");
   var iDelete = document.querySelector("#i-delete");
 
-  var replyBox = document.querySelector("#reply-box");
+  var replyView = document.querySelector("#reply-view");
 
   var arr = location.href.split("?");
   console.log(arr);
@@ -201,8 +201,42 @@ function itemViewFetch() {
         itemImgWrap.innerHTML = `${photoFilePath}`;
         heartClick.innerHTML = `${likeState}`;
         likeCnt.innerHTML = `${item.data.likeCount}`;
+
+        replyFetch(no);
     })
 })
+
+};
+
+function replyFetch(no) {
+    fetch(`/market/getReply?no=${no}`)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(replies) {
+       
+        for (let reply of replies.data) {
+            console.log(reply);
+            // if (item.data.userId == loginUser.data.userId) {
+                
+            // }
+
+            let div = document.createElement("div");
+            div.setAttribute('class', 'd-flex my-3');
+            
+            div.innerHTML = 
+            `
+                <div><img src="../asset/image/user-img.jpg"></div>
+                <div class="ps-2">
+                    <div class="fw-bold">${reply.userName}</div>
+                    <div>${reply.content}</div>
+                    <div style="color: rgb(190, 190, 190)">${reply.rgtDate}</div>
+                </div>
+                <div class="ms-auto"><img src="../asset/image/menu.png"></div>
+            `
+            replyView.appendChild(div);
+        }
+    })
 }
 
 $("#menu").on("click", function() {

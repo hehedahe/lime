@@ -15,14 +15,14 @@
 
 
     <select id="findByEmailAndPassword" resultMap="userMap">
-        SELECT user_id,
-               name,
-               email,
-               phone_no,
-               user_type
-        FROM   user
-        WHERE  email=#{email}
-        AND    pwd=#{password}
+        SELECT u.user_id,
+               u.email,
+               u.name,
+               u.phone_no,
+               u.user_img,
+               u.user_type
+        FROM `user` u
+        where email=#{email} and u.pwd =#{password}
     </select>
 
     <select id="findByEmail" resultMap="userMap" parameterType="string">
