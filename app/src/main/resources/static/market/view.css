@@ -163,6 +163,6 @@ textarea.autosize::placeholder {
     bottom: 15px;
 }
 
-/* .dropdown-toggle{
-    display: none;
-} */
+#menu {
+    float: right;
+}

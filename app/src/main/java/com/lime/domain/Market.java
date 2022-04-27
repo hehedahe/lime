@@ -26,10 +26,6 @@ public class Market {
   List<ItemImage> photo;
   int likeCount;
 
-  ///중고물품게시판 
-  String name; //판매자
-
   User writer;
 
-  // List<ContactTel> tels;
 }

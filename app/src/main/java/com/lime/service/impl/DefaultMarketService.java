@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.lime.dao.ItemImageDao;
 import com.lime.dao.ItemLikeDao;
+import com.lime.dao.ItemReplyDao;
 import com.lime.dao.MarketDao;
 import com.lime.domain.ItemImage;
 import com.lime.domain.ItemLike;
+import com.lime.domain.ItemReply;
 import com.lime.domain.Market;
 import com.lime.service.MarketService;
 
@@ -24,6 +26,9 @@ public class DefaultMarketService implements MarketService {
 
   @Autowired
   ItemLikeDao itemLikeDao;
+
+  @Autowired
+  ItemReplyDao itemReplyDao;
 
   //  @Override
   //  @Transactional // 다음 메서드는 트랜잭션 안에서 실행하도록 설정한다.
@@ -137,6 +142,11 @@ public class DefaultMarketService implements MarketService {
   @Override
   public List<Market> getWish(int userId) {
     return marketDao.findWish(userId);
+  }
+
+  @Override
+  public List<ItemReply> getReply(int no) {
+    return itemReplyDao.findReply(no);
   }
 
   //  @Override
