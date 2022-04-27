@@ -7,25 +7,23 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class User {
-  int userId; // user_id
+  int userId;
   String name; 
   String email;
   String password;
-  String userType;
   String rgtDate;
   int ttlCash; // 라임캐시 잔액
-  String gender; //gender
-  String bankName; // 은행명
-  String acntNo; // 계좌번호
-  String acntHolder; // 예금주명
-  String blockDate; // 제재일
+  String gender;
+  String bankName;
+  String acntNo;
+  String acntHolder;
+  String blockDate;
   String phoneNo;
   boolean eventYn;
   String brthDay;
-  String UserImg;
-  String UserType;
-
-  Integer mannerScore; // 매너점수
+  String userImg;
+  String userType;
+  Integer mannerScore;
   String region;
   String city;
   String club;

@@ -127,11 +127,8 @@
 
 <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-    var xEmail = document.querySelector("input[name=email]");
-    var xPassword = document.querySelector("input[name=password]");
 
     document.querySelector("form[name=form1]").onsubmit = function () {
-
 
         var fd = new FormData(document.forms.namedItem("form1"));
 
@@ -139,17 +136,20 @@
             method: "POST",
             body: new URLSearchParams(fd)
         })
-            .then(function (response) {
-                return response.text();
-            })
-            .then(function (text) {
-                if (text == "success") {
-                    // window.alert("로그인 성공!")
-                    location.href = "/social-match/index.html";
-                } else {
-                    window.alert("로그인 실패!");
-                }
-            });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (result) {
+            console.log(result)
+
+            if (result.status == "success" && result.data.userType == "U") {
+                location.href = "/social-match/index.html";
+            } else if (result.status == "success" && result.data.userType == "M"){
+                location.href = "/manager/index.html"
+            } else {
+                window.alert("로그인 실패!");
+            }
+        });
         return false;
     };
 
