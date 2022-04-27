@@ -1,4 +1,4 @@
-/*package com.lime.controller;
+package com.lime.controller;
 
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
@@ -16,4 +16,3 @@ public interface ChatRepository extends ReactiveMongoRepository<Chat, String>{
 	@Query("{ roomNum: ?0 }")
 	Flux<Chat> mFindByRoomNum(Integer roomNum);
 }
-*/
