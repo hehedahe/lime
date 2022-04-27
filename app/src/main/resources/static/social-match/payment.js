@@ -1,17 +1,5 @@
 "use strict";
 
-// fetch("/match-rsv/order")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (result) {
-//     if (result.status == "fail") {
-//       window.alert("서버 요청 오류!");
-//       console.log(result.data);
-//       return;
-//     }
-//   });
-
 $.getJSON("/member/getLoginUser", (result) => {
   console.log(result.status);
   if (result.status == "fail") {
@@ -110,8 +98,16 @@ function getFullYmdStr(date) {
   );
 }
 
+var params = new URLSearchParams();
+params.set("amt", 20000);
+params.set("typeUse", "U");
+params.set("matchId", matchId);
+params.set("state", "P");
+
+console.log(params);
+
 $(".modal-footer button").on("click", function () {
-  $.getJSON(`/rsv/match/add?amt=20000&typeUse=U&matchId=${matchId}&state=P`, function (result) {
+  $.post(`/rsv/match/add`, params, function (result) {
     console.log('소셜매치 결제 : ' + result.status)
   })
   location.href = `/social-match/rsv.html`
@@ -128,7 +124,7 @@ $('#payment-btn').on('click', function (e) {
       alert("라임 캐시 충전이 필요합니다. 🪙");
       window.open('/common/charge.html', '라임캐시 충전', 'width=500, height=820, left=-1500, top=100, resizable=false');
     } else {
-      $.getJSON(`/rsv/match/add?amt=20000&typeUse=U&matchId=${matchId}&state=P`, function (result) {
+      $.post(`/rsv/match/add`, params, function (result) {
         console.log('소셜매치 결제 : ' + result.status)
       })
       location.href = `/social-match/rsv.html`
