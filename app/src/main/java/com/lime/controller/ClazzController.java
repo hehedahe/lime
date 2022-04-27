@@ -41,6 +41,25 @@ public class ClazzController {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @RequestMapping("/class/open1")
   public Object open1(Clazz cls, MultipartFile file, HttpSession session) {
 
