@@ -146,7 +146,25 @@ public class DefaultMarketService implements MarketService {
 
   @Override
   public List<ItemReply> getReply(int no) {
-    return itemReplyDao.findReply(no);
+    return itemReplyDao.find(no);
+  }
+
+  @Override
+  public int addReply(ItemReply itemReply) {
+    itemReplyDao.insert(itemReply);
+    return 1;
+  }
+
+  @Override
+  public int updateReply(ItemReply itemReply) {
+    itemReplyDao.update(itemReply);
+    return 1;
+  }
+
+  @Override
+  public int deleteReply(ItemReply itemReply) {
+    itemReplyDao.delete(itemReply);
+    return 1;
   }
 
   //  @Override

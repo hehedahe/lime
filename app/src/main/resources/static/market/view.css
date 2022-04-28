@@ -131,6 +131,24 @@ html, body {
     margin: 10px 0;
 }
 
+#writer-badge {
+    font-weight: bold;
+    padding: 1px 8px 1px 8px;
+    color: rgb(102, 200, 141);
+    border: 1px solid rgb(102, 200, 141);
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+#me-badge {
+    font-weight: bold;
+    padding: 1px 8px 1px 8px;
+    color: rgb(239, 15, 15);
+    border: 1px solid rgb(239, 15, 15);
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
 #reply-form {
     position: relative;
     border: 1px solid rgb(234, 235, 239);
@@ -140,8 +158,8 @@ html, body {
 }
 
 textarea.autosize {
-    height: 30px;
-    width: 850px;
+    /* height: 38px; */
+    width: 800px;
     border: none;
     vertical-align: middle;
     outline: none;
@@ -156,11 +174,32 @@ textarea.autosize::placeholder {
 
 #reply-btn {
     font-weight: bold;
-    position: absolute;
     border: none;
     color: rgb(102, 200, 141);
     background-color: white;
-    bottom: 15px;
+    padding-bottom: 10px;
+}
+
+#r-cancel-btn {
+    width: 50px;
+    height: 30px;
+    font-weight: bold;
+    border: none;
+    color: rgb(102, 200, 141);
+    background-color: white;
+    padding-bottom: 10px;
+    bottom: 0;
+}
+
+#r-complete-btn {
+    width: 50px;
+    height: 30px;
+    font-weight: bold;
+    border: none;
+    color: rgb(102, 200, 141);
+    background-color: white;
+    padding-bottom: 10px;
+    bottom: 0;
 }
 
 #menu {

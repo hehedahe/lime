@@ -38,4 +38,10 @@ public interface MarketService {
   int delete(Market market);
 
   List<ItemReply> getReply(int no);
+
+  int addReply(ItemReply itemReply);
+
+  int updateReply(ItemReply itemReply);
+
+  int deleteReply(ItemReply itemReply);
 }
