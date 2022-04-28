@@ -13,7 +13,6 @@
         VALUES      (#{name}, #{email}, #{password})
     </insert>
 
-
     <select id="findByEmailAndPassword" resultMap="userMap">
         SELECT u.user_id,
                u.email,
@@ -21,8 +20,8 @@
                u.phone_no,
                u.user_img,
                u.user_type
-        FROM `user` u
-        where email=#{email} and u.pwd =#{password}
+        FROM   `user` u
+        where  email=#{email} and u.pwd =#{password}
     </select>
 
     <select id="findByEmail" resultMap="userMap" parameterType="string">

@@ -1,57 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.lime.dao.MatchRsvDao">
 
-  <resultMap type="matchRsv" id="matchRsvMap">
-    <id column="mtch_id" property="matchId"/>
-    <id column="user_id" property="userId"/>
-    <result column="lime_id" property="limeId"/>
-    <result column="state" property="state"/>
-    <result column="date" property="date"/>
-    
-<!--     <association property="limeId" javaType="LimeCash">
-      <id column="lc_lime_id" property="limeId"/>
-      <result column="date" property="date"/>
-    </association> -->
-  </resultMap>
+    <resultMap type="matchRsv" id="matchRsvMap">
+        <id column="mtch_id" property="matchId"/>
+        <result column="state" property="state"/>
+        <result column="date" property="date"/>
+        <result column="lime_id" property="limeId"/>
 
-  <select id="countAll" resultType="int">
-    select count(*) from social_mtch_rsv
-  </select>
-  
-  <select id="findAll" resultMap="matchRsvMap">
-    select 
-      mtch_id,
-      user_id,
-      lime_id,
-      state
-    from 
-      social_mtch_rsv
-    order by 
-      mtch_id asc
-  </select>
-  
-  <insert id="insert" parameterType="MatchRsv">
-    insert into social_mtch_rsv(mtch_id,user_id,lime_id,state)
-    values(#{matchRsv.matchId},#{matchRsv.userId},#{limeId},#{matchRsv.state})
-  </insert>
-  
+        <collection property="users" ofType="user">
+            <id column="user_id" property="userId"/>
+            <result column="name" property="name"/>
+            <result column="gender" property="gender"/>
+            <result column="manner_score" property="mannerScore"/>
+            <result column="lv_id" property="lvId"/>
+        </collection>
+        <!--     <association property="limeId" javaType="LimeCash">
+              <id column="lc_lime_id" property="limeId"/>
+              <result column="date" property="date"/>
+            </association> -->
+    </resultMap>
+
+    <select id="countAll" resultType="int">
+        select count(*)
+        from social_mtch_rsv
+    </select>
+
+    <select id="findAll" resultMap="matchRsvMap">
+        select mtch_id,
+               user_id,
+               lime_id,
+               state
+        from social_mtch_rsv
+        order by mtch_id asc
+    </select>
+
+    <insert id="insert" parameterType="MatchRsv">
+        insert into social_mtch_rsv(mtch_id, user_id, lime_id, state)
+        values (#{matchRsv.matchId}, #{matchRsv.userId}, #{limeId}, #{matchRsv.state})
+    </insert>
+
     <select id="findByUserId" resultMap="matchRsvMap">
-    select 
-      smr.mtch_id,
-      smr.user_id,
-      smr.lime_id,
-      smr.state,
-      lc.date
-    from social_mtch_rsv smr
-      left outer join lime_cash lc on smr.lime_id=lc.lime_id
-    where
-     smr.user_id=#{userId}
-    order by 
-      smr.mtch_id asc
-  </select>
-  
+        select smr.mtch_id,
+               smr.user_id,
+               smr.lime_id,
+               smr.state,
+               lc.date
+        from social_mtch_rsv smr
+                 left outer join lime_cash lc on smr.lime_id = lc.lime_id
+        where smr.user_id = #{userId}
+        order by smr.mtch_id asc
+    </select>
+
+    <select id="findUsers" resultMap="matchRsvMap" parameterType="int">
+        SELECT    smr.mtch_id,
+                  smr.state,
+                  smr.user_id,
+                  u.name,
+                  m.gender,
+                  m.manner_score,
+                  m.lv_id
+        FROM      social_mtch_rsv smr
+        LEFT JOIN `user` u on u.user_id = smr.user_id
+        LEFT JOIN `member` m on m.user_id = smr.user_id
+        WHERE     smr.mtch_id = #{matchId}
+    </select>
+
 </mapper>

@@ -2,6 +2,7 @@ package com.lime.service;
 
 import java.util.List;
 import com.lime.domain.MatchRsv;
+import com.lime.domain.User;
 
 public interface MatchRsvService {
 
@@ -14,4 +15,6 @@ public interface MatchRsvService {
   MatchRsv get(int matchId, int userId);
 
   List<MatchRsv> get(int userId);
+
+  MatchRsv getUsers(int matchId);
 }

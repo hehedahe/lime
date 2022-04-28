@@ -1,6 +1,8 @@
 package com.lime.service.impl;
 
 import java.util.List;
+
+import com.lime.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lime.dao.LimeCashDao;
@@ -37,11 +39,18 @@ public class DefaultMatchRsvService implements MatchRsvService {
     return matchRsvDao.findByUserId(userId);
   }
 
+  @Override
+  public MatchRsv getUsers(int matchId) {
+    return matchRsvDao.findUsers(matchId);
+  }
+
   //  @Override
   //  public int add(int limeId, MatchRsv matchRsv) {
   //    matchRsvDao.insert(limeId, matchRsv);
   //    return 1;
   //  }
+
+
 
 
 
