@@ -10,6 +10,8 @@ public interface MatchRsvDao {
 
   int countAll();
 
+  int countByMatchId(Integer matchId);
+
   List<MatchRsv> findAll();
 
   int insert(@Param("limeId") int limeId, @Param("matchRsv") MatchRsv matchRsv);

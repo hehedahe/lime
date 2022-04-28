@@ -37,6 +37,15 @@ public class MatchRsvController {
     return matchRsvService.list();
   }
 
+  @GetMapping("/count")
+  public Object get(int matchId) {
+    int reserved = matchRsvService.getCount(matchId);
+    //    if (match == null) {
+    //      return new ResultMap().setStatus(FAIL).setData("해당 번호의 매치가 없습니다.");
+    //    }
+    return new ResultMap().setStatus(SUCCESS).setData(reserved);
+  }
+
   @GetMapping("/balance")
   public Object getBalance(HttpSession session) {
     User user = (User) session.getAttribute("loginUser");
@@ -47,6 +56,20 @@ public class MatchRsvController {
       return new ResultMap().setStatus(SUCCESS).setData(userInfo);
     }
     return new ResultMap().setStatus(FAIL).setData("로그인하지 않았습니다.");
+  }
+
+  @GetMapping("/check")
+  public Object get(HttpSession session, int matchId) {
+    User user = (User) session.getAttribute("loginUser");
+
+    int userId = user.getUserId();
+
+    MatchRsv match = matchRsvService.get(matchId, userId);
+
+    if (match != null) {
+      return new ResultMap().setStatus(SUCCESS).setData(match);      
+    }
+    return new ResultMap().setStatus(FAIL).setData("예약한 적 없습니다.");
   }
 
   @GetMapping("/get")

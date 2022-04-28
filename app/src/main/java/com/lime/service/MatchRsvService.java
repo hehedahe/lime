@@ -11,6 +11,8 @@ public interface MatchRsvService {
 
   int getCount();
 
+  int getCount(Integer matchId);
+
   MatchRsv get(int matchId, int userId);
 
   List<MatchRsv> get(int userId);
