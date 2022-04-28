@@ -102,11 +102,4 @@ $(document).on('click', '.team-btn', function (e) {
 
 
 
-//
-// $(document).on('click', '.eval-btn', function (e) {
-//
-// });
-
-
-
 
