@@ -125,3 +125,10 @@ $('#payment-btn').on('click', function (e) {
     }
   })
 });
+
+// =====================================
+//            라임 캐시 충전
+// =====================================
+$('#button-addon').on('click', function (e) {
+  window.open('/common/charge.html', '라임캐시 충전', 'width=500, height=870, left=-1500, top=50, resizable=false, scrollbars=false');
+});
