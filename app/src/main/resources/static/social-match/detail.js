@@ -1,5 +1,18 @@
 "use strict"
 
+$.getJSON("/member/getLoginUser", (result) => {
+  console.log(result.status);
+  if (result.status == "fail") {
+    return;
+  }
+  $.getJSON(`/rsv/match/check?matchId=${matchId}`, function (result) {
+    console.log('예약한 적 있는가?' + result.status);
+    if (result.status == "success") {
+      $("#apply-btn").addClass("closed-btn").text("신청 완료");
+    }
+  })
+})
+
 const countDownTimer = function (id, date) {
     var _vDate = new Date(date);
     var _second = 1000;
@@ -73,13 +86,6 @@ if (matchId == null) {
 
 console.log(matchId);
     
-$.getJSON(`/rsv/match/check?matchId=${matchId}`, function (result) {
-  console.log('예약한 적 있는가?' + result.status);
-  if (result.status == "success") {
-    $("#apply-btn").addClass("closed-btn").text("신청 완료");
-  }
-})
-
 const xNumOfPeople = $("#numOfPeople");
 const xMatchType = $("#matchType");
 const xLevel = $("#level")
