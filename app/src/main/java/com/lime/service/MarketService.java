@@ -18,6 +18,8 @@ public interface MarketService {
 
   List<Market> listCityChecked(String regionName, String cityName, String keyword);
 
+  List<Market> getWish(int userId);
+
   Market get(int no);
 
   int add(Market market, Object fileList);
@@ -28,7 +30,10 @@ public interface MarketService {
 
   int delete(ItemLike itemLike);
 
-  //int update(Market contact);
 
-  //int delete(int no);
+  int update(Market market);
+
+  int updateState(Market market);
+
+  int delete(Market market);
 }

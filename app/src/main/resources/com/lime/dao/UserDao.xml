@@ -9,8 +9,8 @@
     </resultMap>
 
     <insert id="insert" parameterType="user">
-        insert into user(name, email, password)
-        values      (#{name}, #{email}, #{password})
+        INSERT INTO user(name, email, password)
+        VALUES      (#{name}, #{email}, #{password})
     </insert>
 
 
@@ -26,11 +26,11 @@
     </select>
 
     <select id="findByEmail" resultMap="userMap" parameterType="string">
-        select user_id,
+        SELECT user_id,
                name,
                email
-        from   user
-        where  email = #{email}
+        FROM   user
+        WHERE  email = #{email}
     </select>
 
 </mapper>

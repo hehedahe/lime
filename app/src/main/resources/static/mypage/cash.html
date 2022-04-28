@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="generator" content="Hugo 0.88.1"/>
+    <title>라임</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet"/>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet"/>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <!-- <link rel="stylesheet" href="../header/user/u-adminHeader.css"> -->
+    <link href="cash.css" rel="stylesheet"/>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <script
+            type="text/javascript"
+            src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#x-header").load("/header/user/header.html"); //헤더 인클루드
+            $("#x-footer").load("/footer/footer.html");
+        });
+    </script>
+
+</head>
+
+<body>
+<div id="x-header" class="d-flex bd-highlight"></div>
+
+<main class="social-match mb-5" id="match-wrapper">
+
+    <h3 id="rsv-title" class="fw-bolder">라임캐시</h3>
+
+    <div id="my-cash" class="">
+        <div class="d-flex justify-content-between align-items-center w-100 h-100">
+            <div class="align-middle">
+                <p>보유 캐시</p>
+                <h4 id="balance" class="fw-bold"><img src="cash-img.png" alt=""><span class="align-middle">20,000원</span></h4>
+            </div>
+            <div class="d-flex flex-column">
+                <button id="charge-btn" class="btn btn-primary mb-2">충전하기</button>
+                <button id="refund-btn" class="btn btn-primary">환불 문의</button>
+            </div>
+        </div>
+        <!-- <div class="d-flex justify-content-end text-end">
+            <p id="refund-info" class="font13">환불은 1:1 문의 게시판을 이용해주세요</p>
+        </div> -->
+    </div>
+
+    <!-- <div class="section-border mt-4"></div> -->
+
+    <ul id="lclist" class="list-group list-group-flush">
+        <!-- <div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">
+            충전 및 사용 내역이 존재하지 않습니다.
+        </div> -->
+       <li class="list-group-item list-group-item-action">
+           <div class="d-flex w-100 h-100 justify-content-between align-items-center">
+               <div>
+                   <div class="d-flex justify-content-start align-items-center">
+                       <div class="charge-mark d-flex align-items-center justify-content-center">충전</div>
+                       <div class="ms-5">
+                           <p id="match-date" class="mb-1">2022.02.24 18:00</p>
+                           <h6 id="field-court-name">캐시 충전</h6>
+                           <span class="pay-date">소셜 매치</span>
+                       </div>
+                   </div>
+               </div>
+               <div id="pay-date" class="text-center align-items-center text-muted">
+                   <p>+20,000원</p>
+               </div>
+           </div>
+       </li>
+    </ul>
+</main>
+
+<div id="x-footer"></div>
+
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    "use strict";
+
+
+    function getDay(date) {
+        let today = new Date(date);
+        const week = ["일", "월", "화", "수", "목", "금", "토"];
+        let day = week[today.getDay()];
+        return day;
+    }
+
+
+    function checkMatchType(matchTypeNo) {
+        switch (matchTypeNo) {
+            case 1:
+                return "남자";
+            case 2:
+                return "여자";
+            case 3:
+                return "혼성";
+        }
+    }
+
+    function checkNumOfPeople(numOfPeople) {
+        switch (numOfPeople) {
+            case "S":
+                return "1vs1";
+            case "D":
+                return "2vs2";
+        }
+    }
+
+    function checkLevel(level) {
+        switch (level) {
+            case 1:
+                return "모든 레벨";
+            case 2:
+                return "BEGINNER";
+            case 3:
+                return "INTERMEDIATE";
+            case 4:
+                return "ADVANCED";
+            case 5:
+                return "PRO";
+        }
+    }
+
+    function checkCourtType(courtTypeNo) {
+        switch (courtTypeNo) {
+            case 1:
+                return "하드";
+            case 2:
+                return "클레이";
+            case 3:
+                return "잔디";
+            case 4:
+                return "앙투카";
+        }
+    }
+
+    var URLSearchParams = new URLSearchParams();
+    console.log("URLSearchParams : " + URLSearchParams);
+
+    $(".form-select").on("change", function (e) {
+        const name = $(e.target).attr("name");
+        console.log(name);
+        const value = e.target.value;
+        console.log(value);
+
+        if (value == 0) {
+            URLSearchParams.delete(name);
+        } else {
+            URLSearchParams.set(name, value);
+        }
+
+        let matchDate = $(".active a").attr("date");
+        console.log(matchDate);
+
+        URLSearchParams.set("matchDate", matchDate);
+
+        console.log("URLSearchParams : " + URLSearchParams);
+
+        $.getJSON(
+            `http://localhost:8080/match/list?${URLSearchParams}`,
+            function (arr) {
+                console.log(arr);
+                const matchList = $(".match-list");
+                let str = "";
+                for (let i = 0; i < arr.length; i++) {
+                    let state = "";
+                    let aaa = "";
+                    if (arr[i].state === "A") {
+                        state = "신청 가능";
+                    } else {
+                        state = "마감";
+                        aaa = "closed-btn";
+                    }
+                    str += `
+                          <a href="/social_match/index.html" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                              <div>
+                                <div class="d-flex justify-content-start align-items-center">
+                                  <div class="me-4 match-time">${arr[i].startTime.slice(
+                                        0,
+                                        5
+                                    )}</div>
+                                  <div class="ms-1">
+                                    <h6 class="mb-1">${arr[i].court.field.name} ${
+                                        arr[i].court.name
+                                    }</h6>
+                                    <p class="text-muted match-info">${checkMatchType(
+                                        arr[i].matchTypeNo
+                                    )} · ${checkNumOfPeople(
+                                        arr[i].numOfPeople
+                                    )} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(
+                                        arr[i].levelNo
+                                    )}</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <button class="btn match-btn ${aaa}">${state}</button>
+                            </div>
+                          </a>`;
+                }
+                $(".match-list").html(str);
+            }
+        );
+    });
+
+    $("#next-btn").on("click", (e) => {
+        $(".date-div")
+            .css("transform", "translateX(-53.1%)")
+            .css("transition", "all .5s");
+        $("#next-btn").addClass("disabled");
+        $("#prev-btn").removeClass("disabled");
+    });
+
+    $("#prev-btn").on("click", (e) => {
+        $(".date-div")
+            .css("transform", "translateX(0%)")
+            .css("transition", "all .5s");
+        $("#prev-btn").addClass("disabled");
+        $("#next-btn").removeClass("disabled");
+    });
+
+
+</script>
+<script type="text/javascript" src="cash.js"></script>
+</body>
+</html>

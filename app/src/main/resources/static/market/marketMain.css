@@ -21,13 +21,6 @@ html,body {
     width: 100%;
     max-width: 1024px;
     height: 150px;
-    /* position: relative;
-    padding-top: 5rem;
-    
-    background-color: green;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; */
 }
 
 #market-nav {
@@ -188,7 +181,7 @@ input[type=search]::placeholder {
 
 #empty-notice {
     position: relative;
-    width: 100%;
+    width: 1024px;
     height: 1000px;
     border: 1px solid rgb(102, 200, 141);
     border-radius: 20px;

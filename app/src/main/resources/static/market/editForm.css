@@ -1,0 +1,124 @@
+html,body {
+    font-family: 'NanumGothic';
+}
+
+#content-body {
+    min-height: 1000px;
+    margin-bottom: 50px;
+}
+
+#input-box {
+    /* border: 1px solid red; */
+    width: 1024px;
+    margin: 0 auto;
+}
+
+input[type="number"] {
+    width: 180px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#complete-btn {
+    padding: 0 10px;
+    margin-left: 20px;
+    width: 100px;
+    height: 38px;
+    color: aliceblue;
+    font-size: large;
+    font-weight: bold;
+    background-color: rgb(102, 200, 141);
+    /* background-color: rgb(102, 200, 141); */
+    border: none;
+    border-radius: 5px;
+    float: right;
+}
+
+#cancel-btn {
+    padding: 0 10px;
+    width: 100px;
+    height: 38px;
+    color: rgb(127, 127, 127);
+    font-size: large;
+    font-weight: bold;
+    background-color: rgb(224, 224, 224);
+    /* background-color: rgb(102, 200, 141); */
+    border: none;
+    border-radius: 5px;
+    float: right;
+    
+}
+
+
+#content-box {
+    min-height: 500px;
+    margin-top: 10px;
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 5px;
+}
+
+#title-wrap {
+    width: 850px;
+    margin: 20px auto 0 auto;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+#titleInput-wrap {
+    height: 100px;
+}
+
+#title-wrap input[type="text"] {
+    border: none;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 0;
+}
+
+#title-wrap input[type="text"]:focus {
+    box-shadow: none;
+}
+
+/* #title-wrap input[type="text"]::placeholder {
+    font-weight: normal;
+} */
+
+#textarea-wrap {
+    width: 850px;
+    margin: 50px auto 0 auto;
+}
+
+textarea.autosize {
+    height: 30px;
+    width: 850px;
+    border: none;
+    vertical-align: middle;
+    outline: none;
+    resize: none;
+    font-weight: bold;
+}
+
+#img-add-box {
+    margin-top: 10px;
+}
+
+#img-add-box p {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#img-file {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
+
+#att_zone{
+	width: 660px;
+	min-height:150px;
+	padding:10px;
+    
+}

@@ -26,7 +26,7 @@
     <result column="lv_name" property="lvName"/>
     
     <association property="writer" javaType="User">
-      <id column="no" property="no"/>
+      <id column="user_id" property="userId"/>
       <result column="name" property="name"/>
     </association>
     
@@ -35,19 +35,9 @@
       <result column="file_path" property="filePath"/>
     </collection>
     
-    
-    
-  </resultMap>
-  
-  <resultMap type="ItemImage" id="ItemImageMap">
-    <id column="item_img_id" property="imgId"/>
-    <result column="file_path" property="filePath"/>
   </resultMap>
   
   
-  
-  
-
   <!-- 
     id => 인터페이스의 메서드 이름과 일치해야 한다.
    -->
@@ -202,6 +192,7 @@ SELECT
 	   i.item_id,
 	   i.item_name,
 	   i.item_cost,
+	   i.trans_state,
 	   rg.region_name,
 	   ct.city_name,
 	   i.view_cnt,
@@ -236,28 +227,57 @@ SELECT
 	  order by ii.item_img_id asc
   </select>
   
+  <select id="findWish" resultMap="marketMap" parameterType="int">
+    SELECT 
+		  i.item_id,
+		  i.item_name,
+		  i.item_cost,
+		  i.trans_state,
+		  i.view_cnt,
+		  c.city_name,
+		  r.region_name,
+		  ii.item_img_id,
+		  ii.file_path 
+		FROM item_like il
+		LEFT JOIN item i
+		  ON il.item_id = i.item_id
+		LEFT JOIN city c  
+		  ON i.city_id = c.city_id 
+		LEFT JOIN region r 
+		  ON c.region_id = r.region_id
+		LEFT JOIN item_img ii 
+		  ON i.item_id = ii.item_id
+		WHERE il.user_id = #{userId}
+       
+  </select>
+  
   <insert id="insert" parameterType="Market" useGeneratedKeys="true" keyColumn="item_id" keyProperty="itemId">
     insert into item(user_id,city_id,item_name,item_cost,content)
-      values(#{writer.no},(select city_id from city
+      values(#{writer.userId},(select city_id from city
         WHERE region_id  = (select region_id from region where region_name=#{regionName}) 
         AND city_name =#{cityName}),#{itemName},#{itemCost},#{content})
   </insert>
   
-  <update id="update" parameterType="Market">
-    update ml_board set 
-      title=#{title},
-      content=#{content} 
+  <update id="updateState" parameterType="Market">
+    update item set 
+      trans_state=#{transState}
     where 
-      board_no=#{no}
+      item_id=#{itemId} and user_id=#{writer.userId}
   </update>
   
-  <select id="countAll" resultType="int">
-    select count(*) from ml_board
-  </select>
+  <update id="update" parameterType="Market">
+    update item set 
+      city_id=(select city_id from city where region_id=(select region_id from region where region_name=#{regionName}) and city_name=#{cityName}),
+      item_cost=#{itemCost},
+      item_name=#{itemName},
+      content=#{content}
+    where 
+      user_id=#{writer.userId} and item_id=#{itemId}
+  </update>
   
-  <delete id="delete" parameterType="int">
-    delete from ml_board
-    where board_no=#{no}
+  <delete id="delete" parameterType="Market">
+    delete from item
+    where item_id=#{itemId} and user_id=#{writer.userId}
   </delete>
   
   <update id="increaseViewCount" parameterType="int">
@@ -265,5 +285,11 @@ SELECT
       view_cnt=view_cnt + 1 
     where item_id=#{no}
   </update>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from ml_board
+  </select>
+  
+  
   
 </mapper>

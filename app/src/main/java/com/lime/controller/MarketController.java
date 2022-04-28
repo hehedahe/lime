@@ -111,11 +111,54 @@ public class MarketController {
     }
   }
 
+  @RequestMapping("/market/update")
+  public Object update(Market market, HttpSession session) {
+    User user = (User) session.getAttribute("loginUser");
+    market.setWriter(user);
+    System.out.println(user);
+    System.out.println(market);
+    int count = marketService.update(market);
+
+    if (count == 1) {
+      return new ResultMap().setStatus(SUCCESS);
+    } else {
+      return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않거나 게시글 작성자가 아닙니다.");
+    }
+  }
+
+  @RequestMapping("/market/updateState")
+  public Object updateState(Market market, HttpSession session) {
+    User user = (User) session.getAttribute("loginUser");
+    market.setWriter(user);
+    System.out.println(market);
+    int count = marketService.updateState(market);
+
+    if (count == 1) {
+      return new ResultMap().setStatus(SUCCESS);
+    } else {
+      return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않거나 게시글 작성자가 아닙니다.");
+    }
+  }
+
+  @RequestMapping("/market/delete")
+  public Object delete(int no, HttpSession session) throws Exception {
+    User user = (User) session.getAttribute("loginUser");
+
+    Market market = new Market();
+    market.setItemId(no).setWriter(user);
+    int count = marketService.delete(market);
+
+    if (count == 1) {
+      return new ResultMap().setStatus(SUCCESS);
+    } else {
+      return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않거나 게시글 작성자가 아닙니다.");
+    }
+  }
+
   @RequestMapping("/market/like")
   public Object update(ItemLike itemLike, HttpSession session) {
-
     User user = (User) session.getAttribute("loginUser");
-    itemLike.setUserId(user.getUserId());
+    itemLike.setWriter(user);
 
     System.out.println(itemLike);
 
@@ -131,8 +174,6 @@ public class MarketController {
   @RequestMapping("/market/getLike")
   public Object getLike(HttpSession session) {
     User user = (User) session.getAttribute("loginUser");
-    ItemLike itemLike = new ItemLike();
-    System.out.println("User::::::::" + user);
 
     if (user != null) {
       return new ResultMap()
@@ -144,6 +185,21 @@ public class MarketController {
           .setData("로그인 후 이용해주세요.");
     }
   } 
+
+  @RequestMapping("/market/getWish")
+  public Object getWish(HttpSession session) {
+    User user = (User) session.getAttribute("loginUser");
+
+    if (user != null) {
+      return new ResultMap()
+          .setStatus(SUCCESS)
+          .setData(marketService.getWish(user.getUserId()));
+    } else {
+      return new ResultMap()
+          .setStatus(FAIL)
+          .setData("로그인 후 이용해주세요.");
+    }
+  }
 
 
   @RequestMapping("/market/photo")
@@ -256,10 +312,7 @@ public class MarketController {
   //    return contactService.update(contact);
   //  }
   //
-  //  @RequestMapping("/contact/delete")
-  //  public Object delete(int no) throws Exception {
-  //    return contactService.delete(no);
-  //  }
+
 
 
 

@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="view.css">
-  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
-  <script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+   <script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/axios/dist/axios.js"></script>
   <title>라임마켓-상세보기</title>
 
   <script type="text/javascript">
@@ -27,7 +27,7 @@
         <div id="content-body">
             <div id="item-box">
               <div id="item-region"><p id="item-region-p"></p></div>
-              <div id="item-title"><p id="item-title-p"></p></div>
+              <div id="item-title" class="d-flex justify-content-between mb-3"><div id="item-title-p" class="col g-0"></div><div id="menu-wrap" ></div></div>
               <div id="item-price"><p id="item-price-p"></p></div>
               <div id="user-info">
                   <div class="container g-0">
@@ -43,10 +43,8 @@
                                   </div>
                               </div>
                           </div>
-                          <div class="col">
-                              <button id="ask" type="button">
-                              구매 문의하기
-                              </button>
+                          <div id="etc" class="col">
+                              
                           </div>
                       </div>
                   </div>
@@ -59,7 +57,19 @@
               </div>
             </div>
             <div id="reply-box">
-                
+              <div id="reply-wrap">
+                <p>댓글</p>
+                <div id="reply-view"></div> <!--댓글 달리는 곳-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col g-0"><img src="../asset/image/user-img.jpg"></div>
+                        <div id="reply-form" class="col-11">
+                            <textarea class="autosize" placeholder="댓글을 남겨보세요" style="overflow: hidden;"></textarea>
+                            <button id="reply-btn" type="button">등록</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
 

@@ -22,4 +22,6 @@ public class LimeCash {
   String typeUse;
   CourtRsv courtRsv;
   MatchRsv matchRsv;
+  String myDate; // 정윤
+  String used;
 }

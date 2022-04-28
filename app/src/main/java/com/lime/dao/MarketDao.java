@@ -24,10 +24,17 @@ public interface MarketDao {
 
   Market findByNo(int no);
 
+  List<Market> findWish(int userId);
+
   int insert(Market market);
 
+  int update(Market market);
+
+  int updateState(Market market);
+
   int increaseViewCount(int no);
-  //
+
+  int delete(Market market);
   //
   //  Market findByEmail(String email);
   //
@@ -35,7 +42,7 @@ public interface MarketDao {
   //
   //  int update(Market contact);
   //
-  //  int delete(int no);
+
   //
   //  List<ContactTel> findTelByContactNo(int contactNo);
   //
