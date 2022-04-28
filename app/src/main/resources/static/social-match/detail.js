@@ -214,6 +214,18 @@ const xFieldAddr = $("#field-addr")
       }
     }
 
+    $("#next-btn").on("click", (e) => {
+      $(".date-div").css("transform", "translateX(-36%)").css("transition", "all .5s");
+      $("#next-btn").addClass("disabled");
+      $("#prev-btn").removeClass("disabled");
+    })
+
+    $("#prev-btn").on("click", (e) => {
+      $(".date-div").css("transform", "translateX(0%)").css("transition", "all .5s");
+      $("#prev-btn").addClass("disabled");
+      $("#next-btn").removeClass("disabled");
+    })
+
     var scrollSpy = new bootstrap.ScrollSpy(document.body, {
       target: '#navbar-example'
     })
