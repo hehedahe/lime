@@ -28,6 +28,11 @@ public class DefaultMatchRsvService implements MatchRsvService {
   }
 
   @Override
+  public int getCount(Integer matchId) {
+    return matchRsvDao.countByMatchId(matchId);
+  }
+
+  @Override
   public MatchRsv get(int matchId, int userId) {
     return matchRsvDao.findByMatchIdAndUserId(matchId, userId);
   }
@@ -42,7 +47,4 @@ public class DefaultMatchRsvService implements MatchRsvService {
   //    matchRsvDao.insert(limeId, matchRsv);
   //    return 1;
   //  }
-
-
-
 }

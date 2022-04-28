@@ -22,6 +22,11 @@
     select count(*) from social_mtch_rsv
   </select>
   
+    <select id="countByMatchId" resultType="int" parameterType="int">
+    select count(*) from social_mtch_rsv 
+    where mtch_id=#{matchId} and state="P";
+  </select>
+  
   <select id="findAll" resultMap="matchRsvMap">
     select 
       mtch_id,
@@ -50,6 +55,21 @@
       left outer join lime_cash lc on smr.lime_id=lc.lime_id
     where
      smr.user_id=#{userId}
+    order by 
+      smr.mtch_id asc
+  </select>
+  
+  <select id="findByMatchIdAndUserId" resultMap="matchRsvMap">
+    select 
+      smr.mtch_id,
+      smr.user_id,
+      smr.lime_id,
+      smr.state,
+      lc.date
+    from social_mtch_rsv smr
+      left outer join lime_cash lc on smr.lime_id=lc.lime_id
+    where
+     smr.user_id=#{userId} and smr.mtch_id=#{matchId}
     order by 
       smr.mtch_id asc
   </select>

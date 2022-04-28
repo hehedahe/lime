@@ -51,38 +51,46 @@ const countDownTimer = function (id, date) {
 
 }
     
-    // 1) URL에서 쿼리스트링(query string)을 추출한다.
-    var arr = location.href.split("?");
-    console.log(arr);
+// 1) URL에서 쿼리스트링(query string)을 추출한다.
+var arr = location.href.split("?");
+console.log(arr);
 
-    if (arr.length == 1) {
-      alert("요청 형식이 올바르지 않습니다.")
-      throw "URL 형식 오류!";
-    }
+if (arr.length == 1) {
+  alert("요청 형식이 올바르지 않습니다.")
+  throw "URL 형식 오류!";
+}
 
-    var qs = arr[1];
-    console.log(qs);
+var qs = arr[1];
+console.log(qs);
 
-    var params = new URLSearchParams(qs);
-    var matchId = params.get("matchId");
+var params = new URLSearchParams(qs);
+var matchId = params.get("matchId");
 
-    if (matchId == null) {
-      alert("매치 번호가 없습니다.");
-      throw "파라미터 오류!";
-    }
-    console.log(matchId);
+if (matchId == null) {
+  alert("매치 번호가 없습니다.");
+  throw "파라미터 오류!";
+}
 
-    const xNumOfPeople = $("#numOfPeople");
-    const xMatchType = $("#matchType");
-    const xLevel = $("#level")
-    const xIndYn = $("#indYn")
-    const xCourtType = $("#courtType")
-    const xParkingArea = $("#parkingArea")
-    const xManagerName = $("#managerName")
-    const xMatchDate = $("#match-date")
-    const xFieldName = $("#field-name")
-    const xCourtNo = $("#court-no")
-    const xFieldAddr = $("#field-addr")
+console.log(matchId);
+    
+$.getJSON(`/rsv/match/check?matchId=${matchId}`, function (result) {
+  console.log('예약한 적 있는가?' + result.status);
+  if (result.status == "success") {
+    $("#apply-btn").addClass("closed-btn").text("신청 완료");
+  }
+})
+
+const xNumOfPeople = $("#numOfPeople");
+const xMatchType = $("#matchType");
+const xLevel = $("#level")
+const xIndYn = $("#indYn")
+const xCourtType = $("#courtType")
+const xParkingArea = $("#parkingArea")
+const xManagerName = $("#managerName")
+const xMatchDate = $("#match-date")
+const xFieldName = $("#field-name")
+const xCourtNo = $("#court-no")
+const xFieldAddr = $("#field-addr")
 
     $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
       console.log(result);
@@ -116,9 +124,21 @@ const countDownTimer = function (id, date) {
 
       if (match.state === 'C') {
         $("#apply-btn").addClass("closed-btn").text("마감")
+        document.getElementById("countdown").textContent = '해당 매치는 마감되었습니다.';
       }
 
     });
+
+    $.getJSON(`/rsv/match/count?matchId=${matchId}`, (result) => {
+      console.log('예약 개수: ' + result.data);
+      let reserved = result.data;
+      if (result.status == "success") {
+        if ((reserved == 2) || (reserved == 4)) {
+          $("#apply-btn").addClass("closed-btn").text("마감")
+          return;
+        }
+      }
+    })
 
     function getDay(date) {
       let today = new Date(date);
@@ -168,6 +188,13 @@ const countDownTimer = function (id, date) {
       }
     }
 
+    function checkNumOfPeople2(numOfPeople) {
+      switch (numOfPeople) {
+        case 'S': return 2
+        case 'D': return 4
+      }
+    }
+
     function checkLevel(level) {
       switch (level) {
         case 1: return '모든 레벨'
@@ -187,74 +214,6 @@ const countDownTimer = function (id, date) {
       }
     }
 
-    var URLSearchParams = new URLSearchParams();
-    console.log("URLSearchParams : " + URLSearchParams);
-
-    $(".form-select").on("change", function (e) {
-
-      const name = $(e.target).attr("name")
-      console.log(name)
-      const value = e.target.value
-      console.log(value)
-
-      if (value == 0) {
-        URLSearchParams.delete(name)
-      } else {
-        URLSearchParams.set(name, value)
-      }
-
-      let matchDate = $(".active a").attr("date")
-      console.log(matchDate)
-
-      URLSearchParams.set("matchDate", matchDate);
-
-      console.log("URLSearchParams : " + URLSearchParams);
-
-      $.getJSON(`http://localhost:8080/match/list?${URLSearchParams}`, function (arr) {
-        console.log(arr)
-        const matchList = $(".match-list")
-        let str = ''
-        for (let i = 0; i < arr.length; i++) {
-          let state = ''
-          let aaa = ''
-          if (arr[i].state === 'A') {
-            state = '신청 가능'
-          } else {
-            state = '마감'
-            aaa = 'closed-btn'
-          }
-          str += `
-          <a href="/social_match/index.html" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between align-items-center">
-              <div>
-                <div class="d-flex justify-content-start align-items-center">
-                  <div class="me-4 match-time">${arr[i].startTime.slice(0, 5)}</div>
-                  <div class="ms-1">
-                    <h6 class="mb-1">${arr[i].court.field.name} ${arr[i].court.name}</h6>
-                    <p class="text-muted match-info">${checkMatchType(arr[i].matchTypeNo)} · ${checkNumOfPeople(arr[i].numOfPeople)} · ${checkCourtType(arr[i].court.courtTypeNo)} · ${checkLevel(arr[i].levelNo)}</p>
-                  </div>
-                </div>
-              </div>
-              <button class="btn match-btn ${aaa}">${state}</button>
-              </div>
-            </a>`
-        }
-        $(".match-list").html(str)
-      })
-    })
-
-    $("#next-btn").on("click", (e) => {
-      $(".date-div").css("transform", "translateX(-36%)").css("transition", "all .5s");
-      $("#next-btn").addClass("disabled");
-      $("#prev-btn").removeClass("disabled");
-    })
-
-    $("#prev-btn").on("click", (e) => {
-      $(".date-div").css("transform", "translateX(0%)").css("transition", "all .5s");
-      $("#prev-btn").addClass("disabled");
-      $("#next-btn").removeClass("disabled");
-    })
-
     var scrollSpy = new bootstrap.ScrollSpy(document.body, {
       target: '#navbar-example'
     })
@@ -265,6 +224,18 @@ const countDownTimer = function (id, date) {
           if (result.status == "fail") {
             alert("로그인이 필요한 서비스입니다.");
             location.href = `/login/login.html`
+        }
+      })
+
+      $.getJSON(`/rsv/match/count?matchId=${matchId}`, (result) => {
+        console.log(result.status);
+        let reserved = result.data;
+        console.log('reserved: ' + reserved);
+          if (result.status == "success") {
+            if ((reserved == 2) || (reserved == 4)) {
+              $("#apply-btn").addClass("closed-btn").text("마감")
+              return;
+            }
         }
       })
 

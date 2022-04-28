@@ -68,6 +68,7 @@ $.getJSON("/rsv/match/balance", function (result) {
   console.log(result);
   let userInfo = result.data;
   xBalance.text(`잔액 ${(userInfo.sum).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`)
+  $("#charge-amount").attr("placeholder", `${(userInfo.sum).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`)
 })
 
 function getDay(date) {
