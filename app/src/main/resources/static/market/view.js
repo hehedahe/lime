@@ -66,11 +66,70 @@ $(document).ready(function(e){
         });
     });
 
+    // 중고 글 삭제
     $(document).on("click", "#i-delete", function() {
         console.log("삭제!");
         console.log($(this).attr("idx"));
         deleteItem($(this).attr("idx"));
-    })
+    });
+
+    // 수정하기 버튼
+    $(document).on("click", "#r-update", function(e) {
+        console.log($(this).attr('idx'));
+        const index = $(this).attr('idx');
+        $(`textarea[idx=${index}]`).attr('readonly', false);
+        $(`div[index=${index}]`)
+        .css('border', '1px solid rgb(234, 235, 239)')
+        .css('border-radius', '5px')
+        .css('padding', '3px 3px');
+
+        
+        $(`button[idx=${index}]`).css('display','');
+        
+    });
+
+    // 댓글 수정 취소
+    $(document).on("click", "#r-cancel-btn", function() {
+        console.log("취소");
+        const index = $(this).attr('idx');
+        $(`textarea[idx=${index}]`).attr('readonly', true);
+        $(`div[index=${index}]`)
+        .css('border', 'none')
+        .css('padding', '3px 3px');
+
+        $(`button[idx=${index}]`).css('display','none');
+    });
+
+    // 댓글 수정 완료
+    $(document).on("click", "#r-complete-btn", function() {
+        const index = $(this).attr('idx');
+        $(`textarea[idx=${index}]`).attr('readonly', true);
+        $(`div[index=${index}]`)
+        .css('border', 'none')
+        .css('padding', '3px 3px');
+
+        $(`button[idx=${index}]`).css('display','none');
+
+        updateReply(index);
+    });
+
+    // 댓글 삭제
+    $(document).on("click", "#r-delete", function() {
+        deleteReply($(this).attr("idx"));
+    });
+
+    // 댓글 추가
+    $(document).on("click", "#reply-btn", function() {
+        if (replyText.value != "") {
+            if (loginUser.data.userId != null) {
+                addReply(no, $("#user-name").attr('idx'));
+            } else {
+                alert("로그인 후 이용해주세요.");
+            }
+        } else {
+            alert("내용을 입력해주세요.");
+        }
+    });
 });
     
     // textarea 크기 자동 조절
@@ -93,9 +152,10 @@ var transState = "";
   var likeCnt = document.querySelector("#like-count");
   var etc = document.querySelector("#etc");
   var menuWrap = document.querySelector("#menu-wrap");
-  var iDelete = document.querySelector("#i-delete");
-
+  var rTextWrap = document.querySelector("#r-text-wrap");
   var replyView = document.querySelector("#reply-view");
+  var replyForm = document.querySelector("#reply-form");
+  var replyText = document.querySelector("#reply-text");
 
   var arr = location.href.split("?");
   console.log(arr);
@@ -137,7 +197,10 @@ function itemViewFetch() {
         }
         console.log(loginUser.data.userId);
         
-        
+        replyForm.setAttribute('name', 'itemId');
+        $("#reply-form").val(no);
+
+        $("#user-name").attr('idx',`${item.data.userId}`);
 
         let etcContent = `<button id="ask" type="button">구매 문의하기</button>`
         if (item.data.userId == loginUser.data.userId) {
@@ -202,42 +265,182 @@ function itemViewFetch() {
         heartClick.innerHTML = `${likeState}`;
         likeCnt.innerHTML = `${item.data.likeCount}`;
 
-        replyFetch(no);
+        replyFetch(no, item.data.userId);
     })
 })
 
 };
 
-function replyFetch(no) {
+function replyFetch(no, writerNo) {
     fetch(`/market/getReply?no=${no}`)
     .then(function(response) {
         return response.json();
     })
     .then(function(replies) {
-       
         for (let reply of replies.data) {
             console.log(reply);
-            // if (item.data.userId == loginUser.data.userId) {
-                
-            // }
+            console.log(reply.content);
+            let arr = reply.content.split("\n");
+            console.log(arr.length);
+            const areaHeight = 28 * arr.length;
 
             let div = document.createElement("div");
             div.setAttribute('class', 'd-flex my-3');
+            div.setAttribute('name', 'reply');
+            div.setAttribute('idx', `${reply.replyId}`);
+
+            if (reply.userId == writerNo) {
+                if (reply.userId == loginUser.data.userId) {
+                    div.innerHTML = 
+                    `
+                        <div><img src="../asset/image/user-img.jpg"></div>
+                        <div class="ps-2">
+                            <div class="fw-bold col-11">${reply.userName} <span id="writer-badge">작성자</span> <span id="me-badge">나</span></div>
+                            <div id="r-text-wrap" class="d-flex align-items-end" index=${reply.replyId}>
+                                <textarea id="r-text" name="replyId" class="autosize pt-1" idx=${reply.replyId} readonly style="overflow: hidden; height: ${areaHeight}px;">${reply.content}</textarea>
+                                <button id="r-cancel-btn" class="mx-1" type="button" style="display: none;" idx=${reply.replyId}>취소</button>
+                                <button id="r-complete-btn" class="mx-1" type="button" style="display: none;" idx=${reply.replyId}>등록</button>
+                            </div>
+                            <div style="color: rgb(190, 190, 190)">${reply.rgtDate}</div>
+                        </div>
+                        <div class="ms-auto"><a class="nav-link my-1" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><img src="../asset/image/menu.png"></a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" id="r-update" idx=${reply.replyId}>수정하기</a></li>
+                            <li><a class="dropdown-item" id="r-delete" idx=${reply.replyId}>삭제하기</a></li>
+                            </ul>
+                        </div>
+                    `
+                } else {
+                    div.innerHTML = 
+                `
+                    <div><img src="../asset/image/user-img.jpg"></div>
+                    <div class="ps-2">
+                        <div class="fw-bold col-11">${reply.userName} <span id="writer-badge">작성자</span></div>
+                        <div id="r-text-wrap" class="d-flex" index=${reply.replyId}>
+                            <textarea id="r-text" name="replyId" class="autosize pt-1" idx=${reply.replyId} readonly style="overflow: hidden; height: ${areaHeight}px;">${reply.content}</textarea>
+                        </div>
+                        <div style="color: rgb(190, 190, 190)">${reply.rgtDate}</div>
+                        
+                    </div>
+                    <div class="ms-auto"><a class="nav-link my-1" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><img src="../asset/image/menu.png"></a>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">신고하기</a></li>
+                        </ul>
+                    </div>
+                `
+                }
+            } else {
+                if (reply.userId == loginUser.data.userId) {
+                    div.innerHTML = 
+                    `
+                        <div><img src="../asset/image/user-img.jpg"></div>
+                        <div class="ps-2">
+                            <div class="fw-bold col-11">${reply.userName} <span id="me-badge">나</span></div>
+                            <div id="r-text-wrap" class="d-flex align-items-end" index=${reply.replyId}>
+                                <textarea id="r-text" name="replyId" class="autosize pt-1" idx=${reply.replyId} readonly style="overflow: hidden; height: ${areaHeight}px;">${reply.content}</textarea>
+                                <button id="r-cancel-btn" class="mx-1" type="button" style="display: none;" idx=${reply.replyId}>취소</button>
+                                <button id="r-complete-btn" class="mx-1" type="button" style="display: none;" idx=${reply.replyId}>등록</button>
+                            </div>
+                            <div style="color: rgb(190, 190, 190)">${reply.rgtDate}</div>
+                        </div>
+                        <div class="ms-auto"><a class="nav-link my-1" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><img src="../asset/image/menu.png"></a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" id="r-update" idx=${reply.replyId}>수정하기</a></li>
+                            <li><a class="dropdown-item" id="r-delete" idx=${reply.replyId}>삭제하기</a></li>
+                            </ul>
+                        </div>
+                    `
+                } else {
+                    div.innerHTML = 
+                `
+                    <div><img src="../asset/image/user-img.jpg"></div>
+                    <div class="ps-2">
+                        <div class="fw-bold col-11">${reply.userName}</div>
+                        <div id="r-text-wrap" class="d-flex" index=${reply.replyId}>
+                            <textarea id="r-text" name="replyId" class="autosize pt-1" idx=${reply.replyId} readonly style="overflow: hidden; height: ${areaHeight}px;">${reply.content}</textarea>
+                        </div>
+                        <div style="color: rgb(190, 190, 190)">${reply.rgtDate}</div>
+                        
+                    </div>
+                    <div class="ms-auto"><a class="nav-link my-1" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><img src="../asset/image/menu.png"></a>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">신고하기</a></li>
+                        </ul>
+                    </div>
+                `
+                }
+            }
             
-            div.innerHTML = 
-            `
-                <div><img src="../asset/image/user-img.jpg"></div>
-                <div class="ps-2">
-                    <div class="fw-bold">${reply.userName}</div>
-                    <div>${reply.content}</div>
-                    <div style="color: rgb(190, 190, 190)">${reply.rgtDate}</div>
-                </div>
-                <div class="ms-auto"><img src="../asset/image/menu.png"></div>
-            `
             replyView.appendChild(div);
         }
     })
+    
+};
+
+function addReply(no, writerNo) {
+    
+    let params = new URLSearchParams();
+    //replyForm.setAttribute('name', 'itemId');
+    const name = $("#reply-form").attr("name");
+    const value = replyForm.value;
+
+    params.set(name, value);
+    params.set('content', $("#reply-text").val());
+
+    fetch(`/market/addReply?`, {
+        method : "POST",
+        body : params
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(result) {
+        if (result.status == "fail") {
+            alert("등록하지 못했습니다.");
+            return;
+        }
+
+        $("div[name=reply]").remove();
+        replyFetch(no, writerNo);
+        replyText.value = "";
+    });
+};
+
+function updateReply(no) {
+    let params = new URLSearchParams();
+    
+    params.set('replyId', no);
+    params.set('content', $(`textarea[idx=${no}]`).val());
+
+    fetch(`/market/updateReply`, {
+        method : "POST",
+        body : params
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(result) {
+        if (result.status == "fail") {
+            alert("권한이 없습니다!");
+            return;
+        }
+    });
 }
+
+function deleteReply(no) {
+
+    fetch(`/market/deleteReply?no=${no}`)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(result) {
+        if (result.status == "fail") {
+            alert("권한이 없습니다!");
+            return;
+        }
+    });
+    $(`div[idx=${no}]`).remove();
+};
 
 $("#menu").on("click", function() {
     console.log("메뉴 눌림!");

@@ -6,5 +6,8 @@ import com.lime.domain.ItemReply;
 
 @Mapper
 public interface ItemReplyDao {
-  List<ItemReply> findReply(int no);
+  List<ItemReply> find(int no);
+  int insert(ItemReply itemReply);
+  int update(ItemReply itemReply);
+  int delete(ItemReply itemReply);
 }

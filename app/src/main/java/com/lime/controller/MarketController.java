@@ -212,6 +212,51 @@ public class MarketController {
     return new ResultMap().setStatus(SUCCESS).setData(itemReply);
   }
 
+  @RequestMapping("/market/addReply")
+  public Object addReply(ItemReply itemReply, HttpSession session) {
+    User user = (User) session.getAttribute("loginUser");
+    System.out.println(user);
+    System.out.println(itemReply);
+
+    itemReply.setWriter(user);
+    int count = marketService.addReply(itemReply);
+
+    if (count == 1) {
+      return new ResultMap().setStatus(SUCCESS);
+    } else {
+      return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않거나 게시글 작성자가 아닙니다.");
+    }
+  }
+
+  @RequestMapping("/market/updateReply")
+  public Object updateReply(ItemReply itemReply, HttpSession session) {
+    User user = (User) session.getAttribute("loginUser");
+    itemReply.setWriter(user);
+    System.out.println(itemReply);
+    int count = marketService.updateReply(itemReply);
+
+    if (count == 1) {
+      return new ResultMap().setStatus(SUCCESS);
+    } else {
+      return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않거나 게시글 작성자가 아닙니다.");
+    }
+  }
+
+  @RequestMapping("/market/deleteReply")
+  public Object deleteReply(int no, HttpSession session) throws Exception {
+    User user = (User) session.getAttribute("loginUser");
+
+    ItemReply itemReply = new ItemReply();
+    itemReply.setReplyId(no).setWriter(user);
+    int count = marketService.deleteReply(itemReply);
+
+    if (count == 1) {
+      return new ResultMap().setStatus(SUCCESS);
+    } else {
+      return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않거나 게시글 작성자가 아닙니다.");
+    }
+  }
+
   @RequestMapping("/market/photo")
   public ResponseEntity<Resource> photo(String filename, String type) {
 
