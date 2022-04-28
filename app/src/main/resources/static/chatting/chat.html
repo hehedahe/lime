@@ -62,40 +62,11 @@
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
  <script>
-     $(document).ready(function () {
-          
-    
-          fetch("/manage/user/list1",{
-              method:"post"
-          })
-          .then(function(response){
-            return response.json();
-          })
-          .then(function(logins){
-                  console.log(logins[0]);
-                  if(logins[0] === null){
-                    console.log(`manages[0] 로그인되지않음!!!`);
-                    alert("로그인이 필요합니다.");
-                    location.href ="../../manage/mLogin/chat-login.html";
-                    
-                  }else{
-                    addUser(logins[0].name);
-                      
-                  }// else (로그인된경우)
-
-            });//로그인여부처리 then   
+    /* $(document).ready(function () {
+            
 
 
-
-             $(document).on("click" ,"li[id='logOutLi']",function(){
-                  sessionStorage.clear();
-                  sessionStorage.removeItem("name");
-                  location.href = "../mLogin/login.html"
-             }) 
-
-
-
-  }) // jquery ReadyFunction
+  }) */// jquery ReadyFunction
  </script>
   
 </body>

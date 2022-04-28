@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.lime.domain.ItemLike;
+import com.lime.domain.ItemReply;
 import com.lime.domain.Market;
 import com.lime.domain.User;
 import com.lime.service.MarketService;
@@ -201,6 +203,14 @@ public class MarketController {
     }
   }
 
+  @RequestMapping("/market/getReply")
+  public Object getReply(int no) {
+    List<ItemReply> itemReply = marketService.getReply(no);
+    if (itemReply == null) {
+      return new ResultMap().setStatus(FAIL).setData("해당 번호의 게시글이 없습니다."); // 컨트롤러는 서비스 객체의 리턴 값에 따라 응답 데이터를 적절히 가공하여 리턴한다.
+    }
+    return new ResultMap().setStatus(SUCCESS).setData(itemReply);
+  }
 
   @RequestMapping("/market/photo")
   public ResponseEntity<Resource> photo(String filename, String type) {
@@ -290,28 +300,6 @@ public class MarketController {
     }
   }
 
-
-
-  //  @RequestMapping("/contact/update")
-  //  public Object update(Market contact, String[] tel) throws Exception {
-  //    // 요청 파라미터 분석 및 가공
-  //    ArrayList<ContactTel> telList = new ArrayList<>();
-  //    for (int i = 0; i < tel.length; i++) {
-  //      String[] value = tel[i].split("_");
-  //      if (value[1].length() == 0) {
-  //        continue;
-  //      }
-  //      // 연락처 변경의 경우 이미 연락처 번호를 알기 때문에 
-  //      // 전화번호를 객체에 담을 때 연락처 번호도 함께 저장한다. 
-  //      ContactTel contactTel = new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1]);
-  //      telList.add(contactTel);
-  //    }
-  //    contact.setTels(telList);
-  //
-  //    // 서비스 객체 실행
-  //    return contactService.update(contact);
-  //  }
-  //
 
 
 
