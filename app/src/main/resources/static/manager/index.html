@@ -22,7 +22,7 @@
             <li>manager</li>
         </ul>
         <div id="nav-links">
-            <a href="#">로그아웃</a>
+            <a href="#" id="signout-btn">로그아웃</a>
         </div>
     </div>
 </nav>
@@ -62,83 +62,18 @@
             <div class="d-grid gap-2 col-4 d-md-block px-2">팀 선택</div>
         </div>
 
-        <div class="row mb-2 pb-2 border-bottom">
-            <div class="col d-flex m-2 align-items-center">
-                <div>🥎</div>
-                <div class="mx-2 fs-5">허라임</div>
-                <span class="badge bg-danger u-level">PRO</span>
-            </div>
-            <div class="d-grid gap-2 col-4 d-md-flex">
-                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
-                <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
-            </div>
-        </div>
-        <div class="row my-2 pb-2 border-bottom">
-            <div class="col d-flex m-2 align-items-center">
-                <div>🥎</div>
-                <div class="mx-2 fs-5">서라임</div>
-                <span class="badge bg-secondary u-level">DEVELOPMENT</span>
-            </div>
-            <div class="d-grid gap-2 col-4 d-md-flex">
-                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
-                <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
-            </div>
-        </div>
-        <div class="row my-2 pb-2 border-bottom">
-            <div class="col d-flex m-2 align-items-center">
-                <div>🥎</div>
-                <div class="mx-2 fs-5" type="button">이라임</div>
-                <span class="badge bg-success u-level">BEGINNER</span>
-            </div>
-            <div class="d-grid gap-2 col-4 d-md-flex">
-                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
-                <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
-            </div>
-        </div>
-        <div class="row my-2 pb-2 border-bottom">
-            <div class="col d-flex m-2 align-items-center">
-                <div>🥎</div>
-                <div class="mx-2 fs-5">오라임</div>
-                <span class="badge bg-warning u-level">INTERMEDIATE</span>
-            </div>
-            <div class="d-grid gap-2 col-4 d-md-flex">
-                <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
-                <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
-            </div>
+        <div id="user-list">
+            <!--      매치 참가 유저 리스트      -->
         </div>
 
         <div class="row row-cols-2 mt-5">
             <div class="col border rounded-0 px-4 x-team" id="x-red">RED</div>
             <div class="col border rounded-0 px-4 x-team text-end" id="x-yellow">YELLOW</div>
             <div class="border border-1 rounded-0 red-team">
-<!--                <div class="col d-flex m-3 align-items-center">-->
-<!--                    <div>🥎</div>-->
-<!--                    <div class="mx-2 fs-5">김라임1</div>-->
-<!--                    <span class="badge bg-warning u-level">INTERMEDIATE</span>-->
-<!--                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>-->
-<!--                </div>-->
-<!--                <div class="col d-flex m-3 align-items-center">-->
-<!--                    <div>🥎</div>-->
-<!--                    <div class="mx-2 fs-5">김라임2</div>-->
-<!--                    <span class="badge bg-danger u-level">PRO</span>-->
-<!--                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>-->
-<!--                </div>-->
+                <!-- RED팀 선택 완료 -->
             </div>
             <div class="border border-1 rounded-0 yellow-team">
-<!--                <div class="col d-flex flex-row-reverse m-3 align-items-center">-->
-<!--                    <div>🥎</div>-->
-<!--                    <div class="mx-2 fs-5">김라임3</div>-->
-<!--                    <span class="badge bg-success u-level">BEGINNER</span>-->
-<!--                    <button class="btn btn-secondary mx-2 eval-btn" type="button">평가</button>-->
-<!--                </div>-->
-<!--                <div class="col d-flex flex-row-reverse m-3 align-items-center">-->
-<!--                    <div>🥎</div>-->
-<!--                    <div class="mx-2 fs-5">김라임4</div>-->
-<!--                    <span class="badge bg-primary">ADVANCED</span>-->
-<!--                    <button class="btn btn-secondary mx-2 eval-btn" data-bs-toggle="modal"-->
-<!--                            data-bs-target="#staticBackdrop" type="button">평가-->
-<!--                    </button>-->
-<!--                </div>-->
+                <!-- YELLOW팀 선택 완료 -->
             </div>
         </div>
 
@@ -231,6 +166,6 @@
     </div>
 </div>
 
-<script src="index.js" type="text/javascript"></script>
+<script src="index.js" type="module"></script>
 </body>
 </html>

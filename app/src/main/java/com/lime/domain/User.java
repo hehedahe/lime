@@ -1,11 +1,18 @@
 package com.lime.domain;
 
 import java.sql.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
   int userId;
   String name; 
@@ -23,12 +30,15 @@ public class User {
   String brthDay;
   String userImg;
   String userType;
+  Integer lvId;
   Integer mannerScore;
   String region;
   String city;
   String club;
   String hand;
   String level;
+
+  MatchRsv matchRsv;
 
   int sum;
   int num;//페이징처리(row_number index)

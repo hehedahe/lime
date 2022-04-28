@@ -11,12 +11,16 @@ const PATH = {
         findCity: '/city/findCity',
     },
     member: {
-        getLoginUser: '/member/getLoginUser'
+        getLoginUser: '/member/getLoginUser',
+        signout: '/member/signout'
     },
     courtRsv: {
         rsvsByDate: '/rsv/court/get',
         bookCourt: '/rsv/court/add',
         rsvsByUser: '/rsv/court/getList'
+    },
+    manager: {
+        getMatchUsers: '/manager/getUsers'
     }
 };
 
@@ -122,6 +126,15 @@ export async function getLoginUser() {
     }
 }
 
+export async function signout() {
+    try {
+        const res = await axios(PATH.member.signout);
+        return res.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 
 
 // *********************
@@ -147,3 +160,20 @@ export async function rsvsByUser() {
     }
 }
 
+
+
+
+
+// *********************
+//        manager
+// *********************
+
+// 해당 매치 참가하는 유저 정보 가져오기
+export async function getMatchUsers(matchId) {
+    try {
+        const response = await axios(`${PATH.manager.getMatchUsers}?matchId=${matchId}`);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
