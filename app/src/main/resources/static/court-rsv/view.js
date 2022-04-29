@@ -126,20 +126,28 @@ $('#map-photo').on('click', function(e) {
 //    예약 버튼 클릭 시 로그인 유무 확인
 // =====================================
 $('#book-btn').on('click', function (e) {
-    fetch('/member/getLoginUser')
-        .then(function (res) {
-            return res.json();
-        })
-        .then(function (r) {
-            console.log(r)
-            if (r.status == "fail") {
-                alert('로그인이 필요한 페이지입니다.');
-            } else {
-                location.href = `/court-rsv/payment.html?${urlArr[1]}`;
-            }
-    });
 
-    console.log("tiem: ::::::", rsvInfo.time)
+    if (rsvInfo.time == null) {
+        Swal.fire(
+            '예약 정보가 없습니다.',
+            '예약하실 날짜와 시간을 정해주세요️️🗓️'
+        )
+    } else {
+        fetch('/member/getLoginUser')
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function (r) {
+                console.log(r)
+                if (r.status == "fail") {
+                    alert('로그인이 필요한 페이지입니다.');
+                } else {
+                    location.href = `/court-rsv/payment.html?${urlArr[1]}`;
+                }
+            });
+    }
+
+
 
 });
 
