@@ -73,7 +73,7 @@ $(document).ready(function(e){
         deleteItem($(this).attr("idx"));
     });
 
-    // 수정하기 버튼
+    // 댓글 수정하기 버튼
     $(document).on("click", "#r-update", function(e) {
         console.log($(this).attr('idx'));
         const index = $(this).attr('idx');
@@ -196,6 +196,10 @@ function itemViewFetch() {
         return;
         }
         console.log(loginUser.data.userId);
+
+        let arr = item.data.content.split("\n");
+        const areaHeight = 28 * arr.length;
+        $("#item-content-p").css('height', `${areaHeight}px`);
         
         replyForm.setAttribute('name', 'itemId');
         $("#reply-form").val(no);
@@ -260,7 +264,7 @@ function itemViewFetch() {
         manner.innerHTML = `매너 ${item.data.mannerScore}`;
         rgtDate.innerHTML = `${item.data.rgtDate}`;
         etc.innerHTML = etcContent;
-        itemContentP.innerHTML = `${item.data.content}`;
+        itemContentP.value = `${item.data.content}`;
         itemImgWrap.innerHTML = `${photoFilePath}`;
         heartClick.innerHTML = `${likeState}`;
         likeCnt.innerHTML = `${item.data.likeCount}`;
