@@ -46,6 +46,10 @@ html, body {
     transform:translateY(-50%);
 }
 
+#i-delete:hover, #r-update:hover, #r-delete:hover {
+    cursor: pointer;
+}
+
 #item-price-p {
     font-size: 1.6em;
     font-weight: bold;
@@ -205,3 +209,4 @@ textarea.autosize::placeholder {
 #menu {
     float: right;
 }
+

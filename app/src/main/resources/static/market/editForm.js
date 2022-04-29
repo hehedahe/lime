@@ -3,6 +3,7 @@
 import { Region1 } from '../common/region.js'
 import { textAreaAutoSizing } from '../common/textAreaAutoSizing.js';
 import { getLoginUser } from '../common/apiList.js';
+import { marketMain } from '../common/link.js';
 
 var regionName = document.querySelector("#region");
 var cityName = document.querySelector("#city");
@@ -44,6 +45,10 @@ $(document).ready(function(e) {
             }
             });
        
+    });
+
+    $(document).on("click", "#cancel-btn", function() {
+        location.href = "marketMain.html";
     });
   
 });
