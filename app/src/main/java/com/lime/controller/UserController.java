@@ -39,20 +39,27 @@ public class UserController {
         // System.out.println("password>>>>>>>>>>>" + password);
 
         User loginUser = memberService.getLoginUser(email, password);
-        session.setAttribute("loginUser", loginUser);
 
-        Cookie cookie = null;
-        if (saveEmail) {
-            cookie = new Cookie("userEmail", email);
+        if (loginUser != null) {
+
+            session.setAttribute("loginUser", loginUser);
+
+            Cookie cookie = null;
+            if (saveEmail) {
+                cookie = new Cookie("userEmail", email);
+            } else {
+                cookie = new Cookie("userEmail", "");
+                cookie.setMaxAge(0);
+            }
+            response.addCookie(cookie);
+
+            System.out.println(loginUser);
+
+            return new ResultMap().setStatus(SUCCESS).setData(loginUser);
         } else {
-            cookie = new Cookie("userEmail", "");
-            cookie.setMaxAge(0);
+            return new ResultMap().setStatus(FAIL);
         }
-        response.addCookie(cookie);
 
-      System.out.println(loginUser);
-
-        return new ResultMap().setStatus(SUCCESS).setData(loginUser);
     }
 
     @RequestMapping("/member/getLoginUser")
