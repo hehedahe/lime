@@ -1,12 +1,8 @@
 package com.lime.domain;
 
-<<<<<<< HEAD
-import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-=======
->>>>>>> jang
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -51,7 +47,7 @@ public class User {
   // 회원가입시 사용하는 도메인 정보
   String unrgtDate;
   boolean unrgtYn;
-  String userImg;
+
   int clubId;
   String brthDate;
   int socialId;
