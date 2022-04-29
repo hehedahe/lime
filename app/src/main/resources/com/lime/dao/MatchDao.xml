@@ -27,13 +27,15 @@
         <id column="field_id" property="fieldId"/>
         <result column="field_name" property="name"/>
         <result column="addr" property="addr"/>
-        <result column="ind_yn" property="indYn"/>
-        <result column="parking_area" property="parkingArea"/>
+        <result column="ind_yn_name" property="indYnName"/>
+        <result column="light_yn_name" property="lightYn"/>
+        <result column="parking_area_yn" property="parkingYn"/>
         <result column="lat" property="lat"/>
         <result column="lng" property="lng"/>
         <result column="region_id" property="regionId"/>
         <result column="city_id" property="cityId"/>
         <result column="city_name" property="cityName"/>
+        <result column="c_t_name" property="cTypeName"/>
       </collection>
     </collection>
   </resultMap>
@@ -93,6 +95,7 @@
 		  c.court_id,
 		  c.name,
 		  c.court_type_id,
+		  c_t.name as c_t_name,
 		  c.field_id,
 		  f.field_id,
 		  f.name as field_name,
@@ -100,9 +103,13 @@
 		  f.ind_yn,
 		  f.parking_area,
 		  f.lat,
-		  f.lng
+		  f.lng,
+		  f.ind_yn,
+		  f.light_yn,
+		  f.parking_area
 		from social_mtch m
 		  left outer join court c on m.court_id=c.court_id
+		  left outer join court_type c_t on c.court_type_id=c_t.court_type_id
 		  left outer join field f on c.field_id=f.field_id
 		order by
 		  m.st_time asc, f.name asc
@@ -124,15 +131,38 @@
       c.court_id,
       c.name,
       c.court_type_id,
+      c_t.name as c_t_name,
       c.field_id,
       f.field_id,
       f.name as field_name,
       f.addr,
       f.lat,
       f.lng,
+      f.ind_yn,
+      (
+      CASE 
+        WHEN f.ind_yn = 1 THEN '실내'
+        WHEN f.ind_yn = 0 THEN '실외'
+      END
+      ) ind_yn_name,
+      f.light_yn,
+      (
+      CASE 
+        WHEN f.light_yn = 1 THEN '있음'
+        WHEN f.light_yn = 0 THEN '없음'
+      END
+      ) light_yn_name,
+      f.parking_area,
+      (
+      CASE 
+        WHEN f.parking_area = 1 THEN '있음'
+        WHEN f.parking_area = 0 THEN '없음'
+      END
+      ) parking_area_yn,
       u.name as manager_name
     from social_mtch m
       left outer join court c on m.court_id=c.court_id
+      left outer join court_type c_t on c.court_type_id=c_t.court_type_id
       left outer join field f on c.field_id=f.field_id
       left outer join user u on m.user_id=u.user_id
     where

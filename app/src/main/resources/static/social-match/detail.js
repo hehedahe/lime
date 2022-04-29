@@ -6,7 +6,7 @@ $.getJSON("/member/getLoginUser", (result) => {
     return;
   }
   $.getJSON(`/rsv/match/check?matchId=${matchId}`, function (result) {
-    console.log('예약한 적 있는가?' + result.status);
+    console.log('예약한 적 있는가? ' + result.status);
     if (result.status == "success") {
       $("#apply-btn").addClass("closed-btn").text("신청 완료");
     }
@@ -91,6 +91,7 @@ const xMatchType = $("#matchType");
 const xLevel = $("#level")
 const xIndYn = $("#indYn")
 const xCourtType = $("#courtType")
+const xLightYn = $("#lightYn");
 const xParkingArea = $("#parkingArea")
 const xManagerName = $("#managerName")
 const xMatchDate = $("#match-date")
@@ -115,6 +116,10 @@ $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
   xFieldName.text(match.court.field.name)
   xCourtNo.text(match.court.name)
   xFieldAddr.text(match.court.field.addr)
+  xIndYn.text(match.court.field.indYnName)
+  xCourtType.text(match.court.field.ctypeName)
+  xLightYn.text(match.court.field.lightYn)
+  xParkingArea.text(match.court.field.parkingYn)
 
   let date = new Date(`${match.matchDate} ${match.startTime}`);
   
