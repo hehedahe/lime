@@ -50,10 +50,9 @@
 
     
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<!-- 
-    <script type="text/javascript">
+
+    <!-- <script type="text/javascript">
         $(document).ready(function(){
-            $(".footer").load('../footer/footer.html');
             $(".header").load("../header/user/header.html");
         })
     </script> -->
@@ -74,12 +73,15 @@
 
 
 <main class="form-signin">
-    <form name="form1">
+
+
+
         <!-- <h1 class="h2 mb-4" id="login-h">로그인</h1> -->
         <h1 class="h1 mb-3" id="pwdfind">비밀번호 찾기</h1>
+        <form name="form1">
         <div id="emailstn">가입한 이메일 주소를 입력해주세요.</div>
         <div class="form-login">
-            <input type="email" name="email" class="form-control" id="floatingPassword" placeholder="이메일">
+            <input type="email" name="email" class="form-control" id="floatingPassword">
             <span id="email-chek">⨀가입되지 않은 이메일입니다.</span>
         </div>
 
@@ -90,6 +92,7 @@
         </button>
 
         <div class="w-100 btn btn-primary mb-4" id="info-tel">
+        </form>    
         <a id="frment">회원가입시 입력한 정보가 보이지 않는다면?</a><br>
         <a>고객센터 문의하기(1557-1004)</a>
         </div>
@@ -101,16 +104,50 @@
 
         <div class="section-border"></div>
         <p class="mt-5 mb-3 text-muted">&copy; lime, Co., Ltd.. All Rights Reserved</p>
-    </form>
 </main>
 
 <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
+
+
+
+
+document.querySelector("form[name=form1]").onsubmit = function() {
+
+
+
+
+var fd = new FormData(document.forms.namedItem("form1"));
+
+fetch("/get/email", { 
+    method: "POST",
+    body: fd
+  }) 
+  .then(function(response) {
+    console.log("응답>>>>>>>>>>>>>", response)  
+    return response.text();
+  })
+  .then(function(text) {
+       const txt = text
+       alert(txt)
+  });
+
+return false;
+};
+
+
+
 
 </script>
 
 
-<div class="footer"></div>
+
+
+
+
+
+
 
 </body>
 

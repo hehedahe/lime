@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.lime.dao.UserSignUpDao;
+import com.lime.domain.User;
 import com.lime.domain.UserSignUp;
 import com.lime.service.UserSignUpService;
 
@@ -19,27 +20,26 @@ public class DefaultUserLoginService implements UserSignUpService {
   @Transactional
 
   /*
-  @Override
-  public int allAdd(UserLogin userLogin) {
-    userLoginDao.page1(userLogin);
-    userLoginDao.page2(userLogin);
-    userLoginDao.page3(userLogin);
-    userLoginDao.page4(userLogin);
-
+  public int allAdd(User user) {
+    userLoginDao.page1(user);
+    userLoginDao.page2(user);
+    userLoginDao.page3(user);
+    userLoginDao.page4(user);
     return 1;
   }
    */
 
-  @Override
-  public int add(UserSignUp userLogin) { // 각각의 table에 insert
-    return userLoginDao.insert(userLogin);
-  }
 
   @Override
-  public int memberAdd(UserSignUp userLogin) { // 각각의 table에 insert
-    return userLoginDao.insert1(userLogin);
+  public int add(User user) { // 각각의 table에 insert
+    return userLoginDao.insert(user);
   }
-
+  /*
+  @Override
+  public int memberAdd(User user) { // 각각의 table에 insert
+    return userLoginDao.insert1(user);
+  }
+   */
 
   @Override
   public UserSignUp get(String email, String password) {
@@ -52,9 +52,9 @@ public class DefaultUserLoginService implements UserSignUpService {
   }
 
   @Override
-  public int add1(UserSignUp userLogin) {
-    userLoginDao.insert(userLogin);
-    userLoginDao.insert1(userLogin);
+  public int add1(User user) {
+    userLoginDao.insert(user);
+    userLoginDao.insert1(user);
 
 
     return 1;
@@ -68,6 +68,16 @@ public class DefaultUserLoginService implements UserSignUpService {
 
   @Override
   public int insert1(UserSignUp userLogin) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public String findPwd(String email) {
+    return userLoginDao.findPwd(email);
+  }
+  @Override
+  public int memberAdd(UserSignUp userLogin) {
     // TODO Auto-generated method stub
     return 0;
   }

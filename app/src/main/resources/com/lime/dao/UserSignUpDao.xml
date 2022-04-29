@@ -46,15 +46,28 @@
   </insert>
    -->
   
-  <insert id="insert" parameterType="userSignUp" keyProperty="userId" keyColumn="user_id"  useGeneratedKeys="true">
+  <insert id="insert" parameterType="user" keyProperty="userId" keyColumn="user_id"  useGeneratedKeys="true">
     insert into user(email, pwd, name, phone_no)
     values(#{email},#{password},#{name},#{phoneNo})
   </insert>
   
-  <insert id="insert1" parameterType="userSignUp" >
+  <insert id="insert1" parameterType="user" >
     insert into member(user_id, evnt_yn, brth_date, gender, bank_id, acnt_no, acnt_holder, scope, preferred_weekdays, preferred_weekends, lefty_yn, court_type_id, city_id)
     values(#{userId},#{eventYn},#{brthDate},#{gender},#{bankId},#{accountNo},#{accountHolder},#{scope},#{preferDays},#{preferWeekend},#{leftYn},#{courtTypeId}, #{cityId})
   </insert>
+  
+  
+  
+  <select id="findPwd" parameterType="String" resultType="String">
+  select 
+    pwd
+  from
+  
+  user
+  where email=#{email}
+  
+  
+  </select>
   
   <!-- 
   <insert id="insert2" parameterType="userlogin" keyProperty="courtTypeId" keyColumn="court_type_id" useGeneratedKeys="true">

@@ -67,11 +67,18 @@
             SNS계정으로 간편 로그인/회원가입
         </div>
         <div class="row justify-content-center mb-3">
-            <div id="facebook-login">
+            <!-- <div id="facebook-login">
                 <a href="">
                     <svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet">
                         <g fill="none" fill-rule="evenodd">
                             <path fill="#3B5998"
+                            <div> -->
+                                <div>
+                                    <fb:login-button 
+                                        scope="public_profile,email" 
+                                    onlogin="checkLoginState();"></fb:login-button>
+                                </div>
+                                <!--
                                   d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z">
                             </path>
                             <path fill="#FFF"
@@ -80,7 +87,7 @@
                         </g>
                     </svg>
                 </a>
-            </div>
+            </div> -->
             <div id="kakao-login">
                 <a href="">
                     <svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet">
@@ -140,6 +147,58 @@
         });
         return false;
     };
+
+
+window.fbAsyncInit = function() {
+
+  FB.init({
+    appId      : '3138092889841579', // 개발자가 등록한 앱 ID
+    cookie     : true,  
+    xfbml      : true,  
+    version    : 'v13.0' 
+  });
+  FB.AppEvents.logPageView();
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function checkLoginState() {
+    FB.getLoginStatus(function(response) { 
+        if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+            
+        	var params = new URLSearchParams();
+          params.append("accessToken", response.authResponse.accessToken);
+
+          fetch("/member/facebookLogin", {
+        	  method: "POST",
+        	  body: params 
+        	}).then(function(response) {
+        		return response.json();
+        	}).then(function(result) {   
+        		if (result.status == "success") {
+                    console.log("--------------------------")
+        			console.log(result.data)
+                    console.log("--------------------------")
+        			location.href = "/social-match/index.html";
+        		} else {
+        			window.alert("페이스북 로그인 실패!");
+        			console.log(result.data);
+        		}
+        	});
+          
+        } else { // 로그인이 되지 않았을 때,
+            console.log("로그인 되지 않았음");
+        }
+    });
+}
+
+
 
 </script>
 </body>
