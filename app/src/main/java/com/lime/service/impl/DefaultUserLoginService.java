@@ -63,7 +63,7 @@ public class DefaultUserLoginService implements UserSignUpService {
 
 
   @Override
-  public int insert1(UserSignUp userLogin) {
+  public int insert1(User user) {
     // TODO Auto-generated method stub
     return 0;
   }
