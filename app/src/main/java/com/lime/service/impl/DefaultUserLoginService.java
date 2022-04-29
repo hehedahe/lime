@@ -60,14 +60,10 @@ public class DefaultUserLoginService implements UserSignUpService {
     return 1;
   }
 
-  @Override
-  public int insert(UserSignUp userLogin) {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+
 
   @Override
-  public int insert1(UserSignUp userLogin) {
+  public int insert1(User user) {
     // TODO Auto-generated method stub
     return 0;
   }
@@ -78,6 +74,12 @@ public class DefaultUserLoginService implements UserSignUpService {
   }
   @Override
   public int memberAdd(UserSignUp userLogin) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public int insert(User user) {
     // TODO Auto-generated method stub
     return 0;
   }
