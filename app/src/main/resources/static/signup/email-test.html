@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>라임</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+  <link href="header.css" rel="stylesheet">
+  <link href="signup1.css" rel="stylesheet">
+
+
+  <style>
+    #pwd-check {
+      color:red;
+    }
+
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="signup-header">
+      <div class="nav-logo"><a href="/header/header.html">lime</a></div>
+      <div class="nav-links-div">
+        <a href="../../login/login.html">로그인</a>
+        <span>|</span>
+        <a href="../../signup/signup1.html">회원가입</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="form-lime mt-5">
+    
+   
+
+      <form name="form1">
+      <div class="form-signup">
+        <label for="inputEmail" class="form-label">이메일</label>
+      <div class="row">
+        <div class="col-8 input-phone">
+          <input class="form-control" type="tel" id="inputEmail" placeholder="이메일">
+        </div>
+        <div class="col input-phone">
+          <button class="btn col" id="phoneCheck" onclick="emailSend()">인증요청</button>
+        </div> 
+      </div>
+  </main>
+
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+
+
+function emailSend() {
+  let clientEmail = document.getElementById('inputEmail').value;
+
+  console.log(clientEmail)
+
+
+  let emailYn = isEmail(clientEmail);
+
+
+  if(emailYn == true) {
+    alert("이메일 인증")
+
+    $.ajax({
+      type:"POST",
+      url: "/user/email",
+      data:{email:clientEmail},
+      success : function(data) {
+        alert("요청 성공")
+      }, error: function(e) {
+        alert("오류 발생")
+      }
+    })
+  } else {
+    alert('이메일 형식에 알맞게 입력해주세요!')
+  }
+}
+
+
+function isEmail(asvalue) { //이메일 정규식 사용
+  const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  return regExp.test(asvalue);
+}
+
+</script>
+</body>
+
+</html>
