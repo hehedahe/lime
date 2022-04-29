@@ -42,6 +42,10 @@ $(document).ready(function(e) {
       });
   });
 
+  $(document).on("click", "#cancel-btn", function() {
+    location.href = "marketMain.html";
+  });
+
 });
 
 
