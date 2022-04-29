@@ -1,3 +1,5 @@
+/*
+
 package com.lime.controller;
 
 import java.util.Properties;
@@ -8,10 +10,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Repository;
+import lombok.Getter;
 
 @Repository
 @Configuration
 @PropertySource(value= "classpath:application.properties")
+@Getter
 public class EmailConfig {
 
   @Value("${mail.smtp.port}")
@@ -56,3 +60,5 @@ public class EmailConfig {
 
 
 }
+
+ */
