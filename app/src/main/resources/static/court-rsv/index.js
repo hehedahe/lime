@@ -36,6 +36,9 @@ expectedRsv.day = WEEKDAY[today.getDay()];
 // 지난 시간 마감 처리
 timeCheck(now);
 
+
+
+
 // =====================================
 //             카카오 지도 API
 // =====================================
@@ -67,6 +70,8 @@ function panTo(lat, lng) {
 };
 
 
+
+
 // =====================================
 //           전체 코트 마커 뿌리기
 // =====================================
@@ -96,6 +101,9 @@ function getCitiName(e) {
     // 시도 → 시군구
     selectCity(e.target.value);
 }
+
+
+
 
 // =====================================
 //   시도/시군구 sorting & 중심좌표 뿌리기
@@ -134,13 +142,18 @@ $('#drop-region').on('change', async function (e) {
                         <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
                         <div class="content3">
                             <p class="card-text">${fields.distance} km</p>
-                            <a href="view.html?" class="btn btn-sm info-btn">정보</a>
+                            <a href="view.html?fieldId=${fields.fieldId}" class="btn btn-sm info-btn">정보</a>
                         </div>
                     </div>
                 </button>
             </div>`
         );
     });
+
+    if (sessionStorage.getItem('fieldId') != null) {
+        let fieldId = sessionStorage.getItem('fieldId');
+        console.log($(`.card-btn[data-value=${fieldId}]`));
+    }
 });
 
 // 시군구
@@ -181,6 +194,11 @@ $('#drop-city').on('change', async function (e) {
                 </button>
             </div>`);
     });
+
+    if (sessionStorage.getItem('fieldId') != null) {
+        let fieldId = sessionStorage.getItem('fieldId');
+        $(`.card-btn[data-value=${fieldId}]`).click();
+    }
 });
 
 
@@ -207,7 +225,6 @@ $(document).on('click', '.card-btn', async function (e) {
 
     // 선택된 카드(테니스장) field_id 값 찾기
     fieldId = $(this).closest('.card-btn').attr('data-value');
-    // fieldId = $('.card-title').attr('data-value');
 
 
     // ***선택한 테니스장 번호 담아두기
@@ -234,7 +251,15 @@ $(document).on('click', '.card-btn', async function (e) {
         let time = ("0" + rsv.dateTime).slice(-2);
         $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).attr('disabled', true).addClass('closed');
     });
+
+    if (sessionStorage.getItem('date') != null) {
+        let date = sessionStorage.getItem('date');
+        $(`.date-wrap[data-date=${date}]`).click();
+    }
 });
+
+
+
 
 
 // =====================================
@@ -271,16 +296,22 @@ $(document).on('click', '.date-wrap', async function (e) {
 
 
 // =====================================
-//        결제 페이지로 데이터 넘기기
+//        상세 페이지로 데이터 넘기기
 // =====================================
 $('.sche-btn').on('click', function (e) {
-    if (fieldId != null) {
+    if (fieldId != null ) {
         expectedRsv.courtId = $(e.target).parent('div').attr('data-court');
         expectedRsv.time = $(e.target).attr('data-time');
 
         console.log(expectedRsv);
 
         let url = new URLSearchParams(expectedRsv).toString();
+
+        sessionStorage.setItem("courtId", expectedRsv.courtId);
+        sessionStorage.setItem("fieldId", expectedRsv.fieldId);
+        sessionStorage.setItem("date", expectedRsv.date);
+        sessionStorage.setItem("region", $('#drop-region').val());
+        sessionStorage.setItem("city", $('#drop-city').val());
 
         location.href = `view.html?${url}`;
     } else {
@@ -314,3 +345,21 @@ function timeCheck(now) {
 
 
 console.log("test:::::::::::::::", expectedRsv);
+
+
+
+
+// localStorage.setItem("v1", "aaa");
+// sessionStorage.setItem("v2", "bbb");
+
+
+console.log(sessionStorage.getItem("courtId"))
+console.log(sessionStorage.getItem("fieldId"))
+console.log(sessionStorage.getItem("date"))
+console.log(sessionStorage.getItem("region"))
+console.log(sessionStorage.getItem("city"))
+
+if (sessionStorage.getItem("courtId") != null) {
+    $('#drop-region').val(sessionStorage.getItem("region")).change();
+    $('#drop-city').val(sessionStorage.getItem("city")).change();
+}

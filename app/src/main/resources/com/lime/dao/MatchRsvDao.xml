@@ -25,71 +25,71 @@
     </resultMap>
 
     <select id="countAll" resultType="int">
-        select count(*)
-        from social_mtch_rsv
+        SELECT count(*)
+        FROM   social_mtch_rsv
     </select>
 
     <select id="findAll" resultMap="matchRsvMap">
-        select mtch_id,
-               user_id,
-               lime_id,
-               state
-        from social_mtch_rsv
-        order by mtch_id asc
+        SELECT   mtch_id,
+                 user_id,
+                 lime_id,
+                 state
+        FROM     social_mtch_rsv
+        ORDER BY mtch_id ASC
     </select>
 
     <insert id="insert" parameterType="MatchRsv">
-        insert into social_mtch_rsv(mtch_id, user_id, lime_id, state)
-        values (#{matchRsv.matchId}, #{matchRsv.userId}, #{limeId}, #{matchRsv.state})
+        INSERT INTO social_mtch_rsv(mtch_id, user_id, lime_id, state)
+        VALUES      (#{matchRsv.matchId}, #{matchRsv.userId}, #{limeId}, #{matchRsv.state})
     </insert>
-  
-    <select id="countByMatchId" resultType="int" parameterType="int">
-    select count(*) from social_mtch_rsv 
-    where mtch_id=#{matchId} and state="P";
-  </select>
-  
-    <select id="findByUserId" resultMap="matchRsvMap">
-    select 
-      smr.mtch_id,
-      smr.user_id,
-      smr.lime_id,
-      smr.state,
-      lc.date
-    from social_mtch_rsv smr
-      left outer join lime_cash lc on smr.lime_id=lc.lime_id
-    where
-     smr.user_id=#{userId}
-    order by 
-      smr.mtch_id asc
-  </select>
-  
-  <select id="findByMatchIdAndUserId" resultMap="matchRsvMap">
-    select 
-      smr.mtch_id,
-      smr.user_id,
-      smr.lime_id,
-      smr.state,
-      lc.date
-    from social_mtch_rsv smr
-      left outer join lime_cash lc on smr.lime_id=lc.lime_id
-    where
-     smr.user_id=#{userId} and smr.mtch_id=#{matchId}
-    order by 
-      smr.mtch_id asc
-  </select>
 
-  <select id="findUsers" resultMap="matchRsvMap" parameterType="int">
-    SELECT    smr.mtch_id,
-              smr.state,
-              smr.user_id,
-              u.name,
-              m.gender,
-              m.manner_score,
-              m.lv_id
-    FROM      social_mtch_rsv smr
-    LEFT JOIN `user` u on u.user_id = smr.user_id
-    LEFT JOIN `member` m on m.user_id = smr.user_id
-    WHERE     smr.mtch_id = #{matchId}
-  </select>
-  
+    <select id="countByMatchId" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM   social_mtch_rsv
+        WHERE  mtch_id = #{matchId}
+        AND    state = "P";
+    </select>
+
+    <select id="findByUserId" resultMap="matchRsvMap">
+        SELECT          smr.mtch_id,
+                        smr.user_id,
+                        smr.lime_id,
+                        smr.state,
+                        lc.date
+        FROM            social_mtch_rsv smr
+        LEFT OUTER JOIN lime_cash lc
+        ON              smr.lime_id = lc.lime_id
+        WHERE           smr.user_id = #{userId}
+        ORDER BY        smr.mtch_id ASC
+    </select>
+
+    <select id="findByMatchIdAndUserId" resultMap="matchRsvMap">
+        SELECT          smr.mtch_id,
+                        smr.user_id,
+                        smr.lime_id,
+                        smr.state,
+                        lc.date
+        FROM            social_mtch_rsv smr
+        LEFT OUTER JOIN lime_cash lc
+        ON              smr.lime_id = lc.lime_id
+        WHERE           smr.user_id = #{userId}
+        AND             smr.mtch_id = #{matchId}
+        ORDER BY        smr.mtch_id ASC
+    </select>
+
+    <select id="findUsers" resultMap="matchRsvMap" parameterType="int">
+        SELECT smr.mtch_id,
+               smr.state,
+               smr.user_id,
+               u.name,
+               m.gender,
+               m.manner_score,
+               m.lv_id
+        FROM social_mtch_rsv smr
+        LEFT JOIN `user` u on u.user_id = smr.user_id
+        LEFT JOIN `member` m on m.user_id = smr.user_id
+        WHERE smr.mtch_id = #{matchId}
+    </select>
+
+
 </mapper>
