@@ -26,6 +26,9 @@
     #sliding_menu{
   	display : none;
    }
+       #custom_sliding_menu{
+  	display : none;
+   }
     
     .pagination{
      text-align: center;
@@ -84,8 +87,14 @@
             		<li><a href="../report/communityReport.html">커뮤니티</a></li>
             	</ul>
           </li>
-          <li class="list-group-item nav-item">
-            <a href="#">고객센터</a>
+         <li class="list-group-item nav-item" id="customLi">
+              고객센터 
+            	<ul id="custom_sliding_menu">
+            		<li id="classLi"><a href="../report/classReport.html">라임소개</a></li>
+            		<li><a href="../report/marketReport.html">자주묻는질문</a></li>
+            		<li><a href="../report/clubReport.html">공지사항</a></li>
+            		<li><a href="../custommer/lime-qs">1:1문의</a></li>
+            	</ul>
           </li>
         </ul>
     </div>
@@ -170,6 +179,16 @@ let globalCurrentPage=1; //현재 페이지
                             console.log($(this).attr("id"));
                           };
                       });
+                    
+                    $(document).on("click", "li[id='customLi']" , function(){
+                        if( $("#custom_sliding_menu").css("display") ==="block"){
+                          $("#custom_sliding_menu").css("display","none");
+                        
+                        }else {
+                          $("#custom_sliding_menu").css("display","block");
+                          console.log($(this).attr("id"));
+                        };
+                    });
                     
                     $(document).on("click", "li[id='userLi']" , function(){
                           if( $("#user-sliding-menu").css("display") ==="block"){

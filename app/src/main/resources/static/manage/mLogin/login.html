@@ -141,13 +141,9 @@
       return response.text();
     })
     .then(function(text) {
-      if (text == "success") {
         window.alert("로그인 성공!")
     	  location.href = "../user/manageUser.html";
         // location.href = "/court_rsv/index.html"
-      } else {
-    	  window.alert("로그인 실패!");
-      }
     });
   return false;
 };
