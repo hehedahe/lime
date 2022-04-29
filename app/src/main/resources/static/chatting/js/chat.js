@@ -1,6 +1,6 @@
 // 로그인 시스템 대신 임시 방편
 let username = 'adming';
-let roomNum = 5;
+let roomNum = 8;
 
 document.querySelector("#username").innerHTML = username;
 
@@ -94,7 +94,9 @@ async function addMessage() {
 
 // 버튼 클릭시 메시지 전송
 document.querySelector("#chat-outgoing-button").addEventListener("click", () => {
-  addMessage();
+  if(document.querySelector("#chat-outgoing-msg")!== ''){
+  	addMessage();
+  }
 });
 
 // 엔터를 치면 메시지 전송
