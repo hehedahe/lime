@@ -1,5 +1,5 @@
-/*
 
+/*
 package com.lime.controller;
 
 import java.util.Properties;
@@ -14,7 +14,7 @@ import lombok.Getter;
 
 @Repository
 @Configuration
-@PropertySource(value= "classpath:application.properties")
+@PropertySource(value="classpath:..src/main/resources/application.properties")
 @Getter
 public class EmailConfig {
 
@@ -57,8 +57,6 @@ public class EmailConfig {
     pt.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
     return pt;
   }
-
-
 }
 
  */

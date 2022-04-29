@@ -13,7 +13,7 @@ public class UserSignUp {
   String rgtDate;
   String unrgtDate;
   boolean unrgtYn;
-  int password;
+  String password;
   String userImg;
   String userType;
   //로그인에서 안받는 정보
