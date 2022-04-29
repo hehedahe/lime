@@ -2,11 +2,7 @@ package com.lime.controller;
 
 import static com.lime.controller.ResultMap.FAIL;
 import static com.lime.controller.ResultMap.SUCCESS;
-<<<<<<< HEAD
-
-=======
 import java.util.Map;
->>>>>>> jang
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,78 +20,78 @@ import com.lime.service.UserSignUpService;
 @RestController
 public class UserController {
 
-    @Autowired
-    UserService memberService;
+  @Autowired
+  UserService memberService;
 
-    @Autowired
-    LimeCashDao lcDao;
+  @Autowired
+  LimeCashDao lcDao;
 
-    @RequestMapping("/member/signup")
-    public Object signUp(User user) {
-        if (memberService.add(user) == 1) {
-            return "success";
-        } else {
-            return "fail";
-        }
+  @RequestMapping("/member/signup")
+  public Object signUp(User user) {
+    if (memberService.add(user) == 1) {
+      return "success";
+    } else {
+      return "fail";
+    }
+  }
+
+  @RequestMapping("/member/signin")
+  public Object signin(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
+    // System.out.println("email>>>>>>>>>>>>>>" + email);
+    // System.out.println("password>>>>>>>>>>>" + password);
+
+    User loginUser = memberService.getLoginUser(email, password);
+
+    if (loginUser != null) {
+
+      session.setAttribute("loginUser", loginUser);
+
+      Cookie cookie = null;
+      if (saveEmail) {
+        cookie = new Cookie("userEmail", email);
+      } else {
+        cookie = new Cookie("userEmail", "");
+        cookie.setMaxAge(0);
+      }
+      response.addCookie(cookie);
+
+      System.out.println(loginUser);
+
+      return new ResultMap().setStatus(SUCCESS).setData(loginUser);
+    } else {
+      return new ResultMap().setStatus(FAIL);
     }
 
-    @RequestMapping("/member/signin")
-    public Object signin(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
-        // System.out.println("email>>>>>>>>>>>>>>" + email);
-        // System.out.println("password>>>>>>>>>>>" + password);
+  }
 
-        User loginUser = memberService.getLoginUser(email, password);
+  @RequestMapping("/member/getLoginUser")
+  public Object getLoginUser(HttpSession session) {
+    User user = (User) session.getAttribute("loginUser");
+    System.out.println("member::::::::" + user);
 
-        if (loginUser != null) {
-
-            session.setAttribute("loginUser", loginUser);
-
-            Cookie cookie = null;
-            if (saveEmail) {
-                cookie = new Cookie("userEmail", email);
-            } else {
-                cookie = new Cookie("userEmail", "");
-                cookie.setMaxAge(0);
-            }
-            response.addCookie(cookie);
-
-            System.out.println(loginUser);
-
-            return new ResultMap().setStatus(SUCCESS).setData(loginUser);
-        } else {
-            return new ResultMap().setStatus(FAIL);
-        }
-
+    if (user != null) {
+      try {
+        int ttlCash = lcDao.findCash(user.getUserId());
+        user.setTtlCash(ttlCash);
+      } catch (Exception e) {
+        System.out.println(e + "::::캐시가 없습니다.");
+      }
+      return new ResultMap()
+          .setStatus(SUCCESS)
+          .setData(user);
+    } else {
+      return new ResultMap()
+          .setStatus(FAIL)
+          .setData("로그인 하지 않았습니다.");
     }
 
-    @RequestMapping("/member/getLoginUser")
-    public Object getLoginUser(HttpSession session) {
-        User user = (User) session.getAttribute("loginUser");
-        System.out.println("member::::::::" + user);
+  }
 
-        if (user != null) {
-            try {
-                int ttlCash = lcDao.findCash(user.getUserId());
-                user.setTtlCash(ttlCash);
-            } catch (Exception e) {
-                System.out.println(e + "::::캐시가 없습니다.");
-            }
-            return new ResultMap()
-                    .setStatus(SUCCESS)
-                    .setData(user);
-        } else {
-            return new ResultMap()
-                    .setStatus(FAIL)
-                    .setData("로그인 하지 않았습니다.");
-        }
-
-    }
-
-    @RequestMapping("/member/signout")
-    public Object signout(HttpSession session) {
-        session.invalidate();
-        return new ResultMap().setStatus(SUCCESS);
-    }
+  @RequestMapping("/member/signout")
+  public Object signout(HttpSession session) {
+    session.invalidate();
+    return new ResultMap().setStatus(SUCCESS);
+  }
 
 
   @Autowired
