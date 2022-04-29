@@ -23,6 +23,19 @@
     height: 20px;
 }
 
+#team-btn {
+    width: 145px;
+    border: 1px solid #66c88d;
+}
+#team-btn:hover,
+#team-btn:focus {
+    box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
+}
+#team-btn:focus {
+    background-color: #66c88d;
+    color: #fff;
+}
+
 .x-team {
     font-size: 20px;
     font-weight: bolder;

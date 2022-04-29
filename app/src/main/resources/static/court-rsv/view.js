@@ -139,9 +139,15 @@ $('#book-btn').on('click', function (e) {
             }
     });
 
-})
+    console.log("tiem: ::::::", rsvInfo.time)
+
+});
 
 
 
 
 
+
+
+console.log(localStorage.getItem("v1"));
+console.log(sessionStorage.getItem("v2"));
