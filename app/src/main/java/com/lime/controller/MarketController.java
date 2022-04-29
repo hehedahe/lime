@@ -315,7 +315,6 @@ public class MarketController {
     if (files != null && files.length > 0) {
       ArrayList fileNames = new ArrayList();
 
-
       for (MultipartFile file : files) {
         // 파일을 저장할 때 사용할 파일명을 준비한다.
         String filename = UUID.randomUUID().toString();
