@@ -35,16 +35,12 @@ public class UserController {
 
     @RequestMapping("/member/signin")
     public Object signin(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
-        // System.out.println("email>>>>>>>>>>>>>>" + email);
-        // System.out.println("password>>>>>>>>>>>" + password);
-
         User loginUser = memberService.getLoginUser(email, password);
+        Cookie cookie = null;
 
         if (loginUser != null) {
-
             session.setAttribute("loginUser", loginUser);
-
-            Cookie cookie = null;
+            System.out.println(loginUser);
             if (saveEmail) {
                 cookie = new Cookie("userEmail", email);
             } else {
@@ -52,8 +48,7 @@ public class UserController {
                 cookie.setMaxAge(0);
             }
             response.addCookie(cookie);
-
-            System.out.println(loginUser);
+            System.out.println(cookie);
 
             return new ResultMap().setStatus(SUCCESS).setData(loginUser);
         } else {

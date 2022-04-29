@@ -21,6 +21,11 @@
     height: 1800px;
 }
 
+.prefer-wrap {
+    width: 125px;
+    align-self: center;
+}
+
 /* 드롭다운 메뉴 */
 #drop-menu {
     width: 1024px;
@@ -33,15 +38,10 @@
 }
 
 /*!* 드롭다운 메뉴 테두리 *!*/
-/*.dropdown-toggle {*/
 .form-select {
     border-radius: 50px;
     margin-right: 10px;
 }
-/*.dropdown-menu {*/
-/*    border: 1px solid rgb(190, 190, 190);*/
-/*    border-radius: 20px;*/
-/*}*/
 
 /* 지도 */
 #map {
@@ -63,33 +63,6 @@
     margin-bottom: 10px;
     width: 45vw;
 }
-
-/*!* 좌우 버튼 *!*/
-/*.left-btn,*/
-/*.right-btn {*/
-/*    width: 70px;*/
-/*    height: 70px;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    background-color: rgba(255,255,255,0.5);*/
-/*}*/
-
-/*.left-btn > i,*/
-/*.right-btn > i {*/
-/*    color: rgb(127, 127, 127);*/
-/*}*/
-
-/*!* 좌우 버튼 호버 *!*/
-/*.left-btn:hover,*/
-/*.right-btn:hover {*/
-/*    background-color: #fff;*/
-/*}*/
-
-/*.left-btn:hover > i,*/
-/*.right-btn:hover > i {*/
-/*    color: #000;*/
-/*}*/
-
 
 /* <p> margin */
 .card-text {

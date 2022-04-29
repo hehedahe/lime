@@ -1,6 +1,7 @@
 
-import {signout, getMatchUsers} from '../common/apiList.js'
+import {signout, getMatchUsers, getLoginUser} from '../common/apiList.js'
 import {levelTag, checkLevel} from '../common/typeCheck.js'
+
 
 
 
@@ -8,6 +9,20 @@ $('#signout-btn').on('click', async function (e) {
     const res = await signout();
     location.href = '/social-match/index.html';
 });
+
+// sweetalert
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
+
 
 let resp;
 let users;
@@ -38,38 +53,24 @@ let users;
 
 
 
-// sweetalert
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-});
-
-
-
-
 
 // =====================================
 //           RED팀, YELLOW팀 CSS
 // =====================================
-$(document).on('click', '.team-btn', function (e) {
+$(document).on('click', '.team-btn', aysnc function (e) {
 
     let selectedName = $(e.target).parent().attr('data-info').split('-')[0];
     let selectedLvId = Number($(e.target).parent().attr('data-info').split('-')[1]);
 
-    console.log(selectedName, selectedLvId)
-
     if ($(e.target).hasClass('btn-outline-danger'))  {
         $(e.target).removeClass('btn-outline-danger').addClass('btn-danger');
-        $(e.target).siblings().removeClass('btn-warning').addClass('btn-outline-warning');
+       if ($(e.target).siblings().hasClass('btn-warning')) {
+           $(e.target).siblings().removeClass('btn-warning').addClass('btn-outline-warning');
+           $(`div[value=${selectedName}`).remove();
+       }
+
         $('.red-team').append(`
-            <div class="col d-flex m-3 align-items-center">
+            <div class="col d-flex m-3 align-items-center" value=${selectedName}>
                 <div>🥎</div>
                 <div class="mx-2 fs-5">${selectedName}</div>
                 ${levelTag(selectedLvId)}
@@ -77,12 +78,16 @@ $(document).on('click', '.team-btn', function (e) {
                         data-bs-target="#staticBackdrop">평가</button>
             </div>
         `);
+
     } else if ($(e.target).hasClass('btn-outline-warning')) {
         $(e.target).removeClass('btn-outline-warning').addClass('btn-warning');
-        $(e.target).siblings().removeClass('btn-danger').addClass('btn-outline-danger');
+        if ($(e.target).siblings().hasClass('btn-danger')) {
+            $(e.target).siblings().removeClass('btn-danger').addClass('btn-outline-danger');
+            $(`div[value=${selectedName}`).remove();
+        }
 
         $('.yellow-team').append(`
-            <div class="col d-flex m-3 align-items-center">
+            <div class="col d-flex m-3 align-items-center" value=${selectedName}>
                 <div>🥎</div>
                 <div class="mx-2 fs-5">${selectedName}</div>
                 ${levelTag(selectedLvId)}
@@ -98,7 +103,11 @@ $(document).on('click', '.team-btn', function (e) {
             title: '한 팀당 과반수 이상이 참여할 수 없습니다.'
         })
     };
+
 });
+
+
+
 
 
 

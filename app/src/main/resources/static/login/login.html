@@ -7,13 +7,12 @@
     <title>라임</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
-
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+    <script src="../node_modules/js-cookie/dist/js.cookie.js"></script>
 
     <style>
         .bd-placeholder-img {
@@ -52,7 +51,7 @@
 
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me" class="form-check-input"> <span>이메일 저장하기</span>
+                <input name="saveEmail" type="checkbox">이메일 저장하기
             </label>
         </div>
         <button class="w-100 btn btn-primary mb-4"
@@ -113,7 +112,7 @@
     </form>
 </main>
 
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 <script type="text/javascript">
 
     document.querySelector("form[name=form1]").onsubmit = function () {
@@ -141,7 +140,17 @@
         return false;
     };
 
+    var xEmail = document.querySelector("input[name=email]");
+
+    //userEmail 쿠키가 있다면 값을 꺼내서 이메일 입력 상자에 넣는다.
+    var userEmail = Cookies.get('userEmail');
+    if (userEmail != undefined) {
+        xEmail.value = userEmail;
+    }
+
 </script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
