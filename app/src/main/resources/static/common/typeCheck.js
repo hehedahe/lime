@@ -1,9 +1,5 @@
 "use strict"
 
-// =====================================
-//    코트 타입 / 실내외 / 주차여부 체크
-// =====================================
-
 // 코트타입 체크
 export function checkCourtType(courtTypeId) {
     switch (courtTypeId) {
@@ -36,6 +32,7 @@ export function checkParking(parkingArea) {
     }
 };
 
+// 라이트 유무 체크
 export function checkLight(lightYn) {
     if (lightYn) {
         return '라이트 보유'
@@ -43,3 +40,30 @@ export function checkLight(lightYn) {
         return '라이트 미보유'
     }
 };
+
+// 레벨 체크
+export function checkLevel(lvId) {
+    switch (lvId) {
+        case 1:
+            return 'DEVELOPMENT'
+        case 2:
+            return 'BEGINNER'
+        case 3:
+            return 'INTERMEDIATE'
+        case 4:
+            return 'ADVANCED'
+        case 5:
+            return 'PRO'
+    }
+}
+
+// 레벨 체크하여 태그 리턴
+export function levelTag(lvId) {
+    switch (lvId) {
+        case 1 : return `<span class="badge bg-secondary">DEVELOPMENT</span>`;
+        case 2 : return `<span class="badge bg-success">BEGINNER</span>`;
+        case 3 : return `<span class="badge bg-warning text-dark">INTERMEDIATE</span>`;
+        case 4 : return `<span class="badge bg-primary">ADVANCED</span>`;
+        case 5 : return `<span class="badge bg-danger">PRO</span>`;
+    }
+}

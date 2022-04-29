@@ -135,7 +135,15 @@ $("#charge-btn").click(function (e) {
             && ($('#agreement2').is(':checked'))
             && methodValue == '무통장 입금'){
 
+        axios.post('/limecash/charge',{
+            userId: user.userId,
+            amt: amount.replace(',', '').replace('원','')
+        }).then((data) => {
+            console.log(data.status);
+        });
+
         alert('무통장 입금 성공!!');
+        window.opener.location.reload();
         window.close();
 
     } else {

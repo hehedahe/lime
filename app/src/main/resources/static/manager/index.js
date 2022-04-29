@@ -1,4 +1,43 @@
 
+import {signout, getMatchUsers} from '../common/apiList.js'
+import {levelTag, checkLevel} from '../common/typeCheck.js'
+
+
+
+$('#signout-btn').on('click', async function (e) {
+    const res = await signout();
+    location.href = '/social-match/index.html';
+});
+
+let resp;
+let users;
+
+(async function () {
+
+    resp = await getMatchUsers(209);
+    users = resp.data.users
+
+    console.log("users::::::::::::", users)
+
+    users?.map((user) => {
+        $('#user-list').append(`
+            <div class="row mb-2 pb-2 border-bottom">
+                <div class="col d-flex m-2 align-items-center">
+                    <div>🥎</div>
+                    <div class="mx-2 fs-5">${user.name}</div>
+                    ${levelTag(user.lvId)}
+                </div>
+                <div class="d-grid gap-2 col-4 d-md-flex" data-info=${user.name}-${user.lvId}>
+                    <button class="team-btn btn btn-outline-danger me-2 col w-50" type="button" value="red">RED팀</button>
+                    <button class="team-btn btn btn-outline-warning col w-50" type="button" value="yellow">YELLOW팀</button>
+                </div>
+            </div>
+        `);
+    })
+})();
+
+
+
 // sweetalert
 const Toast = Swal.mixin({
     toast: true,
@@ -10,46 +49,55 @@ const Toast = Swal.mixin({
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
-})
+});
+
+
+
+
 
 // =====================================
-//             RED팀 YELLOW팀 CSS
+//           RED팀, YELLOW팀 CSS
 // =====================================
-$('.team-btn').on('click', function (e) {
+$(document).on('click', '.team-btn', function (e) {
+
+    let selectedName = $(e.target).parent().attr('data-info').split('-')[0];
+    let selectedLvId = Number($(e.target).parent().attr('data-info').split('-')[1]);
+
+    console.log(selectedName, selectedLvId)
+
     if ($(e.target).hasClass('btn-outline-danger'))  {
         $(e.target).removeClass('btn-outline-danger').addClass('btn-danger');
         $(e.target).siblings().removeClass('btn-warning').addClass('btn-outline-warning');
-
         $('.red-team').append(`
             <div class="col d-flex m-3 align-items-center">
                 <div>🥎</div>
-                <div class="mx-2 fs-5">김라임1</div>
-                <span class="badge bg-warning u-level">INTERMEDIATE</span>
+                <div class="mx-2 fs-5">${selectedName}</div>
+                ${levelTag(selectedLvId)}
                 <button class="btn btn-secondary mx-2 eval-btn" type="button" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">평가</button>
             </div>
         `);
-    } else if ($(e.target).hasClass('btn-outline-warning') && (($('.btn-warning').length) <= 2)) {
+    } else if ($(e.target).hasClass('btn-outline-warning')) {
         $(e.target).removeClass('btn-outline-warning').addClass('btn-warning');
         $(e.target).siblings().removeClass('btn-danger').addClass('btn-outline-danger');
 
         $('.yellow-team').append(`
             <div class="col d-flex m-3 align-items-center">
                 <div>🥎</div>
-                <div class="mx-2 fs-5">이라임</div>
-                <span class="badge bg-warning u-level">INTERMEDIATE</span>
+                <div class="mx-2 fs-5">${selectedName}</div>
+                ${levelTag(selectedLvId)}
                 <button class="btn btn-secondary mx-2 eval-btn" type="button" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">평가</button>
             </div>
         `);
     }
 
-    if (($('.btn-danger').length > 2) || ($('.btn-warning').length > 2)) {
+    if (($('.btn-danger').length > (users.length / 2)) || ($('.btn-warning').length > (users.length / 2))) {
         Toast.fire({
             icon: 'info',
             title: '한 팀당 과반수 이상이 참여할 수 없습니다.'
-        });
-    }
+        })
+    };
 });
 
 

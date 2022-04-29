@@ -1,7 +1,9 @@
 package com.lime.domain;
 
+import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
 
 @Data
 @Accessors(chain = true)
@@ -12,6 +14,7 @@ public class MatchRsv {
   String state;
   Match match;
   String date;
+  List<User> users;
 
   public MatchRsv() {}
 

@@ -17,7 +17,10 @@
     <result column="content" property="content"/>
     <result column="rgt_date" property="rgtDate"/>
     <result column="mdfy_date" property="mdfyDate"/>
-    
+    <association property="writer" javaType="User">
+      <id column="user_id" property="userId"/>
+      <result column="name" property="name"/>
+    </association>
     
   </resultMap>
   
@@ -26,7 +29,7 @@
     id => 인터페이스의 메서드 이름과 일치해야 한다.
    -->
    
-  <select id="findReply" resultMap="ItemReplyMap" parameterType="int">
+  <select id="find" resultMap="ItemReplyMap" parameterType="int">
     select
       tr.trans_rpy_id,
       tr.item_id,
@@ -41,6 +44,21 @@
     where tr.item_id = #{itemId}
   </select>
   
-   
+  <insert id="insert" parameterType="ItemReply">
+    insert into trans_rpy(user_id,item_id,content)
+    values(#{writer.userId}, #{itemId}, #{content})
+  </insert>
+  
+  <update id="update" parameterType="ItemReply">
+    update trans_rpy set 
+      content=#{content}
+    where 
+      user_id=#{writer.userId} and trans_rpy_id=#{replyId}
+  </update>
+  
+  <delete id="delete" parameterType="ItemReply">
+    delete from trans_rpy
+    where trans_rpy_id=#{replyId} and user_id=#{writer.userId}
+  </delete>
   
 </mapper>
