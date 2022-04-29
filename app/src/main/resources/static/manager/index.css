@@ -24,8 +24,9 @@
 }
 
 #team-btn {
-    width: 145px;
+    width: 120px;
     border: 1px solid #66c88d;
+    color: #6c757d;
 }
 #team-btn:hover,
 #team-btn:focus {

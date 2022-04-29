@@ -152,7 +152,7 @@ $('#drop-region').on('change', async function (e) {
 
     if (sessionStorage.getItem('fieldId') != null) {
         let fieldId = sessionStorage.getItem('fieldId');
-        console.log($(`.card-btn[data-value=${fieldId}]`));
+        $(`.card-btn[data-value=${fieldId}]`).click();
     }
 });
 
@@ -188,7 +188,7 @@ $('#drop-city').on('change', async function (e) {
                         <p class="card-text">#${checkCourtType(fields.courtTypeId)}</p>
                         <div class="content3">
                             <p class="card-text">${fields.distance} km</p>
-                            <a href="#" class="btn btn-sm info-btn">정보</a>
+                            <a href="view.html?fieldId=${fields.fieldId}" class="btn btn-sm info-btn">정보</a>
                         </div>
                     </div>
                 </button>
@@ -222,7 +222,6 @@ $(document).on('click', '.card-btn', async function (e) {
     $('html').animate({scrollTop: offset.top}, 400);
     // window.scrollTo({ left: 0, top: 750, behavior: "smooth" });
 
-
     // 선택된 카드(테니스장) field_id 값 찾기
     fieldId = $(this).closest('.card-btn').attr('data-value');
 
@@ -242,20 +241,14 @@ $(document).on('click', '.card-btn', async function (e) {
     $('#crt-type').text(checkCourtType(court.courtTypeId) + '  ·');
     $('#crt-parking').text(checkParking(court.parkingArea));
 
-
-
     // 현재 예약되어 있는 시간 비활성화
     const res = await rsvsByDate(expectedRsv.date, court.fieldId);
 
     res.data?.map((rsv) => {
+
         let time = ("0" + rsv.dateTime).slice(-2);
         $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).attr('disabled', true).addClass('closed');
     });
-
-    if (sessionStorage.getItem('date') != null) {
-        let date = sessionStorage.getItem('date');
-        $(`.date-wrap[data-date=${date}]`).click();
-    }
 });
 
 
@@ -278,14 +271,17 @@ $(document).on('click', '.date-wrap', async function (e) {
     } else {
 
         // ***선택 날짜, 요일 담아두기
-        expectedRsv.date = $(e.target).attr('data-date');
-        expectedRsv.day = $(e.target).find('span').text();
+        expectedRsv.date = $(this).attr('data-date');
+        expectedRsv.day = $(this).find('span').text();
 
-        console.log($(e.target).find('span').text())
 
         const res = await rsvsByDate(expectedRsv.date, expectedRsv.fieldId);
+        console.log("date:::::::::::", expectedRsv.date)
 
         res.data?.map((rsv) => {
+
+            console.log(rsv)
+
             let time = ("0" + rsv.dateTime).slice(-2);
             $(`[data-court=${rsv.courtId}]`).find($(`[data-time=${time}]`)).attr('disabled', true).addClass('closed');
         })
@@ -349,10 +345,11 @@ console.log("test:::::::::::::::", expectedRsv);
 
 
 
+// =====================================
+// sessionStorage에 유저가 선택한 정보 보관
+// =====================================
 // localStorage.setItem("v1", "aaa");
 // sessionStorage.setItem("v2", "bbb");
-
-
 console.log(sessionStorage.getItem("courtId"))
 console.log(sessionStorage.getItem("fieldId"))
 console.log(sessionStorage.getItem("date"))
@@ -360,6 +357,13 @@ console.log(sessionStorage.getItem("region"))
 console.log(sessionStorage.getItem("city"))
 
 if (sessionStorage.getItem("courtId") != null) {
-    $('#drop-region').val(sessionStorage.getItem("region")).change();
-    $('#drop-city').val(sessionStorage.getItem("city")).change();
+        $('#drop-region').val(sessionStorage.getItem("region")).change();
+        $('#drop-city').val(sessionStorage.getItem("city")).change();
 }
+
+
+
+
+// =====================================
+//              유저 선호 지역
+// =====================================

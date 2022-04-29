@@ -34,40 +34,35 @@ public class UserController {
     }
   }
 
-  @RequestMapping("/member/signin")
-  public Object signin(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
-    // System.out.println("email>>>>>>>>>>>>>>" + email);
-    // System.out.println("password>>>>>>>>>>>" + password);
 
-    User loginUser = memberService.getLoginUser(email, password);
+    @RequestMapping("/member/signin")
+    public Object signin(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
+        User loginUser = memberService.getLoginUser(email, password);
+        Cookie cookie = null;
 
-    if (loginUser != null) {
+        if (loginUser != null) {
+            session.setAttribute("loginUser", loginUser);
+            System.out.println(loginUser);
+            if (saveEmail) {
+                cookie = new Cookie("userEmail", email);
+            } else {
+                cookie = new Cookie("userEmail", "");
+                cookie.setMaxAge(0);
+            }
+            response.addCookie(cookie);
+            System.out.println(cookie);
 
-      session.setAttribute("loginUser", loginUser);
+            return new ResultMap().setStatus(SUCCESS).setData(loginUser);
+        } else {
+            return new ResultMap().setStatus(FAIL);
+        }
 
-      Cookie cookie = null;
-      if (saveEmail) {
-        cookie = new Cookie("userEmail", email);
-      } else {
-        cookie = new Cookie("userEmail", "");
-        cookie.setMaxAge(0);
-      }
-      response.addCookie(cookie);
 
-      System.out.println(loginUser);
-
-      return new ResultMap().setStatus(SUCCESS).setData(loginUser);
-    } else {
-      return new ResultMap().setStatus(FAIL);
-    }
-
-  }
-
-  @RequestMapping("/member/getLoginUser")
-  public Object getLoginUser(HttpSession session) {
-    User user = (User) session.getAttribute("loginUser");
-    System.out.println("member::::::::" + user);
-
+@RequestMapping("/member/getLoginUser")
+public Object getLoginUser(HttpSession session) {
+  User user = (User) session.getAttribute("loginUser");
+  System.out.println("member::::::::" + user);
+  
     if (user != null) {
       try {
         int ttlCash = lcDao.findCash(user.getUserId());

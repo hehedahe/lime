@@ -12,6 +12,10 @@ public class MatchRsv {
   int userId;
   int limeId;
   String state;
+  String ratingList;
+  String team;
+  String ratingScore;
+
   Match match;
   String date;
   List<User> users;

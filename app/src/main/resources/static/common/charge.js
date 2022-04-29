@@ -97,7 +97,7 @@ $("#charge-btn").click(function (e) {
         && ($('#agreement2').is(':checked'))
         && methodValue == '카드 결제') {
 
-        window.resizeTo(1200,890);
+        window.resizeTo(1200, 890);
 
         //결제시 전달되는 정보
         var IMP = window.IMP; // 생략 가능
@@ -116,11 +116,11 @@ $("#charge-btn").click(function (e) {
         }, function (rsp) { // callback
             if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
                 // axios로 HTTP 요청
-                axios.post('/limecash/charge',{
+                axios.post('/limecash/charge', {
                     impUid: rsp.imp_uid,
                     merchantUid: rsp.merchant_uid,
                     userId: user.userId,
-                    amt: amount.replace(',', '').replace('원','')
+                    amt: amount.replace(',', '').replace('원', '')
                 }).then((data) => {
                     console.log(data.status);
                 });
@@ -131,21 +131,19 @@ $("#charge-btn").click(function (e) {
                 alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
             }
         });
-    } else if (($('#agreement1').is(':checked'))
-            && ($('#agreement2').is(':checked'))
-            && methodValue == '무통장 입금'){
-
-        axios.post('/limecash/charge',{
-            userId: user.userId,
-            amt: amount.replace(',', '').replace('원','')
-        }).then((data) => {
-            console.log(data.status);
-        });
-
-        alert('무통장 입금 성공!!');
-        window.opener.location.reload();
-        window.close();
-
+    // } else if (($('#agreement1').is(':checked'))
+    //         && ($('#agreement2').is(':checked'))
+    //         && methodValue == '무통장 입금'){
+    //
+    //     axios.post('/limecash/charge',{
+    //         userId: user.userId,
+    //         amt: amount.replace(',', '').replace('원','')
+    //     }).then((data) => {
+    //         console.log(data.status);
+    //     });
+    //
+    //     window.opener.location.reload();
+    //     window.close();
     } else {
         window.alert("구매 조건 및 정보 제공 등에 동의해 주세요.");
     }
