@@ -123,15 +123,8 @@
       <form name="form1">
       <div class="form-signup">
         <label for="inputEmail" class="form-label">이메일</label>
-      <div class="row">
-        <div class="col-8 input-phone">
-          <input class="form-control" type="tel" name="email" id="inputEmail" placeholder="이메일">
-        </div>
-        <div class="col input-phone">
-          <button class="btn col" id="phoneCheck" type="button" onclick="emailSend()">인증요청</button>
-        </div> 
+        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="이메일">
       </div>
-
       <div class="form-signup">
         <label for="inputPassword" class="form-label">비밀번호</label>
         <div class="form-text mb-2 signup-help">영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</div>
@@ -148,13 +141,13 @@
       </div>
       <div class="form-signup">
         <label for="inputPhone" class="form-label">휴대폰 번호</label>
-         <!-- <div class="row">
-          <div class="col-8 input-phone"> -->
+        <!-- <div class="row"> -->
+          <!-- <div class="col-8 input-phone"> -->
             <input class="form-control" type="tel" name="phoneNo" id="inputPhone" placeholder="휴대폰번호(-없이 입력)">
-          </div>
+          <!-- </div> -->
           <!-- <div class="col input-phone">
             <button class="btn col" id="phoneCheck">인증요청</button>
-          </div>  -->
+          </div> -->
         </div>
       </div>
       <div class="form-signup">
@@ -182,7 +175,7 @@
           </div>
         </div>
       </div>
-      <button class="w-100 btn btn-primary mb-4" id="btn-signup" formaction="" type="button"  >가입하기</button>
+      <button class="w-100 btn btn-primary mb-4" id="btn-signup">가입하기</button>
       </form>
       <div class="row mb-5" id="footer-login">
         <div class="col text-center">이미 아이디가 있으신가요?<a href="../login/login.html">로그인</a></div>
@@ -219,17 +212,7 @@ $(".form-control").focusout(function() {
 })
 
 
-
-// $("#btn-signup").click(function () {
-//   $('form1').attr("action", "/signup/signup1")
-
-//   console.log("요청 성공")
-// })
-
-
-
-
-/*
+  
 document.querySelector("form[name=form1]").onsubmit = function() {
 
   const p1 = document.getElementById('inputPassword').value;
@@ -247,7 +230,7 @@ document.querySelector("form[name=form1]").onsubmit = function() {
     alert("실명으로 사용해주세요!")
     return false;
   }
-
+*/
   if (email.value === "" || 
       pwd.value === "" ||
   		name.value === "" ||
@@ -275,12 +258,7 @@ document.querySelector("form[name=form1]").onsubmit = function() {
 
   return false;
 };
-*/
 
-
-
-
-/*
 
 $(document).ready(function() {
   $("#checkAll").click(function() {
@@ -296,44 +274,6 @@ $(document).ready(function() {
     else $("#checkAll").prop("checked", true); 
   });
 });
-
-*/
-
-
-function emailSend() {
-  let clientEmail = document.getElementById('inputEmail').value;
-
-  console.log(clientEmail)
-
-
-  let emailYn = isEmail(clientEmail);
-
-
-  if(emailYn == true) {
-    alert("이메일 인증")
-
-    $.ajax({
-      type:"POST",
-      url: "api/user/mail",
-      data:{mail:clientEmail},
-      success : function(data) {
-      }, error: function(e) {
-        alert("오류 발생")
-      }
-    })
-  } else {
-    alert('이메일 형식에 알맞게 입력해주세요!')
-  }
-}
-
-
-function isEmail(asvalue) { //이메일 정규식 사용
-  const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-  return regExp.test(asvalue);
-}
-
-
-
 
 
 
