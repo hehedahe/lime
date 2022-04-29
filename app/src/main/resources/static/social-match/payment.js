@@ -104,6 +104,7 @@ paymentInfo.amt = 20000;
 paymentInfo.typeUse= "U";
 paymentInfo.matchId = matchId;
 paymentInfo.state = "P";
+paymentInfo.used = "M";
 
 console.log(JSON.stringify(paymentInfo));
 

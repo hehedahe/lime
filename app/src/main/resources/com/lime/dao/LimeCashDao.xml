@@ -15,8 +15,8 @@
 
 
 <insert id="checkout" parameterType="LimeCash" keyProperty="limeId" keyColumn="lime_id" useGeneratedKeys="true">
-    INSERT INTO lime_cash(user_id, amt, type_use)
-    VALUE       (#{userId},#{amt},#{typeUse})
+    INSERT INTO lime_cash(user_id, amt, type_use, used)
+    VALUE       (#{userId},#{amt},#{typeUse},#{used})
 </insert>
 
 
