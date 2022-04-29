@@ -96,13 +96,10 @@
               <thead>
                 <tr id="x-thead"  class="align-middle">
                   <th scope="col">No.</th>
-                  <th scope="col">구장명</th>
-                  <th scope="col">구장주소</th>
-                  <th scope="col">코트타입</th>
-                  <th scope="col">코트갯수</th>
-                  <th scope="col">주차장</th>
-                  <th scope="col">실내외여부</th>
-                  <th scope="col">야간라이트</th>
+                  <th scope="col">문의내역</th>
+                  <th scope="col">문의자명</th>
+                  <th scope="col">문의처리</th>
+				  <th>
                 </tr>
               </thead>
             <tbody id ="x-tbody">
@@ -231,14 +228,9 @@ for (
   chartHtml +=`
   <tr id = "xTr">
     <td id="x-no">${fields[i].fieldId}</td>
-          <td>${fields[i].name}</td>
-          <td>${goo}</br>${remainAddr}</td>
-          <td>${fields[i].courtName}</td>
-          <td>${fields[i].courtCnt}</td>
-          <td>${fields[i].parkingYn}</td>
-          <td>${fields[i].indYnName}</td>
-          <td>${fields[i].lightYn}</td>
-          <td><button id="chattingBtn"  class="btn btn-outline-success" type="button" value= "${manages[i].userId}">1:1 채팅</td>
+          <td><p>구장예약어떻게 하나요??</p></td>
+          <td><p>홍길동${i+1}</p></td>
+          <td><button id="chattingBtn"  class="btn btn-outline-success" type="button">1:1 채팅</td>
         </tr>`
  		remainAddr ='';
 }
@@ -306,6 +298,10 @@ function paging(no,fields) {
     //글 목록 표시 재호출
     displayData(selectedPage, fields);
   });
+  $("#chattingBtn").click(function(){
+	  window.open("../../chatting/chat.html")
+  });
+  
 }
 </script>
 </body>

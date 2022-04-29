@@ -1,6 +1,6 @@
 // 로그인 시스템 대신 임시 방편
-let username = prompt("아이디를 입력하세요");
-let roomNum = prompt("채팅방 번호를 입력하세요");
+let username = 'adming';
+let roomNum = 5;
 
 document.querySelector("#username").innerHTML = username;
 
