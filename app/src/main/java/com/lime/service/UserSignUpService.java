@@ -5,9 +5,9 @@ import com.lime.domain.UserSignUp;
 
 public interface UserSignUpService {
 
-  int insert (UserSignUp userLogin);
+  int insert (User user);
 
-  int insert1 (UserSignUp userLogin);
+  int insert1 (User user);
 
   //int allAdd(UserLogin userLogin);
 

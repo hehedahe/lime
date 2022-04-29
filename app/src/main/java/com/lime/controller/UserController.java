@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import com.lime.dao.LimeCashDao;
 import com.lime.domain.User;
-import com.lime.domain.UserSignUp;
 import com.lime.service.UserService;
 import com.lime.service.UserSignUpService;
 
@@ -114,12 +113,10 @@ public class UserController {
 
     // 3) 현재 등록된 사용자 중에서 해당 이메일의 사용자가 있는지 찾아본다.
     // 4-2) 등록된 사용자가 아니라면 회원 등록 후 자동 로그인 처리한다.
-    userSignUpService.insert(new UserSignUp()
+    userSignUpService.insert(new User()
         .setEmail(email)
         .setName(name)
         .setPassword("1111"));
-
-    UserSignUp userSignUp = new UserSignUp();
 
     return new ResultMap().setStatus(SUCCESS).setData("새 회원 로그인");
   }
