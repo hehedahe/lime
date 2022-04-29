@@ -56,6 +56,7 @@ public class UserController {
         } else {
             return new ResultMap().setStatus(FAIL);
         }
+    }
 
 
 @RequestMapping("/member/getLoginUser")
