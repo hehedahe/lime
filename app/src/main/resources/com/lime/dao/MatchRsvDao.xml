@@ -94,7 +94,7 @@
         UPDATE social_mtch_rsv
         SET    team=#{team}
         WHERE  mtch_id=#{matchId}
-        AND user_id=#{userId}
+        AND    user_id=#{userId}
     </update>
 
 
