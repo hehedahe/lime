@@ -22,4 +22,6 @@ public interface MatchRsvDao {
 
   MatchRsv findUsers(int matchId);
 
+  MatchRsv getAverageLevel(Integer matchId);
+
 }

@@ -15,6 +15,7 @@ public class MatchRsv {
   Match match;
   String date;
   List<User> users;
+  int averageLevel;
 
   public MatchRsv() {}
 

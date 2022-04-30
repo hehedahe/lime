@@ -5,7 +5,7 @@ $.getJSON("/member/getLoginUser", (result) => {
   if (result.status == "fail") {
     return;
   }
-  $.getJSON(`/rsv/match/check?matchId=${matchId}`, function (result) {
+  $.getJSON(`/rsv/match/check-reserved?matchId=${matchId}`, function (result) {
     console.log('예약한 적 있는가? ' + result.status);
     if (result.status == "success") {
       $("#apply-btn").addClass("closed-btn").text("신청 완료");
@@ -27,7 +27,7 @@ const countDownTimer = function (id, date) {
 
       if (distDt < 0) {
         clearInterval(timer);
-        document.getElementById(id).textContent = '해당 매치는 마감되었습니다.';
+        getAvgLevel();
         $("#apply-btn").addClass("closed-btn").text("마감");
         return;
       }
@@ -85,6 +85,8 @@ if (matchId == null) {
 }
 
 console.log(matchId);
+
+let matchInfo = {};
     
 const xNumOfPeople = $("#numOfPeople");
 const xMatchType = $("#matchType");
@@ -140,7 +142,11 @@ $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
 
   checkRemains(match.numOfPeople);
 
+  matchInfo.level = match.levelNo
+
 });
+
+console.log(matchInfo)
 
 function getDay(date) {
   let today = new Date(date);
@@ -214,6 +220,16 @@ function checkLevel(level) {
   }
 }
 
+function getLevel(level) {
+  switch (level) {
+    case 1: return 'DEVELOPMENT'
+    case 2: return 'BEGINNER'
+    case 3: return 'INTERMEDIATE'
+    case 4: return 'ADVANCED'
+    case 5: return 'PRO'
+  }
+}
+
 function checkCourtType(courtTypeNo) {
   switch (courtTypeNo) {
     case 1: return '하드'
@@ -253,6 +269,21 @@ function checkRemainsForD() {
   })
 }
 
+function getAvgLevel() {
+  console.log("getAvgLevel() 실행됨");
+  $.getJSON(`/rsv/match/avg-level?matchId=${matchId}`, (result) => {
+    if (result.status == "success") {
+      let avgLevel = result.data.averageLevel;
+      document.getElementById("countdown").textContent = `예상 평균 레벨은 ${getLevel(avgLevel)}입니다.`;
+      $("#countdown").css("font-size", "1.6rem")
+    } else {
+      document.getElementById(id).textContent = '해당 매치는 마감되었습니다.';
+    }
+  })
+}
+
+getAvgLevel();
+
 $("#next-btn").on("click", (e) => {
   $(".date-div").css("transform", "translateX(-36%)").css("transition", "all .5s");
   $("#next-btn").addClass("disabled");
@@ -269,6 +300,24 @@ var scrollSpy = new bootstrap.ScrollSpy(document.body, {
   target: '#navbar-example'
 })
 
+let matchLevel = {};
+matchLevel = $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
+  return result.responseJSON;
+})
+
+console.log(matchLevel)
+
+let matchLevel2 = {};
+matchLevel2 = fetch(`/match/get?matchId=${matchId}`)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (result) {
+      return result.data;
+    })
+  
+console.log(matchLevel2)
+
 $("#apply-btn").on("click", (e) => {
   $.getJSON("/member/getLoginUser", (result) => {
     console.log(result.status);
@@ -282,18 +331,23 @@ $("#apply-btn").on("click", (e) => {
 
   checkRemains(reverseCheckNumOfPeople(xNumOfPeople.html()));
 
-  $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
+  $.getJSON("/rsv/match/balance", function (result) {
+    console.log(result);
+    let userInfo = result.data;
+    console.log("로그인한 유저의 레벨: " + userInfo.lvId);
 
-//   $.getJSON("/rsv/match/balance", function (result) {
-//     console.log(result);
-//     let userInfo = result.data;
-//     if (userInfo.sum < 20000) {
-//       window.alert("라임캐시가 부족합니다. 충전하시겠습니까?");
-//       location.href = `../common/charge.html`
-//     } else {
-//       $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
-//     }
-//   })      
+    $.getJSON(`/match/get?matchId=${matchId}`, function (result) {
+      let matchLv = result.data.levelNo;
+      console.log("현재 매치의 레벨 제한: " + matchLv)
+      if (userInfo.lvId < matchLv) {
+        window.alert(`${checkLevel(matchLv)}부터 참여 가능합니다.`);
+        return;
+      } else {
+        $(location).attr("href", `/social-match/payment.html?matchId=${matchId}`)
+      }
+    })
+
+  })      
 }
   // location.href = `/social-match/payment.html?matchId=${matchId}`
   // fetch("/match/order").then(function (response) {
