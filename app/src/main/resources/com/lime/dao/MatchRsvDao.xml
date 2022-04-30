@@ -104,12 +104,22 @@
         WHERE     smr.mtch_id = #{matchId}
     </select>
 
-    <update id="updateTeam" parameterType="matchRsv">
-        UPDATE social_mtch_rsv
-        SET    team=#{team}
-        WHERE  mtch_id=#{matchId}
-        AND    user_id=#{userId}
-    </update>
+<!--    <update id="updateTeam" parameterType="matchRsv">-->
+<!--        UPDATE social_mtch_rsv-->
+<!--        SET    team=#{team}-->
+<!--        WHERE  mtch_id=#{matchId}-->
+<!--        AND    user_id=#{userId}-->
+<!--    </update>-->
 
+<!--    <update id="updateScore" parameterType="matchRsv">-->
+<!--        UPDATE social_mtch_rsv smr-->
+<!--        SET    smr.rating_list=CONCAT(#{normalPoint},',',#{matchPoint}),-->
+<!--               smr.rating_score=(SELECT sum(rl.score)-->
+<!--                                 FROM   rating_list rl-->
+<!--                                 WHERE  rl.rating_list_id=#{normalPoint}-->
+<!--                                    OR     rl.rating_list_id=#{matchPoint})-->
+<!--        WHERE  smr.mtch_id=#{matchId}-->
+<!--          AND    smr.user_id=#{userId}-->
+<!--    </update>-->
 
 </mapper>

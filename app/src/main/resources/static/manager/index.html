@@ -27,7 +27,7 @@
     </div>
 </nav>
 
-<div class="d-flex h-100" id="wrapper">
+<div class="d-flex" id="wrapper">
     <!-- Sidebar-->
     <div class="border-end bg-white" id="sidebar-wrapper">
         <div class="list-group list-group-flush">
@@ -97,7 +97,7 @@
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form name="rating-form">
+                        <form name="form" id="rating-form">
                             <div class="d-flex align-items-center my-2">
                                 <img src="../header/userImg.png" height="30px" width="30px"/>
                                 <div class="mx-3 fw-bold fs-5 u-name"></div>
@@ -118,48 +118,48 @@
                                 <div>
                                     <label class="form-label">일반</label>
                                     <div class="point-form">
-                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point1" value="1">
+                                        <input type="radio" class="btn-check point-chk" name="normalPoint" id="normal-point1" value="5">
                                         <label class="btn" for="normal-point1">성별 불일치</label>
-                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point2" value="2">
+                                        <input type="radio" class="btn-check point-chk" name="normalPoint" id="normal-point2" value="10">
                                         <label class="btn" for="normal-point2">무단 불참</label>
-                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point3" value="3">
+                                        <input type="radio" class="btn-check point-chk" name="normalPoint" id="normal-point3" value="5">
                                         <label class="btn" for="normal-point3">테니스화 미착용</label>
-                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point4" value="4">
+                                        <input type="radio" class="btn-check point-chk" name="normalPoint" id="normal-point4" value="5">
                                         <label class="btn" for="normal-point4">지각</label>
-                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point5" value="5">
+                                        <input type="radio" class="btn-check point-chk" name="normalPoint" id="normal-point5" value="5">
                                         <label class="btn" for="normal-point5">15분 이상 지각</label>
-                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point6" value="6">
+                                        <input type="radio" class="btn-check point-chk" name="normalPoint" id="normal-point6" value="5">
                                         <label class="btn" for="normal-point6">금연 구역에서 흡연</label>
-                                        <input type="radio" class="btn-check point-chk" name="normal-point" id="normal-point7" value="7">
+                                        <input type="radio" class="btn-check point-chk" name="normalPoint" id="normal-point7" value="10">
                                         <label class="btn" for="normal-point7">매치 직전 취소</label>
                                     </div>
                                 </div>
                                 <div class="mt-2">
                                     <label class="form-label">경기중</label>
                                     <div class="point-form">
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point1" value="8">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point1" value="10">
                                         <label class="btn" for="match-point1">거친 플레이</label>
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point2" value="9">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point2" value="10">
                                         <label class="btn" for="match-point2">지시/짜증/욕설</label>
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point3" value="10">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point3" value="20">
                                         <label class="btn" for="match-point3">운영 비협조</label>
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point4" value="11">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point4" value="20">
                                         <label class="btn" for="match-point4">무단 이탈</label>
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point5" value="12">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point5" value="30">
                                         <label class="btn" for="match-point5">폭행</label>
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point6" value="13">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point6" value="10">
                                         <label class="btn" for="match-point6">보복성 플레이</label>
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point7" value="14">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point7" value="10">
                                         <label class="btn" for="match-point7">무성의한 플레이</label>
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point8" value="15">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point8" value="10">
                                         <label class="btn" for="match-point8">지나친 개인 플레이</label>
-                                        <input type="radio" class="btn-check point-chk" name="match-point" id="match-point9" value="16">
+                                        <input type="radio" class="btn-check point-chk" name="matchPoint" id="match-point9" value="20">
                                         <label class="btn" for="match-point9">조롱/도발/비꼼</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center mt-4">
-                                <button type="submit" class="btn w-50">저장</button>
+                                <button type="button" class="btn w-50 save-btn">저장</button>
                             </div>
                         </form>
                     </div>

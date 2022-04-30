@@ -21,9 +21,11 @@ public interface MatchRsvDao {
   List<MatchRsv> findByUserId(int userId);
 
   MatchRsv findUsers(int matchId);
-
-  int updateTeam(MatchRsv matchRsv);
+  
+  //  int updateTeam(MatchRsv matchRsv);
+  //  int updateScore(MatchRsv matchRsv);
   
   MatchRsv getAverageLevel(Integer matchId);
+
 
 }

@@ -146,7 +146,7 @@ $('#payment-btn').on('click', function (e) {
                     text: '다시 시도해 주세요.'
                 });
             }
-        })
+        });
     }
 });
 

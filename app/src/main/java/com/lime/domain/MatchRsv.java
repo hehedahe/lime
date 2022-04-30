@@ -16,6 +16,10 @@ public class MatchRsv {
   String team;
   String ratingScore;
 
+  String lvId;
+  String normalPoint;
+  String matchPoint;
+
   Match match;
   String date;
   List<User> users;
