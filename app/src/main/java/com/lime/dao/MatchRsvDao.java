@@ -22,6 +22,8 @@ public interface MatchRsvDao {
 
   MatchRsv findUsers(int matchId);
 
-  int updateTeam(MatchRsv matchRsv);
+//  int updateTeam(MatchRsv matchRsv);
+//
+//  int updateScore(MatchRsv matchRsv);
 
 }

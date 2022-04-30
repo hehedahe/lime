@@ -32,6 +32,14 @@
         WHERE  email = #{email}
     </select>
 
+    <update id="update" parameterType="user">
+        UPDATE `member` m
+        SET    m.lv_id = #{lvId},
+               m.manner_score = #{mannerScore}
+        WHERE  user_id = #{userId}
+    </update>
+
+
 </mapper>
 
 
