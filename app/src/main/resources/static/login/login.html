@@ -7,13 +7,12 @@
     <title>라임</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
-
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+    <script src="../node_modules/js-cookie/dist/js.cookie.js"></script>
 
     <style>
         .bd-placeholder-img {
@@ -52,7 +51,7 @@
 
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me" class="form-check-input"> <span>이메일 저장하기</span>
+                <input name="saveEmail" type="checkbox">이메일 저장하기
             </label>
         </div>
         <button class="w-100 btn btn-primary mb-4"
@@ -67,11 +66,18 @@
             SNS계정으로 간편 로그인/회원가입
         </div>
         <div class="row justify-content-center mb-3">
-            <div id="facebook-login">
+            <!-- <div id="facebook-login">
                 <a href="">
                     <svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet">
                         <g fill="none" fill-rule="evenodd">
                             <path fill="#3B5998"
+                            <div> -->
+                                <div>
+                                    <fb:login-button 
+                                        scope="public_profile,email" 
+                                    onlogin="checkLoginState();"></fb:login-button>
+                                </div>
+                                <!--
                                   d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z">
                             </path>
                             <path fill="#FFF"
@@ -80,7 +86,7 @@
                         </g>
                     </svg>
                 </a>
-            </div>
+            </div> -->
             <div id="kakao-login">
                 <a href="">
                     <svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet">
@@ -113,7 +119,7 @@
     </form>
 </main>
 
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 <script type="text/javascript">
 
     document.querySelector("form[name=form1]").onsubmit = function () {
@@ -141,7 +147,67 @@
         return false;
     };
 
+
+window.fbAsyncInit = function() {
+
+  FB.init({
+    appId      : '3138092889841579', // 개발자가 등록한 앱 ID
+    cookie     : true,  
+    xfbml      : true,  
+    version    : 'v13.0' 
+  });
+  FB.AppEvents.logPageView();
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function checkLoginState() {
+    FB.getLoginStatus(function(response) { 
+        if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+            
+        	var params = new URLSearchParams();
+          params.append("accessToken", response.authResponse.accessToken);
+
+          fetch("/member/facebookLogin", {
+        	  method: "POST",
+        	  body: params 
+        	}).then(function(response) {
+        		return response.json();
+        	}).then(function(result) {   
+        		if (result.status == "success") {
+                    console.log("--------------------------")
+        			console.log(result.data)
+                    console.log("--------------------------")
+        			location.href = "/social-match/index.html";
+        		} else {
+        			window.alert("페이스북 로그인 실패!");
+        			console.log(result.data);
+        		}
+        	});
+          
+        } else { // 로그인이 되지 않았을 때,
+            console.log("로그인 되지 않았음");
+        }
+    });
+}
+
+var xEmail = document.querySelector("input[name=email]");
+
+//userEmail 쿠키가 있다면 값을 꺼내서 이메일 입력 상자에 넣는다.
+var userEmail = Cookies.get('userEmail');
+if (userEmail != undefined) {
+    xEmail.value = userEmail;
+}
+
 </script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

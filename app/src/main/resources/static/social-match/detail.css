@@ -65,6 +65,10 @@ a {
   border-bottom-width: 1px;
 }
 
+.field-detail .list-group-item {
+  height: 6.4rem;
+}
+
 .match-time {
   font-weight: bold;
 }

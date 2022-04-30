@@ -1,6 +1,5 @@
 package com.lime.domain;
 
-import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,5 +42,30 @@ public class User {
   int sum;
   int num;//페이징처리(row_number index)
   int userCount;//총 회원수
+
+
+  // 회원가입시 사용하는 도메인 정보
+  String unrgtDate;
+  boolean unrgtYn;
+
+  int clubId;
+  String brthDate;
+  int socialId;
+  boolean socialYn;
+  int bankId;
+  String accountNo;
+  String accountHolder;
+  String scope;
+  int preferDays;
+  int preferWeekend;
+  int cityId;
+  int regionId;
+  String cityName;
+  String regionName;
+  int courtTypeId;
+  String courtTypeName;
+  String leftYn;
+
+  // 여기까지
 }
 
