@@ -24,7 +24,7 @@ public class ManagerController {
         return new ResultMap().setStatus(SUCCESS).setData(users);
     }
 
-    @PostMapping("/setTeam")
+    @PutMapping("/setTeam")
     public Object setTeam(@RequestBody MatchRsv matchRsv) {
         int setTeam = rtService.addTeamInfo(matchRsv);
 
