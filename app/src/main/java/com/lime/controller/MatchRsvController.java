@@ -58,7 +58,7 @@ public class MatchRsvController {
     return new ResultMap().setStatus(FAIL).setData("로그인하지 않았습니다.");
   }
 
-  @GetMapping("/check")
+  @GetMapping("/check-reserved")
   public Object get(HttpSession session, int matchId) {
     User user = (User) session.getAttribute("loginUser");
 
@@ -70,6 +70,16 @@ public class MatchRsvController {
       return new ResultMap().setStatus(SUCCESS).setData(match);      
     }
     return new ResultMap().setStatus(FAIL).setData("예약한 적 없습니다.");
+  }
+
+  @GetMapping("/avg-level")
+  public Object compare(int matchId) {
+    MatchRsv match = matchRsvService.getAverageLevel(matchId);
+
+    if (match != null) {
+      return new ResultMap().setStatus(SUCCESS).setData(match);
+    }
+    return new ResultMap().setStatus(FAIL).setData("매치 인원이 부족하거나 경기 시작 30분 전이 아닙니다.");
   }
 
   @GetMapping("/get")

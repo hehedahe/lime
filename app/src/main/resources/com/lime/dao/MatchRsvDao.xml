@@ -13,6 +13,7 @@
         <result column="rating_list" property="ratingList"/>
         <result column="team" property="team"/>
         <result column="rating_score" property="ratingScore"/>
+        <result column="avg_level" property="averageLevel"/>
 
         <collection property="users" ofType="user">
             <id column="user_id" property="userId"/>
@@ -60,6 +61,19 @@
         ON              smr.lime_id = lc.lime_id
         WHERE           smr.user_id = #{userId}
         ORDER BY        smr.mtch_id ASC
+    </select>
+
+    <select id="getAverageLevel" resultMap="matchRsvMap">
+        SELECT          smr.mtch_id,
+                        smr.user_id,
+                        smr.lime_id,
+                        smr.state,
+                        ROUND(AVG(m.lv_id)) avg_level
+        FROM            social_mtch_rsv smr
+        LEFT OUTER JOIN member m
+        ON              smr.user_id = m.user_id
+        WHERE           smr.mtch_id = #{matchId}
+        ORDER BY        smr.user_id ASC;
     </select>
 
     <select id="findByMatchIdAndUserId" resultMap="matchRsvMap">
