@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>라임</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
+
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="find-pwd.css" rel="stylesheet">
+
+
+    
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".footer").load('../footer/footer.html');
+            $(".header").load("../header/user/header.html");
+        })
+    </script> -->
+
+
+
+
+</head>
+
+
+
+
+
+<body class="text-center">
+
+<div class="header"></div>
+
+
+
+<main class="form-signin">
+        <!-- <h1 class="h2 mb-4" id="login-h">로그인</h1> -->
+        <h1 class="h1 mb-3" id="pwdfind">비밀번호 찾기</h1>
+        <div id="emailstn">가입한 이메일 주소를 입력해주세요.</div>
+        <div class="form-login">
+            <input type="text" name="floatingPassword" class="form-control" id="floatingPassword1" >
+            <span id="email-chek">⨀가입되지 않은 이메일입니다.</span>
+        </div>
+
+        
+
+        <button type="button" class="w-100 btn btn-primary mb-4" id="link-btn"
+        >비밀번호 설정 링크 받기
+        </button>
+
+        <div class="w-100 btn btn-primary mb-4" id="info-tel">
+        <a id="frment">회원가입시 입력한 정보가 보이지 않는다면?</a><br>
+        <a>고객센터 문의하기(1557-1004)</a>
+        </div>
+        <!--   onclick="location.href='/social_match/social_match.html'">로그인</button> -->
+        
+        <!-- <div class="row justify-content-center mb-3"> -->
+        
+            
+
+        <div class="section-border"></div>
+        <p class="mt-5 mb-3 text-muted">&copy; lime, Co., Ltd.. All Rights Reserved</p>
+</main>
+
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+
+
+$(document).ready(function () {
+		
+	  
+		$(document).on("click", "#link-btn" , function(){
+			alert(document.querySelector("#floatingPassword1").value);  
+			/*fetch(`/get/email=${email}`)
+			.then(function(response){
+				console.log(response);
+			})
+			*/	
+      });
+	
+	
+});
+
+
+
+</script>
+
+
+<div class="footer"></div>
+
+</body>
+
+</html>

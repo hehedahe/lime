@@ -32,7 +32,16 @@ public class UserController {
             return "fail";
         }
     }
-
+    /*
+    @RequestMapping("/get/email")
+    public Object getPwd(String email) {
+        if (memberService.add(user) == 1) {
+            return "success";
+        } else {
+            return "fail";
+        }
+    }
+*/
     @RequestMapping("/member/signin")
     public Object signin(String email, String password, boolean saveEmail, HttpServletResponse response, HttpSession session) {
         // System.out.println("email>>>>>>>>>>>>>>" + email);
