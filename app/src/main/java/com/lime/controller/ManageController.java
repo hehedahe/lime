@@ -21,7 +21,6 @@ public class ManageController {
   @Autowired 
   ManageReportService manageReportService;//게시물관리 
 
-
   //회원관리-회원리스트
   @RequestMapping("/manage/user/list")
   public Object userList(HttpSession session) {
