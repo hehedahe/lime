@@ -41,6 +41,7 @@
     <result column="content" property="content" />
     <result column="rgtDate" property="rgtDate" />
     <result column="itemName" property="itemName" />
+    <result column="name" property="userName"/>
   </resultMap>
   
 	
