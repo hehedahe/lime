@@ -493,7 +493,7 @@ function deleteItem(no) {
         window.alert("서버 요청 오류!");
         return;
         }
-        window.alert("삭제완료!");
+        // window.alert("삭제 완료!");
         location.href = "marketMain.html";
     });
 }
