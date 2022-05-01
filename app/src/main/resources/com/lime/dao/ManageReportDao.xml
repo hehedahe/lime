@@ -41,6 +41,7 @@
     <result column="content" property="content" />
     <result column="rgtDate" property="rgtDate" />
     <result column="itemName" property="itemName" />
+    <result column="name" property="userName"/>
   </resultMap>
   
 	
@@ -56,6 +57,7 @@
 			cls c
 			inner JOIN user u
 			ON c.user_id = u.user_id
+			ORDER BY c.cls_id DESC
   </select>
   <select id="findClassByNo" resultMap="classMap"
     parameterType="int">
