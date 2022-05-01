@@ -57,6 +57,7 @@
 			cls c
 			inner JOIN user u
 			ON c.user_id = u.user_id
+			ORDER BY c.cls_id DESC
   </select>
   <select id="findClassByNo" resultMap="classMap"
     parameterType="int">
