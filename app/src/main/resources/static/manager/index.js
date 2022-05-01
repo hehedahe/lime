@@ -128,19 +128,62 @@ $(document).on('click', '.team-btn', async function (e) {
 });
 
 
+
+let data = {};
+
+
 $(document).on('click', '.eval-btn', function (e) {
     let userId = $(this).parent().attr('value');
     let user = findUser(userId);
+
+    console.log(user);
     $('.u-name').html(`${user.name} ${levelTag(user.lvId)}`);
+
+    data.userId = userId;
+    data.mannerScore = Number(user.mannerScore);
 });
 
-const lv = $('select[name=level]').val();
-const normalPoint = $('input[name=normal-point]').val();
-const matchPoint = $('input[name=match-point]').val();
+// ----- 유저 정보를 가져와
+// ----- 유저 번호, 유저 이름, 유저 레벨, 유저 점수
+// ------ let userLevel;
+// ------- let userScore;
+
+// ---- getUserInfo()
+// ---- response;
+// userLevel = response.userLevel
 
 
-$('form[name=rating-form]').on('submit', function (e) {
 
+
+
+
+
+
+$('.save-btn').on('click', function (e) {
+    let lv = $('#level-select option:selected').val();
+    let normalP = Number($('input[name=normalPoint]:checked').val());
+    let matchP = Number($('input[name=matchPoint]:checked').val());
+
+
+    data.mannerScore -= (normalP + matchP);
+    data.lvId = lv;
+
+    console.log(data);
+
+    fetch('/manager/update', {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(data)
+    }).then(function (res) {
+        return res;
+    }).then(function (result) {
+        console.log(result);
+        $('#rating-form').find(':input').prop('checked',false);
+        $('#level-select option').prop('selected', false);
+        $('#staticBackdrop').modal("hide");
+    })
 })
 
 

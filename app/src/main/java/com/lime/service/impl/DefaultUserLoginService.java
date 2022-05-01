@@ -16,19 +16,6 @@ public class DefaultUserLoginService implements UserSignUpService {
   @Autowired
   UserSignUpDao userLoginDao;
 
-  @Options(useGeneratedKeys = true, keyProperty = "userId")
-  @Transactional
-
-  /*
-  public int allAdd(User user) {
-    userLoginDao.page1(user);
-    userLoginDao.page2(user);
-    userLoginDao.page3(user);
-    userLoginDao.page4(user);
-    return 1;
-  }
-   */
-
 
   @Override
   public int add(User user) { // 각각의 table에 insert

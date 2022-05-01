@@ -269,6 +269,18 @@ a {
 
 .date-ul .btn-primary:focus {
   box-shadow: none;
+  background-color: #66c88d;
+}
+
+.date-ul .btn-primary.clicked {
+  box-shadow: none;
+  background-color: #66c88d;
+}
+
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: #66c88d;
 }
 
 .btn.disabled {
@@ -354,6 +366,11 @@ ul {
 }
 
 .average-level h2 {
+  font-weight: bolder;
+  margin: 0;
+}
+
+.average-level h3 {
   font-weight: bolder;
   margin: 0;
 }

@@ -22,6 +22,7 @@
 		<result column="club_name" property="club" />
 		<result column="lefty_yn" property="hand" />
 		<result column="lv_name" property="level" />
+		<result column="lv_id" property="lvId" />
 	</resultMap>
 	
  	 <resultMap type="field" id="fieldMap">
@@ -244,7 +245,7 @@
 	
 	
 	<select id="findByNo" resultMap="userMap" parameterType="int">
-   SELECT
+SELECT
           tt.userId userId,
           tt.name name,
           tt.email email,
@@ -266,6 +267,7 @@
           r_region_name,          
           club_name,
           lv_name,
+          lv_id,
           (
              case
                 when m_lefty_yn = 'Y'
@@ -316,6 +318,7 @@
           ,r1.region_name r_region_name
           ,club1.name club_name
           ,lv2.lv_name lv_name
+          ,m.lv_id
           ,m.lefty_yn m_lefty_yn
           ,c2.city_name c_city_name
           FROM user u

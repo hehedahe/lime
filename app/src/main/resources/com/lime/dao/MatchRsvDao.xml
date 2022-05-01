@@ -13,6 +13,7 @@
         <result column="rating_list" property="ratingList"/>
         <result column="team" property="team"/>
         <result column="rating_score" property="ratingScore"/>
+        <result column="avg_level" property="averageLevel"/>
 
         <collection property="users" ofType="user">
             <id column="user_id" property="userId"/>
@@ -62,6 +63,19 @@
         ORDER BY        smr.mtch_id ASC
     </select>
 
+    <select id="getAverageLevel" resultMap="matchRsvMap">
+        SELECT          smr.mtch_id,
+                        smr.user_id,
+                        smr.lime_id,
+                        smr.state,
+                        ROUND(AVG(m.lv_id)) avg_level
+        FROM            social_mtch_rsv smr
+        LEFT OUTER JOIN member m
+        ON              smr.user_id = m.user_id
+        WHERE           smr.mtch_id = #{matchId}
+        ORDER BY        smr.user_id ASC;
+    </select>
+
     <select id="findByMatchIdAndUserId" resultMap="matchRsvMap">
         SELECT          smr.mtch_id,
                         smr.user_id,
@@ -90,12 +104,22 @@
         WHERE     smr.mtch_id = #{matchId}
     </select>
 
-    <update id="updateTeam" parameterType="matchRsv">
-        UPDATE social_mtch_rsv
-        SET    team=#{team}
-        WHERE  mtch_id=#{matchId}
-        AND    user_id=#{userId}
-    </update>
+<!--    <update id="updateTeam" parameterType="matchRsv">-->
+<!--        UPDATE social_mtch_rsv-->
+<!--        SET    team=#{team}-->
+<!--        WHERE  mtch_id=#{matchId}-->
+<!--        AND    user_id=#{userId}-->
+<!--    </update>-->
 
+<!--    <update id="updateScore" parameterType="matchRsv">-->
+<!--        UPDATE social_mtch_rsv smr-->
+<!--        SET    smr.rating_list=CONCAT(#{normalPoint},',',#{matchPoint}),-->
+<!--               smr.rating_score=(SELECT sum(rl.score)-->
+<!--                                 FROM   rating_list rl-->
+<!--                                 WHERE  rl.rating_list_id=#{normalPoint}-->
+<!--                                    OR     rl.rating_list_id=#{matchPoint})-->
+<!--        WHERE  smr.mtch_id=#{matchId}-->
+<!--          AND    smr.user_id=#{userId}-->
+<!--    </update>-->
 
 </mapper>

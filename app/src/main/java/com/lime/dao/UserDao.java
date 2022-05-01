@@ -10,6 +10,7 @@ public interface UserDao {
   int insert(User user);
   User findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
   User findByEmail(String email);
+  int update(User user);
 }
 
 

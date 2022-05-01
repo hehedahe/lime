@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
 //STS 툴에 lombok 설정하는 법 (인터넷)
-
 @Data
 @Document(collection = "chat")
 public class Chat {

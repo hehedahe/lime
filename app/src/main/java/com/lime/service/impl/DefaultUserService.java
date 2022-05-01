@@ -27,4 +27,9 @@ public class DefaultUserService implements UserService {
     return userDao.findByEmail(email);
   }
 
+  @Override
+  public int update(User user) {
+    return userDao.update(user);
+  }
+
 }
