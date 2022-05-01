@@ -1,8 +1,13 @@
 // 로그인 시스템 대신 임시 방편
-let username = 'admin';
+var username = '';
 let roomNum = 8;
 
-document.querySelector("#username").innerHTML = username;
+function setName(userData){
+	console.log("호출되냐???????"+userData)
+	username = userData;
+	document.querySelector("#username").innerHTML = username;
+}
+
 
 // SSE 연결하기
 const eventSource = new EventSource(`http://localhost:8080/chat/roomNum/${roomNum}`);

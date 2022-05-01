@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'NG';
+    src: url("../asset/font/NanumGothic.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'NGBold';
+    src: url("../asset/font/NanumGothicBold.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'CooperBlack';
+    src: url("../asset/font/Cooper-Black-BT.woff") format("woff");
+}
+
+html {
+    overflow: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'NG';
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* header 전체*/
+#h-nav {
+    width: 100vw;
+}
+
+.header {
+    font-family: 'NG';
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(191, 186, 178);
+}
+
+/* 로고 */
+.nav-logo {
+    height: 10vh;
+    width: 15vw;
+    display: flex;
+    align-items: center;
+    padding: 2vh 0 0 4vw;
+    list-style: none;
+}
+
+.nav-logo > li {
+    font-family: 'CooperBlack';
+}
+
+.nav-logo li:first-child {
+    font-size: xxx-large;
+    color: rgb(70, 70, 70);
+}
+.nav-logo > li:last-child {
+    height: 4vh;
+    align-self: flex-end;
+    color: rgb(127, 127, 127);
+    margin-left: 10px;
+}
+
+/* 마이페이지 */
+.nav-links {
+    display: flex;
+    width: 8vw;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links > a {
+    color: #000;
+    text-decoration: none;
+}
+
+.nav-links > a:hover {
+    font-family: 'NGBold';
+    color: rgb(70, 70, 70);
+}
+
+.list-group-item {
+    padding: 1rem;
+    border: none;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+#sidebar {
+    width: 15rem;
+}
