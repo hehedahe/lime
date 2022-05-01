@@ -1,5 +1,5 @@
 // 로그인 시스템 대신 임시 방편
-let username = 'adming';
+let username = 'admin';
 let roomNum = 8;
 
 document.querySelector("#username").innerHTML = username;

@@ -72,6 +72,7 @@ let rsvData = {
     userId : user.userId,
     amt : 50000,
     typeUse : "U",
+    used : "C",
     courtRsv : {
         fieldId : rsvInfo.fieldId,
         courtId : rsvInfo.courtId,
@@ -90,7 +91,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 2000,
+    timer: 1200,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -101,8 +102,22 @@ const Toast = Swal.mixin({
 
 $('#payment-btn').on('click', function (e) {
     if (user.ttlCash < 50000) {
-        alert("라임 캐시 충전이 필요합니다. 🪙");
-        window.open('/common/charge.html', '라임캐시 충전', 'width=500, height=820, left=-1500, top=100, resizable=false');
+        Swal.fire({
+            icon: 'info',
+            title: '라임 캐시 잔액이 부족합니다.',
+            text: '캐시 충전 후 다시 시도해 주세요 🪙',
+            showCancelButton: true,
+            confirmButtonColor: '#66c88d',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '충전하기',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.open('/common/charge.html',
+                          '라임캐시 충전',
+                         'width=500, height=820, left=-1500, top=100, resizable=false');
+            }
+        });
     } else {
         fetch(('/rsv/court/add'), {
             method: 'post',
@@ -119,9 +134,11 @@ $('#payment-btn').on('click', function (e) {
                     title: '코트 예약이 완료되었습니다.'
                 });
 
+                sessionStorage.clear();
+
                 setTimeout(function () {
                     location.href = '/social-match/rsv.html';
-                }, 3000)
+                }, 1200)
             } else {
                 Toast.fire({
                     icon: 'error',

@@ -84,6 +84,10 @@ var arr = location.href.split("?");
         
         itemNo.value = item.data.itemId;
         console.log(loginUser.data.userId);
+
+        let arr = item.data.content.split("\n");
+        const areaHeight = 28 * arr.length;
+        $("#item-content").css('height', `${areaHeight}px`);
         // if (item.data.userId != loginUser.data.userId) {
         //     window.alert("권한이 없습니다!");
         //     return;

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/header/mgrHeader.css">
     <link rel="stylesheet" href="index.css">
 
@@ -27,7 +27,7 @@
     </div>
 </nav>
 
-<div class="d-flex" id="wrapper">
+<div class="d-flex h-100" id="wrapper">
     <!-- Sidebar-->
     <div class="border-end bg-white" id="sidebar-wrapper">
         <div class="list-group list-group-flush">
@@ -59,7 +59,6 @@
 
         <div class="mt-5 mb-3 fs-4 fw-bold row align-items-center">
             <div class="col">참가자 명단</div>
-            <button type="button" class="btn mx-3" id="team-btn">팀 선택 완료</button>
         </div>
 
         <div id="user-list">
@@ -77,6 +76,8 @@
             </div>
         </div>
 
+
+        <!--  평가 모달  -->
         <div class="modal fade"
              id="staticBackdrop"
              data-bs-backdrop="static"
@@ -84,30 +85,31 @@
              tabindex="-1"
              aria-labelledby="staticBackdropLabel"
              aria-hidden="true">
+
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title fw-bolder" id="staticBackdropLabel">참가자 평가</h4>
+
                         <button type="button"
                                 class="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form name="rating-form">
                             <div class="d-flex align-items-center my-2">
                                 <img src="../header/userImg.png" height="30px" width="30px"/>
-                                <div class="mx-3 fw-bold fs-5 u-name">김라임</div>
-                                <span class="badge bg-warning u-level">INTERMEDIATE</span>
+                                <div class="mx-3 fw-bold fs-5 u-name"></div>
                             </div>
-                            <div class="my-3">
+                            <div class="my-4">
                                 <label for="level-select" class="form-label">레벨</label>
-                                <select type="level" class="form-select" id="level-select" aria-label="level select">
-                                    <option>DEVELOPMENT</option>
-                                    <option>BEGINNER</option>
-                                    <option>INTERMEDIATE</option>
-                                    <option>ADVANCED</option>
-                                    <option>PRO</option>
+                                <select type="level" class="form-select" id="level-select" name="level" aria-label="level select">
+                                    <option value="1">DEVELOPMENT</option>
+                                    <option value="2">BEGINNER</option>
+                                    <option value="3">INTERMEDIATE</option>
+                                    <option value="4">ADVANCED</option>
+                                    <option value="5">PRO</option>
                                 </select>
                                 <div id="levelHelp" class="form-text">실제 레벨과 다를 경우 변경해주세요.<br>참가자에게 레벨을 알려주지 마세요.</div>
                             </div>
@@ -156,10 +158,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn d-flex justify-content-center w-25">저장</button>
+                            <div class="d-flex justify-content-center mt-4">
+                                <button type="submit" class="btn w-50">저장</button>
+                            </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

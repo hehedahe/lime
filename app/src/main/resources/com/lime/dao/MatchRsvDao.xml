@@ -10,6 +10,9 @@
         <result column="state" property="state"/>
         <result column="date" property="date"/>
         <result column="lime_id" property="limeId"/>
+        <result column="rating_list" property="ratingList"/>
+        <result column="team" property="team"/>
+        <result column="rating_score" property="ratingScore"/>
 
         <collection property="users" ofType="user">
             <id column="user_id" property="userId"/>
@@ -18,10 +21,6 @@
             <result column="manner_score" property="mannerScore"/>
             <result column="lv_id" property="lvId"/>
         </collection>
-        <!--     <association property="limeId" javaType="LimeCash">
-              <id column="lc_lime_id" property="limeId"/>
-              <result column="date" property="date"/>
-            </association> -->
     </resultMap>
 
     <select id="countAll" resultType="int">
@@ -78,18 +77,25 @@
     </select>
 
     <select id="findUsers" resultMap="matchRsvMap" parameterType="int">
-        SELECT smr.mtch_id,
-               smr.state,
-               smr.user_id,
-               u.name,
-               m.gender,
-               m.manner_score,
-               m.lv_id
-        FROM social_mtch_rsv smr
+        SELECT    smr.mtch_id,
+                  smr.state,
+                  smr.user_id,
+                  u.name,
+                  m.gender,
+                  m.manner_score,
+                  m.lv_id
+        FROM      social_mtch_rsv smr
         LEFT JOIN `user` u on u.user_id = smr.user_id
         LEFT JOIN `member` m on m.user_id = smr.user_id
-        WHERE smr.mtch_id = #{matchId}
+        WHERE     smr.mtch_id = #{matchId}
     </select>
+
+    <update id="updateTeam" parameterType="matchRsv">
+        UPDATE social_mtch_rsv
+        SET    team=#{team}
+        WHERE  mtch_id=#{matchId}
+        AND    user_id=#{userId}
+    </update>
 
 
 </mapper>

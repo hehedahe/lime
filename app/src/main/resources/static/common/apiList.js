@@ -16,11 +16,11 @@ const PATH = {
     },
     courtRsv: {
         rsvsByDate: '/rsv/court/get',
-        bookCourt: '/rsv/court/add',
         rsvsByUser: '/rsv/court/getList'
     },
     manager: {
-        getMatchUsers: '/manager/getUsers'
+        getMatchUsers: '/manager/getUsers',
+        setTeam: '/manager/setTeam'
     }
 };
 
@@ -54,7 +54,7 @@ export async function dateFormat(colon, date) {
 // field
 // *********************
 
-// 테니스장 전체 리스트
+// 테니스장 전체 리스트 가져오기
 export async function fieldList() {
     try {
         const response = await axios(PATH.field.list);
@@ -92,7 +92,7 @@ export async function getCourt(fieldId) {
 // city
 // *********************
 
-// 시도 좌표
+// 시도 중심좌표 찾기
 export async function findRegion(regionId) {
     try {
         const response = await axios(`${PATH.city.findRegion}?regionId=${regionId}`);
@@ -102,7 +102,7 @@ export async function findRegion(regionId) {
     }
 };
 
-// 시군구 좌표
+// 시군구 중심 좌표 찾기
 export async function findCity(cityName, regionId) {
     try {
         const response = await axios(`${PATH.city.findCity}?cityName=${cityName}&regionId=${regionId}`);
@@ -117,6 +117,8 @@ export async function findCity(cityName, regionId) {
 // *********************
 // member
 // *********************
+
+// 로그인한 유저 정보 가져오기
 export async function getLoginUser() {
     try {
         const res = await axios(PATH.member.getLoginUser);
@@ -126,6 +128,7 @@ export async function getLoginUser() {
     }
 }
 
+// 로그아웃
 export async function signout() {
     try {
         const res = await axios(PATH.member.signout);
@@ -151,6 +154,8 @@ export async function rsvsByDate(date, fieldId) {
     }
 };
 
+
+// 유저의 예약 가져오기
 export async function rsvsByUser() {
     try {
         const response = await axios(PATH.courtRsv.rsvsByUser);
@@ -177,3 +182,4 @@ export async function getMatchUsers(matchId) {
         console.log(e);
     }
 }
+
