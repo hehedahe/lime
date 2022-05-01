@@ -48,6 +48,7 @@ dependencies {
   implementation("org.jboss.marshalling:jboss-marshalling-osgi:2.0.10.Final")
   
   
+
   //회원가입시 이메일 인증 추가 또는 이메일로 찾기 구현
   implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
