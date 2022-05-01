@@ -299,7 +299,7 @@ function replyFetch(no, writerNo) {
                     `
                         <div><img src="../asset/image/user-img.jpg"></div>
                         <div class="ps-2">
-                            <div class="fw-bold col-11">${reply.userName} <span id="writer-badge">작성자</span> <span id="me-badge">나</span></div>
+                            <div class="fw-bold col-11">${reply.userName} <span id="writer-badge">판매자</span> <span id="me-badge">나</span></div>
                             <div id="r-text-wrap" class="d-flex align-items-end" index=${reply.replyId}>
                                 <textarea id="r-text" name="replyId" class="autosize pt-1" idx=${reply.replyId} readonly style="overflow: hidden; height: ${areaHeight}px;">${reply.content}</textarea>
                                 <button id="r-cancel-btn" class="mx-1" type="button" style="display: none;" idx=${reply.replyId}>취소</button>
@@ -319,7 +319,7 @@ function replyFetch(no, writerNo) {
                 `
                     <div><img src="../asset/image/user-img.jpg"></div>
                     <div class="ps-2">
-                        <div class="fw-bold col-11">${reply.userName} <span id="writer-badge">작성자</span></div>
+                        <div class="fw-bold col-11">${reply.userName} <span id="writer-badge">판매자</span></div>
                         <div id="r-text-wrap" class="d-flex" index=${reply.replyId}>
                             <textarea id="r-text" name="replyId" class="autosize pt-1" idx=${reply.replyId} readonly style="overflow: hidden; height: ${areaHeight}px;">${reply.content}</textarea>
                         </div>
