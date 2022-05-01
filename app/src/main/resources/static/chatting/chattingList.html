@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache">
+
+  <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="manageUser.css">
+    <!-- <link rel="stylesheet" href="adminHeader.css"> -->
+    <link rel="stylesheet" href="my-adminHeader.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+    <!--<link rel="import" href="static/footer/footer.html">-->
+
+     <link rel="stylesheet" href="header.css"> 
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    
+    <style>
+
+	#user-sliding-menu {
+	 display: none;
+	}
+    
+    #sliding_menu{
+  	display : none;
+   }
+    
+    .pagination{
+     text-align: center;
+    }
+
+    #x-table {
+    align-items: center;
+    height: 50%;
+    text-justify: auto;
+    
+  }
+
+  #loginP{
+    margin: 0%;
+  }
+
+  #x-title{
+	text-align : center;
+	color : gray;
+	font-size : 20px;
+	margin-bottom : 15px; 
+  }
+    
+</style>
+</head>
+
+<body>
+  <nav id="h-nav">
+    <div class="header">
+      <ul class="nav-logo">
+        <li>lime</li>
+        <li>administrator</li>
+      </ul>
+      <div class="nav-links" >
+        <ul>
+        <li><p id="loginP"></p></li>
+       <!-- <li><a href="../mLogin/login.html">로그아웃</a></li>-->
+        <li id="logOutLi">로그아웃</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+   
+  <main class="admin-user">
+  	<!-- 
+    <div id="sidebar" class="d-flex flex-column flex-shrink-0 border-end">
+        <ul class="list-group nav nav-pills flex-column mb-auto">
+          <li class="list-group-item nav-item" id="userLi">
+            회원관리
+             <ul id="user-sliding-menu">
+            		<li><a href="manageUser.html">유저</a></li>
+            		<li><a href="manageManager.html">매니저</a></li>
+            </ul>
+          </li>
+          <li class="list-group-item nav-item">
+            <a href="../field/manageFiled.html"">구장관리</a>
+          </li>
+          <li class="list-group-item nav-item" id="rptLi">
+             게시글관리
+            	<ul id="sliding_menu">
+            		<li id="classLi"><a href="../report/classReport.html" >클래스</a></li>
+            		<li><a href="../report/marketReport.html">중고마켓</a></li>
+            		<li><a href="../report/clubReport.html">클럽</a></li>
+            		<li><a href="../report/communityReport.html">커뮤니티</a></li>
+            	</ul>
+          </li>
+          <li class="list-group-item nav-item">
+            <a href="#">고객센터</a>
+          </li>
+        </ul>
+    </div>
+    -->
+    <div id="user-table" class="d-flex mt-5 justify-content-center">
+      <div class="table-responsive table-condensed">
+      		<div id="x-title">chatting List</div>
+            <table id="x-table" class="table table-striped table-hover table-bordered table-condensed border-primary text-center align-middle">
+              <thead>
+                <tr id="x-thead">
+                  <th scope="col">방번호</th>
+                  <th scope="col">채팅내용</th>
+                  <th scope="col">이름</th>
+                  <th scope="col">최근채팅일자</th>
+                  <th scope="col">참여</th>
+                </tr>
+              </thead>
+            <tbody id ="x-tbody">
+            </tbody>
+          </table>
+          <tfoot aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+            </ul>
+          </tfoot>
+      </div>
+    </div>
+  </main>
+  
+
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+var xTbody = document.querySelector("#x-tbody");
+let totalData; //총 데이터 수
+let dataPerPage = 5; //한 페이지에 나타낼 글 수
+let pageCount = 5; //페이징에 나타낼 페이지 수
+let globalCurrentPage=1; //현재 페이지 
+
+
+
+  $(document).ready(function () {
+	  
+		 fetch("/member/getLoginUser")
+		 .then(function(response){
+			 return response.json();
+		 })
+		 .then(function(users){
+			 console.log(users.data.name)
+		 
+          
+		      var chartHtml='';
+		
+		  	  chartHtml +=`
+		  		  <tr id = "xTr">
+			          <td id="x-no">1</td>
+			          <td>쩔어!쩔어!</td>
+			          <td>김시진</td>
+			          <td>2022-05-02 01:40:12</td>
+			          <td><button id="detailBtn"  class="btn btn-outline-success" type="button">채팅방입장</td>
+			      </tr>
+		  		  <tr id = "xTr">
+			          <td id="x-no">2</td>
+			          <td>한게임고고?????</td>
+			          <td>박찬성</td>
+			          <td>2022-04-30 13:45:12</td>
+			          <td><button id="detailBtn"  class="btn btn-outline-success" type="button">채팅방입장</td>
+		     	  </tr>
+		  		  <tr id = "xTr">
+			          <td id="x-no">3</td>
+			          <td>빨리 안오냐?????</td>
+			          <td>강성호</td>
+			          <td>2022-04-12 14:21:12</td>
+			          <td><button id="detailBtn"  class="btn btn-outline-success" type="button">채팅방입장</td>
+		 	  	 </tr>  		  
+		 	  	 <tr id = "xTr">
+			          <td id="x-no">4</td>
+			          <td>오늘나이스게임!!!ㅎㅎㅎ</td>
+			          <td>박주호</td>
+			          <td>2022-04-11 16:22:12</td>
+			          <td><button id="detailBtn"  class="btn btn-outline-success" type="button">채팅방입장</td>
+			  	 </tr>
+		  		  <tr id = "xTr">
+			          <td id="x-no">5</td>
+			          <td>잘치더라~  다음에도 또 알려줘~~</td>
+			          <td>박하나</td>
+			          <td>2022-04-09  14:21:12</td>
+			          <td><button id="detailBtn"  class="btn btn-outline-success" type="button">채팅방입장</td>
+			  	 </tr>
+			  	 `
+				$("#x-tbody").html(chartHtml);
+			  	
+			  	var arr = location.href.split("=");
+			  	console.log(arr.length);
+			  	console.log(arr[1]);
+			  	
+		        $("#loginP").html(users.data.name)  
+			
+		        
+		 });
+		 
+                $(document).on("click", "button[id='detailBtn']", function () {
+
+                    location.href = "/chatting/chat.html";
+
+                }); 
+		 
+		 
+  }) // jquery ReadyFunction
+
+
+
+</script>
+</body>
+</html>

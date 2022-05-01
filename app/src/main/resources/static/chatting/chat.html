@@ -64,7 +64,14 @@
  <script>
   $(document).ready(function () {
             		
-	
+	 fetch("/member/getLoginUser")
+	 .then(function(response){
+		 return response.json();
+	 })
+	 .then(function(users){
+		 console.log(users.data.name)
+		 setName(users.data.name);
+	 });
 
   }) // jquery ReadyFunction
  </script>
