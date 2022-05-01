@@ -259,6 +259,19 @@ $(document).on('click', '.card-btn', async function (e) {
 //      해당 날짜 예약 리스트 가져오기
 // =====================================
 
+// sweetalert
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+
 $(document).on('click', '.date-wrap', async function (e) {
     $('.sche-btn').removeClass('closed').attr('disabled', false);
     let clickedDate = $(e.target).text().slice(0,2);
@@ -267,7 +280,10 @@ $(document).on('click', '.date-wrap', async function (e) {
         timeCheck(now);
     }
     if (fieldId == null) {
-        window.alert("구장을 먼저 선택해 주세요! 🎾");
+        Toast.fire({
+            icon: 'info',
+            title: '구장을 먼저 선택해주세요! 🎾'
+        });
     } else {
 
         // ***선택 날짜, 요일 담아두기
@@ -311,7 +327,10 @@ $('.sche-btn').on('click', function (e) {
 
         location.href = `view.html?${url}`;
     } else {
-        window.alert("구장을 먼저 선택해 주세요! 🎾");
+        Toast.fire({
+            icon: 'info',
+            title: '구장을 먼저 선택해주세요! 🎾'
+        });
     }
 });
 

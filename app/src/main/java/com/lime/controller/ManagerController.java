@@ -1,12 +1,17 @@
 package com.lime.controller;
 
+import com.lime.domain.Evaluation;
 import com.lime.domain.MatchRsv;
 import com.lime.domain.User;
+import com.lime.service.EvaluationService;
 import com.lime.service.MatchRsvService;
 import com.lime.service.RatingService;
 import com.lime.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 import static com.lime.controller.ResultMap.FAIL;
 import static com.lime.controller.ResultMap.SUCCESS;
 
@@ -16,6 +21,9 @@ public class ManagerController {
 
     @Autowired
     MatchRsvService mrService;
+
+    @Autowired
+    EvaluationService evService;
 
 //    @Autowired
 //    RatingService rtService;
@@ -63,4 +71,16 @@ public class ManagerController {
             return new ResultMap().setStatus(FAIL);
         }
     }
+
+    @GetMapping("/findList")
+    public List<Evaluation> findEvalList(@RequestParam Integer userId) {
+        return evService.findList(userId);
+    }
+
+    @GetMapping("/findMtch")
+    public Evaluation findMtch(@RequestParam Integer mtchId) {
+        return evService.findMtch(mtchId);
+    }
 }
+
+

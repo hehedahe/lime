@@ -1,6 +1,6 @@
 
-import {signout, getMatchUsers, getLoginUser} from '../common/apiList.js'
-import {levelTag, checkLevel} from '../common/typeCheck.js'
+import {signout, getMatchUsers, getMtch} from '../common/apiList.js'
+import {levelTag, checkLevel, getFullYmdStr, checkMatchType, checkNumOfPeople} from "../common/typeCheck.js";
 
 
 
@@ -24,21 +24,45 @@ const Toast = Swal.mixin({
 });
 
 // qs에서 matchId 찾기
-// let arr = location.href.split('?');
-// if (arr.length == 0) {
-//     alert("요청 형식이 올바르지 않습니다.")
-//     throw "URL 형식 오류!";
-// }
-//
-// let params = new URLSearchParams(arr[1]);
-// let matchId = params.get("matchId");
-//
-// if (matchId == null) {
-//     alert("매치 번호가 없습니다.");
-//     throw "파라미터 오류!";
-// }
+let arr = location.href.split('?');
+if (arr.length == 0) {
+    alert("요청 형식이 올바르지 않습니다.")
+    throw "URL 형식 오류!";
+}
 
-let resp = await getMatchUsers(209);
+let params = new URLSearchParams(arr[1]);
+let matchId = params.get("matchId");
+
+if (matchId == null) {
+    alert("매치 번호가 없습니다.");
+    throw "파라미터 오류!";
+}
+
+
+const info = await getMtch(matchId);
+console.log(info);
+
+let str = `<div class="fs-6 fw-bold">${getFullYmdStr(info.mtchDate)} ${info.stTime.slice(0, 5)}</div>
+           <div class="fs-5 fw-bold my-1">${info.field} ${info.court}</div>
+           <div class="d-flex match-info">
+               <div>${checkMatchType(info.mtchType)}</div>
+               <div class="vr mx-2"></div>
+               <div>${checkNumOfPeople(info.mtchNum)}</div>
+               <div class="vr mx-2"></div>
+               ${levelTag(info.lvId)}
+               <div class="vr mx-2"></div>
+               <div>${info.courtType} 타입</div>
+           </div>`
+
+$('#match-info').html(str);
+
+
+
+
+
+
+
+let resp = await getMatchUsers(matchId);
 let users = resp.data.users;
 console.log(users);
 
@@ -177,15 +201,14 @@ $('.save-btn').on('click', function (e) {
         },
         body: JSON.stringify(data)
     }).then(function (res) {
-        return res;
+        return res.json();
     }).then(function (result) {
         console.log(result);
         $('#rating-form').find(':input').prop('checked',false);
         $('#level-select option').prop('selected', false);
         $('#staticBackdrop').modal("hide");
-    })
+    });
 })
-
 
 
 

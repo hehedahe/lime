@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/header/mgrHeader.css">
+    <link rel="stylesheet" href="index2.css">
+
+    <script src="../node_modules/axios/dist/axios.js"></script>
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+    <title>라임 - 매니저</title>
+</head>
+<body>
+<nav id="h-nav">
+    <div id="header">
+        <ul id="nav-logo">
+            <li>lime</li>
+            <li>manager</li>
+        </ul>
+        <div id="nav-links">
+            <a href="#" id="signout-btn">로그아웃</a>
+        </div>
+    </div>
+</nav>
+
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">공지사항</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">프로필 설정</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">소셜매치</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/manager/index1.html">매치내역</a>
+        </div>
+    </div>
+
+    <div class="social-match m-4 container-fluid" id="match-wrapper">
+
+        <h3 id="rsv-title" class="fw-bolder mb-5">매치 내역</h3>
+
+        <ul class="list-group list-group-flush match-rsv-list">
+            <div class="list-group-item d-flex w-100 justify-content-center align-items-center p-5">
+                예약 내역이 존재하지 않습니다.
+            </div>
+            <!--        <li class="list-group-item list-group-item-action">-->
+            <!--            <div class="d-flex w-100 justify-content-between align-items-center">-->
+            <!--                <div>-->
+            <!--                    <div class="d-flex justify-content-start align-items-center">-->
+            <!--                        <div class="ms-5">-->
+            <!--                            <p id="match-date" class="mb-1">2022년 3월 5일 토요일 18:00</p>-->
+            <!--                            <h6 id="field-court-name" class="mb-1">만석동 테니스장 코트4</h6>-->
+            <!--                            <p id="field-addr" class="mb-1">대구 수성구 알파시티2로 95 5층</p>-->
+            <!--                            <p id="match-detail" class="text-muted match-info">여자 · 1vs1 · 하드 · 모든 레벨</p>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <div id="pay-date" class="text-center align-items-center text-muted">-->
+            <!--                    <p>결제일시 2022.02.25 15:32</p>-->
+            <!--                    <p>결제 완료</p>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </li>-->
+        </ul>
+    </div>
+</div>
+
+<script src="./index1.js" type="module"></script>
+</body>
+</html>
