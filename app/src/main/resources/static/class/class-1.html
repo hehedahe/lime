@@ -18,6 +18,11 @@
         $(".header").load("../header/user/header.html");
     })
 </script>
+<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
 <style>
 
 
@@ -39,6 +44,7 @@ body {
 
 
 
+
 .form-control:focus {
     box-shadow: 0 0 0 0.25rem rgb(102 200 141 / 25%);
   }
@@ -51,12 +57,6 @@ margin-left: 0.4rem; */
 }
 
 
-.wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 40px;
-}
 
 input::placeholder {
     color: gray;
@@ -83,10 +83,6 @@ ul{
 }
 #re-ul {
     margin-left: 31.5vw;
-}
-
-.search-wrapper {
-    margin-top: 10px;
 }
 
 .re-ci-choose > select {
@@ -121,8 +117,6 @@ ul{
     margin-left: 31.5vw;
     margin-right: 1vw;
 }
-
-
 
 #page-turn {
     display: flex;
@@ -176,21 +170,8 @@ ul{
     color: rgb(102,200,141);
     outline: 1px solid rgb(102,200,141);
 }
-.class-cont {
-    height: 40px;
-    border-radius: 5px;
-    margin-bottom: 70px;
-    margin-left: 35vw;
-}
-.class-cont > select {
-    border: 1px solid #bbb;
-}
-.cl-info-comment {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
+
+
 textarea {
     resize: none;
     border-radius: 10px;
@@ -214,16 +195,13 @@ textarea:focus {
     border: none;
 }
 
+/* .cls-info {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+} */
 
-#formGroupExampleInput {
-    width: 300px;
-    margin-left: 420px;
-}
 
-#formGroupExampleInput2 {
-    width: 300px;
-    margin-left: 420px;
-}
 </style>
 
 
@@ -251,32 +229,43 @@ textarea:focus {
       </div>
     </div>
 </div>
-<div>
-  <div class="mb-3">
-    <input type="text" class="form-control" name="title" id="formGroupExampleInput" placeholder="클래스 이름을 입력해주세요.">
-  </div>
-  <div class="mb-3">
+<ul class="cls-info">
+  <li class="mb-3">
+    <input type="text" class="form-control" name="intro" id="formGroupExampleInput2" placeholder="클래스 이름을 등록해주세요.">
+  </li>
+  <li class="mb-3">
     <input type="text" class="form-control" name="intro" id="formGroupExampleInput2" placeholder="클래스 한줄 소개를 입력해주세요.">
-  </div>
-</div>
+  </li>
+</ul>
 <form name="form1">
 <ul id="re-ul" class="chose">지역
     <li class="re-ci-choose">
-      <select class="form-select" aria-label="Default select example" id="regionId">
-        <option selected>지역</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" aria-label="region" name="regionId" id="region">
+        <option selected>시/도</option>
+        <option value="1">서울</option>
+        <option value="2">부산</option>
+        <option value="3">대구</option>
+        <option value="4">인천</option>
+        <option value="5">광주</option>
+        <option value="6">대전</option>
+        <option value="7">울산</option>
+        <option value="8">세종</option>
+        <option value="9">경기</option>
+        <option value="10">강원</option>
+        <option value="11">충청북도</option>
+        <option value="12">충청남도</option>
+        <option value="13">전라북도</option>
+        <option value="14">전라남도</option>
+        <option value="15">경상북도</option>
+        <option value="16">경상남도</option>
+        <option value="17">제주</option>
       </select>
     </li>
 </ul>
 <ul id="city-ul" class="chose">도시
     <li class="re-ci-choose">
-      <select class="form-select" aria-label="Default select example" id="cityId">
-        <option selected>도시</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" aria-label="city" name="cityId" id="drop-city">
+        <option selected>시/군/구</option>
       </select>
     </li>
 </ul>
@@ -311,6 +300,7 @@ textarea:focus {
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- <script src="../../node_modules/jquery/dist/jquery.min.js"></script> -->
+<script type="module" src="../signup/signupForm.js"></script>
 <script>
 
 
