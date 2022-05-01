@@ -133,7 +133,7 @@ input[type=search]::placeholder {
 .heart-click {
     position: absolute;
     right: 10px;
-    bottom: 150px;
+    top: 210px;
     
 }
 

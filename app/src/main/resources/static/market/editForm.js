@@ -39,7 +39,7 @@ $(document).ready(function(e) {
                 return response.json();
             }).then(function(result) {
             if (result.status == "success") {
-                location.href = "marketMain.html";
+                location.href = `/market/view.html?no=${no}`;
             } else {
                 alert("게시글 변경 실패!");
             }
@@ -48,7 +48,7 @@ $(document).ready(function(e) {
     });
 
     $(document).on("click", "#cancel-btn", function() {
-        location.href = "marketMain.html";
+        location.href = `/market/view.html?no=${no}`;
     });
   
 });
