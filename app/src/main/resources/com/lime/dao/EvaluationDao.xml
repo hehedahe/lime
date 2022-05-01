@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lime.dao.EvaluationDao">
+
+    <resultMap type="Evaluation" id="evaluationMap">
+    </resultMap>
+
+    <select id="findList" resultMap="evaluationMap" parameterType="int">
+        SELECT   smr.mtch_id,
+                 sm.mtch_date,
+                 sm.st_time,
+                 f.name           field,
+                 c.name           court,
+                 mt.mtch_type,
+                 sm.num_of_people mtchNum,
+                 ct.name          courtType,
+                 sm.lv_id
+        FROM     social_mtch sm,
+                 social_mtch_rsv smr,
+                 field f,
+                 court c,
+                 mtch_type mt,
+                 court_type ct
+        WHERE    sm.user_id = #{userId}
+          AND    c.field_id = f.field_id
+          AND    sm.court_id = c.court_id
+          AND    sm.mtch_id = smr.mtch_id
+          AND    c.court_type_id = ct.court_type_id
+          AND    sm.mtch_type_id = mt.mtch_type_id
+        GROUP BY smr.mtch_id
+        ORDER BY sm.mtch_date DESC
+    </select>
+
+    <select id="findMtch" resultMap="evaluationMap" parameterType="int">
+        SELECT      smr.mtch_id,
+                    sm.mtch_date,
+                    sm.st_time,
+                    f.name           field,
+                    c.name           court,
+                    mt.mtch_type,
+                    sm.num_of_people mtchNum,
+                    ct.name          courtType,
+                    sm.lv_id
+        FROM        social_mtch sm,
+                    social_mtch_rsv smr,
+                    field f,
+                    court c,
+                    mtch_type mt,
+                    court_type ct
+        WHERE       smr.mtch_id = #{mtchId}
+          AND       c.field_id = f.field_id
+          AND       sm.court_id = c.court_id
+          AND       sm.mtch_id = smr.mtch_id
+          AND       c.court_type_id = ct.court_type_id
+          AND       sm.mtch_type_id = mt.mtch_type_id
+        GROUP BY    smr.mtch_id
+    </select>
+
+
+</mapper>

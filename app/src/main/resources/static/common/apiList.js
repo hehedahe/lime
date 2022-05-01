@@ -20,7 +20,9 @@ const PATH = {
     },
     manager: {
         getMatchUsers: '/manager/getUsers',
-        setTeam: '/manager/setTeam'
+        setTeam: '/manager/setTeam',
+        findList: '/manager/findList',
+        findMtch: '/manager/findMtch'
     }
 };
 
@@ -177,6 +179,26 @@ export async function rsvsByUser() {
 export async function getMatchUsers(matchId) {
     try {
         const response = await axios(`${PATH.manager.getMatchUsers}?matchId=${matchId}`);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+// 매니저의 매치 리스트 가져오기
+export async function getMtchList(managerId) {
+    try {
+        const response =await axios(`${PATH.manager.findList}?userId=${managerId}`);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+// 매치 리스트 1개 가져오기
+export async function getMtch(mtchId) {
+    try {
+        const response =await axios(`${PATH.manager.findMtch}?mtchId=${mtchId}`);
         return response.data;
     } catch (e) {
         console.log(e);

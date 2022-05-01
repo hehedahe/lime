@@ -57,6 +57,28 @@ export function checkLevel(lvId) {
     }
 }
 
+// 매치 성별 타입
+export function checkMatchType(matchTypeNo) {
+    switch (matchTypeNo) {
+        case "M":
+            return "남자";
+        case "W":
+            return "여자";
+        case "MW":
+            return "혼성";
+    }
+}
+
+// 매치 인원수
+export function checkNumOfPeople(numOfPeople) {
+    switch (numOfPeople) {
+        case "S":
+            return "1vs1";
+        case "D":
+            return "2vs2";
+    }
+}
+
 // 레벨 체크하여 태그 리턴
 export function levelTag(lvId) {
     switch (lvId) {
@@ -66,4 +88,11 @@ export function levelTag(lvId) {
         case 4 : return `<span class="badge bg-primary">ADVANCED</span>`;
         case 5 : return `<span class="badge bg-danger">PRO</span>`;
     }
+}
+
+
+// dateFormat
+export function getFullYmdStr(date) {
+    let d = new Date(date);
+    return d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일 " + '일월화수목금토'.charAt(d.getUTCDay()) + '요일';
 }
