@@ -28,7 +28,7 @@ $.getJSON("/rsv/match/balance", function (result) {
     xMannerBar.attr('style', `width: ${userInfo.mannerScore}%`).attr('aria-valuenow', `${userInfo.mannerScore}`)
   })
 
-  function checkLevel(courtTypeNo) {
+function checkLevel(courtTypeNo) {
     switch (courtTypeNo) {
         case 'D':
             return "DEVELOPMENT";
@@ -42,3 +42,7 @@ $.getJSON("/rsv/match/balance", function (result) {
             return "PRO";
     }
 }
+
+$("#mypage-charge-btn").on('click', function () {
+    window.open('/common/charge.html', '라임캐시 충전', 'width=500, height=820, left=-1500, top=100, resizable=false');
+})
