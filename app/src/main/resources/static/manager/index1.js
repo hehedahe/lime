@@ -1,24 +1,28 @@
 import {getLoginUser, getMtchList} from "../common/apiList.js";
 import {levelTag, checkLevel, getFullYmdStr, checkMatchType, checkNumOfPeople} from "../common/typeCheck.js";
 
-
+// 로그아웃
 $('#signout-btn').on('click', function () {
     fetch("/member/signout").then(function (response) {
         location.href = "/social-match/index.html"
     });
 });
 
-let managerId;
+
+let managerId; // 매니저 userId
+
+
 (async function () {
+    // user정보 가져오기
     const res = await getLoginUser();
-    console.log("res:::::::::::::::", res)
     managerId = res.data.userId;
-    console.log(managerId)
+
+    // 매니저 소셜매치 리스트 가져오기
     let res2 = await getMtchList(managerId);
-    console.log(res2);
 
     let str = '';
 
+    // 매치 리스트
     res2?.map((m) => {
         str += `
               <li class="list-group-item list-group-item-action mt-3" data-id=${m.mtchId} id="match">
@@ -43,6 +47,7 @@ let managerId;
 })();
 
 
+// 매치 상세 페이지로 이동
 $(document).on('click', '#match', function (e) {
     location.href = `/manager/index2.html?matchId=${$(this).attr('data-id')}`;
 })
