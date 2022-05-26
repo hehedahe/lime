@@ -12,8 +12,6 @@
 
 - 💻 [주요기능 및 화면](#-view)
 
-- 🌈 [노션 링크](https://deadpan-fireplace-ddb.notion.site/Debugger-5574baffadcb4b0ba47de81f5470267a)
-
 ## 📗 OverView
 
 - 개발 기간 : 2개월
@@ -60,7 +58,7 @@
 - 회원이 클래스(강의)를 수강신청 할 수 있는 페이지입니다. 
   <img src="/app/클래스.jpg" width="80%" height="80%">
  - 클래스 상세
- - 클래스 등록하기를 통해 클래스 등록이 가능합니다.
+ - 클래스 개설하기를 통해 클래스 등록이 가능합니다.
   <img src="/app/클래스등록1.jpg" width="80%" height="80%">
 
 ### 라임마켓
