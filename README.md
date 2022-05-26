@@ -84,7 +84,7 @@
 ### 관리자페이지
 
 - 관리자로 로그인시 등록된 회원, 클래스, 구장, 라임마켓의 정보를 조회할 수 있습니다. 
-<img src="/app/관리자1.jpg" width="100%" height="100%">   
-<img src="/app/관리자2.jpg" width="70%" height="70%">
+<img src="/app/관리자1.jpg" width="80%" height="80%">   
+<img src="/app/관리자2.jpg" width="80%" height="80%">
 
 
