@@ -12,6 +12,8 @@
 
 📗 [개요](#-overview)
 
+📘 [ERD설계](#-ERD)
+
 💻 [주요기능 및 화면](#-view)
 
 </br>
@@ -30,9 +32,13 @@
   - Build tool : Gradle
   - VCS tool : GitHub
   - IDE : Eclipse
-  - Editor : Atom / VS Code
+  - Editor : Atom / VS Code / IntelliJ
   - etc. tool : DBeaver / eXERD
-  - Open API : Kakao Map / facebookDevelopers
+  - Open API : Kakao Map / facebookDevelopers / INIAPI
+  
+
+## 📘 ERD
+
 
 ## 💻 View
 
