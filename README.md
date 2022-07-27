@@ -39,6 +39,9 @@
 
 ## 📘 ERD
 
+<img src="https://user-images.githubusercontent.com/94945985/181228018-706522cb-9f07-43b5-b05d-2f5ca00ea6b4.jpg"/>
+<img src="https://user-images.githubusercontent.com/94945985/181228445-f9f9d6e0-811e-4181-a207-746a200fbf1a.jpg"/>
+
 
 ## 💻 View
 
@@ -48,7 +51,7 @@
 - 소셜매치 상세
   - 내 선호, 지역, 도시, 레벨, 코트, 성별로 분류 결과를 볼 수 있습니다.
   - 신청가능 버튼 클릭시 결제 페이지로 이동합니다.
-  <img src="/app/소셜매치.jpg" width="55%" height="55%">
+  <img src="/app/소셜매치.jpg" width="80%" height="80%">
 
 ### 코트예약
 
